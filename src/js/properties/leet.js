@@ -1,3 +1,4 @@
+//leetspeak variations of each letter of the alphabet
 export const leet = {
     "a":  [
               "4",

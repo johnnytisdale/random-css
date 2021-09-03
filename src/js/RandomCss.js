@@ -10,7 +10,7 @@ export default class RandomCSS extends Component {
 		//methods
 		for (let method in methods) this[method] = methods[method].bind(this);
 
-		//properties
+		//set immutable properties (this.leet, this.sections, this.unicode)
 		this.setProperties();
 
 		//set defaults in case props are not passed
