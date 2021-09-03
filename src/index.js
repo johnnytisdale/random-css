@@ -4,7 +4,7 @@ import RandomCSS from "./js/RandomCss";
 /*
 import ReactDOM  from "react-dom";
 const div = document.getElementById('app');
-if (div) { ReactDOM.render( <RandomCSS/>, div); }
+if (div) { ReactDOM.render( <RandomCSS size={4} />, div); }
 */
 
 export default RandomCSS;
