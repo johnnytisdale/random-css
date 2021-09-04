@@ -1,9 +1,24 @@
 const cssProperties = [
     /*{
+        "name":     "animation",
+        "type":     "animation",
+        "default":  null,
+        "values": [
+            "rotate",
+            "scale",
+            "skew"
+        ]
+    },*/
+    {
         "name":     "backgroundColor",
         "type":     "color",
         "default":  "rgb(255,255,255)"
-    },*/
+    },
+    {
+        "name":     "borderColor",
+        "default":  "rgb(0,0,0)",
+        "type":     "color",
+    },
     {
         "name":     "color",
         "type":     "color",
