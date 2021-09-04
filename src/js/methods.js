@@ -3,7 +3,6 @@ import changeCharacter		from './methods/changeCharacter';
 import changeInterval		from './methods/changeInterval';
 import changeStyle			from './methods/changeStyle';
 import getArrayElement		from './methods/getArrayElement';
-import getBorderRadius		from './methods/getBorderRadius';
 import getColor				from './methods/getColor';
 import getContainerStyle	from './methods/getContainerStyle';
 import getElement			from './methods/getElement';
@@ -24,7 +23,6 @@ export {
 	changeInterval,
 	changeStyle,
 	getArrayElement,
-	getBorderRadius, //delete?
 	getColor,
 	getContainerStyle,
 	getElement,

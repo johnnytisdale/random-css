@@ -1,11 +1,16 @@
+//imports
 import React, { Component } from "react";
-import style 				from '../style.scss';
-import * as methods 		from './methods';
-import Character 			from "./components/Character/Character";	
+import Character from "./components/Character/Character";
+import * as methods from './methods';
+import style from '../style.scss';
 
+//root component
 export default class RandomCSS extends Component {
 
+	//create a new instance
 	constructor(props) {
+
+		//allow access to this.props in constructor
 		super(props);
 
 		//set "this" keyword in methods
@@ -24,22 +29,32 @@ export default class RandomCSS extends Component {
 		//this.initializeInterval();
 	}
 
+	//render element(s) in the dom
 	render() {
 		return (
+
+			//container
 			<div id='random-css' style={this.getContainerStyle()}>
-				{this.state.display.map((character, i) => (
-					<Character
-						character={character}
-						cssProperties={this.cssProperties}
-						id={i}
-						key={'character-' + i}
-						style={{
-							color: "red",
-							height: (this.props.size * 1.1875) + 'rem',
-							width: this.props.size + 'rem'
-						}}
-					/>
-				))}
+
+				{
+					//loop through the characters in the text
+					this.state.display.map((character, i) => (
+
+						//create a new instance of the Character component
+						<Character
+							character={character}
+							cssProperties={this.cssProperties}
+							id={i}
+							key={'character-' + i}
+							options={this.props.options}
+							style={{
+								height: (this.props.size * 1.1875) + 'rem',
+								width: 	this.props.size + 'rem'
+							}}
+						/>
+					))
+				}
+
 			</div>
 		);
 	}

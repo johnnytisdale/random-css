@@ -9,6 +9,8 @@ export default class Character extends Component {
         //allow access to this.props in constructor
 		super(props);
 
+        console.log(this.props.options);
+
         //set "this" keyword in methods
 		for (let method in methods) { this[method] = methods[method].bind(this); }
 
@@ -31,7 +33,7 @@ export default class Character extends Component {
         this.state = {style: this.props.style};
 	}
 
-    //render the element in the dom
+    //render element in the dom
 	render() {
 		return <div data-id={this.props.id} style={this.state.style}>{this.props.character}</div>;
 	}
@@ -73,14 +75,31 @@ export default class Character extends Component {
                     //set the value according to the type of css property
                     switch(cssProperty.type) {
 
+                        //get a random element from an array of all possible values
+                        case "array":
+                            value = this.getArrayElement(cssProperty.values);
+                            break;
+
                         //get a random rgb color
                         case "color":
                             value = this.getColor(0, 255, 0, 255, 0, 255);
                             break;
 
-                        //get a random element from an array of all possible values
-                        case "array":
-                            value = this.getArrayElement(cssProperty.values);
+                        //get the value by calling a function specific to this property
+                        case "function":
+                            value = this[cssProperty.function]();
+                            break;
+
+                        //select a random integer from a range of values
+                        case "range":
+                            value = this.getRandom(cssProperty.range[0], cssProperty.range[1]);
+                            if (cssProperty.hasOwnProperty('unit')) {
+                                value += '' + cssProperty.unit;
+                            }
+                            break;
+
+                        default:
+                            continue;
                     }
 
                     //set the value for this css property

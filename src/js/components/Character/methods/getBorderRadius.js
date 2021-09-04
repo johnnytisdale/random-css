@@ -1,5 +1,5 @@
 export default function getBorderRadius() {
-	let length = this.props.options.borderRadius.mono ? 1 : 4;
+	let length = 1;//this.props.options.borderRadius.mono ? 1 : 4;
 	let string = '';
 	for (let i = 0; i < length; i++) {
 		string += this.getRandom(0, 100) + '%';
