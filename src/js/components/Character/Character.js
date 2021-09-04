@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Timer from "../Timer/Timer";
 import * as methods 		from './values/methods';
 
 export default class Character extends Component {
@@ -23,10 +24,7 @@ export default class Character extends Component {
         for (let cssProperty of this.props.cssProperties) {
 
             //add a timer for this css property
-            this.timers[cssProperty.name] = {
-                elapsed:    0,
-                interval:   this.getRandom(3, 10)
-            };
+            this.timers[cssProperty.name] = new Timer;
         }
 
         //set initial state
@@ -55,18 +53,9 @@ export default class Character extends Component {
                 //loop through css properties
                 for (let cssProperty of this.props.cssProperties) {
 
-                    //increment the timer for this property
-                    this.timers[cssProperty.name].elapsed++;
-
                     //if the interval has not elapsed, do nothing 
-                    if (this.timers[cssProperty.name].elapsed < this.timers[cssProperty.name].interval) {
+                    if (!this.timers[cssProperty.name].increment()) {
                         continue;
-                    }
-
-                    //if the interval has elapsed, reset timer
-                    else {
-                        this.timers[cssProperty.name].elapsed  = 0;
-                        this.timers[cssProperty.name].duration = this.getRandom(3, 10);
                     }
 
                     //declare variable to hold new value for this css property
