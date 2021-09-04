@@ -1,11 +1,11 @@
-import {leet}     from '../properties/leet';
-import {sections} from '../properties/sections';
-import {unicode}  from '../properties/unicode';
+import {cssProperties} 	from '../properties/cssProperties';
+import {leet}     		from '../properties/leet';
+import {unicode}  		from '../properties/unicode';
 
 export default function setProperties() {
 
-	//sections of the form (randomcss.org)
-	this.sections = sections;
+	//css properties
+	this.cssProperties = cssProperties;
 
 	//leetspeak variations of each letter of the alphabet
 	this.leet = leet;
