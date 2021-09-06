@@ -37,11 +37,6 @@ export default class RandomCSS extends Component {
 	//render element(s) in the dom
 	render() {
 
-		console.log({
-			unsafe: this.state.unsafe,
-			classNames: this.getClassNames(),
-			style: this.getStyle()
-		});
 		return (
 
 			//container

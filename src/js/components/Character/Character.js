@@ -121,7 +121,7 @@ export default class Character extends Component {
                     update = true;
 
                     //set the value for this css property
-                    style[name] = value;
+                    style[cssProperty.camelCase] = value;
                 }
 
                 //update state
