@@ -3,7 +3,7 @@
 
  ## Testing
  1. Uncomment the commented lines in in src/index.js.
- 2. npm run build
+ 2. npm run dev
  3. Open index.html in browser.
 
 
