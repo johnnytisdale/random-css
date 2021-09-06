@@ -1,6 +1,6 @@
+import cssProperties 	from '../properties/cssProperties.json';
 import {leet}     		from '../properties/leet';
 import {unicode}  		from '../properties/unicode';
-import cssProperties from '../properties/cssProperties.json';
 
 export default function setProperties() {
 

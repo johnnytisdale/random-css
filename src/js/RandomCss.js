@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import Character from "./components/Character/Character";
 import * as methods from './methods';
-import style from '../style.scss';
+import style from '../css/style.scss';
 
 //root component
 export default class RandomCSS extends Component {
