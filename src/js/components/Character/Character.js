@@ -55,7 +55,7 @@ export default class Character extends Component {
         //if (this.props.character != 'r') return;
 
         //start the interval for this character
-        setInterval(
+        this.interval = setInterval(
             
             //function to be called every x milliseconds
             () => {
@@ -98,14 +98,19 @@ export default class Character extends Component {
 
                         //get the value by calling a function specific to this property
                         case "function":
-                            value = this[cssProperty.function]();
+                            try {
+                                value = this[cssProperty.function]();
+                            } catch (e) {
+                                console.log(e);
+                                clearInterval(this.interval);
+                            }
                             break;
 
                         //select a random integer from a range of values
                         case "range":
                             value = this.getRandom(cssProperty.range[0], cssProperty.range[1]);
                             if (cssProperty.hasOwnProperty('unit')) {
-                                value += '' + cssProperty.unit;
+                                value += '' + this.getArrayElement(cssProperty.unit);
                             }
                             break;
 
@@ -121,7 +126,7 @@ export default class Character extends Component {
                     update = true;
 
                     //set the value for this css property
-                    style[cssProperty.camelCase] = value;
+                    style[name] = value;
                 }
 
                 //update state

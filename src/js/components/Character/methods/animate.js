@@ -1,10 +1,7 @@
-export default function animate(i) {
-
-	//don't animate if all options disabled
-	if (!this.props.options.animation.values.length) return;
+export default function animate() {
 
 
-	let type = this.getArrayElement(this.props.options.animation.values);
+	let type = this.getArrayElement(["rotate", "scale", "skew"]);
 	let name = 'rotate';
 	if (type == 'skew') {
 		switch (this.getRandom(1,3)) {
@@ -25,9 +22,9 @@ export default function animate(i) {
 	let retVal;
 	switch (action) {
 		case 1: //play/pause
-			var animation = this.getElement(i).style.animation;
+			let animation = this.state.style.animation;
 			if (typeof(animation) != 'undefined' && animation !== null && animation != 'none') {
-				var state = this.getElement(i).style.animationPlayState;
+				let state = this.state.style.animationPlayState;
 				retVal = animation.replace(
 					state,
 					state == 'running' ? 'paused' : 'running'
@@ -65,16 +62,3 @@ export default function animate(i) {
 	}
 	return retVal;
 }
-
-
-			
-			/*
-			duration
-			timingFunction
-			delay
-			iterationCount
-			direction
-			fillMode
-			playState
-			name
-			*/

@@ -6,10 +6,18 @@ import RandomCSS from "./js/RandomCss";
  * 2. npm run build                     *
  * 3. open index.html in browser        *
  ****************************************/
-
-console.log('not typescript');
-import ReactDOM  from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 const div = document.getElementById('app');
-if (div) { ReactDOM.render( <RandomCSS size={4} text='X' unsafe={true} />, div); }
+if (div) { ReactDOM.render(
+    <RandomCSS
+        center={true}
+        //options={{}}
+        size={4}
+        text='X'
+        unsafe={true}
+    />,
+    div);
+}
 
 //export default RandomCSS;

@@ -1,4 +1,4 @@
-import animate				from './methods/animate';
+//import animate				from './methods/animate';
 import changeCharacter		from './methods/changeCharacter';
 import changeInterval		from './methods/changeInterval';
 import changeStyle			from './methods/changeStyle';
@@ -20,7 +20,7 @@ import setOptions			from './methods/setOptions';
 import setProperties		from './methods/setProperties';
 
 export {
-	animate,
+	//animate,
 	changeCharacter,
 	changeInterval,
 	changeStyle,
@@ -31,12 +31,12 @@ export {
 	getProperty,
 	getRandom,
 	getStyle,
-	initializeInterval,
-	initializeState,
+	//initializeInterval,
+	//initializeState,
 	rotate, //delete?
 	setDefaults,
 	setDisplay,
 	setIntervals,
 	setOptions,
-	setProperties
+	//setProperties
 };
