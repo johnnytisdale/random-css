@@ -1,11 +1,9 @@
-import cssProperties 	from '../properties/cssProperties.json';
 import {leet}     		from '../properties/leet';
 import {unicode}  		from '../properties/unicode';
 
 export default function setProperties() {
 
-	//css properties
-	this.cssProperties = cssProperties;
+	
 
 	//leetspeak variations of each letter of the alphabet
 	this.leet = leet;

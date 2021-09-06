@@ -1,287 +1,582 @@
-.random-css-backgroundColor-AliceBlue { background-color: AliceBlue }
-.random-css-backgroundColor-AntiqueWhite { background-color: AntiqueWhite }
-.random-css-backgroundColor-Aqua { background-color: Aqua }
-.random-css-backgroundColor-Aquamarine { background-color: Aquamarine }
-.random-css-backgroundColor-Azure { background-color: Azure }
-.random-css-backgroundColor-Beige { background-color: Beige }
-.random-css-backgroundColor-Bisque { background-color: Bisque }
-.random-css-backgroundColor-Black { background-color: Black }
-.random-css-backgroundColor-BlanchedAlmond { background-color: BlanchedAlmond }
-.random-css-backgroundColor-Blue { background-color: Blue }
-.random-css-backgroundColor-BlueViolet { background-color: BlueViolet }
-.random-css-backgroundColor-Brown { background-color: Brown }
-.random-css-backgroundColor-BurlyWood { background-color: BurlyWood }
-.random-css-backgroundColor-CadetBlue { background-color: CadetBlue }
-.random-css-backgroundColor-Chartreuse { background-color: Chartreuse }
-.random-css-backgroundColor-Chocolate { background-color: Chocolate }
-.random-css-backgroundColor-Coral { background-color: Coral }
-.random-css-backgroundColor-CornflowerBlue { background-color: CornflowerBlue }
-.random-css-backgroundColor-Cornsilk { background-color: Cornsilk }
-.random-css-backgroundColor-Crimson { background-color: Crimson }
-.random-css-backgroundColor-Cyan { background-color: Cyan }
-.random-css-backgroundColor-DarkBlue { background-color: DarkBlue }
-.random-css-backgroundColor-DarkCyan { background-color: DarkCyan }
-.random-css-backgroundColor-DarkGoldenrod { background-color: DarkGoldenrod }
-.random-css-backgroundColor-DarkGray { background-color: DarkGray }
-.random-css-backgroundColor-DarkGreen { background-color: DarkGreen }
-.random-css-backgroundColor-DarkKhaki { background-color: DarkKhaki }
-.random-css-backgroundColor-DarkMagenta { background-color: DarkMagenta }
-.random-css-backgroundColor-DarkOliveGreen { background-color: DarkOliveGreen }
-.random-css-backgroundColor-DarkOrange { background-color: DarkOrange }
-.random-css-backgroundColor-DarkOrchid { background-color: DarkOrchid }
-.random-css-backgroundColor-DarkRed { background-color: DarkRed }
-.random-css-backgroundColor-DarkSalmon { background-color: DarkSalmon }
-.random-css-backgroundColor-DarkSeaGreen { background-color: DarkSeaGreen }
-.random-css-backgroundColor-DarkSlateBlue { background-color: DarkSlateBlue }
-.random-css-backgroundColor-DarkSlateGray { background-color: DarkSlateGray }
-.random-css-backgroundColor-DarkTurquoise { background-color: DarkTurquoise }
-.random-css-backgroundColor-DarkViolet { background-color: DarkViolet }
-.random-css-backgroundColor-DeepPink { background-color: DeepPink }
-.random-css-backgroundColor-DeepSkyBlue { background-color: DeepSkyBlue }
-.random-css-backgroundColor-DimGray { background-color: DimGray }
-.random-css-backgroundColor-DodgerBlue { background-color: DodgerBlue }
-.random-css-backgroundColor-FireBrick { background-color: FireBrick }
-.random-css-backgroundColor-FloralWhite { background-color: FloralWhite }
-.random-css-backgroundColor-ForestGreen { background-color: ForestGreen }
-.random-css-backgroundColor-Fuchsia { background-color: Fuchsia }
-.random-css-backgroundColor-Gainsboro { background-color: Gainsboro }
-.random-css-backgroundColor-GhostWhite { background-color: GhostWhite }
-.random-css-backgroundColor-Gold { background-color: Gold }
-.random-css-backgroundColor-Goldenrod { background-color: Goldenrod }
-.random-css-backgroundColor-Gray { background-color: Gray }
-.random-css-backgroundColor-Green { background-color: Green }
-.random-css-backgroundColor-GreenYellow { background-color: GreenYellow }
-.random-css-backgroundColor-Honeydew { background-color: Honeydew }
-.random-css-backgroundColor-HotPink { background-color: HotPink }
-.random-css-backgroundColor-IndianRed { background-color: IndianRed }
-.random-css-backgroundColor-Indigo { background-color: Indigo }
-.random-css-backgroundColor-Ivory { background-color: Ivory }
-.random-css-backgroundColor-Khaki { background-color: Khaki }
-.random-css-backgroundColor-Lavender { background-color: Lavender }
-.random-css-backgroundColor-LavenderBlush { background-color: LavenderBlush }
-.random-css-backgroundColor-LawnGreen { background-color: LawnGreen }
-.random-css-backgroundColor-LemonChiffon { background-color: LemonChiffon }
-.random-css-backgroundColor-LightBlue { background-color: LightBlue }
-.random-css-backgroundColor-LightCoral { background-color: LightCoral }
-.random-css-backgroundColor-LightCyan { background-color: LightCyan }
-.random-css-backgroundColor-LightGoldenrodYellow { background-color: LightGoldenrodYellow }
-.random-css-backgroundColor-LightGreen { background-color: LightGreen }
-.random-css-backgroundColor-LightGrey { background-color: LightGrey }
-.random-css-backgroundColor-LightPink { background-color: LightPink }
-.random-css-backgroundColor-LightSalmon { background-color: LightSalmon }
-.random-css-backgroundColor-LightSeaGreen { background-color: LightSeaGreen }
-.random-css-backgroundColor-LightSkyBlue { background-color: LightSkyBlue }
-.random-css-backgroundColor-LightSlateGray { background-color: LightSlateGray }
-.random-css-backgroundColor-LightSteelBlue { background-color: LightSteelBlue }
-.random-css-backgroundColor-LightYellow { background-color: LightYellow }
-.random-css-backgroundColor-Lime { background-color: Lime }
-.random-css-backgroundColor-LimeGreen { background-color: LimeGreen }
-.random-css-backgroundColor-Linen { background-color: Linen }
-.random-css-backgroundColor-Magenta { background-color: Magenta }
-.random-css-backgroundColor-Maroon { background-color: Maroon }
-.random-css-backgroundColor-MediumAquamarine { background-color: MediumAquamarine }
-.random-css-backgroundColor-MediumBlue { background-color: MediumBlue }
-.random-css-backgroundColor-MediumOrchid { background-color: MediumOrchid }
-.random-css-backgroundColor-MediumPurple { background-color: MediumPurple }
-.random-css-backgroundColor-MediumSeaGreen { background-color: MediumSeaGreen }
-.random-css-backgroundColor-MediumSlateBlue { background-color: MediumSlateBlue }
-.random-css-backgroundColor-MediumSpringGreen { background-color: MediumSpringGreen }
-.random-css-backgroundColor-MediumTurquoise { background-color: MediumTurquoise }
-.random-css-backgroundColor-MediumVioletRed { background-color: MediumVioletRed }
-.random-css-backgroundColor-MidnightBlue { background-color: MidnightBlue }
-.random-css-backgroundColor-MintCream { background-color: MintCream }
-.random-css-backgroundColor-MistyRose { background-color: MistyRose }
-.random-css-backgroundColor-Moccasin { background-color: Moccasin }
-.random-css-backgroundColor-NavajoWhite { background-color: NavajoWhite }
-.random-css-backgroundColor-Navy { background-color: Navy }
-.random-css-backgroundColor-OldLace { background-color: OldLace }
-.random-css-backgroundColor-Olive { background-color: Olive }
-.random-css-backgroundColor-OliveDrab { background-color: OliveDrab }
-.random-css-backgroundColor-Orange { background-color: Orange }
-.random-css-backgroundColor-OrangeRed { background-color: OrangeRed }
-.random-css-backgroundColor-Orchid { background-color: Orchid }
-.random-css-backgroundColor-PaleGoldenrod { background-color: PaleGoldenrod }
-.random-css-backgroundColor-PaleGreen { background-color: PaleGreen }
-.random-css-backgroundColor-PaleTurquoise { background-color: PaleTurquoise }
-.random-css-backgroundColor-PaleVioletRed { background-color: PaleVioletRed }
-.random-css-backgroundColor-PapayaWhip { background-color: PapayaWhip }
-.random-css-backgroundColor-PeachPuff { background-color: PeachPuff }
-.random-css-backgroundColor-Peru { background-color: Peru }
-.random-css-backgroundColor-Pink { background-color: Pink }
-.random-css-backgroundColor-Plum { background-color: Plum }
-.random-css-backgroundColor-PowderBlue { background-color: PowderBlue }
-.random-css-backgroundColor-Purple { background-color: Purple }
-.random-css-backgroundColor-RebeccaPurple { background-color: RebeccaPurple }
-.random-css-backgroundColor-Red { background-color: Red }
-.random-css-backgroundColor-RosyBrown { background-color: RosyBrown }
-.random-css-backgroundColor-RoyalBlue { background-color: RoyalBlue }
-.random-css-backgroundColor-SaddleBrown { background-color: SaddleBrown }
-.random-css-backgroundColor-Salmon { background-color: Salmon }
-.random-css-backgroundColor-SandyBrown { background-color: SandyBrown }
-.random-css-backgroundColor-SeaGreen { background-color: SeaGreen }
-.random-css-backgroundColor-Seashell { background-color: Seashell }
-.random-css-backgroundColor-Sienna { background-color: Sienna }
-.random-css-backgroundColor-Silver { background-color: Silver }
-.random-css-backgroundColor-SkyBlue { background-color: SkyBlue }
-.random-css-backgroundColor-SlateBlue { background-color: SlateBlue }
-.random-css-backgroundColor-SlateGray { background-color: SlateGray }
-.random-css-backgroundColor-Snow { background-color: Snow }
-.random-css-backgroundColor-SpringGreen { background-color: SpringGreen }
-.random-css-backgroundColor-SteelBlue { background-color: SteelBlue }
-.random-css-backgroundColor-Tan { background-color: Tan }
-.random-css-backgroundColor-Teal { background-color: Teal }
-.random-css-backgroundColor-Thistle { background-color: Thistle }
-.random-css-backgroundColor-Tomato { background-color: Tomato }
-.random-css-backgroundColor-Turquoise { background-color: Turquoise }
-.random-css-backgroundColor-Violet { background-color: Violet }
-.random-css-backgroundColor-Wheat { background-color: Wheat }
-.random-css-backgroundColor-White { background-color: White }
-.random-css-backgroundColor-WhiteSmoke { background-color: WhiteSmoke }
-.random-css-backgroundColor-Yellow { background-color: Yellow }
-.random-css-backgroundColor-Yellow { background-color: Yellow }
-.random-css-backgroundColor-YellowGreen { background-color: YellowGreen }
-.random-css-borderColor-AliceBlue { border-color: AliceBlue }
-.random-css-borderColor-AntiqueWhite { border-color: AntiqueWhite }
-.random-css-borderColor-Aqua { border-color: Aqua }
-.random-css-borderColor-Aquamarine { border-color: Aquamarine }
-.random-css-borderColor-Azure { border-color: Azure }
-.random-css-borderColor-Beige { border-color: Beige }
-.random-css-borderColor-Bisque { border-color: Bisque }
-.random-css-borderColor-Black { border-color: Black }
-.random-css-borderColor-BlanchedAlmond { border-color: BlanchedAlmond }
-.random-css-borderColor-Blue { border-color: Blue }
-.random-css-borderColor-BlueViolet { border-color: BlueViolet }
-.random-css-borderColor-Brown { border-color: Brown }
-.random-css-borderColor-BurlyWood { border-color: BurlyWood }
-.random-css-borderColor-CadetBlue { border-color: CadetBlue }
-.random-css-borderColor-Chartreuse { border-color: Chartreuse }
-.random-css-borderColor-Chocolate { border-color: Chocolate }
-.random-css-borderColor-Coral { border-color: Coral }
-.random-css-borderColor-CornflowerBlue { border-color: CornflowerBlue }
-.random-css-borderColor-Cornsilk { border-color: Cornsilk }
-.random-css-borderColor-Crimson { border-color: Crimson }
-.random-css-borderColor-Cyan { border-color: Cyan }
-.random-css-borderColor-DarkBlue { border-color: DarkBlue }
-.random-css-borderColor-DarkCyan { border-color: DarkCyan }
-.random-css-borderColor-DarkGoldenrod { border-color: DarkGoldenrod }
-.random-css-borderColor-DarkGray { border-color: DarkGray }
-.random-css-borderColor-DarkGreen { border-color: DarkGreen }
-.random-css-borderColor-DarkKhaki { border-color: DarkKhaki }
-.random-css-borderColor-DarkMagenta { border-color: DarkMagenta }
-.random-css-borderColor-DarkOliveGreen { border-color: DarkOliveGreen }
-.random-css-borderColor-DarkOrange { border-color: DarkOrange }
-.random-css-borderColor-DarkOrchid { border-color: DarkOrchid }
-.random-css-borderColor-DarkRed { border-color: DarkRed }
-.random-css-borderColor-DarkSalmon { border-color: DarkSalmon }
-.random-css-borderColor-DarkSeaGreen { border-color: DarkSeaGreen }
-.random-css-borderColor-DarkSlateBlue { border-color: DarkSlateBlue }
-.random-css-borderColor-DarkSlateGray { border-color: DarkSlateGray }
-.random-css-borderColor-DarkTurquoise { border-color: DarkTurquoise }
-.random-css-borderColor-DarkViolet { border-color: DarkViolet }
-.random-css-borderColor-DeepPink { border-color: DeepPink }
-.random-css-borderColor-DeepSkyBlue { border-color: DeepSkyBlue }
-.random-css-borderColor-DimGray { border-color: DimGray }
-.random-css-borderColor-DodgerBlue { border-color: DodgerBlue }
-.random-css-borderColor-FireBrick { border-color: FireBrick }
-.random-css-borderColor-FloralWhite { border-color: FloralWhite }
-.random-css-borderColor-ForestGreen { border-color: ForestGreen }
-.random-css-borderColor-Fuchsia { border-color: Fuchsia }
-.random-css-borderColor-Gainsboro { border-color: Gainsboro }
-.random-css-borderColor-GhostWhite { border-color: GhostWhite }
-.random-css-borderColor-Gold { border-color: Gold }
-.random-css-borderColor-Goldenrod { border-color: Goldenrod }
-.random-css-borderColor-Gray { border-color: Gray }
-.random-css-borderColor-Green { border-color: Green }
-.random-css-borderColor-GreenYellow { border-color: GreenYellow }
-.random-css-borderColor-Honeydew { border-color: Honeydew }
-.random-css-borderColor-HotPink { border-color: HotPink }
-.random-css-borderColor-IndianRed { border-color: IndianRed }
-.random-css-borderColor-Indigo { border-color: Indigo }
-.random-css-borderColor-Ivory { border-color: Ivory }
-.random-css-borderColor-Khaki { border-color: Khaki }
-.random-css-borderColor-Lavender { border-color: Lavender }
-.random-css-borderColor-LavenderBlush { border-color: LavenderBlush }
-.random-css-borderColor-LawnGreen { border-color: LawnGreen }
-.random-css-borderColor-LemonChiffon { border-color: LemonChiffon }
-.random-css-borderColor-LightBlue { border-color: LightBlue }
-.random-css-borderColor-LightCoral { border-color: LightCoral }
-.random-css-borderColor-LightCyan { border-color: LightCyan }
-.random-css-borderColor-LightGoldenrodYellow { border-color: LightGoldenrodYellow }
-.random-css-borderColor-LightGreen { border-color: LightGreen }
-.random-css-borderColor-LightGrey { border-color: LightGrey }
-.random-css-borderColor-LightPink { border-color: LightPink }
-.random-css-borderColor-LightSalmon { border-color: LightSalmon }
-.random-css-borderColor-LightSeaGreen { border-color: LightSeaGreen }
-.random-css-borderColor-LightSkyBlue { border-color: LightSkyBlue }
-.random-css-borderColor-LightSlateGray { border-color: LightSlateGray }
-.random-css-borderColor-LightSteelBlue { border-color: LightSteelBlue }
-.random-css-borderColor-LightYellow { border-color: LightYellow }
-.random-css-borderColor-Lime { border-color: Lime }
-.random-css-borderColor-LimeGreen { border-color: LimeGreen }
-.random-css-borderColor-Linen { border-color: Linen }
-.random-css-borderColor-Magenta { border-color: Magenta }
-.random-css-borderColor-Maroon { border-color: Maroon }
-.random-css-borderColor-MediumAquamarine { border-color: MediumAquamarine }
-.random-css-borderColor-MediumBlue { border-color: MediumBlue }
-.random-css-borderColor-MediumOrchid { border-color: MediumOrchid }
-.random-css-borderColor-MediumPurple { border-color: MediumPurple }
-.random-css-borderColor-MediumSeaGreen { border-color: MediumSeaGreen }
-.random-css-borderColor-MediumSlateBlue { border-color: MediumSlateBlue }
-.random-css-borderColor-MediumSpringGreen { border-color: MediumSpringGreen }
-.random-css-borderColor-MediumTurquoise { border-color: MediumTurquoise }
-.random-css-borderColor-MediumVioletRed { border-color: MediumVioletRed }
-.random-css-borderColor-MidnightBlue { border-color: MidnightBlue }
-.random-css-borderColor-MintCream { border-color: MintCream }
-.random-css-borderColor-MistyRose { border-color: MistyRose }
-.random-css-borderColor-Moccasin { border-color: Moccasin }
-.random-css-borderColor-NavajoWhite { border-color: NavajoWhite }
-.random-css-borderColor-Navy { border-color: Navy }
-.random-css-borderColor-OldLace { border-color: OldLace }
-.random-css-borderColor-Olive { border-color: Olive }
-.random-css-borderColor-OliveDrab { border-color: OliveDrab }
-.random-css-borderColor-Orange { border-color: Orange }
-.random-css-borderColor-OrangeRed { border-color: OrangeRed }
-.random-css-borderColor-Orchid { border-color: Orchid }
-.random-css-borderColor-PaleGoldenrod { border-color: PaleGoldenrod }
-.random-css-borderColor-PaleGreen { border-color: PaleGreen }
-.random-css-borderColor-PaleTurquoise { border-color: PaleTurquoise }
-.random-css-borderColor-PaleVioletRed { border-color: PaleVioletRed }
-.random-css-borderColor-PapayaWhip { border-color: PapayaWhip }
-.random-css-borderColor-PeachPuff { border-color: PeachPuff }
-.random-css-borderColor-Peru { border-color: Peru }
-.random-css-borderColor-Pink { border-color: Pink }
-.random-css-borderColor-Plum { border-color: Plum }
-.random-css-borderColor-PowderBlue { border-color: PowderBlue }
-.random-css-borderColor-Purple { border-color: Purple }
-.random-css-borderColor-RebeccaPurple { border-color: RebeccaPurple }
-.random-css-borderColor-Red { border-color: Red }
-.random-css-borderColor-RosyBrown { border-color: RosyBrown }
-.random-css-borderColor-RoyalBlue { border-color: RoyalBlue }
-.random-css-borderColor-SaddleBrown { border-color: SaddleBrown }
-.random-css-borderColor-Salmon { border-color: Salmon }
-.random-css-borderColor-SandyBrown { border-color: SandyBrown }
-.random-css-borderColor-SeaGreen { border-color: SeaGreen }
-.random-css-borderColor-Seashell { border-color: Seashell }
-.random-css-borderColor-Sienna { border-color: Sienna }
-.random-css-borderColor-Silver { border-color: Silver }
-.random-css-borderColor-SkyBlue { border-color: SkyBlue }
-.random-css-borderColor-SlateBlue { border-color: SlateBlue }
-.random-css-borderColor-SlateGray { border-color: SlateGray }
-.random-css-borderColor-Snow { border-color: Snow }
-.random-css-borderColor-SpringGreen { border-color: SpringGreen }
-.random-css-borderColor-SteelBlue { border-color: SteelBlue }
-.random-css-borderColor-Tan { border-color: Tan }
-.random-css-borderColor-Teal { border-color: Teal }
-.random-css-borderColor-Thistle { border-color: Thistle }
-.random-css-borderColor-Tomato { border-color: Tomato }
-.random-css-borderColor-Turquoise { border-color: Turquoise }
-.random-css-borderColor-Violet { border-color: Violet }
-.random-css-borderColor-Wheat { border-color: Wheat }
-.random-css-borderColor-White { border-color: White }
-.random-css-borderColor-WhiteSmoke { border-color: WhiteSmoke }
-.random-css-borderColor-Yellow { border-color: Yellow }
-.random-css-borderColor-Yellow { border-color: Yellow }
-.random-css-borderColor-YellowGreen { border-color: YellowGreen }
+.random-css-container {
+	background-color: white;
+	display:          flex;
+	padding:          .25rem;
+	position:         relative;
+}
+.random-css-container-center {
+	margin: auto;
+	width:  min-content;
+}
+.random-css-container div {
+	box-sizing: border-box;
+	overflow:   min-content;
+	text-align: center;
+}
+.random-css-container-0-25 {
+	font-size: 0.25rem;
+}
+.random-css-character-0-25 {
+	height: 0.296875rem;
+	width:  0.25rem;
+}
+.random-css-container-0-5 {
+	font-size: 0.5rem;
+}
+.random-css-character-0-5 {
+	height: 0.59375rem;
+	width:  0.5rem;
+}
+.random-css-container-0-75 {
+	font-size: 0.75rem;
+}
+.random-css-character-0-75 {
+	height: 0.890625rem;
+	width:  0.75rem;
+}
+.random-css-container-1-0 {
+	font-size: 1.0rem;
+}
+.random-css-character-1-0 {
+	height: 1.1875rem;
+	width:  1.0rem;
+}
+.random-css-container-1-25 {
+	font-size: 1.25rem;
+}
+.random-css-character-1-25 {
+	height: 1.484375rem;
+	width:  1.25rem;
+}
+.random-css-container-1-5 {
+	font-size: 1.5rem;
+}
+.random-css-character-1-5 {
+	height: 1.78125rem;
+	width:  1.5rem;
+}
+.random-css-container-1-75 {
+	font-size: 1.75rem;
+}
+.random-css-character-1-75 {
+	height: 2.078125rem;
+	width:  1.75rem;
+}
+.random-css-container-2-0 {
+	font-size: 2.0rem;
+}
+.random-css-character-2-0 {
+	height: 2.375rem;
+	width:  2.0rem;
+}
+.random-css-container-2-25 {
+	font-size: 2.25rem;
+}
+.random-css-character-2-25 {
+	height: 2.671875rem;
+	width:  2.25rem;
+}
+.random-css-container-2-5 {
+	font-size: 2.5rem;
+}
+.random-css-character-2-5 {
+	height: 2.96875rem;
+	width:  2.5rem;
+}
+.random-css-container-2-75 {
+	font-size: 2.75rem;
+}
+.random-css-character-2-75 {
+	height: 3.265625rem;
+	width:  2.75rem;
+}
+.random-css-container-3-0 {
+	font-size: 3.0rem;
+}
+.random-css-character-3-0 {
+	height: 3.5625rem;
+	width:  3.0rem;
+}
+.random-css-container-3-25 {
+	font-size: 3.25rem;
+}
+.random-css-character-3-25 {
+	height: 3.859375rem;
+	width:  3.25rem;
+}
+.random-css-container-3-5 {
+	font-size: 3.5rem;
+}
+.random-css-character-3-5 {
+	height: 4.15625rem;
+	width:  3.5rem;
+}
+.random-css-container-3-75 {
+	font-size: 3.75rem;
+}
+.random-css-character-3-75 {
+	height: 4.453125rem;
+	width:  3.75rem;
+}
+.random-css-container-4-0 {
+	font-size: 4.0rem;
+}
+.random-css-character-4-0 {
+	height: 4.75rem;
+	width:  4.0rem;
+}
+.random-css-container-4-25 {
+	font-size: 4.25rem;
+}
+.random-css-character-4-25 {
+	height: 5.046875rem;
+	width:  4.25rem;
+}
+.random-css-container-4-5 {
+	font-size: 4.5rem;
+}
+.random-css-character-4-5 {
+	height: 5.34375rem;
+	width:  4.5rem;
+}
+.random-css-container-4-75 {
+	font-size: 4.75rem;
+}
+.random-css-character-4-75 {
+	height: 5.640625rem;
+	width:  4.75rem;
+}
+.random-css-container-5-0 {
+	font-size: 5.0rem;
+}
+.random-css-character-5-0 {
+	height: 5.9375rem;
+	width:  5.0rem;
+}
+.random-css-container-5-25 {
+	font-size: 5.25rem;
+}
+.random-css-character-5-25 {
+	height: 6.234375rem;
+	width:  5.25rem;
+}
+.random-css-container-5-5 {
+	font-size: 5.5rem;
+}
+.random-css-character-5-5 {
+	height: 6.53125rem;
+	width:  5.5rem;
+}
+.random-css-container-5-75 {
+	font-size: 5.75rem;
+}
+.random-css-character-5-75 {
+	height: 6.828125rem;
+	width:  5.75rem;
+}
+.random-css-container-6-0 {
+	font-size: 6.0rem;
+}
+.random-css-character-6-0 {
+	height: 7.125rem;
+	width:  6.0rem;
+}
+.random-css-container-6-25 {
+	font-size: 6.25rem;
+}
+.random-css-character-6-25 {
+	height: 7.421875rem;
+	width:  6.25rem;
+}
+.random-css-container-6-5 {
+	font-size: 6.5rem;
+}
+.random-css-character-6-5 {
+	height: 7.71875rem;
+	width:  6.5rem;
+}
+.random-css-container-6-75 {
+	font-size: 6.75rem;
+}
+.random-css-character-6-75 {
+	height: 8.015625rem;
+	width:  6.75rem;
+}
+.random-css-container-7-0 {
+	font-size: 7.0rem;
+}
+.random-css-character-7-0 {
+	height: 8.3125rem;
+	width:  7.0rem;
+}
+.random-css-container-7-25 {
+	font-size: 7.25rem;
+}
+.random-css-character-7-25 {
+	height: 8.609375rem;
+	width:  7.25rem;
+}
+.random-css-container-7-5 {
+	font-size: 7.5rem;
+}
+.random-css-character-7-5 {
+	height: 8.90625rem;
+	width:  7.5rem;
+}
+.random-css-container-7-75 {
+	font-size: 7.75rem;
+}
+.random-css-character-7-75 {
+	height: 9.203125rem;
+	width:  7.75rem;
+}
+.random-css-container-8-0 {
+	font-size: 8.0rem;
+}
+.random-css-character-8-0 {
+	height: 9.5rem;
+	width:  8.0rem;
+}
+.random-css-container-8-25 {
+	font-size: 8.25rem;
+}
+.random-css-character-8-25 {
+	height: 9.796875rem;
+	width:  8.25rem;
+}
+.random-css-container-8-5 {
+	font-size: 8.5rem;
+}
+.random-css-character-8-5 {
+	height: 10.09375rem;
+	width:  8.5rem;
+}
+.random-css-container-8-75 {
+	font-size: 8.75rem;
+}
+.random-css-character-8-75 {
+	height: 10.390625rem;
+	width:  8.75rem;
+}
+.random-css-container-9-0 {
+	font-size: 9.0rem;
+}
+.random-css-character-9-0 {
+	height: 10.6875rem;
+	width:  9.0rem;
+}
+.random-css-container-9-25 {
+	font-size: 9.25rem;
+}
+.random-css-character-9-25 {
+	height: 10.984375rem;
+	width:  9.25rem;
+}
+.random-css-container-9-5 {
+	font-size: 9.5rem;
+}
+.random-css-character-9-5 {
+	height: 11.28125rem;
+	width:  9.5rem;
+}
+.random-css-container-9-75 {
+	font-size: 9.75rem;
+}
+.random-css-character-9-75 {
+	height: 11.578125rem;
+	width:  9.75rem;
+}
+.random-css-container-10-0 {
+	font-size: 10.0rem;
+}
+.random-css-character-10-0 {
+	height: 11.875rem;
+	width:  10.0rem;
+}
+.random-css-background-color-AliceBlue { background-color: AliceBlue }
+.random-css-background-color-AntiqueWhite { background-color: AntiqueWhite }
+.random-css-background-color-Aqua { background-color: Aqua }
+.random-css-background-color-Aquamarine { background-color: Aquamarine }
+.random-css-background-color-Azure { background-color: Azure }
+.random-css-background-color-Beige { background-color: Beige }
+.random-css-background-color-Bisque { background-color: Bisque }
+.random-css-background-color-Black { background-color: Black }
+.random-css-background-color-BlanchedAlmond { background-color: BlanchedAlmond }
+.random-css-background-color-Blue { background-color: Blue }
+.random-css-background-color-BlueViolet { background-color: BlueViolet }
+.random-css-background-color-Brown { background-color: Brown }
+.random-css-background-color-BurlyWood { background-color: BurlyWood }
+.random-css-background-color-CadetBlue { background-color: CadetBlue }
+.random-css-background-color-Chartreuse { background-color: Chartreuse }
+.random-css-background-color-Chocolate { background-color: Chocolate }
+.random-css-background-color-Coral { background-color: Coral }
+.random-css-background-color-CornflowerBlue { background-color: CornflowerBlue }
+.random-css-background-color-Cornsilk { background-color: Cornsilk }
+.random-css-background-color-Crimson { background-color: Crimson }
+.random-css-background-color-Cyan { background-color: Cyan }
+.random-css-background-color-DarkBlue { background-color: DarkBlue }
+.random-css-background-color-DarkCyan { background-color: DarkCyan }
+.random-css-background-color-DarkGoldenrod { background-color: DarkGoldenrod }
+.random-css-background-color-DarkGray { background-color: DarkGray }
+.random-css-background-color-DarkGreen { background-color: DarkGreen }
+.random-css-background-color-DarkKhaki { background-color: DarkKhaki }
+.random-css-background-color-DarkMagenta { background-color: DarkMagenta }
+.random-css-background-color-DarkOliveGreen { background-color: DarkOliveGreen }
+.random-css-background-color-DarkOrange { background-color: DarkOrange }
+.random-css-background-color-DarkOrchid { background-color: DarkOrchid }
+.random-css-background-color-DarkRed { background-color: DarkRed }
+.random-css-background-color-DarkSalmon { background-color: DarkSalmon }
+.random-css-background-color-DarkSeaGreen { background-color: DarkSeaGreen }
+.random-css-background-color-DarkSlateBlue { background-color: DarkSlateBlue }
+.random-css-background-color-DarkSlateGray { background-color: DarkSlateGray }
+.random-css-background-color-DarkTurquoise { background-color: DarkTurquoise }
+.random-css-background-color-DarkViolet { background-color: DarkViolet }
+.random-css-background-color-DeepPink { background-color: DeepPink }
+.random-css-background-color-DeepSkyBlue { background-color: DeepSkyBlue }
+.random-css-background-color-DimGray { background-color: DimGray }
+.random-css-background-color-DodgerBlue { background-color: DodgerBlue }
+.random-css-background-color-FireBrick { background-color: FireBrick }
+.random-css-background-color-FloralWhite { background-color: FloralWhite }
+.random-css-background-color-ForestGreen { background-color: ForestGreen }
+.random-css-background-color-Fuchsia { background-color: Fuchsia }
+.random-css-background-color-Gainsboro { background-color: Gainsboro }
+.random-css-background-color-GhostWhite { background-color: GhostWhite }
+.random-css-background-color-Gold { background-color: Gold }
+.random-css-background-color-Goldenrod { background-color: Goldenrod }
+.random-css-background-color-Gray { background-color: Gray }
+.random-css-background-color-Green { background-color: Green }
+.random-css-background-color-GreenYellow { background-color: GreenYellow }
+.random-css-background-color-Honeydew { background-color: Honeydew }
+.random-css-background-color-HotPink { background-color: HotPink }
+.random-css-background-color-IndianRed { background-color: IndianRed }
+.random-css-background-color-Indigo { background-color: Indigo }
+.random-css-background-color-Ivory { background-color: Ivory }
+.random-css-background-color-Khaki { background-color: Khaki }
+.random-css-background-color-Lavender { background-color: Lavender }
+.random-css-background-color-LavenderBlush { background-color: LavenderBlush }
+.random-css-background-color-LawnGreen { background-color: LawnGreen }
+.random-css-background-color-LemonChiffon { background-color: LemonChiffon }
+.random-css-background-color-LightBlue { background-color: LightBlue }
+.random-css-background-color-LightCoral { background-color: LightCoral }
+.random-css-background-color-LightCyan { background-color: LightCyan }
+.random-css-background-color-LightGoldenrodYellow { background-color: LightGoldenrodYellow }
+.random-css-background-color-LightGreen { background-color: LightGreen }
+.random-css-background-color-LightGrey { background-color: LightGrey }
+.random-css-background-color-LightPink { background-color: LightPink }
+.random-css-background-color-LightSalmon { background-color: LightSalmon }
+.random-css-background-color-LightSeaGreen { background-color: LightSeaGreen }
+.random-css-background-color-LightSkyBlue { background-color: LightSkyBlue }
+.random-css-background-color-LightSlateGray { background-color: LightSlateGray }
+.random-css-background-color-LightSteelBlue { background-color: LightSteelBlue }
+.random-css-background-color-LightYellow { background-color: LightYellow }
+.random-css-background-color-Lime { background-color: Lime }
+.random-css-background-color-LimeGreen { background-color: LimeGreen }
+.random-css-background-color-Linen { background-color: Linen }
+.random-css-background-color-Magenta { background-color: Magenta }
+.random-css-background-color-Maroon { background-color: Maroon }
+.random-css-background-color-MediumAquamarine { background-color: MediumAquamarine }
+.random-css-background-color-MediumBlue { background-color: MediumBlue }
+.random-css-background-color-MediumOrchid { background-color: MediumOrchid }
+.random-css-background-color-MediumPurple { background-color: MediumPurple }
+.random-css-background-color-MediumSeaGreen { background-color: MediumSeaGreen }
+.random-css-background-color-MediumSlateBlue { background-color: MediumSlateBlue }
+.random-css-background-color-MediumSpringGreen { background-color: MediumSpringGreen }
+.random-css-background-color-MediumTurquoise { background-color: MediumTurquoise }
+.random-css-background-color-MediumVioletRed { background-color: MediumVioletRed }
+.random-css-background-color-MidnightBlue { background-color: MidnightBlue }
+.random-css-background-color-MintCream { background-color: MintCream }
+.random-css-background-color-MistyRose { background-color: MistyRose }
+.random-css-background-color-Moccasin { background-color: Moccasin }
+.random-css-background-color-NavajoWhite { background-color: NavajoWhite }
+.random-css-background-color-Navy { background-color: Navy }
+.random-css-background-color-OldLace { background-color: OldLace }
+.random-css-background-color-Olive { background-color: Olive }
+.random-css-background-color-OliveDrab { background-color: OliveDrab }
+.random-css-background-color-Orange { background-color: Orange }
+.random-css-background-color-OrangeRed { background-color: OrangeRed }
+.random-css-background-color-Orchid { background-color: Orchid }
+.random-css-background-color-PaleGoldenrod { background-color: PaleGoldenrod }
+.random-css-background-color-PaleGreen { background-color: PaleGreen }
+.random-css-background-color-PaleTurquoise { background-color: PaleTurquoise }
+.random-css-background-color-PaleVioletRed { background-color: PaleVioletRed }
+.random-css-background-color-PapayaWhip { background-color: PapayaWhip }
+.random-css-background-color-PeachPuff { background-color: PeachPuff }
+.random-css-background-color-Peru { background-color: Peru }
+.random-css-background-color-Pink { background-color: Pink }
+.random-css-background-color-Plum { background-color: Plum }
+.random-css-background-color-PowderBlue { background-color: PowderBlue }
+.random-css-background-color-Purple { background-color: Purple }
+.random-css-background-color-RebeccaPurple { background-color: RebeccaPurple }
+.random-css-background-color-Red { background-color: Red }
+.random-css-background-color-RosyBrown { background-color: RosyBrown }
+.random-css-background-color-RoyalBlue { background-color: RoyalBlue }
+.random-css-background-color-SaddleBrown { background-color: SaddleBrown }
+.random-css-background-color-Salmon { background-color: Salmon }
+.random-css-background-color-SandyBrown { background-color: SandyBrown }
+.random-css-background-color-SeaGreen { background-color: SeaGreen }
+.random-css-background-color-Seashell { background-color: Seashell }
+.random-css-background-color-Sienna { background-color: Sienna }
+.random-css-background-color-Silver { background-color: Silver }
+.random-css-background-color-SkyBlue { background-color: SkyBlue }
+.random-css-background-color-SlateBlue { background-color: SlateBlue }
+.random-css-background-color-SlateGray { background-color: SlateGray }
+.random-css-background-color-Snow { background-color: Snow }
+.random-css-background-color-SpringGreen { background-color: SpringGreen }
+.random-css-background-color-SteelBlue { background-color: SteelBlue }
+.random-css-background-color-Tan { background-color: Tan }
+.random-css-background-color-Teal { background-color: Teal }
+.random-css-background-color-Thistle { background-color: Thistle }
+.random-css-background-color-Tomato { background-color: Tomato }
+.random-css-background-color-Turquoise { background-color: Turquoise }
+.random-css-background-color-Violet { background-color: Violet }
+.random-css-background-color-Wheat { background-color: Wheat }
+.random-css-background-color-White { background-color: White }
+.random-css-background-color-WhiteSmoke { background-color: WhiteSmoke }
+.random-css-background-color-Yellow { background-color: Yellow }
+.random-css-background-color-Yellow { background-color: Yellow }
+.random-css-background-color-YellowGreen { background-color: YellowGreen }
+.random-css-border-color-AliceBlue { border-color: AliceBlue }
+.random-css-border-color-AntiqueWhite { border-color: AntiqueWhite }
+.random-css-border-color-Aqua { border-color: Aqua }
+.random-css-border-color-Aquamarine { border-color: Aquamarine }
+.random-css-border-color-Azure { border-color: Azure }
+.random-css-border-color-Beige { border-color: Beige }
+.random-css-border-color-Bisque { border-color: Bisque }
+.random-css-border-color-Black { border-color: Black }
+.random-css-border-color-BlanchedAlmond { border-color: BlanchedAlmond }
+.random-css-border-color-Blue { border-color: Blue }
+.random-css-border-color-BlueViolet { border-color: BlueViolet }
+.random-css-border-color-Brown { border-color: Brown }
+.random-css-border-color-BurlyWood { border-color: BurlyWood }
+.random-css-border-color-CadetBlue { border-color: CadetBlue }
+.random-css-border-color-Chartreuse { border-color: Chartreuse }
+.random-css-border-color-Chocolate { border-color: Chocolate }
+.random-css-border-color-Coral { border-color: Coral }
+.random-css-border-color-CornflowerBlue { border-color: CornflowerBlue }
+.random-css-border-color-Cornsilk { border-color: Cornsilk }
+.random-css-border-color-Crimson { border-color: Crimson }
+.random-css-border-color-Cyan { border-color: Cyan }
+.random-css-border-color-DarkBlue { border-color: DarkBlue }
+.random-css-border-color-DarkCyan { border-color: DarkCyan }
+.random-css-border-color-DarkGoldenrod { border-color: DarkGoldenrod }
+.random-css-border-color-DarkGray { border-color: DarkGray }
+.random-css-border-color-DarkGreen { border-color: DarkGreen }
+.random-css-border-color-DarkKhaki { border-color: DarkKhaki }
+.random-css-border-color-DarkMagenta { border-color: DarkMagenta }
+.random-css-border-color-DarkOliveGreen { border-color: DarkOliveGreen }
+.random-css-border-color-DarkOrange { border-color: DarkOrange }
+.random-css-border-color-DarkOrchid { border-color: DarkOrchid }
+.random-css-border-color-DarkRed { border-color: DarkRed }
+.random-css-border-color-DarkSalmon { border-color: DarkSalmon }
+.random-css-border-color-DarkSeaGreen { border-color: DarkSeaGreen }
+.random-css-border-color-DarkSlateBlue { border-color: DarkSlateBlue }
+.random-css-border-color-DarkSlateGray { border-color: DarkSlateGray }
+.random-css-border-color-DarkTurquoise { border-color: DarkTurquoise }
+.random-css-border-color-DarkViolet { border-color: DarkViolet }
+.random-css-border-color-DeepPink { border-color: DeepPink }
+.random-css-border-color-DeepSkyBlue { border-color: DeepSkyBlue }
+.random-css-border-color-DimGray { border-color: DimGray }
+.random-css-border-color-DodgerBlue { border-color: DodgerBlue }
+.random-css-border-color-FireBrick { border-color: FireBrick }
+.random-css-border-color-FloralWhite { border-color: FloralWhite }
+.random-css-border-color-ForestGreen { border-color: ForestGreen }
+.random-css-border-color-Fuchsia { border-color: Fuchsia }
+.random-css-border-color-Gainsboro { border-color: Gainsboro }
+.random-css-border-color-GhostWhite { border-color: GhostWhite }
+.random-css-border-color-Gold { border-color: Gold }
+.random-css-border-color-Goldenrod { border-color: Goldenrod }
+.random-css-border-color-Gray { border-color: Gray }
+.random-css-border-color-Green { border-color: Green }
+.random-css-border-color-GreenYellow { border-color: GreenYellow }
+.random-css-border-color-Honeydew { border-color: Honeydew }
+.random-css-border-color-HotPink { border-color: HotPink }
+.random-css-border-color-IndianRed { border-color: IndianRed }
+.random-css-border-color-Indigo { border-color: Indigo }
+.random-css-border-color-Ivory { border-color: Ivory }
+.random-css-border-color-Khaki { border-color: Khaki }
+.random-css-border-color-Lavender { border-color: Lavender }
+.random-css-border-color-LavenderBlush { border-color: LavenderBlush }
+.random-css-border-color-LawnGreen { border-color: LawnGreen }
+.random-css-border-color-LemonChiffon { border-color: LemonChiffon }
+.random-css-border-color-LightBlue { border-color: LightBlue }
+.random-css-border-color-LightCoral { border-color: LightCoral }
+.random-css-border-color-LightCyan { border-color: LightCyan }
+.random-css-border-color-LightGoldenrodYellow { border-color: LightGoldenrodYellow }
+.random-css-border-color-LightGreen { border-color: LightGreen }
+.random-css-border-color-LightGrey { border-color: LightGrey }
+.random-css-border-color-LightPink { border-color: LightPink }
+.random-css-border-color-LightSalmon { border-color: LightSalmon }
+.random-css-border-color-LightSeaGreen { border-color: LightSeaGreen }
+.random-css-border-color-LightSkyBlue { border-color: LightSkyBlue }
+.random-css-border-color-LightSlateGray { border-color: LightSlateGray }
+.random-css-border-color-LightSteelBlue { border-color: LightSteelBlue }
+.random-css-border-color-LightYellow { border-color: LightYellow }
+.random-css-border-color-Lime { border-color: Lime }
+.random-css-border-color-LimeGreen { border-color: LimeGreen }
+.random-css-border-color-Linen { border-color: Linen }
+.random-css-border-color-Magenta { border-color: Magenta }
+.random-css-border-color-Maroon { border-color: Maroon }
+.random-css-border-color-MediumAquamarine { border-color: MediumAquamarine }
+.random-css-border-color-MediumBlue { border-color: MediumBlue }
+.random-css-border-color-MediumOrchid { border-color: MediumOrchid }
+.random-css-border-color-MediumPurple { border-color: MediumPurple }
+.random-css-border-color-MediumSeaGreen { border-color: MediumSeaGreen }
+.random-css-border-color-MediumSlateBlue { border-color: MediumSlateBlue }
+.random-css-border-color-MediumSpringGreen { border-color: MediumSpringGreen }
+.random-css-border-color-MediumTurquoise { border-color: MediumTurquoise }
+.random-css-border-color-MediumVioletRed { border-color: MediumVioletRed }
+.random-css-border-color-MidnightBlue { border-color: MidnightBlue }
+.random-css-border-color-MintCream { border-color: MintCream }
+.random-css-border-color-MistyRose { border-color: MistyRose }
+.random-css-border-color-Moccasin { border-color: Moccasin }
+.random-css-border-color-NavajoWhite { border-color: NavajoWhite }
+.random-css-border-color-Navy { border-color: Navy }
+.random-css-border-color-OldLace { border-color: OldLace }
+.random-css-border-color-Olive { border-color: Olive }
+.random-css-border-color-OliveDrab { border-color: OliveDrab }
+.random-css-border-color-Orange { border-color: Orange }
+.random-css-border-color-OrangeRed { border-color: OrangeRed }
+.random-css-border-color-Orchid { border-color: Orchid }
+.random-css-border-color-PaleGoldenrod { border-color: PaleGoldenrod }
+.random-css-border-color-PaleGreen { border-color: PaleGreen }
+.random-css-border-color-PaleTurquoise { border-color: PaleTurquoise }
+.random-css-border-color-PaleVioletRed { border-color: PaleVioletRed }
+.random-css-border-color-PapayaWhip { border-color: PapayaWhip }
+.random-css-border-color-PeachPuff { border-color: PeachPuff }
+.random-css-border-color-Peru { border-color: Peru }
+.random-css-border-color-Pink { border-color: Pink }
+.random-css-border-color-Plum { border-color: Plum }
+.random-css-border-color-PowderBlue { border-color: PowderBlue }
+.random-css-border-color-Purple { border-color: Purple }
+.random-css-border-color-RebeccaPurple { border-color: RebeccaPurple }
+.random-css-border-color-Red { border-color: Red }
+.random-css-border-color-RosyBrown { border-color: RosyBrown }
+.random-css-border-color-RoyalBlue { border-color: RoyalBlue }
+.random-css-border-color-SaddleBrown { border-color: SaddleBrown }
+.random-css-border-color-Salmon { border-color: Salmon }
+.random-css-border-color-SandyBrown { border-color: SandyBrown }
+.random-css-border-color-SeaGreen { border-color: SeaGreen }
+.random-css-border-color-Seashell { border-color: Seashell }
+.random-css-border-color-Sienna { border-color: Sienna }
+.random-css-border-color-Silver { border-color: Silver }
+.random-css-border-color-SkyBlue { border-color: SkyBlue }
+.random-css-border-color-SlateBlue { border-color: SlateBlue }
+.random-css-border-color-SlateGray { border-color: SlateGray }
+.random-css-border-color-Snow { border-color: Snow }
+.random-css-border-color-SpringGreen { border-color: SpringGreen }
+.random-css-border-color-SteelBlue { border-color: SteelBlue }
+.random-css-border-color-Tan { border-color: Tan }
+.random-css-border-color-Teal { border-color: Teal }
+.random-css-border-color-Thistle { border-color: Thistle }
+.random-css-border-color-Tomato { border-color: Tomato }
+.random-css-border-color-Turquoise { border-color: Turquoise }
+.random-css-border-color-Violet { border-color: Violet }
+.random-css-border-color-Wheat { border-color: Wheat }
+.random-css-border-color-White { border-color: White }
+.random-css-border-color-WhiteSmoke { border-color: WhiteSmoke }
+.random-css-border-color-Yellow { border-color: Yellow }
+.random-css-border-color-Yellow { border-color: Yellow }
+.random-css-border-color-YellowGreen { border-color: YellowGreen }
 .random-css-color-AliceBlue { color: AliceBlue }
 .random-css-color-AntiqueWhite { color: AntiqueWhite }
 .random-css-color-Aqua { color: Aqua }

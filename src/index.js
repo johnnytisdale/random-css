@@ -8,6 +8,6 @@ import RandomCSS from "./js/RandomCss";
  ****************************************/
 import ReactDOM  from "react-dom";
 const div = document.getElementById('app');
-if (div) { ReactDOM.render( <RandomCSS size={4} />, div); }
+if (div) { ReactDOM.render( <RandomCSS size={4} unsafe={true} />, div); }
 
 //export default RandomCSS;

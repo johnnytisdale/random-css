@@ -6,6 +6,7 @@ export default function initializeState(props) {
 		display: this.setDisplay(text),
 		exportClass: 'invisible',
 		intervals: this.setIntervals(this.props.text),
+		options: this.props.options,
 		text: text,
 	};
 }

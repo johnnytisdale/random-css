@@ -1,0 +1,18 @@
+{
+    "background-color": {
+        "camelCase": "backgroundColor",
+        "type": "color"
+    },
+   "border-color": {
+        "camelCase": "borderColor",
+        "type": "color"
+    },
+    "border-radius": {
+        "camelCase": "borderRadius",
+        "type": "numerical"
+    },
+    "color": {
+        "camelCase": "color",
+        "type": "color"
+    }
+}
