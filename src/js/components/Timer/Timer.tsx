@@ -1,6 +1,10 @@
-import getRandom from '../Character/methods/getRandom';
+import applyMixins from '../../mixins/applyMixins';
+import GetsRandom from "../../mixins/GetRandom";
 
-export default class Timer {
+class Timer {
+
+    interval:   number;
+    ticks:      number;
 
     //create new instance
     constructor() {
@@ -24,7 +28,13 @@ export default class Timer {
     //set/reset
     set() {
         this.ticks    = 0;
-        this.interval = getRandom(3, 10);
+        this.interval = this.getRandom(3, 10);
     }
 
 }
+
+interface Timer extends GetsRandom {}
+
+applyMixins(Timer, [GetsRandom]);
+
+export default Timer;

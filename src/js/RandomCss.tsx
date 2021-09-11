@@ -1,10 +1,9 @@
 //imports
 import * as React from "react";
-import Character from "./components/Character/Character";
-//import * as methods from './methods';
-//import style from '../css/style.scss';
-import {leet}     		from './properties/leet';
-import {unicode}  		from './properties/unicode';
+import Character  from "./components/Character/Character";
+import {leet}     from './properties/leet';
+import {unicode}  from './properties/unicode';
+//import style 	  from '../css/style.scss';
 
 interface Props {
 	center: 	boolean,
@@ -25,6 +24,7 @@ interface State {
 //root component
 export default class RandomCSS extends React.Component <Props, State> {
 
+	//instance variable declarations
 	leet: 	 object;
 	unicode: object;
 
@@ -33,9 +33,6 @@ export default class RandomCSS extends React.Component <Props, State> {
 
 		//allow access to this.props in constructor
 		super(props);
-
-		//set "this" keyword in methods
-		//for (let method in methods) { this[method] = methods[method].bind(this); }
 
 		//leetspeak variations of each letter of the alphabet
 		this.leet = leet;
@@ -123,7 +120,7 @@ export default class RandomCSS extends React.Component <Props, State> {
 										height: (this.props.size * 1.1875) + 'rem',
 										width: 	this.props.size + 'rem'
 									}
-									: null
+									: {}
 							}
 							character={character}
 							key={'character-' + index}
