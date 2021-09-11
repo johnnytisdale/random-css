@@ -1,5 +1,5 @@
-import applyMixins from '../../mixins/applyMixins';
-import GetsRandom from "../../mixins/GetRandom";
+import applyMixins from '../mixins/applyMixins';
+import GetsRandom from "../mixins/GetRandom";
 
 class Timer {
 
@@ -28,13 +28,13 @@ class Timer {
     //set/reset
     set() {
         this.ticks    = 0;
-        this.interval = this.getRandom(3, 10);
+        this.interval = this.getRandom(3, 20);
     }
 
 }
 
+//apply mixins
 interface Timer extends GetsRandom {}
-
 applyMixins(Timer, [GetsRandom]);
 
 export default Timer;

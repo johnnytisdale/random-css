@@ -1,16 +1,9 @@
-/*type Constructor = new (...args: any[]) => {};
-
-export default function GetRandom<TBase extends Constructor>(Base: TBase) {
-    return class GetsRandom extends Base {
-
-        //get a random number between min and max (inclusive)
-        getRandom(min:number, max:number) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-    }
-}*/
-
 export default class GetsRandom {
+
+    getArrayElement(array:Array<any>) {
+        return array[this.getRandom(0, array.length - 1)];
+    }
+
     getRandom(min:number, max:number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }

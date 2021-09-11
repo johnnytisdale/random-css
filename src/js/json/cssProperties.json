@@ -35,10 +35,9 @@
     "border-width": {
         "camelCase": "borderWidth",
         "type": "range",
-        "range": [1, 5],
-        "unit": [
-            "px"
-        ]
+        "min": 1,
+        "max": 5,
+        "unit": "px"
     },
     "color": {
         "camelCase": "color",

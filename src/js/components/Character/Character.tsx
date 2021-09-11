@@ -1,8 +1,11 @@
 //imports
-import * as React from "react";
-import Timer from "../Timer/Timer";
-import colors from './values/colors.json';
-import cssProperties from './values/cssProperties.json';
+import * as React       from "react";
+import ArrayProperty    from "../../classes/ArrayProperty";
+import cssProperties    from '../../json/cssProperties.json';
+import CssProperty      from "../../classes/CssProperty";
+import ColorProperty    from '../../classes/ColorProperty';
+import RangeProperty    from '../../classes/RangeProperty'
+import Timer            from "../../classes/Timer";
 
 interface Props {
     baseStyle:  object,
@@ -25,26 +28,26 @@ interface Style {
     animationPlayState?: string;
 }
 
-interface CssProperty {
+/*interface CssProperty {
     camelCase:  string;
     type:       string;
     function?:  string;
     values?:    string[];
     range?:     number[];
     unit?:      string[];
-}
+}*/
 
 interface CssProperties {
-    [index: string]: CssProperty;
+    [index: string]: any;//CssProperty;
 }
 
 export default class Character extends React.Component <Props, State> {
 
-    [index:string]: any;
-    colors:         Array<string>;
-    cssProperties:  CssProperties;
-    interval:       ReturnType<typeof setInterval>;
-    timers:         Timers;
+    [index:string]:     any;
+    CssProperties:      Array<CssProperty>;
+    cssPropertiesJson:  CssProperties;
+    interval:           ReturnType<typeof setInterval>;
+    timers:             Timers;
 
     //create a new instance
 	constructor(props:Props) {
@@ -52,25 +55,56 @@ export default class Character extends React.Component <Props, State> {
         //allow access to this.props in constructor
 		super(props);
 
-        //set "this" keyword in methods
-		//for (let method in methods) { this[method] = methods[method].bind(this); }
-
-        //html color names
-        this.colors = colors;
-
         //css properties
-		this.cssProperties = cssProperties;
+		this.cssPropertiesJson = cssProperties;
 
-        //create object to keep up with the timers for css properties.
-        //1 tick = x milliseconds, as defined by setInterval.
-        //the css property will have a new value assigned after x ticks have occurred.
-        this.timers = {};
+        //array to hold CssProperty objects
+        this.CssProperties = [];
 
-        //loop through css properties
-        for (let cssProperty in this.cssProperties) {
+        //loop through the css property names in the json
+        for (let cssPropertyName in this.cssPropertiesJson) {
 
-            //add a timer for this css property
-            this.timers[cssProperty] = new Timer;
+            //get the json object corresponding to this css property
+            const cssProperty = this.cssPropertiesJson[cssPropertyName];
+
+            //create a new CssProperty object based on the "type" of css property
+
+            //color
+            if (cssProperty.type == 'color') {
+                this.CssProperties.push(
+                    new ColorProperty(
+                        cssPropertyName,
+                        cssProperty.camelCase,
+                        this.props.unsafe
+                    )
+                );
+            }
+
+            //array
+            else if (cssProperty.type == 'array') {
+                this.CssProperties.push(
+                    new ArrayProperty(
+                        cssPropertyName,
+                        cssProperty.camelCase,
+                        this.props.unsafe,
+                        cssProperty.values
+                    )
+                )
+            }
+
+            //range
+            else if (cssProperty.type == 'range') {
+                this.CssProperties.push(
+                    new RangeProperty(
+                        cssPropertyName,
+                        cssProperty.camelCase,
+                        this.props.unsafe,
+                        cssProperty.min,
+                        cssProperty.max,
+                        cssProperty.unit
+                    )
+                )
+            }
         }
 
         //set initial state
@@ -166,8 +200,8 @@ export default class Character extends React.Component <Props, State> {
         for (let name in this.state.style) {
     
             //dev
-            if (typeof this.cssProperties[name] == 'undefined') continue;
-            if (this.cssProperties[name].type != 'color') continue;
+            if (typeof this.cssPropertiesJson[name] == 'undefined') continue;
+            if (this.cssPropertiesJson[name].type != 'color') continue;
     
             //push class name to array
             classNames.push('random-css-' + name + '-' + this.state.style[name]);
@@ -175,25 +209,6 @@ export default class Character extends React.Component <Props, State> {
     
         //return string
         return classNames.join(' ');
-    }
-
-    getColor(rMin:number, rMax:number, gMin:number, gMax:number, bMin:number, bMax:number) {
-        const red   = this.getRandom(rMin, rMax);
-        const green = this.getRandom(gMin, gMax);
-        const blue  = this.getRandom(bMin, bMax);
-        return `rgb(${red}, ${green}, ${blue})`;
-        /*return ('rgb('
-            + this.getRandom(rMin, rMax)
-            + ','
-            + this.getRandom(gMin, gMax)
-            + ','
-            + this.getRandom(bMin, bMax)
-            + ')'
-        );*/
-    }
-
-    getArrayElement(array:Array<any>) {
-        return array[this.getRandom(0, array.length - 1)];
     }
 
     getBaseClass() {
@@ -214,11 +229,6 @@ export default class Character extends React.Component <Props, State> {
         return className;
     }
 
-    //get a random number between min and max (inclusive)
-    getRandom(min:number, max:number) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
     getStyle() {
     
         //if not using inline style, return null
@@ -229,7 +239,7 @@ export default class Character extends React.Component <Props, State> {
     
         //add properties from state
         for (let name in this.state.style) {
-            const cssProperty = this.cssProperties[name];
+            const cssProperty = this.cssPropertiesJson[name];
             if (typeof cssProperty == 'undefined') {
                 console.log('undefined', name);
                 continue;
@@ -269,35 +279,32 @@ export default class Character extends React.Component <Props, State> {
                 //do not update state if no properties change
                 let update = false;
 
-                //loop through css properties
-                for (let name in this.cssProperties) {
+                //loop through the css property objects
+                for (let CssProperty of this.CssProperties) {
 
-                    const cssProperty = this.cssProperties[name];
-
-                    //if the interval has not elapsed, do nothing 
-                    if (!this.timers[name].increment()) {
+                    //if this timer's countdown is not complete, do nothing
+                    if (!CssProperty.timer.increment()) {
                         continue;
                     }
 
-                    //get the old value so we can compare to new value to see if it changed
-                    const oldValue = style[name];
+                    const oldValue = CssProperty.getValue();
 
-                    //declare variable to hold new value for this css property
-                    let value;
+                    const newValue = CssProperty.setValue();
+
+                    //the randomly selected value is the same as before, so don't update state
+                    if (newValue == oldValue) { continue; }
+
+                    update = true;
+
+                    style[CssProperty.name] = newValue;
+                }
+
+                /*
 
                     //set the value according to the type of css property
                     switch(cssProperty.type) {
 
-                        //get a random element from an array of all possible values
-                        case "array":
-                            value = this.getArrayElement(cssProperty.values);
-                            break;
-
-                        //get a random rgb color
-                        case "color":
-                            //value = this.getColor(0, 255, 0, 255, 0, 255);
-                            value = this.getArrayElement(this.colors);
-                            break;
+                       
 
                         //get the value by calling a function specific to this property
                         case "function":
@@ -309,28 +316,12 @@ export default class Character extends React.Component <Props, State> {
                             }
                             break;
 
-                        //select a random integer from a range of values
-                        case "range":
-                            value = String(this.getRandom(cssProperty.range[0], cssProperty.range[1]));
-                            if (cssProperty.hasOwnProperty('unit')) {
-                                value += '' + this.getArrayElement(cssProperty.unit);
-                            }
-                            break;
-
                         default:
                             console.log('invalid type: ' + cssProperty.type);
                             continue;
                     }
-
-                    //the randomly selected value is the same as before, so don't update state
-                    if (value == oldValue) { continue; }
-                        
-                    //the property changed, so update state
-                    update = true;
-
-                    //set the value for this css property
-                    style[name] = value;
-                }
+                    
+                */
 
                 //update state
                 if (update) {

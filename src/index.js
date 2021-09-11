@@ -10,6 +10,6 @@ import RandomCSS from "./js/RandomCss";
 console.log('not typescript');
 import ReactDOM  from "react-dom";
 const div = document.getElementById('app');
-if (div) { ReactDOM.render( <RandomCSS size={4} text='X' unsafe={true} />, div); }
+if (div) { ReactDOM.render( <RandomCSS size={4} text='random' unsafe={false} />, div); }
 
 //export default RandomCSS;
