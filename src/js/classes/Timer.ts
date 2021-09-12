@@ -1,5 +1,5 @@
 import applyMixins from '../mixins/applyMixins';
-import GetsRandom from "../mixins/GetRandom";
+import GetsRandom from "../mixins/GetsRandom";
 
 class Timer {
 

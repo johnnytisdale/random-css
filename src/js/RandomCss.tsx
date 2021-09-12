@@ -3,7 +3,7 @@ import * as React from "react";
 import Character  from "./components/Character/Character";
 import {leet}     from './properties/leet';
 import {unicode}  from './properties/unicode';
-//import style 	  from '../css/style.scss';
+import style 	  from '../css/style.css';
 
 interface Props {
 	center: 	boolean,

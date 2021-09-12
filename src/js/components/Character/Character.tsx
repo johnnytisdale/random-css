@@ -1,11 +1,14 @@
 //imports
 import * as React       from "react";
-import ArrayProperty    from "../../classes/ArrayProperty";
+
 import cssProperties    from '../../json/cssProperties.json';
+
+import Animation        from "../../classes/Animation";
+import ArrayProperty    from "../../classes/ArrayProperty";
+import BorderRadius     from "../../classes/BorderRadius";
 import CssProperty      from "../../classes/CssProperty";
 import ColorProperty    from '../../classes/ColorProperty';
 import RangeProperty    from '../../classes/RangeProperty'
-import Timer            from "../../classes/Timer";
 
 interface Props {
     baseStyle:  object,
@@ -18,24 +21,11 @@ interface State {
     style: Style;
 }
 
-interface Timers {
-    [index: string]: Timer;
-}
-
 interface Style {
     [index:string]:      string;
     animation?:          string;
     animationPlayState?: string;
 }
-
-/*interface CssProperty {
-    camelCase:  string;
-    type:       string;
-    function?:  string;
-    values?:    string[];
-    range?:     number[];
-    unit?:      string[];
-}*/
 
 interface CssProperties {
     [index: string]: any;//CssProperty;
@@ -47,7 +37,6 @@ export default class Character extends React.Component <Props, State> {
     CssProperties:      Array<CssProperty>;
     cssPropertiesJson:  CssProperties;
     interval:           ReturnType<typeof setInterval>;
-    timers:             Timers;
 
     //create a new instance
 	constructor(props:Props) {
@@ -89,7 +78,7 @@ export default class Character extends React.Component <Props, State> {
                         this.props.unsafe,
                         cssProperty.values
                     )
-                )
+                );
             }
 
             //range
@@ -103,7 +92,21 @@ export default class Character extends React.Component <Props, State> {
                         cssProperty.max,
                         cssProperty.unit
                     )
-                )
+                );
+            }
+
+            //animation
+            else if (cssPropertyName == 'animation') {
+                this.CssProperties.push(
+                    new Animation(this.props.unsafe)
+                );
+            }
+
+            //border radius
+            else if (cssPropertyName == 'border-radius') {
+                this.CssProperties.push(
+                    new BorderRadius(this.props.unsafe)
+                );
             }
         }
 
@@ -111,87 +114,9 @@ export default class Character extends React.Component <Props, State> {
         this.state = {style: {}};
 	}
 
-    animate() {
-
-        //randomly select a transformation
-        const transformation = this.getArrayElement(["rotate", "scale", "skew"]);
-
-        //set animation name based on transformation
-        let name = transformation;
-
-        //if skewing, randomly select X axis, Y axis, or both
-        if (transformation == 'skew') {
-            name += this.getArrayElement(['X', 'Y', 'XY']);
-        }
-        
-        //if scaling, randomly select up or down
-        else if (transformation == 'scale') {
-            name += this.getArrayElement(['scaleDown', 'scaleUp']);
-        }
-
-        let retVal;
-
-        
-        //play/pause
-        if (this.getRandom(0, 1)) {
-            
-            let animation = this.state.style.animation;
-            if (typeof(animation) != 'undefined' && animation !== null && animation != 'none') {
-                let state = this.state.style.animationPlayState;
-                retVal = animation.replace(
-                    state,
-                    state == 'running' ? 'paused' : 'running'
-                );
-            }
-
-        //change variables
-        } else {
-                
-            
-            retVal = this.getRandom(1,3) + 's' + ' ' +
-                this.getArrayElement([
-                    'linear',
-                    'ease',
-                    'ease-in',
-                    'ease-out',
-                    'ease-in-out',
-                    'step-start',
-                    'step-end',
-                    'steps'
-                ]) + ' 0s ' + 
-                this.getArrayElement([
-                    'infinite',
-                    1, 2, 3
-                ]) + ' ' +
-                this.getArrayElement([
-                    'normal',
-                    'reverse',
-                    'alternate',
-                    'alternate-reverse'
-                ]) + ' ' +
-                this.getArrayElement([
-                    'forwards',
-                    'backwards',
-                    'both'
-                ]) + ' running ' + name;
-                
-        }
-        return retVal;
-    }
-
-    getBorderRadius() {
-        let length = 1;//this.props.options.borderRadius.mono ? 1 : 4;
-        let string = '';
-        for (let i = 0; i < length; i++) {
-            string += this.getRandom(0, 100) + '%';
-            if (i < length - 1) {
-                string += ' ';
-            }
-        }
-        return string;
-    }
-
     getClassNames() {
+
+        if (this.props.unsafe) return null;
     
         //an array to hold css class names
         let classNames = [];
@@ -208,7 +133,7 @@ export default class Character extends React.Component <Props, State> {
         }
     
         //return string
-        return classNames.join(' ');
+        return this.getBaseClass() + ' ' + classNames.join(' ');
     }
 
     getBaseClass() {
@@ -254,7 +179,7 @@ export default class Character extends React.Component <Props, State> {
 	render() {
 		return (
             <div
-                className={this.props.unsafe ? null : this.getBaseClass() + ' ' + this.getClassNames()}
+                className={this.getClassNames()}
                 style={this.getStyle()}
             >
                 {this.props.character}
@@ -283,53 +208,30 @@ export default class Character extends React.Component <Props, State> {
                 for (let CssProperty of this.CssProperties) {
 
                     //if this timer's countdown is not complete, do nothing
-                    if (!CssProperty.timer.increment()) {
-                        continue;
-                    }
+                    if (!CssProperty.timer.increment()) continue;
 
+                    //save current value for later comparison
                     const oldValue = CssProperty.getValue();
 
+                    //set a new random value
                     const newValue = CssProperty.setValue();
 
-                    //the randomly selected value is the same as before, so don't update state
-                    if (newValue == oldValue) { continue; }
+                    //if the randomly selected value is the same as before, no need to update state
+                    if (newValue == oldValue) continue;
 
+                    //the value has changed, so we must update state
                     update = true;
 
+                    //add the new value to the style object
                     style[CssProperty.name] = newValue;
                 }
 
-                /*
-
-                    //set the value according to the type of css property
-                    switch(cssProperty.type) {
-
-                       
-
-                        //get the value by calling a function specific to this property
-                        case "function":
-                            try {
-                                value = this[cssProperty.function]();
-                            } catch (e) {
-                                console.log(e);
-                                clearInterval(this.interval);
-                            }
-                            break;
-
-                        default:
-                            console.log('invalid type: ' + cssProperty.type);
-                            continue;
-                    }
-                    
-                */
-
                 //update state
-                if (update) {
-                    this.setState({style: style});
-                }
+                if (update) this.setState({style: style});
             },
             
             //call function every x milliseconds
+            //to do: use a prop
             100
         );
     }

@@ -14,7 +14,7 @@ if (div) { ReactDOM.render(
         center={true}
         //options={{}}
         size={4}
-        text='X'
+        text='random css'
         unsafe={true}
     />,
     div);

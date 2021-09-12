@@ -1,5 +1,5 @@
 import Timer from '../classes/Timer';
-import GetsRandom from '../mixins/GetRandom';
+import GetsRandom from '../mixins/GetsRandom';
 import applyMixins from '../mixins/applyMixins';
 
 abstract class CssProperty {
