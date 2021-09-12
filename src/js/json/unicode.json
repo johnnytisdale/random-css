@@ -1,5 +1,4 @@
-//unicode variations of each letter of the alphabet
-export const unicode = {
+{
     "a":  [
               {
                   "description":  "A WITH ACUTE, LATIN CAPITAL LETTER",

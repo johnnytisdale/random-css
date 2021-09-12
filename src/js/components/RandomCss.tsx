@@ -1,8 +1,6 @@
 //imports
 import * as React from "react";
-import Character  from "./components/Character/Character";
-import {leet}     from './properties/leet';
-import {unicode}  from './properties/unicode';
+import Character  from "./Character";
 import style 	  from '../css/style.css';
 
 interface Props {
@@ -24,21 +22,11 @@ interface State {
 //root component
 export default class RandomCSS extends React.Component <Props, State> {
 
-	//instance variable declarations
-	leet: 	 object;
-	unicode: object;
-
 	//create a new instance
 	constructor(props:Props) {
 
 		//allow access to this.props in constructor
 		super(props);
-
-		//leetspeak variations of each letter of the alphabet
-		this.leet = leet;
-
-		//unicode variations of each letter of the alphabet
-		this.unicode = unicode;
 
 		//initial state
 		this.state = {

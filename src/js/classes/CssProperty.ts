@@ -1,11 +1,8 @@
-import Timer from '../classes/Timer';
-import GetsRandom from '../mixins/GetsRandom';
-import applyMixins from '../mixins/applyMixins';
+//parent class
+import Randomizable from './Randomizable';
 
-abstract class CssProperty {
-
-    //the name of this css property
-    name: string;
+//define and export class
+export default abstract class CssProperty extends Randomizable {
 
     //the camelCase name of this css property (for React)
     camelCase: string;
@@ -13,28 +10,17 @@ abstract class CssProperty {
     //if unsafe, we will use inline css
     unsafe: boolean;
 
-    //a timer for this css property
-    timer: Timer;
-
     //the current value of this css property
     value: string;
 
+    //create a new instance
     constructor(name:string, camelCase:string, unsafe:boolean = false) {
-        this.name       = name;
+
+        //call the parent class's constructor
+        super(name);
+
+        //set instance variables
         this.camelCase  = camelCase;
         this.unsafe     = unsafe;
-        this.timer      = new Timer;
     }
-
-    getValue():string {
-        return this.value;
-    }
-
-    abstract setValue():string;
-
 }
-
-interface CssProperty extends GetsRandom {};
-applyMixins(CssProperty, [GetsRandom]);
-
-export default CssProperty;

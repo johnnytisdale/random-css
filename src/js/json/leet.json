@@ -1,5 +1,4 @@
-//leetspeak variations of each letter of the alphabet
-export const leet = {
+{
     "a":  [
               "4",
               "/-\\",
@@ -106,7 +105,7 @@ export const leet = {
     "n":  [
               "|\\|",
               "/\\/",
-              "/V",
+              "/V"
           ],
     "o":  [
               "0",

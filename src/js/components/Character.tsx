@@ -1,14 +1,19 @@
-//imports
-import * as React       from "react";
+//react
+import * as React           from "react";
 
-import cssProperties    from '../../json/cssProperties.json';
+//json
+import cssProperties        from '../json/cssProperties.json';
 
-import Animation        from "../../classes/Animation";
-import ArrayProperty    from "../../classes/ArrayProperty";
-import BorderRadius     from "../../classes/BorderRadius";
-import CssProperty      from "../../classes/CssProperty";
-import ColorProperty    from '../../classes/ColorProperty';
-import RangeProperty    from '../../classes/RangeProperty'
+//Randomizable classes
+import Animation            from "../classes/Animation";
+import ArrayProperty        from "../classes/ArrayProperty";
+import BorderRadius         from "../classes/BorderRadius";
+import ColorProperty        from '../classes/ColorProperty';
+import Glyph                from "../classes/Glyph";
+import Randomizable         from "../classes/Randomizable";
+import RangeProperty        from '../classes/RangeProperty';
+import CssProperty from "../classes/CssProperty";
+
 
 interface Props {
     baseStyle:  object,
@@ -18,7 +23,8 @@ interface Props {
 }
 
 interface State {
-    style: Style;
+    glyph?: string;
+    style?: Style;
 }
 
 interface Style {
@@ -34,9 +40,10 @@ interface CssProperties {
 export default class Character extends React.Component <Props, State> {
 
     [index:string]:     any;
-    CssProperties:      Array<CssProperty>;
+    Randomizables:      Array<Randomizable>;
     cssPropertiesJson:  CssProperties;
     interval:           ReturnType<typeof setInterval>;
+    leet:               string[];
 
     //create a new instance
 	constructor(props:Props) {
@@ -48,7 +55,7 @@ export default class Character extends React.Component <Props, State> {
 		this.cssPropertiesJson = cssProperties;
 
         //array to hold CssProperty objects
-        this.CssProperties = [];
+        this.Randomizables = [];
 
         //loop through the css property names in the json
         for (let cssPropertyName in this.cssPropertiesJson) {
@@ -60,7 +67,7 @@ export default class Character extends React.Component <Props, State> {
 
             //color
             if (cssProperty.type == 'color') {
-                this.CssProperties.push(
+                this.Randomizables.push(
                     new ColorProperty(
                         cssPropertyName,
                         cssProperty.camelCase,
@@ -71,7 +78,7 @@ export default class Character extends React.Component <Props, State> {
 
             //array
             else if (cssProperty.type == 'array') {
-                this.CssProperties.push(
+                this.Randomizables.push(
                     new ArrayProperty(
                         cssPropertyName,
                         cssProperty.camelCase,
@@ -83,7 +90,7 @@ export default class Character extends React.Component <Props, State> {
 
             //range
             else if (cssProperty.type == 'range') {
-                this.CssProperties.push(
+                this.Randomizables.push(
                     new RangeProperty(
                         cssPropertyName,
                         cssProperty.camelCase,
@@ -97,21 +104,28 @@ export default class Character extends React.Component <Props, State> {
 
             //animation
             else if (cssPropertyName == 'animation') {
-                this.CssProperties.push(
+                this.Randomizables.push(
                     new Animation(this.props.unsafe)
                 );
             }
 
             //border radius
             else if (cssPropertyName == 'border-radius') {
-                this.CssProperties.push(
+                this.Randomizables.push(
                     new BorderRadius(this.props.unsafe)
                 );
             }
         }
 
+        this.Randomizables.push(new Glyph(this.props.character));
+        
+        console.log(this.Randomizables);
+
         //set initial state
-        this.state = {style: {}};
+        this.state = {
+            glyph:  this.props.character,
+            style:  {}
+        };
 	}
 
     getClassNames() {
@@ -182,7 +196,7 @@ export default class Character extends React.Component <Props, State> {
                 className={this.getClassNames()}
                 style={this.getStyle()}
             >
-                {this.props.character}
+                {this.state.glyph}
             </div>
         );
 	}
@@ -198,36 +212,54 @@ export default class Character extends React.Component <Props, State> {
             //function to be called every x milliseconds
             () => {
 
+                let state:State = {};
+
                 //clone current style object
                 let style = JSON.parse(JSON.stringify(this.state.style));
 
-                //do not update state if no properties change
-                let update = false;
+                //do not update glyph if the randomly selected glyph is same as before
+                //let updateGlyph = false;
 
-                //loop through the css property objects
-                for (let CssProperty of this.CssProperties) {
+                let updateState = false;
+
+                //do not update style if no css properties change
+                let updateStyle = false;
+
+                //loop through the Randomizable objects
+                for (let randomizable of this.Randomizables) {
 
                     //if this timer's countdown is not complete, do nothing
-                    if (!CssProperty.timer.increment()) continue;
+                    if (!randomizable.timer.increment()) continue;
 
                     //save current value for later comparison
-                    const oldValue = CssProperty.getValue();
+                    const oldValue = randomizable.getValue();
 
                     //set a new random value
-                    const newValue = CssProperty.setValue();
+                    const newValue = randomizable.setValue();
 
                     //if the randomly selected value is the same as before, no need to update state
                     if (newValue == oldValue) continue;
 
-                    //the value has changed, so we must update state
-                    update = true;
+                    //a css property changed, so we must update style
+                    if (randomizable instanceof CssProperty) {
+                        updateState = true;
+                        updateStyle = true;
 
-                    //add the new value to the style object
-                    style[CssProperty.name] = newValue;
+                        //add the new value to the style object
+                        style[randomizable.name] = newValue;
+                    }
+                    
+                    else if (randomizable instanceof Glyph) {
+                        updateState = true;
+                        state.glyph = newValue;
+                    }
                 }
 
                 //update state
-                if (update) this.setState({style: style});
+                if (updateState) {
+                    if (updateStyle) state.style = style;
+                    this.setState(state);
+                }
             },
             
             //call function every x milliseconds
