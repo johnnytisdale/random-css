@@ -3,6 +3,8 @@ import * as React from "react";
 import Character  from "./Character";
 import style 	  from '../css/style.css';
 
+import RandomizableFactory from '../classes/RandomizableFactory';
+
 interface Props {
 	center: 	boolean,
 	//options: 	object,
@@ -21,6 +23,8 @@ interface State {
 
 //root component
 export default class RandomCSS extends React.Component <Props, State> {
+
+	factory:RandomizableFactory = new RandomizableFactory(this.props.unsafe);
 
 	//create a new instance
 	constructor(props:Props) {
@@ -111,6 +115,7 @@ export default class RandomCSS extends React.Component <Props, State> {
 									: {}
 							}
 							character={character}
+							factory={this.factory}
 							key={'character-' + index}
 							//options={this.state.options}
 							size={this.state.size}

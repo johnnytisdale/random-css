@@ -4,20 +4,20 @@ import * as React           from "react";
 //json
 import cssProperties        from '../json/cssProperties.json';
 
-//Randomizable classes
-import Animation            from "../classes/Animation";
-import ArrayProperty        from "../classes/ArrayProperty";
-import BorderRadius         from "../classes/BorderRadius";
-import ColorProperty        from '../classes/ColorProperty';
+//interfaces
+import CssPropertyOptions from "../interfaces/CssPropertyOptions";
+
+//Randomizables
+import CssProperty          from "../classes/CssProperty";
 import Glyph                from "../classes/Glyph";
 import Randomizable         from "../classes/Randomizable";
-import RangeProperty        from '../classes/RangeProperty';
-import CssProperty from "../classes/CssProperty";
+import RandomizableFactory  from "../classes/RandomizableFactory";
 
 
 interface Props {
     baseStyle:  object,
     character:  string,
+    factory:    RandomizableFactory;
     size:       number,
     unsafe:     boolean
 }
@@ -33,17 +33,15 @@ interface Style {
     animationPlayState?: string;
 }
 
-interface CssProperties {
-    [index: string]: any;//CssProperty;
-}
+
 
 export default class Character extends React.Component <Props, State> {
 
-    [index:string]:     any;
-    Randomizables:      Array<Randomizable>;
-    cssPropertiesJson:  CssProperties;
+    //instance variables
+    cssPropertiesJson:  CssPropertyOptions;
     interval:           ReturnType<typeof setInterval>;
     leet:               string[];
+    Randomizables:      Array<Randomizable>;
 
     //create a new instance
 	constructor(props:Props) {
@@ -55,69 +53,7 @@ export default class Character extends React.Component <Props, State> {
 		this.cssPropertiesJson = cssProperties;
 
         //array to hold CssProperty objects
-        this.Randomizables = [];
-
-        //loop through the css property names in the json
-        for (let cssPropertyName in this.cssPropertiesJson) {
-
-            //get the json object corresponding to this css property
-            const cssProperty = this.cssPropertiesJson[cssPropertyName];
-
-            //create a new CssProperty object based on the "type" of css property
-
-            //color
-            if (cssProperty.type == 'color') {
-                this.Randomizables.push(
-                    new ColorProperty(
-                        cssPropertyName,
-                        cssProperty.camelCase,
-                        this.props.unsafe
-                    )
-                );
-            }
-
-            //array
-            else if (cssProperty.type == 'array') {
-                this.Randomizables.push(
-                    new ArrayProperty(
-                        cssPropertyName,
-                        cssProperty.camelCase,
-                        this.props.unsafe,
-                        cssProperty.values
-                    )
-                );
-            }
-
-            //range
-            else if (cssProperty.type == 'range') {
-                this.Randomizables.push(
-                    new RangeProperty(
-                        cssPropertyName,
-                        cssProperty.camelCase,
-                        this.props.unsafe,
-                        cssProperty.min,
-                        cssProperty.max,
-                        cssProperty.unit
-                    )
-                );
-            }
-
-            //animation
-            else if (cssPropertyName == 'animation') {
-                this.Randomizables.push(
-                    new Animation(this.props.unsafe)
-                );
-            }
-
-            //border radius
-            else if (cssPropertyName == 'border-radius') {
-                this.Randomizables.push(
-                    new BorderRadius(this.props.unsafe)
-                );
-            }
-        }
-
-        this.Randomizables.push(new Glyph(this.props.character));
+        this.Randomizables = this.getRandomizables();
         
         console.log(this.Randomizables);
 
@@ -168,6 +104,27 @@ export default class Character extends React.Component <Props, State> {
         return className;
     }
 
+    getRandomizables(): Randomizable[] {
+
+        let randomizables = [];
+
+        //loop through the css property names in the json
+        for (let cssPropertyName in this.cssPropertiesJson) {
+
+            //get the json object corresponding to this css property
+            const cssProperty = this.cssPropertiesJson[cssPropertyName];
+
+            //get a new CssProperty object based on the "type" of css property
+            const randomizable = this.props.factory.make('css', cssPropertyName, cssProperty);
+            
+            randomizables.push(randomizable);
+        }
+
+        randomizables.push(this.props.factory.make('glyph', 'glyph', {character: this.props.character}));
+
+        return randomizables;
+    }
+
     getStyle() {
     
         //if not using inline style, return null
@@ -216,9 +173,6 @@ export default class Character extends React.Component <Props, State> {
 
                 //clone current style object
                 let style = JSON.parse(JSON.stringify(this.state.style));
-
-                //do not update glyph if the randomly selected glyph is same as before
-                //let updateGlyph = false;
 
                 let updateState = false;
 
