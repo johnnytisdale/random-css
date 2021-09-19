@@ -14,19 +14,9 @@ import RandomCSS from "./js/components/RandomCss";
  *********************************/
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import Form from "./js/components/Form";
 const div = document.getElementById('app');
-if (div) {
-    ReactDOM.render(
-        <RandomCSS
-            center={true}
-            //options={{}}
-            size={4}
-            text='random css'
-            unsafe={true}
-        />,
-        div
-    );
-}
+if (div) ReactDOM.render(<Form />, div);
 
 
 

@@ -1,22 +1,35 @@
 //imports
-import applyMixins  from "../mixins/applyMixins";
+import applyMixins  from "../../../mixins/applyMixins";
 import CssProperty  from "./CssProperty";
-import HasColors    from "../mixins/HasColors";
+import HasColors    from "../../../mixins/HasColors";
+import { Options }  from "../../Options/Options";
+import CssOptions from "../../Options/Randomizables/Css/CssOptions";
+
+type ColorPropertyName = (
+    'backgroundColor'
+  | 'borderColor'
+  | 'color'
+  | 'textDecorationColor'
+);
 
 //class definition
-class ColorProperty extends CssProperty {
+abstract class ColorProperty extends CssProperty {
 
-    constructor(name:string, camelCase:string, unsafe:boolean) {
-        super(name, camelCase, unsafe);
+    abstract camelCase: ColorPropertyName;
+
+    options:Options;
+
+    constructor(name: string, options: Options) {
+        super(name, options);
         this.colors = this.getColors();
     }
 
     public setValue():string {
-        this.value = this.unsafe ? this.getColor_unsafe() : this.getColor_safe();
+        this.value = this.options.global.unsafe ? this.getColor_unsafe() : this.getColor_safe();
         return this.value;
     }
 
-    private getColor_safe() {
+    private getColor_safe():string {
         return this.getArrayElement(this.colors);
     }
 

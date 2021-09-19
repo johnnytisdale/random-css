@@ -1,30 +1,39 @@
-//imports
+//react
 import * as React from "react";
+
+//components
 import Character  from "./Character";
+
+//style
 import style 	  from '../css/style.css';
 
-import RandomizableFactory from '../classes/RandomizableFactory';
+//interfaces
+import {Options, defaultOptions} from "../ts/Options/Options";
+
+//classes
+import Randomizable from "../ts/Randomizables/Randomizable";
+import RandomizableFactory from '../ts/Randomizables/RandomizableFactory';
+
+
 
 interface Props {
-	center: 	boolean,
-	//options: 	object,
-	size: 		number,
-	text: 		string,
-	unsafe: 	boolean
+	center: 	boolean;
+	options: 	Options;
+	size: 		number;
+	text: 		string;
+	unsafe: 	boolean;
 }
 
 interface State {
-	center: 	boolean,
-	display:	Array<string>,
-	//options:	object,
-	size:		number,
-	unsafe:		boolean
+	//display:		Array<string>;
+	randomizables: 	Randomizable[];
 }
 
 //root component
 export default class RandomCSS extends React.Component <Props, State> {
 
-	factory:RandomizableFactory = new RandomizableFactory(this.props.unsafe);
+	//instance variables
+	factory:			RandomizableFactory = new RandomizableFactory(this.props.options);
 
 	//create a new instance
 	constructor(props:Props) {
@@ -34,11 +43,7 @@ export default class RandomCSS extends React.Component <Props, State> {
 
 		//initial state
 		this.state = {
-			center:  typeof this.props.center == 'undefined' ? true : this.props.center,
-			display: this.setDisplay(typeof props.text == 'undefined' ? 'random css' : props.text),
-			//options: typeof this.props.options == 'undefined' ? this.setOptions() : this.props.options,
-			size:    typeof this.props.size == 'undefined' ? 1 : this.props.size,
-			unsafe:  typeof this.props.unsafe == 'undefined' ? false : this.props.unsafe
+			randomizables: 	this.factory.getRandomizables()
 		};
 	}
 
@@ -46,16 +51,16 @@ export default class RandomCSS extends React.Component <Props, State> {
 
 		let classNames = ['random-css-container'];
 	
-		if (!this.state.unsafe) {
+		if (!this.props.unsafe) {
 	
 			//center?
-			if (this.state.center) {
+			if (this.props.center) {
 				classNames.push('random-css-container-center');
 			}
 		
 			//size
-			let className = 'random-css-container-' + this.state.size;
-			if (this.state.size % 1 == 0) {
+			let className = 'random-css-container-' + this.props.size;
+			if (this.props.size % 1 == 0) {
 				className += '-0';
 			}
 			classNames.push(className);
@@ -69,10 +74,10 @@ export default class RandomCSS extends React.Component <Props, State> {
 	getStyle(): object {
 
 		//if we are not using inline css, return null
-		return !this.state.unsafe ? null : {
+		return !this.props.unsafe ? null : {
 			fontSize: this.props.size + 'rem',
-			margin: this.state.center ? 'auto' : 0,
-			width: this.state.center ? 'min-content' : 'auto'
+			margin: this.props.center ? 'auto' : 0,
+			width: this.props.center ? 'min-content' : 'auto'
 		};
 	}
 
@@ -102,26 +107,30 @@ export default class RandomCSS extends React.Component <Props, State> {
 
 				{
 					//loop through the characters in the text
-					this.state.display.map((character, index) => (
+					this.setDisplay(this.props.text).map((character, index) => {
+					
+						return (
 
-						//create a new instance of the Character component
-						<Character
-							baseStyle={
-								this.state.unsafe
-									? {
-										height: (this.props.size * 1.1875) + 'rem',
-										width: 	this.props.size + 'rem'
-									}
-									: {}
-							}
-							character={character}
-							factory={this.factory}
-							key={'character-' + index}
-							//options={this.state.options}
-							size={this.state.size}
-							unsafe={this.state.unsafe}
-						/>
-					))
+							//create a new instance of the Character component
+							<Character
+								baseStyle={
+									this.props.unsafe
+										? {
+											height: (this.props.size * 1.1875) + 'rem',
+											width: 	this.props.size + 'rem'
+										}
+										: {}
+								}
+								character={character}
+								factory={this.factory}
+								key={'character-' + index}
+								options={this.props.options}
+								//randomizables={this.factory.getRandomizables()}
+								size={this.props.size}
+								unsafe={this.props.unsafe}
+							/>
+						);
+					})
 				}
 
 			</div>

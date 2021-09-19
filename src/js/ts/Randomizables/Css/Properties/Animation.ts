@@ -1,8 +1,12 @@
 //imports
-import CssProperty  from "./CssProperty";
+import CssOptions from "../../../Options/Randomizables/Css/CssOptions";
+import CssProperty  from "../CssProperty";
+import { Options } from "../../../Options/Options";
 
 //class definition
 export default class Animation extends CssProperty {
+
+    camelCase: keyof CssOptions = 'animation';
 
     axes:               string[] = ['X', 'Y', 'XY'];
     directions:         string[] = ['normal', 'reverse', 'alternate', 'alternate-reverse'];
@@ -14,13 +18,8 @@ export default class Animation extends CssProperty {
 
     playState: string;
 
-    constructor(unsafe:boolean) {
-        super('animation', 'animation', unsafe);
-    }
-
-    public setValue():string {
-        this.value = this.animate();
-        return this.value;
+    constructor(options:Options) {
+        super('animation', options);
     }
 
     private animate() {
@@ -29,6 +28,19 @@ export default class Animation extends CssProperty {
         const shouldChangePlayState = this.getRandom(0, 1);
 
         return shouldChangePlayState ? this.changePlayState() : this.newAnimation();
+    }
+
+    private changePlayState() {
+        //to do: make safe for custom animation names)
+        let animation = this.value;
+        if (typeof this.value == 'undefined') return this.newAnimation();
+        const newPlayState = this.playState == 'running' ? 'paused' : 'running';
+        const value = animation.replace(
+            this.playState,
+            newPlayState
+        );
+        this.playState = newPlayState;
+        return value;
     }
 
     private newAnimation() {
@@ -76,16 +88,8 @@ export default class Animation extends CssProperty {
         );
     }
 
-    private changePlayState() {
-        //to do: make safe for custom animation names)
-        let animation = this.value;
-        if (typeof this.value == 'undefined') return this.newAnimation();
-        const newPlayState = this.playState == 'running' ? 'paused' : 'running';
-        const value = animation.replace(
-            this.playState,
-            newPlayState
-        );
-        this.playState = newPlayState;
-        return value;
+    public setValue():string {
+        this.value = this.animate();
+        return this.value;
     }
 }

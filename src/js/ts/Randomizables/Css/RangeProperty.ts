@@ -1,17 +1,24 @@
 //imports
 import CssProperty  from "./CssProperty";
+import { Options } from "../../Options/Options";
+
+type RangePropertyName = (
+    'borderWidth'
+);
 
 //class definition
-export default class ArrayProperty extends CssProperty {
+export default abstract class RangeProperty extends CssProperty {
+
+    abstract camelCase: RangePropertyName;
 
     min:    number;
     max:    number;
     unit:   string;
 
-    constructor(name:string, camelCase:string, unsafe:boolean, min:number, max:number, unit:string) {
+    constructor(name: string, options:Options, min:number, max:number, unit:string) {
 
         //call the parent class's constructor
-        super(name, camelCase, unsafe);
+        super(name, options);
 
         //do a little constructing of our own
         this.min  = min;

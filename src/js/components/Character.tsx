@@ -5,23 +5,26 @@ import * as React           from "react";
 import cssProperties        from '../json/cssProperties.json';
 
 //interfaces
-import CssPropertyOptions from "../interfaces/CssPropertyOptions";
+import {Options}            from '../ts/Options/Options';
 
 //Randomizables
-import CssProperty          from "../classes/CssProperty";
-import Glyph                from "../classes/Glyph";
-import Randomizable         from "../classes/Randomizable";
-import RandomizableFactory  from "../classes/RandomizableFactory";
+import CssProperty          from "../ts/Randomizables/Css/CssProperty";
+import Glyph                from "../ts/Randomizables/Glyph/Glyph";
+import Randomizable         from "../ts/Randomizables/Randomizable";
+import RandomizableFactory  from "../ts/Randomizables/RandomizableFactory";
 
-
+//react component props
 interface Props {
-    baseStyle:  object,
-    character:  string,
-    factory:    RandomizableFactory;
-    size:       number,
-    unsafe:     boolean
+    baseStyle:      object;
+    character:      string;
+    factory:        RandomizableFactory;
+    options:        Options;
+    //randomizables:  Randomizable[];
+    size:           number;
+    unsafe:         boolean;
 }
 
+//react component state
 interface State {
     glyph?: string;
     style?: Style;
@@ -33,15 +36,20 @@ interface Style {
     animationPlayState?: string;
 }
 
+//to do: get rid of json
+interface CssPropertiesJson {
+    [index:string]: any;
+}
 
-
+//define and expert react component
 export default class Character extends React.Component <Props, State> {
 
     //instance variables
-    cssPropertiesJson:  CssPropertyOptions;
+    cssPropertiesJson:  CssPropertiesJson;
+    factory:            RandomizableFactory;
     interval:           ReturnType<typeof setInterval>;
     leet:               string[];
-    Randomizables:      Array<Randomizable>;
+    randomizables:      Randomizable[];
 
     //create a new instance
 	constructor(props:Props) {
@@ -52,10 +60,10 @@ export default class Character extends React.Component <Props, State> {
         //css properties
 		this.cssPropertiesJson = cssProperties;
 
+        this.factory = new RandomizableFactory(this.props.options);
+
         //array to hold CssProperty objects
-        this.Randomizables = this.getRandomizables();
-        
-        console.log(this.Randomizables);
+        this.randomizables = this.factory.getRandomizables();//this.getRandomizables();
 
         //set initial state
         this.state = {
@@ -78,7 +86,7 @@ export default class Character extends React.Component <Props, State> {
             if (typeof this.cssPropertiesJson[name] == 'undefined') continue;
             if (this.cssPropertiesJson[name].type != 'color') continue;
     
-            //push class name to array
+            //push css class name to array
             classNames.push('random-css-' + name + '-' + this.state.style[name]);
         }
     
@@ -102,27 +110,6 @@ export default class Character extends React.Component <Props, State> {
         }
     
         return className;
-    }
-
-    getRandomizables(): Randomizable[] {
-
-        let randomizables = [];
-
-        //loop through the css property names in the json
-        for (let cssPropertyName in this.cssPropertiesJson) {
-
-            //get the json object corresponding to this css property
-            const cssProperty = this.cssPropertiesJson[cssPropertyName];
-
-            //get a new CssProperty object based on the "type" of css property
-            const randomizable = this.props.factory.make('css', cssPropertyName, cssProperty);
-            
-            randomizables.push(randomizable);
-        }
-
-        randomizables.push(this.props.factory.make('glyph', 'glyph', {character: this.props.character}));
-
-        return randomizables;
     }
 
     getStyle() {
@@ -161,8 +148,6 @@ export default class Character extends React.Component <Props, State> {
     //component mounted
     componentDidMount() {
 
-        //if (this.props.character != 'r') return;
-
         //start the interval for this character
         this.interval = setInterval(
             
@@ -180,7 +165,23 @@ export default class Character extends React.Component <Props, State> {
                 let updateStyle = false;
 
                 //loop through the Randomizable objects
-                for (let randomizable of this.Randomizables) {
+                for (let randomizable of this.randomizables) {
+
+                    //this randomizable is disabled
+                    if (!randomizable.isEnabled()) {
+
+                        //if it was just disabled
+                        if (randomizable.justDisabled()) {
+                            
+                            if (randomizable instanceof CssProperty) {
+                                delete style[randomizable.name];// = '';
+                                updateState = true;
+                                updateStyle = true;
+                            }
+
+                        }
+                        continue;
+                    }
 
                     //if this timer's countdown is not complete, do nothing
                     if (!randomizable.timer.increment()) continue;

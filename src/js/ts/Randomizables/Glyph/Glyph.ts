@@ -1,14 +1,16 @@
 //classes
-import Randomizable from "./Randomizable";
+import Randomizable from "../Randomizable";
 
 //interfaces
-import Leet             from '../interfaces/Leet';
-import Unicode          from '../interfaces/Unicode';
-import UnicodeCharacter from "../interfaces/UnicodeCharacter";
+import GlyphOptions from '../../Options/Randomizables/GlyphOptions';
+import Leet from "./Leet";
+import { Options } from "../../Options/Options";
+import Unicode          from './Unicode';
+import UnicodeCharacter from "./UnicodeCharacter";
 
 //json
-import leetJson         from '../json/leet.json';
-import unicodeJson      from '../json/unicode.json';
+import leetJson         from '../../../json/leet.json';
+import unicodeJson      from '../../../json/unicode.json';
 
 //specify types of json
 const leet:Leet         = leetJson;
@@ -23,10 +25,10 @@ export default class Glyph extends Randomizable {
     unicode:    string[] = [];
 
     //create a new instance
-    constructor(character:string) {
+    constructor(character:string, options:Options) {
 
         //call the parent class's constructor
-        super('glyph');
+        super('glyph', options);
 
         //instance variables
         this.character  = character;
@@ -41,6 +43,10 @@ export default class Glyph extends Randomizable {
         }
     }
 
+    protected getOptions():GlyphOptions {
+        return this.options.glyph;
+    }
+
     setValue() {
         switch (this.getRandom(1,3)) {
             case 1: this.value = this.getArrayElement(this.leet);       break;
@@ -50,6 +56,11 @@ export default class Glyph extends Randomizable {
         
         return this.value;
         
+    }
+
+    isEnabled():boolean {
+        console.log('Glyph: isEnabled: return false hard coded');
+        return false;
     }
 
 }

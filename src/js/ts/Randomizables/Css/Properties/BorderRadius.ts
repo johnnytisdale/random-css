@@ -1,16 +1,14 @@
 //imports
-import CssProperty  from "./CssProperty";
+import CssProperty  from "../CssProperty";
+import { Options } from "../../../Options/Options";
 
 //class definition
 export default class BorderRadius extends CssProperty {
 
-    constructor(unsafe:boolean) {
-        super('border-radius', 'borderRadius', unsafe);
-    }
+    camelCase: 'borderRadius' = 'borderRadius';
 
-    public setValue():string {
-        this.value = this.getBorderRadius();
-        return this.value;
+    constructor(options:Options) {
+        super('border-radius', options);
     }
 
     private getBorderRadius() {
@@ -23,5 +21,10 @@ export default class BorderRadius extends CssProperty {
             }
         }
         return string;
+    }
+
+    public setValue():string {
+        this.value = this.getBorderRadius();
+        return this.value;
     }
 }
