@@ -174,7 +174,7 @@ export default class Character extends React.Component <Props, State> {
                         if (randomizable.justDisabled()) {
                             
                             if (randomizable instanceof CssProperty) {
-                                delete style[randomizable.name];// = '';
+                                delete style[randomizable.getName()];// = '';
                                 updateState = true;
                                 updateStyle = true;
                             }
@@ -190,7 +190,7 @@ export default class Character extends React.Component <Props, State> {
                     const oldValue = randomizable.getValue();
 
                     //set a new random value
-                    const newValue = randomizable.setValue();
+                    const newValue = randomizable.randomize();
 
                     //if the randomly selected value is the same as before, no need to update state
                     if (newValue == oldValue) continue;
@@ -201,7 +201,7 @@ export default class Character extends React.Component <Props, State> {
                         updateStyle = true;
 
                         //add the new value to the style object
-                        style[randomizable.name] = newValue;
+                        style[randomizable.getName()] = newValue;
                     }
                     
                     else if (randomizable instanceof Glyph) {

@@ -24,7 +24,7 @@ abstract class ColorProperty extends CssProperty {
         this.colors = this.getColors();
     }
 
-    public setValue():string {
+    public randomize():string {
         this.value = this.options.global.unsafe ? this.getColor_unsafe() : this.getColor_safe();
         return this.value;
     }

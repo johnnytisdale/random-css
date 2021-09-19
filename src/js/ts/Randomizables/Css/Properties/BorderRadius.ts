@@ -23,7 +23,7 @@ export default class BorderRadius extends CssProperty {
         return string;
     }
 
-    public setValue():string {
+    public randomize():string {
         this.value = this.getBorderRadius();
         return this.value;
     }

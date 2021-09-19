@@ -26,7 +26,7 @@ export default abstract class RangeProperty extends CssProperty {
         this.unit = unit;
     }
 
-    public setValue():string {
+    public randomize():string {
         this.value = String(this.getRandom(this.min, this.max)) + this.unit;
         return this.value;
     }

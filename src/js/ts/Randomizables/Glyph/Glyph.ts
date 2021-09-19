@@ -47,7 +47,7 @@ export default class Glyph extends Randomizable {
         return this.options.glyph;
     }
 
-    setValue() {
+    randomize() {
         switch (this.getRandom(1,3)) {
             case 1: this.value = this.getArrayElement(this.leet);       break;
             case 2: this.value = this.getArrayElement(this.unicode);    break;
@@ -55,7 +55,6 @@ export default class Glyph extends Randomizable {
         }
         
         return this.value;
-        
     }
 
     isEnabled():boolean {

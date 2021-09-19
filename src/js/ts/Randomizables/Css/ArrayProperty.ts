@@ -29,7 +29,7 @@ export default abstract class ArrayProperty extends CssProperty {
         return this.getOptions().values;
     }
 
-    public setValue():string {
+    public randomize():string {
         this.value = this.getArrayElement(this.values);
         return this.value;
     }

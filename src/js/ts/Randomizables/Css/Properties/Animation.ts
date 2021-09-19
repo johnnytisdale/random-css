@@ -88,7 +88,7 @@ export default class Animation extends CssProperty {
         );
     }
 
-    public setValue():string {
+    public randomize():string {
         this.value = this.animate();
         return this.value;
     }
