@@ -2,7 +2,7 @@
  *       DO NOT COMMENT THIS LINE       *
  * WHETHER IN DEVELOPMENT OR PRODUCTION *
  ****************************************/
-import RandomCSS from "./js/components/RandomCss";
+import RandomCSS from "./ts/RandomCss";
 
 
 
@@ -14,7 +14,7 @@ import RandomCSS from "./js/components/RandomCss";
  *********************************/
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Form from "./js/components/Form";
+import Form from "./ts/Form";
 const div = document.getElementById('app');
 if (div) ReactDOM.render(<Form />, div);
 

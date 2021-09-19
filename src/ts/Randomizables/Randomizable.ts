@@ -1,6 +1,6 @@
 //imports
-import applyMixins          from '../../mixins/applyMixins';
-import GetsRandom           from '../../mixins/GetsRandom';
+import applyMixins          from '../applyMixins';
+import Randomizes           from './Randomizes';
 import { Options }          from '../Options/Options';
 import RandomizableOptions  from '../Options/Randomizables/RandomizableOptions';
 import Timer                from '../Timer';
@@ -69,8 +69,8 @@ abstract class Randomizable {
 }
 
 //apply mixins
-interface Randomizable extends GetsRandom {};
-applyMixins(Randomizable, [GetsRandom]);
+interface Randomizable extends Randomizes {};
+applyMixins(Randomizable, [Randomizes]);
 
 //export class
 export default Randomizable;

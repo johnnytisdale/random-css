@@ -35,12 +35,15 @@ export default class RandomizableFactory {
         this.options = options;
     }
 
-    public getRandomizables(): Randomizable[] {
-        return Object.keys(this.options.css).map((name: keyof CssOptions) => this.make(name));
+    public getRandomizables(character: string): Randomizable[] {
+        let randomizables: Randomizable[];
+        randomizables = Object.keys(this.options.css).map((name: keyof CssOptions) => this.make(name));
+        randomizables.push(this.make('glyph', character));
+        return randomizables;
     }
     
     //make a Randomizable
-    make(name: string): Randomizable {
+    make(name: string, character: string = null): Randomizable {
 
         switch (name) {
             case 'animation':           return new Animation(this.options);
@@ -56,6 +59,7 @@ export default class RandomizableFactory {
             case 'fontStyle':           return new FontStyle(this.options);
             case 'fontVariant':         return new FontVariant(this.options);
             case 'fontWeight':          return new FontWeight(this.options);
+            case 'glyph':               return new Glyph(character, this.options);
             case 'textDecorationColor': return new TextDecorationColor(this.options);
             case 'textDecorationLine':  return new TextDecorationLine(this.options);
         }

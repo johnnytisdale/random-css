@@ -2,8 +2,8 @@
 import * as React from "react";
 
 //interfaces
-import {defaultOptions} from '../ts/Options/Options';
-import CssPropertyOptions from "../ts/Options/Randomizables/Css/CssPropertyOptions";
+import {defaultOptions} from './Options/Options';
+import CssPropertyOptions from "./Options/Randomizables/Css/CssPropertyOptions";
 
 //react component props
 interface Props {

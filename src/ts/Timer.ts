@@ -1,5 +1,5 @@
-import applyMixins from '../mixins/applyMixins';
-import GetsRandom from "../mixins/GetsRandom";
+import applyMixins from './applyMixins';
+import Randomizes from "./Randomizables/Randomizes";
 
 class Timer {
 
@@ -34,7 +34,7 @@ class Timer {
 }
 
 //apply mixins
-interface Timer extends GetsRandom {}
-applyMixins(Timer, [GetsRandom]);
+interface Timer extends Randomizes {}
+applyMixins(Timer, [Randomizes]);
 
 export default Timer;

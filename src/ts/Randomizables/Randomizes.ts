@@ -1,4 +1,4 @@
-export default class GetsRandom {
+export default class Randomizes {
 
     getArrayElement(array:Array<any>) {
         return array[this.getRandom(0, array.length - 1)];

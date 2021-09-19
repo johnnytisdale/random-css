@@ -4,8 +4,8 @@ import RandomCSS from "./RandomCss";
 import CssOption from "./CssOption";
 
 //interfaces
-import {Options, defaultOptions} from '../ts/Options/Options';
-import CssOptions from "../ts/Options/Randomizables/Css/CssOptions";
+import {Options, defaultOptions} from './Options/Options';
+import CssOptions from "./Options/Randomizables/Css/CssOptions";
 
 //react component props
 interface Props {}
@@ -53,22 +53,6 @@ export default class Form extends React.Component <Props, State> {
 
                         {/* options */}
                         <div className='options'>
-
-                            {/* unsafe */}
-                            <div className='option'>
-                                <div className='label'>unsafe</div>
-                                <div className='input'>
-                                    <input
-                                        type='checkbox'
-                                        checked={this.state.options.global.unsafe}
-                                        onChange={() => {
-                                            let options = this.state.options;
-                                            options.global.unsafe = !this.state.options.global.unsafe;
-                                            this.setState({options: options});
-                                        }}
-                                    />
-                                </div>
-                            </div>
                             
 
                             {/* center */}
@@ -119,6 +103,22 @@ export default class Form extends React.Component <Props, State> {
                                             e.preventDefault();
                                             let options = this.state.options;
                                             options.global.text = e.target.value;
+                                            this.setState({options: options});
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* unsafe */}
+                            <div className='option'>
+                                <div className='label'>unsafe</div>
+                                <div className='input'>
+                                    <input
+                                        type='checkbox'
+                                        checked={this.state.options.global.unsafe}
+                                        onChange={() => {
+                                            let options = this.state.options;
+                                            options.global.unsafe = !this.state.options.global.unsafe;
                                             this.setState({options: options});
                                         }}
                                     />

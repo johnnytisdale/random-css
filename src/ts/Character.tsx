@@ -5,21 +5,19 @@ import * as React           from "react";
 import cssProperties        from '../json/cssProperties.json';
 
 //interfaces
-import {Options}            from '../ts/Options/Options';
+import {Options}            from './Options/Options';
 
 //Randomizables
-import CssProperty          from "../ts/Randomizables/Css/CssProperty";
-import Glyph                from "../ts/Randomizables/Glyph/Glyph";
-import Randomizable         from "../ts/Randomizables/Randomizable";
-import RandomizableFactory  from "../ts/Randomizables/RandomizableFactory";
+import CssProperty          from "./Randomizables/Css/CssProperty";
+import Glyph                from "./Randomizables/Glyph/Glyph";
+import Randomizable         from "./Randomizables/Randomizable";
+import RandomizableFactory  from "./Randomizables/RandomizableFactory";
 
 //react component props
 interface Props {
     baseStyle:      object;
     character:      string;
     factory:        RandomizableFactory;
-    options:        Options;
-    //randomizables:  Randomizable[];
     size:           number;
     unsafe:         boolean;
 }
@@ -46,9 +44,7 @@ export default class Character extends React.Component <Props, State> {
 
     //instance variables
     cssPropertiesJson:  CssPropertiesJson;
-    factory:            RandomizableFactory;
     interval:           ReturnType<typeof setInterval>;
-    leet:               string[];
     randomizables:      Randomizable[];
 
     //create a new instance
@@ -60,10 +56,8 @@ export default class Character extends React.Component <Props, State> {
         //css properties
 		this.cssPropertiesJson = cssProperties;
 
-        this.factory = new RandomizableFactory(this.props.options);
-
         //array to hold CssProperty objects
-        this.randomizables = this.factory.getRandomizables();//this.getRandomizables();
+        this.randomizables = this.props.factory.getRandomizables(this.props.character);
 
         //set initial state
         this.state = {
@@ -170,15 +164,15 @@ export default class Character extends React.Component <Props, State> {
                     //this randomizable is disabled
                     if (!randomizable.isEnabled()) {
 
-                        //if it was just disabled
+                        //it was just disabled since last check
                         if (randomizable.justDisabled()) {
                             
+                            //remove styling
                             if (randomizable instanceof CssProperty) {
                                 delete style[randomizable.getName()];// = '';
                                 updateState = true;
                                 updateStyle = true;
                             }
-
                         }
                         continue;
                     }

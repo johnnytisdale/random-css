@@ -1,7 +1,7 @@
 //imports
-import applyMixins  from "../../../mixins/applyMixins";
+import applyMixins  from "../../applyMixins";
 import CssProperty  from "./CssProperty";
-import HasColors    from "../../../mixins/HasColors";
+import HasColors    from "../HasColors";
 import { Options }  from "../../Options/Options";
 import CssOptions from "../../Options/Randomizables/Css/CssOptions";
 

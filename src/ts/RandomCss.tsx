@@ -1,18 +1,9 @@
-//react
-import * as React from "react";
-
-//components
-import Character  from "./Character";
-
-//style
-import style 	  from '../css/style.css';
-
-//interfaces
-import {Options, defaultOptions} from "../ts/Options/Options";
-
-//classes
-import Randomizable from "../ts/Randomizables/Randomizable";
-import RandomizableFactory from '../ts/Randomizables/RandomizableFactory';
+//imports
+import * as React  from "react";
+import Character   from "./Character";
+import { Options } from "./Options/Options";
+import style 	   from '../css/style.css';
+import RandomizableFactory from './Randomizables/RandomizableFactory';
 
 
 
@@ -24,28 +15,11 @@ interface Props {
 	unsafe: 	boolean;
 }
 
-interface State {
-	//display:		Array<string>;
-	randomizables: 	Randomizable[];
-}
-
 //root component
-export default class RandomCSS extends React.Component <Props, State> {
+export default class RandomCSS extends React.Component <Props> {
 
 	//instance variables
-	factory:			RandomizableFactory = new RandomizableFactory(this.props.options);
-
-	//create a new instance
-	constructor(props:Props) {
-
-		//allow access to this.props in constructor
-		super(props);
-
-		//initial state
-		this.state = {
-			randomizables: 	this.factory.getRandomizables()
-		};
-	}
+	factory: RandomizableFactory = new RandomizableFactory(this.props.options);
 
 	getClassNames(): string {
 
@@ -124,8 +98,6 @@ export default class RandomCSS extends React.Component <Props, State> {
 								character={character}
 								factory={this.factory}
 								key={'character-' + index}
-								options={this.props.options}
-								//randomizables={this.factory.getRandomizables()}
 								size={this.props.size}
 								unsafe={this.props.unsafe}
 							/>

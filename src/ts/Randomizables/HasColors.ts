@@ -1,8 +1,8 @@
-import colors from '../json/colors.json';
+import colors from '../../json/colors.json';
 
 export default class HasColors {
 
-    colors:string[];
+    protected colors:string[];
 
     getColors(): string[] {
         return colors;
