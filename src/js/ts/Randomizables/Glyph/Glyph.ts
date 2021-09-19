@@ -56,10 +56,4 @@ export default class Glyph extends Randomizable {
         
         return this.value;
     }
-
-    isEnabled():boolean {
-        console.log('Glyph: isEnabled: return false hard coded');
-        return false;
-    }
-
 }
