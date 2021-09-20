@@ -1,19 +1,19 @@
 //imports
-import * as React           from 'react';
-import BaseStyle            from './BaseStyle';
-import CssProperty          from './Randomizables/Css/CssProperty';
-import Glyph                from './Randomizables/Glyph/Glyph';
-import Randomizable         from './Randomizables/Randomizable';
-import RandomizableFactory  from './Randomizables/RandomizableFactory';
-import Style                from './Style';
+import * as React          from 'react';
+import BaseStyle           from './BaseStyle';
+import CssProperty         from './Randomizables/Css/CssProperty';
+import Glyph               from './Randomizables/Glyph/Glyph';
+import Randomizable        from './Randomizables/Randomizable';
+import RandomizableFactory from './Randomizables/RandomizableFactory';
+import Style               from './Style';
 
-
+//react component props
 interface Props {
-    baseStyle:      BaseStyle;
-    character:      string;
-    factory:        RandomizableFactory;
-    size:           number;
-    unsafe:         boolean;
+    baseStyle: BaseStyle;
+    character: string;
+    factory:   RandomizableFactory;
+    size:      number;
+    unsafe:    boolean;
 }
 
 //react component state
@@ -22,63 +22,66 @@ interface State {
     style?: Style;
 }
 
-//define and expert react component
+//define and export react component
 export default class Character extends React.Component <Props, State> {
 
     //instance variables
-    interval:           ReturnType<typeof setInterval>;
-    randomizables:      Randomizable[];
+    private interval:      ReturnType<typeof setInterval>;
+    private randomizables: Randomizable[];
 
     //create a new instance
-	constructor(props:Props) {
+    constructor(props:Props) {
 
-        //allow access to this.props in constructor
-		super(props);
+        //call parent class's constructor
+        super(props);
 
-        //array to hold CssProperty objects
-        this.randomizables = this.props.factory.getRandomizables(this.props.character);
+        //randomizables
+        this.randomizables = props.factory.getRandomizables(props.character);
 
-        //set initial state
+        //initial state
         this.state = {
-            glyph:  this.props.character,
-            style:  {}
+            glyph: props.character,
+            style: {}
         };
-	}
-
-    getClassNames() {
-
-        if (this.props.unsafe) return null;
-    
-        const classNames = Object.keys(this.state.style).map(
-            (name: keyof Style) => 'random-css-' + name + '-' + this.state.style[name]
-        );
-    
-        return this.getBaseClass() + ' ' + classNames.join(' ');
     }
 
-    getBaseClass() {
-
-        //if applying inline style, no need to use classes
-        if (this.props.unsafe) return;
-    
-        //css class
+    //construct class name based on font size
+    private getBaseClass(): string {
         return 'random-css-character-' + this.props.size + (Number(this.props.size) % 1 == 0 ? '-0' : '');
     }
 
+    //get a string of space separated css class names
+    private getClassNames(): string {
+
+        //if using inline style, no css class named are needed
+        if (this.props.unsafe) return null;
+
+        //class names for properties that remain constant
+        const constantClasses = this.getBaseClass();
+
+        //class names for properties that are randomized
+        const randomizedClasses = Object.keys(this.state.style).map(
+            (name: keyof Style) => 'random-css-' + name + '-' + this.state.style[name]
+        );
+        
+        return constantClasses + randomizedClasses.join(' ');
+    }
+
+    //get updated style
     getStyle(): React.CSSProperties {
     
         //if not using inline style, return null
         if (!this.props.unsafe) return null;
     
-        //clone the base style object
+        //combine base style with randomized style
         let style: any = {...this.props.baseStyle, ...this.state.style};
                 
         return style;
     }
 
     //render element in the dom
-	render(): React.ReactNode {
-		return (
+    render(): React.ReactNode {
+        return (
             <div
                 className={this.getClassNames()}
                 style={this.getStyle()}
@@ -86,10 +89,10 @@ export default class Character extends React.Component <Props, State> {
                 {this.state.glyph}
             </div>
         );
-	}
+    }
 
     //component mounted
-    componentDidMount() {
+    public componentDidMount(): void {
 
         //start the interval for this character
         this.interval = setInterval(
@@ -140,16 +143,15 @@ export default class Character extends React.Component <Props, State> {
 
                     //a css property changed, so we must update style
                     if (randomizable instanceof CssProperty) {
+                        style[randomizable.getName()] = newValue;
                         updateState = true;
                         updateStyle = true;
-
-                        //add the new value to the style object
-                        style[randomizable.getName()] = newValue;
                     }
                     
+                    //the glyph changed, so we must update state
                     else if (randomizable instanceof Glyph) {
-                        updateState = true;
                         state.glyph = newValue;
+                        updateState = true;
                     }
                 }
 
