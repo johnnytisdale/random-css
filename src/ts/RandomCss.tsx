@@ -1,11 +1,10 @@
 //imports
-import * as React  from "react";
-import Character   from "./Character";
-import { Options } from "./Options/Options";
-import style 	   from '../css/style.css';
-import RandomizableFactory from './Randomizables/RandomizableFactory';
-
-
+import * as React  			from "react";
+import BaseStyle 			from "./BaseStyle";
+import Character   			from "./Character";
+import { Options } 			from "./Options/Options";
+import style 	   			from '../css/style.css';
+import RandomizableFactory 	from './Randomizables/RandomizableFactory';
 
 interface Props {
 	center: 	boolean;
@@ -72,7 +71,16 @@ export default class RandomCSS extends React.Component <Props> {
 	}
 
 	//render element(s) in the dom
-	render() {
+	render(): React.ReactNode {
+
+		const baseStyle: BaseStyle = (
+			this.props.unsafe
+				? {
+					height: (this.props.size * 1.1875) + 'rem',
+					width: 	this.props.size + 'rem'
+				}
+				: {}
+		);
 
 		return (
 
@@ -82,19 +90,14 @@ export default class RandomCSS extends React.Component <Props> {
 				{
 					//loop through the characters in the text
 					this.setDisplay(this.props.text).map((character, index) => {
+
+						
 					
 						return (
 
 							//create a new instance of the Character component
 							<Character
-								baseStyle={
-									this.props.unsafe
-										? {
-											height: (this.props.size * 1.1875) + 'rem',
-											width: 	this.props.size + 'rem'
-										}
-										: {}
-								}
+								baseStyle={baseStyle}
 								character={character}
 								factory={this.factory}
 								key={'character-' + index}

@@ -1,21 +1,15 @@
-//react
-import * as React           from "react";
+//imports
+import * as React           from 'react';
+import BaseStyle            from './BaseStyle';
+import CssProperty          from './Randomizables/Css/CssProperty';
+import Glyph                from './Randomizables/Glyph/Glyph';
+import Randomizable         from './Randomizables/Randomizable';
+import RandomizableFactory  from './Randomizables/RandomizableFactory';
+import Style                from './Style';
 
-//json
-import cssProperties        from '../json/cssProperties.json';
 
-//interfaces
-import {Options}            from './Options/Options';
-
-//Randomizables
-import CssProperty          from "./Randomizables/Css/CssProperty";
-import Glyph                from "./Randomizables/Glyph/Glyph";
-import Randomizable         from "./Randomizables/Randomizable";
-import RandomizableFactory  from "./Randomizables/RandomizableFactory";
-
-//react component props
 interface Props {
-    baseStyle:      object;
+    baseStyle:      BaseStyle;
     character:      string;
     factory:        RandomizableFactory;
     size:           number;
@@ -28,22 +22,10 @@ interface State {
     style?: Style;
 }
 
-interface Style {
-    [index:string]:      string;
-    animation?:          string;
-    animationPlayState?: string;
-}
-
-//to do: get rid of json
-interface CssPropertiesJson {
-    [index:string]: any;
-}
-
 //define and expert react component
 export default class Character extends React.Component <Props, State> {
 
     //instance variables
-    cssPropertiesJson:  CssPropertiesJson;
     interval:           ReturnType<typeof setInterval>;
     randomizables:      Randomizable[];
 
@@ -52,9 +34,6 @@ export default class Character extends React.Component <Props, State> {
 
         //allow access to this.props in constructor
 		super(props);
-
-        //css properties
-		this.cssPropertiesJson = cssProperties;
 
         //array to hold CssProperty objects
         this.randomizables = this.props.factory.getRandomizables(this.props.character);
@@ -70,21 +49,10 @@ export default class Character extends React.Component <Props, State> {
 
         if (this.props.unsafe) return null;
     
-        //an array to hold css class names
-        let classNames = [];
+        const classNames = Object.keys(this.state.style).map(
+            (name: keyof Style) => 'random-css-' + name + '-' + this.state.style[name]
+        );
     
-        //loop through the css property names
-        for (let name in this.state.style) {
-    
-            //dev
-            if (typeof this.cssPropertiesJson[name] == 'undefined') continue;
-            if (this.cssPropertiesJson[name].type != 'color') continue;
-    
-            //push css class name to array
-            classNames.push('random-css-' + name + '-' + this.state.style[name]);
-        }
-    
-        //return string
         return this.getBaseClass() + ' ' + classNames.join(' ');
     }
 
@@ -93,42 +61,23 @@ export default class Character extends React.Component <Props, State> {
         //if applying inline style, no need to use classes
         if (this.props.unsafe) return;
     
-        //font size in rem
-        const size = this.props.size;
-    
         //css class
-        let className = 'random-css-character-' + size;
-    
-        if (size % 1 == 0) {
-            className += '-0';
-        }
-    
-        return className;
+        return 'random-css-character-' + this.props.size + (Number(this.props.size) % 1 == 0 ? '-0' : '');
     }
 
-    getStyle() {
+    getStyle(): React.CSSProperties {
     
         //if not using inline style, return null
         if (!this.props.unsafe) return null;
     
         //clone the base style object
-        let style = JSON.parse(JSON.stringify(this.props.baseStyle));
-    
-        //add properties from state
-        for (let name in this.state.style) {
-            const cssProperty = this.cssPropertiesJson[name];
-            if (typeof cssProperty == 'undefined') {
-                console.log('undefined', name);
-                continue;
-            }
-            style[cssProperty.camelCase] = this.state.style[name];
-        }
+        let style: any = {...this.props.baseStyle, ...this.state.style};
                 
         return style;
     }
 
     //render element in the dom
-	render() {
+	render(): React.ReactNode {
 		return (
             <div
                 className={this.getClassNames()}
@@ -151,7 +100,7 @@ export default class Character extends React.Component <Props, State> {
                 let state:State = {};
 
                 //clone current style object
-                let style = JSON.parse(JSON.stringify(this.state.style));
+                let style = this.state.style;
 
                 let updateState = false;
 
@@ -164,12 +113,12 @@ export default class Character extends React.Component <Props, State> {
                     //this randomizable is disabled
                     if (!randomizable.isEnabled()) {
 
-                        //it was just disabled since last check
+                        //it was disabled since last check
                         if (randomizable.justDisabled()) {
                             
                             //remove styling
                             if (randomizable instanceof CssProperty) {
-                                delete style[randomizable.getName()];// = '';
+                                delete style[randomizable.getName()];
                                 updateState = true;
                                 updateStyle = true;
                             }

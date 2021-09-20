@@ -31,7 +31,7 @@ export default class Form extends React.Component <Props, State> {
         this.state = {options: defaultOptions};
     }
 
-    render() {
+    render(): React.ReactNode {
         return (
             <>
                 <RandomCSS
