@@ -150,6 +150,29 @@ export default class Form extends React.Component <Props, State> {
                             }
                         </div>
                     </div>
+
+                    {/* glyph */}
+                    <div className='section'>
+                        <div className='title'>Glyph options</div>
+                        <div className='options'>
+                            <div className='option'>
+                                <div className='label'>enabled</div>
+                                <div className='input'>
+                                    <input
+                                        type='checkbox'
+                                        checked={this.state.options.glyph.enabled}
+                                        onChange={
+                                            () => {
+                                                let options = this.state.options;
+                                                options.glyph.enabled = !options.glyph.enabled;
+                                                this.setState({options: options});
+                                            }
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                 </div>
             </>

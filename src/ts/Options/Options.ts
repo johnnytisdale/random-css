@@ -68,7 +68,7 @@ const defaultOptions:Options = {
                 "Verdana"
             ]
         }, 
-        fontKerning: {
+       fontKerning: {
             enabled: true,
             values:  [
                 "none",
@@ -122,7 +122,7 @@ const defaultOptions:Options = {
                 "800",
                 "900"
             ]
-        }, 
+        },
         textDecorationColor: {
             enabled: true
         },

@@ -30,7 +30,7 @@ export default class Character extends React.Component <Props, State> {
     private randomizables: Randomizable[];
 
     //create a new instance
-    constructor(props:Props) {
+    constructor(props: Props) {
 
         //call parent class's constructor
         super(props);
@@ -124,6 +124,11 @@ export default class Character extends React.Component <Props, State> {
                                 delete style[randomizable.getName()];
                                 updateState = true;
                                 updateStyle = true;
+                            }
+
+                            else if (randomizable instanceof Glyph) {
+                                state.glyph = this.props.character;
+                                updateState = true;
                             }
                         }
                         continue;

@@ -38,6 +38,7 @@
 	},
 	"version": "1.1.1",
 	"dependencies": {
+		"@types/react": "^17.0.24",
 		"@types/react-dom": "^17.0.9"
 	}
 }
