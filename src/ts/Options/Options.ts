@@ -140,7 +140,9 @@ const defaultOptions:Options = {
         }
     },
     glyph: {
-        enabled: true
+        enabled: true,
+        leet:    true,
+        unicode: true
     }
 }
 

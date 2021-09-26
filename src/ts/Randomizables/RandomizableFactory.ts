@@ -23,6 +23,10 @@ import TextDecorationLine   from './Css/Properties/TextDecorationLine';
 import CssOptions                   from '../Options/Randomizables/Css/CssOptions';
 import { Options, defaultOptions }  from '../Options/Options';
 
+//json
+import leet    from '../../json/leet.json';
+import unicode from '../../json/unicode.json'
+
 
 //define and export class
 export default class RandomizableFactory {
@@ -36,9 +40,15 @@ export default class RandomizableFactory {
     }
 
     public getRandomizables(character: string): Randomizable[] {
-        let randomizables: Randomizable[];
-        randomizables = Object.keys(this.options.css).map((name: keyof CssOptions) => this.make(name));
-        randomizables.push(this.make('glyph', character));
+        let randomizables: Randomizable[] = [];
+        Object.keys(this.options.css).some(
+            (name: keyof CssOptions) => {
+                let randomizable: Randomizable = this.make(name);
+                if (randomizable !== null) randomizables.push(randomizable);
+            }
+        );
+        let glyph = this.make('glyph', character);
+        if (glyph !== null) randomizables.push(glyph);
         return randomizables;
     }
     
@@ -59,9 +69,15 @@ export default class RandomizableFactory {
             case 'fontStyle':           return new FontStyle(this.options);
             case 'fontVariant':         return new FontVariant(this.options);
             case 'fontWeight':          return new FontWeight(this.options);
-            case 'glyph':               return new Glyph(character, this.options);
             case 'textDecorationColor': return new TextDecorationColor(this.options);
             case 'textDecorationLine':  return new TextDecorationLine(this.options);
+
+            case 'glyph':
+                if (leet.hasOwnProperty(character) && unicode.hasOwnProperty(character)) {
+                    return new Glyph(character, this.options);   
+                } else {
+                    return null;
+                }
         }
     }
 }

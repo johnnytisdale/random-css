@@ -32,7 +32,7 @@ export default abstract class CssOption extends React.Component <Props, State> {
     render() {
         return (   
             <div className='option'>
-                <div className='label'>{this.props.name}</div>
+                <div className='label expandable'>{this.props.name}</div>
                 <div className='input'>
                     <input
                         type='checkbox'

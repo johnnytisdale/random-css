@@ -47,13 +47,30 @@ export default class Glyph extends Randomizable {
         return this.options.glyph;
     }
 
-    randomize() {
-        switch (this.getRandom(1,3)) {
-            case 1: this.value = this.getArrayElement(this.leet);       break;
-            case 2: this.value = this.getArrayElement(this.unicode);    break;
-            case 3: this.value = this.character;
-        }
+    randomize(): string {
+
+        const options = this.getOptions();
         
+        if (options.leet && options.unicode) {
+            switch (this.getRandom(1, 3)) {
+                case 1: this.value = this.getArrayElement(this.leet);    break;
+                case 2: this.value = this.getArrayElement(this.unicode); break;
+                case 3: this.value = this.character;
+            }
+        } else if (options.leet) {
+            switch (this.getRandom(1, 2)) {
+                case 1: this.value = this.getArrayElement(this.leet); break;
+                case 2: this.value = this.character;
+            }
+        } else if (options.unicode) {
+            switch (this.getRandom(1, 2)) {
+                case 1: this.value = this.getArrayElement(this.unicode); break;
+                case 2: this.value = this.character;
+            }
+        } else {
+            this.value = this.character;
+        }
+
         return this.value;
     }
 }

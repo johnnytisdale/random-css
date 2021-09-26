@@ -1,17 +1,19 @@
 //imports
 import * as React from "react";
-import RandomCSS from "./RandomCss";
-import CssOption from "./CssOption";
+import Checkbox   from "./Form/Checkbox";
+import RandomCSS  from "./RandomCss";
+import CssOption  from "./CssOption";
 
 //interfaces
 import {Options, defaultOptions} from './Options/Options';
-import CssOptions from "./Options/Randomizables/Css/CssOptions";
+import CssOptions                from "./Options/Randomizables/Css/CssOptions";
 
 //react component props
 interface Props {}
 
 //react component state
 interface State {
+    allCss:  boolean;
     options: Options;
 }
 
@@ -28,19 +30,62 @@ export default class Form extends React.Component <Props, State> {
         super(props);
 
         //initial state
-        this.state = {options: defaultOptions};
+        this.state = {
+            allCss:  true,
+            options: defaultOptions
+        };
+
+        //bind this to methods
+        this.areAllCssPropertiesEnabled = this.areAllCssPropertiesEnabled.bind(this);
+        this.toggleAllCss               = this.toggleAllCss.bind(this);
+        this.toggleCss                  = this.toggleCss.bind(this);
+    }
+
+    areAllCssPropertiesEnabled(): boolean {
+        let allEnabled = true;
+        Object.keys(defaultOptions.css).some(
+            (name: keyof CssOptions) => {
+                if (!this.state.options.css[name].enabled) {
+                    return allEnabled = false;
+                }
+            }
+        );
+        return allEnabled;
+    }
+
+    toggleAllCss(): void {
+        let options = this.state.options;
+        Object.keys(defaultOptions.css).map((name: keyof CssOptions) => {
+            options.css[name].enabled = !this.state.allCss;
+        });
+        this.setState({
+            allCss: !this.state.allCss,
+            options: options
+        });
+    }
+
+    //toggle randomization for an individual css property
+    toggleCss(name: keyof CssOptions): void {
+        let options = this.state.options;
+        options.css[name].enabled = !options.css[name].enabled;
+        this.setState({
+            allCss:  this.areAllCssPropertiesEnabled() ? true : false,
+            options: options
+        });
     }
 
     render(): React.ReactNode {
         return (
             <>
-                <RandomCSS
-                    center={this.state.options.global.center}
-                    options={this.state.options}
-                    size={this.state.options.global.size}
-                    text={this.state.options.global.text}
-                    unsafe={this.state.options.global.unsafe}
-                />
+                <div id="top">
+                    <RandomCSS
+                        center={this.state.options.global.center}
+                        options={this.state.options}
+                        size={this.state.options.global.size}
+                        text={this.state.options.global.text}
+                        unsafe={this.state.options.global.unsafe}
+                    />
+                </div>
 
                 {/* dev form */}
                 <div id='dev-form'>
@@ -132,6 +177,20 @@ export default class Form extends React.Component <Props, State> {
                     <div className='section'>
                         <div className='title'>CSS options</div>
                         <div className='options'>
+
+                            {/* select all */}
+                            <div id='select-all-css' className='option'>
+                                <div className='label'>select all</div>
+                                <div className='input'>
+                                    <input
+                                        type='checkbox'
+                                        checked={this.state.allCss}
+                                        onChange={this.toggleAllCss}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* individual properties */}
                             {
                                 Object.keys(defaultOptions.css).map((name: keyof CssOptions, i: number) => {
                                     return (
@@ -139,11 +198,7 @@ export default class Form extends React.Component <Props, State> {
                                             key={'CssOption-' + i}
                                             name={name}
                                             options={this.state.options.css[name]}
-                                            toggleEnabled={() => {
-                                                let options = this.state.options;
-                                                options.css[name].enabled = !options.css[name].enabled;
-                                                this.setState({options: options});
-                                            }}
+                                            toggleEnabled={() => this.toggleCss(name)}
                                         />
                                     );
                                 })
@@ -155,22 +210,45 @@ export default class Form extends React.Component <Props, State> {
                     <div className='section'>
                         <div className='title'>Glyph options</div>
                         <div className='options'>
-                            <div className='option'>
-                                <div className='label'>enabled</div>
-                                <div className='input'>
-                                    <input
-                                        type='checkbox'
-                                        checked={this.state.options.glyph.enabled}
-                                        onChange={
-                                            () => {
-                                                let options = this.state.options;
-                                                options.glyph.enabled = !options.glyph.enabled;
-                                                this.setState({options: options});
-                                            }
-                                        }
-                                    />
-                                </div>
-                            </div>
+                            <Checkbox
+                                active={true}
+                                checked={this.state.options.glyph.enabled}
+                                expandable={false}
+                                label="enabled"
+                                toggle={
+                                    () => {
+                                        let options = this.state.options;
+                                        options.glyph.enabled = !options.glyph.enabled;
+                                        this.setState({options: options});
+                                    }
+                                }
+                            />
+                            <Checkbox
+                                active={this.state.options.glyph.enabled}
+                                checked={this.state.options.glyph.leet}
+                                expandable={false}
+                                label="1337"
+                                toggle={
+                                    () => {
+                                        let options = this.state.options;
+                                        options.glyph.leet = !options.glyph.leet;
+                                        this.setState({options: options});
+                                    }
+                                }
+                            />
+                            <Checkbox
+                                active={this.state.options.glyph.enabled}
+                                checked={this.state.options.glyph.unicode}
+                                expandable={false}
+                                label="unicode"
+                                toggle={
+                                    () => {
+                                        let options = this.state.options;
+                                        options.glyph.unicode = !options.glyph.unicode;
+                                        this.setState({options: options});
+                                    }
+                                }
+                            />
                         </div>
                     </div>
                     

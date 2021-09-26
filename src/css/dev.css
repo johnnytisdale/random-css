@@ -1,12 +1,24 @@
+body {
+    margin: 0;
+}
+
 #app {
     text-align: center;
+}
+
+#top {
+    background-color: white;
+    border-bottom:    1px solid black;
+    padding-bottom:   1rem;
+    position:         sticky;
+    top:              0;
 }
 
 #dev-form {
     border:         1px solid black;
     display:        inline-block;
     font-size:      1.25rem;
-	margin-top:     4rem;
+	margin:         2rem 0;
 	text-align:     left;
 }
 
@@ -34,4 +46,24 @@
 
 #dev-form > .section > .options > .option > .label {
     padding-right: 1rem;
+}
+
+#select-all-css > div {
+    padding-bottom: 1rem;
+}
+
+.expandable:hover {
+    border-bottom: 1px dotted black;
+    border-top: 1px dotted black;
+    cursor: pointer;
+}
+
+.expandable:after {
+    content: "▼";
+    font-size: .75rem;
+    padding-left: .25rem;
+}
+
+.inactive {
+    color: gray;
 }
