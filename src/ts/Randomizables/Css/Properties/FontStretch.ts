@@ -1,9 +1,12 @@
 import ArrayProperty from "../ArrayProperty";
 import { Options } from "../../../Options/Options";
+import FontStretchOptions from "../../../Options/Randomizables/Css/Properties/FontStretchOptions";
 
 export default class FontStretch extends ArrayProperty {
 
     camelCase: 'fontStretch' = 'fontStretch';
+
+    options: FontStretchOptions;
 
     values: string[] = [
         "ultra-condensed",
@@ -17,7 +20,8 @@ export default class FontStretch extends ArrayProperty {
         "ultra-expanded"
     ];
 
-    constructor(options:Options) {
-        super('font-stretch', options);
+    constructor(options: FontStretchOptions, unsafe: boolean) {
+        super('font-stretch', unsafe);
+        this.options = options;
     }
 }

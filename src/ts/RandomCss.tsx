@@ -99,8 +99,9 @@ export default class RandomCSS extends React.Component <Props> {
 							<Character
 								baseStyle={baseStyle}
 								character={character}
-								factory={this.factory}
+								//factory={this.factory}
 								key={'character-' + index}
+								randomizables={this.factory.getRandomizables(character)}
 								size={this.props.size}
 								unsafe={this.props.unsafe}
 							/>

@@ -17,15 +17,15 @@ abstract class ColorProperty extends CssProperty {
 
     abstract camelCase: ColorPropertyName;
 
-    options:Options;
+    //options:Options;
 
-    constructor(name: string, options: Options) {
-        super(name, options);
+    constructor(name: string, unsafe: boolean) {
+        super(name, unsafe);
         this.colors = this.getColors();
     }
 
     public randomize():string {
-        this.value = this.options.global.unsafe ? this.getColor_unsafe() : this.getColor_safe();
+        this.value = this.unsafe ? this.getColor_unsafe() : this.getColor_safe();
         return this.value;
     }
 

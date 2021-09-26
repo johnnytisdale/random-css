@@ -21,12 +21,12 @@ export default abstract class ArrayProperty extends CssProperty {
     abstract camelCase: ArrayPropertyName;
     abstract values:string[];
 
-    constructor(name: string, options:Options) {
+    /*constructor(name: string, options:Options) {
         super(name, options);
-    }
+    }*/
 
     protected getValues():string[] {
-        return this.getOptions().values;
+        return this.values;//this.getOptions().values;
     }
 
     public randomize():string {
@@ -34,7 +34,7 @@ export default abstract class ArrayProperty extends CssProperty {
         return this.value;
     }
 
-    protected getOptions():ArrayPropertyOptions {
+    /*protected getOptions():ArrayPropertyOptions {
         return this.options.css[this.camelCase];
-    }
+    }*/
 }

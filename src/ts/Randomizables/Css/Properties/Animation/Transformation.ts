@@ -1,0 +1,1 @@
+export type Transformation = 'rotate' | 'scale' | 'skew';

@@ -1,12 +1,12 @@
 //imports
-import CssOptions from "../../../Options/Randomizables/Css/CssOptions";
-import CssProperty  from "../CssProperty";
-import { Options } from "../../../Options/Options";
+import CssOptions from "../../../../Options/Randomizables/Css/CssOptions";
+import CssProperty  from "../../CssProperty";
+import { Transformation } from "./Transformation";
 
 //class definition
 export default class Animation extends CssProperty {
 
-    camelCase: keyof CssOptions = 'animation';
+    camelCase = 'animation' as const;
 
     axes:               string[] = ['X', 'Y', 'XY'];
     directions:         string[] = ['normal', 'reverse', 'alternate', 'alternate-reverse'];
@@ -14,12 +14,14 @@ export default class Animation extends CssProperty {
     iterations:         string[] = ['infinite', '1', '2', '3'];
     scaleDirections:    string[] = ['Down', 'Up'];
     timingFunctions:    string[] = ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out', 'step-start', 'step-end', 'steps'];
-    transformations:    string[] = ["rotate", "scale", "skew"];
+    transformations:    Transformation[];
 
     playState: string;
 
-    constructor(options:Options) {
-        super('animation', options);
+    constructor(transformations: Transformation[], unsafe: boolean) {
+        super('animation', unsafe);
+        this.transformations = transformations;
+        console.log(this.transformations);
     }
 
     private animate() {
@@ -44,6 +46,9 @@ export default class Animation extends CssProperty {
     }
 
     private newAnimation() {
+
+        let transformations = [];
+
         //randomly select a transformation
         const transformation = this.getArrayElement(this.transformations);
 
@@ -89,7 +94,6 @@ export default class Animation extends CssProperty {
     }
 
     public randomize():string {
-        this.value = this.animate();
-        return this.value;
+        return this.value = this.animate();
     }
 }

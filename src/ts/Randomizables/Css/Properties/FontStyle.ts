@@ -1,9 +1,12 @@
 import ArrayProperty from "../ArrayProperty";
 import { Options } from "../../../Options/Options";
+import FontStyleOptions from "../../../Options/Randomizables/Css/Properties/FontStyleOptions";
 
 export default class FontStyle extends ArrayProperty {
 
     camelCase: 'fontStyle' = 'fontStyle';
+
+    options: FontStyleOptions;
 
     values: string[] = [
         "italic",
@@ -11,7 +14,8 @@ export default class FontStyle extends ArrayProperty {
         "oblique"
     ];
 
-    constructor(options:Options) {
-        super('font-style', options);
+    constructor(options: FontStyleOptions, unsafe: boolean) {
+        super('font-style', unsafe);
+        this.options = options;
     }
 }

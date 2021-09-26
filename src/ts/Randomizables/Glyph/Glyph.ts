@@ -1,16 +1,10 @@
-//classes
-import Randomizable from "../Randomizable";
-
-//interfaces
+//imports
+import Leet         from "./Leet";
+import leetJson     from '../../../json/leet.json';
 import GlyphOptions from '../../Options/Randomizables/GlyphOptions';
-import Leet from "./Leet";
-import { Options } from "../../Options/Options";
-import Unicode          from './Unicode';
-import UnicodeCharacter from "./UnicodeCharacter";
-
-//json
-import leetJson         from '../../../json/leet.json';
-import unicodeJson      from '../../../json/unicode.json';
+import Randomizable from "../Randomizable";
+import Unicode      from './Unicode';
+import unicodeJson  from '../../../json/unicode.json';
 
 //specify types of json
 const leet:Leet         = leetJson;
@@ -21,17 +15,19 @@ export default class Glyph extends Randomizable {
 
     //instance variables
     character:  string;
-    leet:       string[] = [];
-    unicode:    string[] = [];
+    leet:       string[]      = [];
+    options:    GlyphOptions;
+    unicode:    string[]      = [];
 
     //create a new instance
-    constructor(character:string, options:Options) {
+    constructor(character:string, options: GlyphOptions, unsafe: boolean) {
 
         //call the parent class's constructor
-        super('glyph', options);
+        super('glyph', unsafe);
 
         //instance variables
         this.character  = character;
+        this.options    = options;
         this.value      = character;
 
         //leetspeak
@@ -43,13 +39,9 @@ export default class Glyph extends Randomizable {
         }
     }
 
-    protected getOptions():GlyphOptions {
-        return this.options.glyph;
-    }
-
     randomize(): string {
 
-        const options = this.getOptions();
+        const options = this.options;
         
         if (options.leet && options.unicode) {
             switch (this.getRandom(1, 3)) {

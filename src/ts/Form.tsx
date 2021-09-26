@@ -2,7 +2,7 @@
 import * as React from "react";
 import Checkbox   from "./Form/Checkbox";
 import RandomCSS  from "./RandomCss";
-import CssOption  from "./CssOption";
+import Animation from "./Form/Animation";
 
 //interfaces
 import {Options, defaultOptions} from './Options/Options';
@@ -31,7 +31,7 @@ export default class Form extends React.Component <Props, State> {
 
         //initial state
         this.state = {
-            allCss:  true,
+            allCss:  false,
             options: defaultOptions
         };
 
@@ -191,7 +191,18 @@ export default class Form extends React.Component <Props, State> {
                             </div>
 
                             {/* individual properties */}
-                            {
+                            <Animation 
+                                options={this.state.options.css.animation}
+                                toggle={() => this.toggleCss('animation')}
+                                setState={
+                                    (option: keyof typeof this.state.options.css.animation, value: boolean) => {
+                                        let state = this.state;
+                                        state.options.css.animation[option] = value;
+                                        this.setState(state);
+                                    }
+                                }
+                            />
+                            {/*
                                 Object.keys(defaultOptions.css).map((name: keyof CssOptions, i: number) => {
                                     return (
                                         <CssOption
@@ -202,7 +213,7 @@ export default class Form extends React.Component <Props, State> {
                                         />
                                     );
                                 })
-                            }
+                            */}
                         </div>
                     </div>
 
@@ -256,5 +267,4 @@ export default class Form extends React.Component <Props, State> {
             </>
         )
     }
-
 }

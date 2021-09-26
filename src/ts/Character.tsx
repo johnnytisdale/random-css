@@ -11,7 +11,8 @@ import Style               from './Style';
 interface Props {
     baseStyle: BaseStyle;
     character: string;
-    factory:   RandomizableFactory;
+    //factory:   RandomizableFactory;
+    randomizables: Randomizable[];
     size:      number;
     unsafe:    boolean;
 }
@@ -27,7 +28,7 @@ export default class Character extends React.Component <Props, State> {
 
     //instance variables
     private interval:      ReturnType<typeof setInterval>;
-    private randomizables: Randomizable[];
+    //private randomizables: Randomizable[];
 
     //create a new instance
     constructor(props: Props) {
@@ -36,7 +37,7 @@ export default class Character extends React.Component <Props, State> {
         super(props);
 
         //randomizables
-        this.randomizables = props.factory.getRandomizables(props.character);
+        //this.randomizables = props.factory.getRandomizables(props.character);
 
         //initial state
         this.state = {
@@ -111,10 +112,10 @@ export default class Character extends React.Component <Props, State> {
                 let updateStyle = false;
 
                 //loop through the Randomizable objects
-                for (let randomizable of this.randomizables) {
+                for (let randomizable of this.props.randomizables) {
 
                     //this randomizable is disabled
-                    if (!randomizable.isEnabled()) {
+                    /*if (!randomizable.isEnabled()) {
 
                         //it was disabled since last check
                         if (randomizable.justDisabled()) {
@@ -132,7 +133,7 @@ export default class Character extends React.Component <Props, State> {
                             }
                         }
                         continue;
-                    }
+                    }*/
 
                     //if this timer's countdown is not complete, do nothing
                     if (!randomizable.timer.increment()) continue;

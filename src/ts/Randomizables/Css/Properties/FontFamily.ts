@@ -1,9 +1,12 @@
 import ArrayProperty from "../ArrayProperty";
 import { Options } from "../../../Options/Options";
+import FontFamilyOptions from "../../../Options/Randomizables/Css/Properties/FontFamilyOptions";
 
 export default class FontFamily extends ArrayProperty {
 
     camelCase: 'fontFamily' = 'fontFamily';
+
+    options: FontFamilyOptions;
 
     values: string[] = [
         "Arial",
@@ -23,7 +26,8 @@ export default class FontFamily extends ArrayProperty {
         "Verdana"
     ];
 
-    constructor(options:Options) {
-        super('font-family', options);
+    constructor(options: FontFamilyOptions, unsafe: boolean) {
+        super('font-family', unsafe);
+        this.options = options;
     }
 }

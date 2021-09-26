@@ -1,14 +1,17 @@
 //imports
 import CssProperty  from "../CssProperty";
 import { Options } from "../../../Options/Options";
+import BorderRadiusOptions from "../../../Options/Randomizables/Css/Properties/BorderRadiusOptions";
 
 //class definition
 export default class BorderRadius extends CssProperty {
 
     camelCase: 'borderRadius' = 'borderRadius';
+    options:    BorderRadiusOptions;
 
-    constructor(options:Options) {
-        super('border-radius', options);
+    constructor(options: BorderRadiusOptions, unsafe: boolean) {
+        super('border-radius', unsafe);
+        this.options = options;
     }
 
     private getBorderRadius() {

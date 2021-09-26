@@ -17,19 +17,22 @@ const defaultOptions:Options = {
     },
     css: {
         animation: {
-            enabled: true
+            enabled: false,
+            rotate:  true,
+            scale:   true,
+            skew:    true
         },
         backgroundColor: {
-            enabled: true
+            enabled: false
         },
         borderColor: {
-            enabled: true
+            enabled: false
         },
         borderRadius: {
-            enabled: true
+            enabled: false
         },
         borderStyle: {
-            enabled: true,
+            enabled: false,
             values: [
                 "dashed",
                 "dotted",
@@ -43,13 +46,13 @@ const defaultOptions:Options = {
             ]
         },
         borderWidth: {
-            enabled: true
+            enabled: false
         },
         color: {
-            enabled: true
+            enabled: false
         },
         fontFamily: {
-            enabled: true,
+            enabled: false,
             values: [
                 "Arial",
                 "\"Arial Black\"",
@@ -69,14 +72,14 @@ const defaultOptions:Options = {
             ]
         }, 
        fontKerning: {
-            enabled: true,
+            enabled: false,
             values:  [
                 "none",
                 "normal"
             ]
         }, 
         fontStretch: {
-            enabled: true,
+            enabled: false,
             values:  [
                 "ultra-condensed",
                 "extra-condensed",
@@ -90,7 +93,7 @@ const defaultOptions:Options = {
             ]
         }, 
         fontStyle: {
-            enabled: true,
+            enabled: false,
             values:  [
                 "italic",
                 "normal",
@@ -98,7 +101,7 @@ const defaultOptions:Options = {
             ]
         }, 
         fontVariant: {
-            enabled: true,
+            enabled: false,
             values: [
                 "all-petite-caps",
                 "all-small-caps",
@@ -110,7 +113,7 @@ const defaultOptions:Options = {
             ]
         }, 
         fontWeight: {
-            enabled: true,
+            enabled: false,
             values: [
                 "100",
                 "200",
@@ -124,10 +127,10 @@ const defaultOptions:Options = {
             ]
         },
         textDecorationColor: {
-            enabled: true
+            enabled: false
         },
         textDecorationLine: {
-            enabled: true,
+            enabled: false,
             values: [
                 "line-through",
                 "line-through underline",
@@ -140,7 +143,7 @@ const defaultOptions:Options = {
         }
     },
     glyph: {
-        enabled: true,
+        enabled: false,
         leet:    true,
         unicode: true
     }

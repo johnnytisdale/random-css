@@ -32,30 +32,32 @@ body {
     margin-bottom:  1rem;
 }
 
-#dev-form > .section > .options {
-    display: table;
+.option {
+    display: flex;
 }
 
-#dev-form > .section > .options > .option {
-    display: table-row;
+.subsection {
+    background-color: #ebebeb;
 }
 
-#dev-form > .section > .options > .option > div {
-    display: table-cell;
-}
-
-#dev-form > .section > .options > .option > .label {
+.option > .label {
     padding-right: 1rem;
+    width: 100%;
 }
 
 #select-all-css > div {
     padding-bottom: 1rem;
 }
 
+.expandable {
+    border-bottom: 1px dotted transparent;
+    border-top:    1px dotted transparent;
+    cursor:        pointer;
+}
+
 .expandable:hover {
     border-bottom: 1px dotted black;
     border-top: 1px dotted black;
-    cursor: pointer;
 }
 
 .expandable:after {

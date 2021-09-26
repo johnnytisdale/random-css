@@ -15,10 +15,10 @@ export default abstract class RangeProperty extends CssProperty {
     max:    number;
     unit:   string;
 
-    constructor(name: string, options:Options, min:number, max:number, unit:string) {
+    constructor(name: string, unsafe: boolean, min:number, max:number, unit:string) {
 
         //call the parent class's constructor
-        super(name, options);
+        super(name, unsafe);
 
         //do a little constructing of our own
         this.min  = min;

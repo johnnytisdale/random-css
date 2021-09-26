@@ -8,15 +8,14 @@ import Style                from '../../Style';
 export default abstract class CssProperty extends Randomizable {
 
     //instance variables
-    protected camelCase:    keyof CssOptions; //the camelCase name of this css property (for React)
+    protected camelCase:    keyof CssOptions;
     protected name:         keyof Style;
 
-    //get the options for this specific css property
-    protected getOptions():CssPropertyOptions {
-        return this.options.css[this.camelCase];
+    constructor(name: string, unsafe: boolean) {
+        super(name, unsafe);
     }
 
     public getName(): keyof Style {
-        return this.options.global.unsafe ? this.camelCase : this.name;
+        return this.unsafe ? this.camelCase : this.name;
     }
 }

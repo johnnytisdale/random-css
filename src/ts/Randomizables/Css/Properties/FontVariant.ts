@@ -1,9 +1,12 @@
 import ArrayProperty from "../ArrayProperty";
 import { Options } from "../../../Options/Options";
+import FontVariantOptions from "../../../Options/Randomizables/Css/Properties/FontVariantOptions";
 
 export default class FontVariant extends ArrayProperty {
 
     camelCase: 'fontVariant' = 'fontVariant';
+
+    options: FontVariantOptions;
 
     values: string[] = [
         "all-petite-caps",
@@ -15,7 +18,8 @@ export default class FontVariant extends ArrayProperty {
         "unicase"
     ];
 
-    constructor(options:Options) {
-        super('font-variant', options);
+    constructor(options:FontVariantOptions, unsafe: boolean) {
+        super('font-variant', unsafe);
+        this.options = options;
     }
 }

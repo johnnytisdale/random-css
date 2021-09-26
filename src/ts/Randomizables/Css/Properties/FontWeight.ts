@@ -1,9 +1,12 @@
 import ArrayProperty from "../ArrayProperty";
 import { Options } from "../../../Options/Options";
+import FontWeightOptions from "../../../Options/Randomizables/Css/Properties/FontWeightOptions";
 
 export default class FontWeight extends ArrayProperty {
 
     camelCase: 'fontWeight' = 'fontWeight';
+
+    options: FontWeightOptions;
 
     values: string[] = [
         "100",
@@ -17,7 +20,8 @@ export default class FontWeight extends ArrayProperty {
         "900"
     ];
 
-    constructor(options:Options) {
-        super('font-weight', options);
+    constructor(options: FontWeightOptions, unsafe: boolean) {
+        super('font-weight', unsafe);
+        this.options = options;
     }
 }
