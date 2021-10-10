@@ -27,6 +27,7 @@ export default abstract class CssPropertySection extends React.Component<CssProp
                     active={true}
                     checked={checked}
                     expand={() => this.setState({expanded: !this.state.expanded})}
+                    expanded={this.state.expanded}
                     expandable={true}
                     label={this.cssProperty}
                     onChange={this.props.toggle}

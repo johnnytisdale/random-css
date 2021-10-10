@@ -78,7 +78,7 @@ body {
     content: "▼";
 }
 
-.expandable .expanded :after {
+.expandable.expanded:after {
     content: "▲";
 }
 

@@ -1,6 +1,7 @@
 export default interface InputProps {
     active:      boolean;
     expand?:     React.MouseEventHandler;
+    expanded?:   boolean;
     expandable?: boolean;
     indent?:     boolean;
     label:       string;

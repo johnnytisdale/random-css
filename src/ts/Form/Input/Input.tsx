@@ -26,6 +26,7 @@ export default abstract class Input<Props> extends React.Component <Props & Inpu
     getLabelClassName(): string {
         let className = 'label';
         if (this.props.expandable) className += ' expandable';
+        if (this.props.expanded) className += ' expanded';
         return className;
     }
 
