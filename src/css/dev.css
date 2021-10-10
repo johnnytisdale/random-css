@@ -17,7 +17,9 @@ body {
 #dev-form {
     border:         1px solid black;
     display:        inline-block;
-    font-size:      1.25rem;
+    /*font-family:    'Montserrat Alternates', sans-serif;*/
+    /*font-family:    'IBM Plex Mono', monospace;*/
+    font-size:      1rem;
 	margin:         2rem 0;
 	text-align:     left;
 }
@@ -36,8 +38,18 @@ body {
     display: flex;
 }
 
-.subsection {
-    background-color: #ebebeb;
+.subsection:last-child {
+    /*background-color: #ebebeb;*/
+    border-bottom: 1px dotted black;
+}
+
+.subsection .label {
+    margin-left: 2rem;
+    
+}
+
+.subsection .title {
+    margin-left: 1rem;
 }
 
 .option > .label {
@@ -61,11 +73,32 @@ body {
 }
 
 .expandable:after {
-    content: "▼";
     font-size: .75rem;
     padding-left: .25rem;
+}
+
+.expandable:not(.expanded):after {
+    content: "▼";
+}
+
+.expandable .expanded :after {
+    content: "▲";
 }
 
 .inactive {
     color: gray;
 }
+
+.indent {
+    margin-left: 1rem;
+}
+
+/*.r-range::-moz-range-track {
+    background-color: red;
+}
+.g-range::-moz-range-track {
+    background-color: green;
+}
+.b-range::-moz-range-track {
+    background-color: blue;
+}*/

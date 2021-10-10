@@ -1,6 +1,6 @@
 //imports
-import CssOptions           from '../../Options/Randomizables/Css/CssOptions';
-import CssPropertyOptions   from '../../Options/Randomizables/Css/CssPropertyOptions';
+import {CssOptions}           from './CssOptions';
+import CssPropertyOptions   from './CssPropertyOptions';
 import Randomizable         from '../Randomizable';
 import Style                from '../../Style';
 
@@ -10,9 +10,16 @@ export default abstract class CssProperty extends Randomizable {
     //instance variables
     protected camelCase:    keyof CssOptions;
     protected name:         keyof Style;
+    protected unsafe: boolean;           //"unsafe" in the context of Content Security Policy (inline css)
 
+    //create a new instance
     constructor(name: string, unsafe: boolean) {
-        super(name, unsafe);
+
+        //call parent's constructor
+        super(name);
+
+        //set instance variables
+        this.unsafe = unsafe;
     }
 
     public getName(): keyof Style {

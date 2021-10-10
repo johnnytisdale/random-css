@@ -1,4 +1,4 @@
 export default interface UnicodeCharacter {
-    description:    string;
-    unicode:        string;
+    description: string;
+    unicode:     string;
 }

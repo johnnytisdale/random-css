@@ -1,7 +1,7 @@
-import CssPropertyOptions from '../Options/Randomizables/Css/CssPropertyOptions';
+import Options from '../Options';
 
 export default interface CssPropertySectionProps {
-    options: CssPropertyOptions;
-    toggle:  React.ChangeEventHandler;
-    setState: Function;
+    options:     Options;
+    setState:    Function;
+    toggle:      (e: React.FormEvent<HTMLInputElement>) => void;
 }

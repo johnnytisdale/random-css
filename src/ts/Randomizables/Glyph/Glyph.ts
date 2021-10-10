@@ -1,68 +1,31 @@
 //imports
-import Leet         from "./Leet";
-import leetJson     from '../../../json/leet.json';
-import GlyphOptions from '../../Options/Randomizables/GlyphOptions';
-import Randomizable from "../Randomizable";
-import Unicode      from './Unicode';
-import unicodeJson  from '../../../json/unicode.json';
-
-//specify types of json
-const leet:Leet         = leetJson;
-const unicode:Unicode   = unicodeJson;
+import Randomizable   from "../Randomizable";
+import { Variations } from "./Variations";
 
 //define class
 export default class Glyph extends Randomizable {
 
     //instance variables
     character:  string;
-    leet:       string[]      = [];
-    options:    GlyphOptions;
-    unicode:    string[]      = [];
+    length:     number;
+    variations: Variations;
 
     //create a new instance
-    constructor(character:string, options: GlyphOptions, unsafe: boolean) {
+    constructor(character: string, variations: Variations) {
 
         //call the parent class's constructor
-        super('glyph', unsafe);
+        super('glyph');
 
         //instance variables
         this.character  = character;
-        this.options    = options;
+        this.length     = variations.length;
         this.value      = character;
-
-        //leetspeak
-        if (leet.hasOwnProperty(this.character)) this.leet = leet[this.character];
-
-        //unicode
-        if (unicode.hasOwnProperty(this.character)) {
-            this.unicode = unicode[this.character].map(x => String.fromCharCode(parseInt(x.unicode, 16)));
-        }
+        this.variations = variations;
     }
 
     randomize(): string {
-
-        const options = this.options;
-        
-        if (options.leet && options.unicode) {
-            switch (this.getRandom(1, 3)) {
-                case 1: this.value = this.getArrayElement(this.leet);    break;
-                case 2: this.value = this.getArrayElement(this.unicode); break;
-                case 3: this.value = this.character;
-            }
-        } else if (options.leet) {
-            switch (this.getRandom(1, 2)) {
-                case 1: this.value = this.getArrayElement(this.leet); break;
-                case 2: this.value = this.character;
-            }
-        } else if (options.unicode) {
-            switch (this.getRandom(1, 2)) {
-                case 1: this.value = this.getArrayElement(this.unicode); break;
-                case 2: this.value = this.character;
-            }
-        } else {
-            this.value = this.character;
-        }
-
-        return this.value;
+        const choice = this.getRandom(0, this.length);
+        if (!choice) return this.value = this.character;
+        return this.value = this.getArrayElement(this.variations[choice - 1]);
     }
 }

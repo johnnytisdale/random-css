@@ -1,10 +1,9 @@
-//imports
-import ArrayPropertyOptions from "../../Options/Randomizables/Css/ArrayPropertyOptions";
-import CssProperty          from "./CssProperty";
-import { Options }          from "../../Options/Options";
+import ArrayPropertyOptions from "./ArrayPropertyOptions";
+import CssProperty from "./CssProperty";
 
-type ArrayPropertyName = (
+export type ArrayPropertyName = (
       'borderStyle'
+    | 'borderRadius'
     | 'fontFamily'
     | 'fontKerning'
     | 'fontStretch'
@@ -13,28 +12,35 @@ type ArrayPropertyName = (
     | 'fontWeight'
     | 'textDecorationLine'
 );
+ 
+export const arrayPropertyOptions = [
+    'borderRadius',
+    'borderStyle',
+    'fontFamily',
+    'fontKerning',
+    'fontStretch',
+    'fontStyle',
+    'fontVariant',
+    'fontWeight',
+    'textDecorationLine'
+];
 
-//class definition
 export default abstract class ArrayProperty extends CssProperty {
 
-    //instance variables
     abstract camelCase: ArrayPropertyName;
-    abstract values:string[];
 
-    /*constructor(name: string, options:Options) {
-        super(name, options);
-    }*/
+    values: string[];
+
+    constructor(name: string, options: ArrayPropertyOptions, unsafe: boolean) {
+        super(name, unsafe);
+        this.values = options.values;
+    }
 
     protected getValues():string[] {
-        return this.values;//this.getOptions().values;
+        return this.values;
     }
 
     public randomize():string {
-        this.value = this.getArrayElement(this.values);
-        return this.value;
+        return this.value = this.getArrayElement(this.values);
     }
-
-    /*protected getOptions():ArrayPropertyOptions {
-        return this.options.css[this.camelCase];
-    }*/
 }

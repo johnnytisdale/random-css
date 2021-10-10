@@ -38,7 +38,7 @@
 	margin: auto;
 	width:  min-content;
 }
-.random-css-container div {
+.random-css-container >div {
 	box-sizing: border-box;
 	overflow:   min-content;
 	text-align: center;

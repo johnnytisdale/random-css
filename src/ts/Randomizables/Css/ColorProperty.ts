@@ -2,8 +2,7 @@
 import applyMixins  from "../../applyMixins";
 import CssProperty  from "./CssProperty";
 import HasColors    from "../HasColors";
-import { Options }  from "../../Options/Options";
-import CssOptions from "../../Options/Randomizables/Css/CssOptions";
+import { ColorPropertyOptions, colorPropertyOptions } from "./ColorPropertyOptions";
 
 type ColorPropertyName = (
     'backgroundColor'
@@ -17,11 +16,24 @@ abstract class ColorProperty extends CssProperty {
 
     abstract camelCase: ColorPropertyName;
 
-    //options:Options;
+    protected options: ColorPropertyOptions;
 
-    constructor(name: string, unsafe: boolean) {
+    protected rMin: number;
+    protected rMax: number;
+    protected gMin: number;
+    protected gMax: number;
+    protected bMin: number;
+    protected bMax: number;
+
+    constructor(name: string, options: ColorPropertyOptions, unsafe: boolean) {
         super(name, unsafe);
         this.colors = this.getColors();
+        this.rMin = options.rMin;
+        this.rMax = options.rMax;
+        this.gMin = options.gMin;
+        this.gMax = options.gMax;
+        this.bMin = options.bMin;
+        this.bMax = options.bMax;
     }
 
     public randomize():string {
@@ -34,9 +46,9 @@ abstract class ColorProperty extends CssProperty {
     }
 
     private getColor_unsafe(rMin:number = 0, rMax:number = 255, gMin:number = 0, gMax:number = 255, bMin:number = 0, bMax:number = 255) {
-        const red   = this.getRandom(rMin, rMax);
-        const green = this.getRandom(gMin, gMax);
-        const blue  = this.getRandom(bMin, bMax);
+        const red   = this.getRandom(this.rMin, this.rMax);
+        const green = this.getRandom(this.gMin, this.gMax);
+        const blue  = this.getRandom(this.bMin, this.bMax);
         return `rgb(${red}, ${green}, ${blue})`;
     }
 }

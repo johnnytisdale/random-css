@@ -2,7 +2,7 @@
 import * as React  			from "react";
 import BaseStyle 			from "./BaseStyle";
 import Character   			from "./Character";
-import { Options } 			from "./Options/Options";
+import Options  			from "./Options";
 import style 	   			from '../css/style.css';
 import RandomizableFactory 	from './Randomizables/RandomizableFactory';
 
@@ -94,17 +94,18 @@ export default class RandomCSS extends React.Component <Props> {
 						
 					
 						return (
-
 							//create a new instance of the Character component
-							<Character
-								baseStyle={baseStyle}
-								character={character}
-								//factory={this.factory}
-								key={'character-' + index}
-								randomizables={this.factory.getRandomizables(character)}
-								size={this.props.size}
-								unsafe={this.props.unsafe}
-							/>
+							
+								<Character
+									baseStyle={baseStyle}
+									character={character}
+									//factory={this.factory}
+									key={'character-' + index}
+									randomizables={this.factory.getRandomizables(character)}
+									size={this.props.size}
+									unsafe={this.props.unsafe}
+								/>
+							
 						);
 					})
 				}

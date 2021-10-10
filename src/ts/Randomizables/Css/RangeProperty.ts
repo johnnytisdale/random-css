@@ -1,33 +1,24 @@
-//imports
 import CssProperty  from "./CssProperty";
-import { Options } from "../../Options/Options";
+import AbsoluteLengthUnit from "./AbsoluteLengthUnit";
+import RangePropertyOptions from "./RangePropertyOptions";
+import RangePropertyName from "./RangePropertyName";
 
-type RangePropertyName = (
-    'borderWidth'
-);
-
-//class definition
 export default abstract class RangeProperty extends CssProperty {
 
-    abstract camelCase: RangePropertyName;
+    protected abstract camelCase: RangePropertyName;
 
-    min:    number;
-    max:    number;
-    unit:   string;
+    max:   number;
+    min:   number;
+    units: AbsoluteLengthUnit[];
 
-    constructor(name: string, unsafe: boolean, min:number, max:number, unit:string) {
-
-        //call the parent class's constructor
+    constructor(name: string, options: RangePropertyOptions, unsafe: boolean) {
         super(name, unsafe);
-
-        //do a little constructing of our own
-        this.min  = min;
-        this.max  = max;
-        this.unit = unit;
+        this.max   = options.max;
+        this.min   = options.min;
+        this.units = options.units;
     }
 
     public randomize():string {
-        this.value = String(this.getRandom(this.min, this.max)) + this.unit;
-        return this.value;
+        return this.value = `${String(this.getRandom(this.min, this.max))}${this.getArrayElement(this.units)}`;
     }
 }
