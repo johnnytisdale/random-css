@@ -17,8 +17,6 @@ body {
 #dev-form {
     border:         1px solid black;
     display:        inline-block;
-    /*font-family:    'Montserrat Alternates', sans-serif;*/
-    /*font-family:    'IBM Plex Mono', monospace;*/
     font-size:      1rem;
 	margin:         2rem 0;
 	text-align:     left;
@@ -39,7 +37,6 @@ body {
 }
 
 .subsection:last-child {
-    /*background-color: #ebebeb;*/
     border-bottom: 1px dotted black;
 }
 
@@ -92,13 +89,3 @@ body {
 .indent {
     margin-left: 1rem;
 }
-
-/*.r-range::-moz-range-track {
-    background-color: red;
-}
-.g-range::-moz-range-track {
-    background-color: green;
-}
-.b-range::-moz-range-track {
-    background-color: blue;
-}*/
