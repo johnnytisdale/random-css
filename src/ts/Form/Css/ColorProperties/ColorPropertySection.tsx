@@ -3,6 +3,16 @@ import * as React                                 from "react";
 import CssPropertySection                         from '../../CssPropertySection';
 import { ColorPropertyOption, colorPropertyOptions } from "../../../Randomizables/Css/ColorPropertyOptions";
 import ColorRange from "../../Input/ColorRange";
+import { borderRadiusValues } from "../../../Randomizables/Css/BorderRadius/BorderRadiusOptions";
+
+interface OtherMap {
+    rMin: 'rMax';
+    rMax: 'rMin';
+    gMin: 'gMax';
+    gMax: 'gMin';
+    bMin: 'bMax';
+    bMax: 'bMin';
+};
 
 //react component
 export default abstract class ColorPropertySection extends CssPropertySection {
@@ -11,9 +21,37 @@ export default abstract class ColorPropertySection extends CssPropertySection {
 
     protected options: ColorPropertyOption[] = colorPropertyOptions;
 
-    protected changeValue(option: ColorPropertyOption, value: number): void {
+    private otherMap: OtherMap = {
+        rMin: 'rMax',
+        rMax: 'rMin',
+        gMin: 'gMax',
+        gMax: 'gMin',
+        bMin: 'bMax',
+        bMax: 'bMin',
+    };
+
+    protected changeValue(option: ColorPropertyOption, targetValue: number): void {
+
         let options = this.props.options;
-        options.css[this.cssProperty][option] = value;
+
+        const max = option.substring(1, 4) == 'Max';
+        const currentValue = options.css[this.cssProperty][option];
+        const otherValue = options.css[this.cssProperty][this.otherMap[option]];
+
+        //rMax/gMax/bMax
+        if (max && targetValue < currentValue && currentValue <= otherValue + 1) {
+            options.css[this.cssProperty][option] = otherValue + 1;
+        }
+
+        //rMin/gMin/bMin
+        else if (!max && targetValue > currentValue && currentValue >= otherValue - 1) {
+            options.css[this.cssProperty][option] = otherValue - 1;
+        }
+
+        else {
+            options.css[this.cssProperty][option] = targetValue;
+        }
+        
         this.props.setState({options: options});
     }
 
