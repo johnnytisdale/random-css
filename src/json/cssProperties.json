@@ -1,0 +1,145 @@
+{
+    "animation": {
+        "camelCase": "animation",
+        "type": "function",
+        "function": "animate"
+    },
+    "background-color": {
+        "camelCase": "backgroundColor",
+        "type": "color"
+    },
+   "border-color": {
+        "camelCase": "borderColor",
+        "type": "color"
+    },
+    "border-radius": {
+        "camelCase": "borderRadius",
+        "type": "function",
+        "function": "getBorderRadius"
+    },
+    "border-style": {
+        "camelCase": "borderStyle",
+        "type": "array",
+        "values": [
+            "dashed",
+            "dotted",
+            "double",
+            "groove",
+            "inset",
+            "none",
+            "outset",
+            "ridge",
+            "solid"
+        ]
+    },
+    "border-width": {
+        "camelCase": "borderWidth",
+        "type": "range",
+        "min": 1,
+        "max": 5,
+        "unit": "px"
+    },
+    "color": {
+        "camelCase": "color",
+        "type": "color"
+    },
+    "font-family": {
+        "camelCase": "fontFamily",
+        "type": "array",
+        "values": [
+            "Arial",
+            "\"Arial Black\"",
+            "Bookman",
+            "Candara",
+            "\"Comic Sans MS\"",
+            "Courier",
+            "\"Courier New\"",
+            "Garamond",
+            "Georgia",
+            "Impact",
+            "Palatino",
+            "Roboto",
+            "\"Times New Roman\"",
+            "Times",
+            "Verdana"
+        ]
+    },
+    "font-kerning": {
+        "camelCase": "fontKerning",
+        "type": "array",
+        "values": [
+            "none",
+            "normal"
+        ]
+    },
+    "font-stretch": {
+        "camelCase": "fontStretch",
+        "type": "array",
+        "values": [
+            "ultra-condensed",
+            "extra-condensed",
+            "condensed",
+            "semi-condensed",
+            "normal",
+            "semi-expanded",
+            "expanded",
+            "extra-expanded",
+            "ultra-expanded"
+        ]
+    },
+    "font-style": {
+        "camelCase": "fontStyle",
+        "default": "normal",
+        "type": "array",
+        "values": [
+            "italic",
+            "normal",
+            "oblique"
+        ]
+    },
+    "font-variant": {
+        "camelCase": "fontVariant",
+        "type": "array",
+        "values": [
+            "all-petite-caps",
+            "all-small-caps",
+            "normal",
+            "small-caps",
+            "petite-caps",
+            "titling-caps",
+            "unicase"
+        ]
+    },
+    "font-weight": {
+        "camelCase": "fontWeight",
+        "type": "array",
+        "values": [
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900"
+        ]
+    },
+    "text-decoration-color": {
+        "camelCase": "textDecorationColor",
+        "type": "color"
+    },
+    "text-decoration-line": {
+        "camelCase": "textDecorationLine",
+        "type": "array",
+        "values": [
+            "line-through",
+            "line-through underline",
+            "line-through overline",
+            "none",
+            "overline",
+            "overline underline",
+            "underline"
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+export type Variations = Array<Array<string>>;
