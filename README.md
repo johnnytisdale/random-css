@@ -15,8 +15,8 @@
 
 
  ## Testing
- 1. Uncomment the commented lines in in src/index.js.
- 2. npm run dev
+ 1. npm install
+ 2. npm run watch
  3. Open index.html in browser.
 
  ## Authors
