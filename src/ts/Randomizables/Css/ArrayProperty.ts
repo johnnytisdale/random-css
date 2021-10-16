@@ -29,10 +29,14 @@ export default abstract class ArrayProperty extends CssProperty {
 
     abstract camelCase: ArrayPropertyName;
 
+    options: ArrayPropertyOptions;
+
     values: string[];
 
     constructor(name: string, options: ArrayPropertyOptions, unsafe: boolean) {
         super(name, unsafe);
+        this.enabled = options.enabled;
+        this.options = options;
         this.values = options.values;
     }
 

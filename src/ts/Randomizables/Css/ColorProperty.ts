@@ -28,12 +28,14 @@ abstract class ColorProperty extends CssProperty {
     constructor(name: string, options: ColorPropertyOptions, unsafe: boolean) {
         super(name, unsafe);
         this.colors = this.getColors();
+        this.enabled = options.enabled;
         this.rMin = options.rMin;
         this.rMax = options.rMax;
         this.gMin = options.gMin;
         this.gMax = options.gMax;
         this.bMin = options.bMin;
         this.bMax = options.bMax;
+        this.options = options;
     }
 
     public randomize():string {

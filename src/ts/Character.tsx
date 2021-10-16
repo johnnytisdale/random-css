@@ -11,7 +11,7 @@ import Style               from './Style';
 interface Props {
     baseStyle: BaseStyle;
     character: string;
-    //factory:   RandomizableFactory;
+    factory:   RandomizableFactory;
     randomizables: Randomizable[];
     size:      number;
     unsafe:    boolean;
@@ -36,12 +36,15 @@ export default class Character extends React.Component <Props, State> {
         //call parent class's constructor
         super(props);
 
+        console.log({props: props.randomizables});
+
         //randomizables
         //this.randomizables = props.factory.getRandomizables(props.character);
 
         //initial state
         this.state = {
             glyph: props.character,
+            //randomizables: props.factory.getRandomizables(props.character),
             style: {}
         };
     }
@@ -115,10 +118,10 @@ export default class Character extends React.Component <Props, State> {
                 for (let randomizable of this.props.randomizables) {
 
                     //this randomizable is disabled
-                    /*if (!randomizable.isEnabled()) {
+                    if (!randomizable.isEnabled()) {
 
                         //it was disabled since last check
-                        if (randomizable.justDisabled()) {
+                        //if (randomizable.wasJustDisabled()) {
                             
                             //remove styling
                             if (randomizable instanceof CssProperty) {
@@ -131,9 +134,10 @@ export default class Character extends React.Component <Props, State> {
                                 state.glyph = this.props.character;
                                 updateState = true;
                             }
-                        }
+                        //}
+
                         continue;
-                    }*/
+                    }
 
                     //if this timer's countdown is not complete, do nothing
                     if (!randomizable.timer.increment()) continue;

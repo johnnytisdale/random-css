@@ -9,13 +9,16 @@ export default abstract class RangeProperty extends CssProperty {
 
     max:   number;
     min:   number;
+    options: RangePropertyOptions;
     units: AbsoluteLengthUnit[];
 
     constructor(name: string, options: RangePropertyOptions, unsafe: boolean) {
         super(name, unsafe);
+        this.enabled = options.enabled;
         this.max   = options.max;
         this.min   = options.min;
         this.units = options.units;
+        this.options = options;
     }
 
     public randomize():string {

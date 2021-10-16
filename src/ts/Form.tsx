@@ -10,8 +10,8 @@ import BorderStyle from "./Form/Css/ArrayProperties/BorderStyle";
 import BorderWidth from "./Form/Css/RangeProperties/BorderWidth";
 import Color from './Form/Css/ColorProperties/Color';
 import FontFamily from "./Form/Css/ArrayProperties/FontFamily";
-import FontKerning from "./Form/Css/ArrayProperties/FontKerning";
-import FontStretch from "./Form/Css/ArrayProperties/FontStretch";
+//import FontKerning from "./Form/Css/ArrayProperties/FontKerning";
+//import FontStretch from "./Form/Css/ArrayProperties/FontStretch";
 import FontStyle from "./Form/Css/ArrayProperties/FontStyle";
 import FontVariant from "./Form/Css/ArrayProperties/FontVariant";
 import FontWeight from "./Form/Css/ArrayProperties/FontWeight";
@@ -44,7 +44,7 @@ export default class Form extends React.Component <Props, State> {
             options: defaultOptions
         };
 
-        console.log(defaultOptions);
+        console.log({defaultOptions: defaultOptions});
 
         //bind this to methods
         this.areAllCssPropertiesEnabled = this.areAllCssPropertiesEnabled.bind(this);
@@ -78,9 +78,11 @@ export default class Form extends React.Component <Props, State> {
 
     //toggle randomization for an individual css property
     toggleCss(name: keyof CssOptions): void {
-        console.log('toggling ' + name);
         let options = this.state.options;
-        options.css[name].enabled = !options.css[name].enabled;
+        const currentValue = options.css[name].enabled;
+        const newValue = currentValue === true ? false : true;
+        //options.css[name].enabled = !options.css[name].enabled;
+        options.css[name].enabled = newValue;
         this.setState({
             allCss:  this.areAllCssPropertiesEnabled() ? true : false,
             options: options
@@ -128,6 +130,24 @@ export default class Form extends React.Component <Props, State> {
                                     />
                                 </div>
                             </div>
+
+                            
+                                {/* ignore spaces */}
+                                <div className='option'>
+                                    <div className='label'>ignore spaces</div>
+                                    <div className='input'>
+                                        <input
+                                            type='checkbox'
+                                            checked={this.state.options.global.ignoreSpaces}
+                                            onChange={() => {
+                                                let options = this.state.options;
+                                                options.global.ignoreSpaces = !this.state.options.global.ignoreSpaces;
+                                                this.setState({options: options});
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            
 
                             {/* size */}
                             <div className='option'>
@@ -245,16 +265,16 @@ export default class Form extends React.Component <Props, State> {
                                 toggle={() => this.toggleCss('fontFamily')}
                                 setState={this.setState}
                             />
-                            <FontKerning
+                            {/*<FontKerning
                                 options={this.state.options}
-                                toggle={() => this.toggleCss('fontFamily')}
+                                toggle={() => this.toggleCss('fontKerning')}
                                 setState={this.setState}
                             />
                             <FontStretch
                                 options={this.state.options}
                                 toggle={() => this.toggleCss('fontStretch')}
                                 setState={this.setState}
-                            />
+                            />*/}
                             <FontStyle
                                 options={this.state.options}
                                 toggle={() => this.toggleCss('fontStyle')}

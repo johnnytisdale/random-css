@@ -14,6 +14,8 @@ export default class Animation extends CssProperty {
 
     camelCase = 'animation' as const;
 
+    options: AnimationOptions;
+
     axes:            Axis[];
     directions:      Direction[];
     fillModes:       FillMode[];
@@ -26,6 +28,11 @@ export default class Animation extends CssProperty {
 
     constructor(options: AnimationOptions, unsafe: boolean) {
         super('animation', unsafe);
+
+        this.enabled = options.enabled;
+
+        this.options = options;
+
         this.axes = options.axes;
         this.directions = options.directions;
         this.fillModes = options.fillModes;

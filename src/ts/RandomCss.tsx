@@ -73,6 +73,8 @@ export default class RandomCSS extends React.Component <Props> {
 	//render element(s) in the dom
 	render(): React.ReactNode {
 
+		console.log('rendering <RandomCss />')
+
 		const baseStyle: BaseStyle = (
 			this.props.unsafe
 				? {
@@ -83,34 +85,30 @@ export default class RandomCSS extends React.Component <Props> {
 		);
 
 		return (
-
-			//container
 			<div className={this.getClassNames()} style={this.getStyle()}>
-
 				{
 					//loop through the characters in the text
 					this.setDisplay(this.props.text).map((character, index) => {
-
-						
-					
+						let randomizables = this.factory.getRandomizables(character);
 						return (
-							//create a new instance of the Character component
-							
-								<Character
-									baseStyle={baseStyle}
-									character={character}
-									//factory={this.factory}
-									key={'character-' + index}
-									randomizables={this.factory.getRandomizables(character)}
-									size={this.props.size}
-									unsafe={this.props.unsafe}
-								/>
-							
+							<Character
+								baseStyle={baseStyle}
+								character={character}
+								key={'character-' + index}
+								factory={this.factory}
+								randomizables={randomizables}
+								size={this.props.size}
+								unsafe={this.props.unsafe}
+							/>
 						);
 					})
 				}
-
 			</div>
 		);
+	}
+
+	shouldComponentUpdate(nextProps: Props) {
+		console.log('should update');
+		return true;
 	}
 }

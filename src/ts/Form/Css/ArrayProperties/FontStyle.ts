@@ -3,7 +3,7 @@ import { FontStyleValue, fontStyleValues } from "../../../Randomizables/Css/Font
 
 export default class FontStyle extends ArrayPropertySection {
 
-    protected cssProperty = 'fontKerning' as const;
+    protected cssProperty = 'fontStyle' as const;
 
     protected values: FontStyleValue[] = fontStyleValues;
 

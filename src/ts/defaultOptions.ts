@@ -33,10 +33,11 @@ function defaultColorOptions(): ColorPropertyOptions {
 
 const defaultOptions: Options = {
     global: {
-        center: true,
-        size:   4,
-        text:   'random css',
-        unsafe: true
+        center:       true,
+        size:         4,
+        text:         'random css',
+        ignoreSpaces: true,
+        unsafe:       true
     },
     css: {
         animation: {
