@@ -3,9 +3,13 @@
 
  ## What's New?
 
+ ### Typescript
+
+ We are now using TypeScript. The upside is that we can use interfaces and abstract classes. The downside is that we are using TypeScript.
+
  ### Content Security Policy
 
- Random CSS is now compatible with a strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), i.e., one that forbids the use of inline CSS. The root component has an `unsafe` prop which defaults to `false`. If you pass `true` to this prop, then it will use inline CSS. Otherwise it will use external CSS and you must be sure to link to the CSS file in your `<head>`.
+ Random CSS is now compatible with a *strict* [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), i.e., one that forbids the use of inline CSS. The root component has an `unsafe` prop which defaults to `false`. If you pass `true` to this prop, then it will use inline CSS. Otherwise it will use external CSS and you must be sure to link to the CSS file in your `<head>`.
 
  While using external CSS is considered safer, it comes with a tradeoff: It significantly limits the number of possible values supported for some CSS properties, particularly color properties.
  

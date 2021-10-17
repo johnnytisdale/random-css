@@ -48,10 +48,9 @@ export default class RandomizableFactory {
         });
         
         //glyph
-        if (this.options.glyph.enabled && character != '') {
-            let glyph = this.make('glyph', character);
-            if (glyph !== null) randomizables.push(glyph);
-        }
+        let glyph = this.make('glyph', character);
+        if (glyph !== null) randomizables.push(glyph);
+        
 
         return randomizables;
     }
@@ -147,6 +146,7 @@ export default class RandomizableFactory {
 
             case 'glyph':
                 
+                if (character == ' ') { return null; }
                 return new Glyph(this.options.glyph, character);
 
             case 'textDecorationColor':

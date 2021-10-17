@@ -98,8 +98,8 @@ const defaultOptions: Options = {
         }
     },
     glyph: {
-        enabled: false,
-        leet:    true,
+        enabled: true,
+        leet:    false,
         unicode: true
     }
 }

@@ -44,8 +44,6 @@ export default class Form extends React.Component <Props, State> {
             options: defaultOptions
         };
 
-        console.log({defaultOptions: defaultOptions});
-
         //bind this to methods
         this.areAllCssPropertiesEnabled = this.areAllCssPropertiesEnabled.bind(this);
         this.setState                   = this.setState.bind(this);

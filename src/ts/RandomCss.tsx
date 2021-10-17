@@ -73,8 +73,6 @@ export default class RandomCSS extends React.Component <Props> {
 	//render element(s) in the dom
 	render(): React.ReactNode {
 
-		console.log('rendering <RandomCss />')
-
 		const baseStyle: BaseStyle = (
 			this.props.unsafe
 				? {
@@ -108,7 +106,6 @@ export default class RandomCSS extends React.Component <Props> {
 	}
 
 	shouldComponentUpdate(nextProps: Props) {
-		console.log('should update');
 		return true;
 	}
 }

@@ -36,8 +36,6 @@ export default class Character extends React.Component <Props, State> {
         //call parent class's constructor
         super(props);
 
-        console.log({props: props.randomizables});
-
         //randomizables
         //this.randomizables = props.factory.getRandomizables(props.character);
 
