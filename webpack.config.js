@@ -1,63 +1,53 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
+	path = require('path'),
+	webpack = require('webpack');
 
-module.exports = {
-	entry: '/src/index.tsx',
-    externals: {
-        react: {          
-            commonjs: "react",
-            commonjs2: "react",
-            amd: "React",
-            root: "React"
-        },
-        "react-dom": {
-            commonjs: "react-dom",
-            commonjs2: "react-dom",
-            amd: "ReactDOM",
-            root: "ReactDOM"
-        }
-    },
-  	module: {
-    	rules: [
-	      	{
-		        test: /\.(js|jsx|ts|tsx)$/,
-		        exclude: /node_modules/,
-		        use: [
-					"babel-loader",
-					"ts-loader"
-				]
-	      	},
-			/*{
-				test: /\.tsx?$/,
-				use: 'ts-loader',
-				exclude: /node_modules/,
-			},*/
-	      	{
-		        test: /\.s[ac]ss$/i,
-	        	use: [
-	          		// Creates `style` nodes from JS strings
-	          		'style-loader',
-	          		// Translates CSS into CommonJS
-	          		'css-loader',
-	          		// Compiles Sass to CSS
-	          		'sass-loader',
-	        	]
-	      	}
-    	]
-  	},
-  	output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: 'index.js',
-        library: 'random-css',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
-    },
-  	resolve: {
-        alias: {
-            'react': path.resolve(__dirname, './node_modules/react'),
-          	'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-        },
-		extensions: ['.tsx', '.ts', '.js']
-    },
+module.exports = env => {
 
+	const plugins = [
+		new webpack.DefinePlugin({
+			ENV: JSON.stringify(env.environment),
+		})
+	];
+
+	if (env.environment != 'production') {
+		plugins.push(
+			new HtmlWebpackPlugin({
+				template: 'src/index.html',
+				title: 'Random CSS'
+			})
+		);
+	}
+
+	return {
+		entry: './src/components/Form.tsx',
+		module: {
+			rules: [
+				{
+					test: /\.(ts|js)x?$/,
+					exclude: /node_modules/,
+					loader: 'babel-loader'
+				},
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+						// Creates `style` nodes from JS strings
+						'style-loader',
+						// Translates CSS into CommonJS
+						'css-loader',
+						// Compiles Sass to CSS
+						'sass-loader',
+					]
+				}
+			]
+		},
+		output: {
+			filename: 'main.js',
+			path: path.resolve(__dirname, 'dist'),
+		},
+		plugins: plugins,
+		resolve: {
+			extensions: [".js", ".json", ".ts", ".tsx"],
+		}
+	}
 };
