@@ -29,7 +29,7 @@ class Form extends React.Component<Props, IState> {
         css: {},
         global: {
           size: 3,
-          text: 'x',
+          text: 'random css',
           unsafe: false
         }
       },
