@@ -16,7 +16,7 @@ export default class FontStyle extends CssProperty {
     "italic",
     "oblique",
     "normal",
-  ];;
+  ];
 
   protected getRandomKeywordValue(): string {
     let keyword = this.getRandomArrayElement(this.keywords);

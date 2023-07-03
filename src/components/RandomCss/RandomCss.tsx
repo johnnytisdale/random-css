@@ -6,6 +6,7 @@ import Randomizable from "../../classes/Randomizable";
 import "./style.scss";
 import TextDecorationColor from "../../classes/CssProperty/TextDecorationColor";
 import TextDecorationLine from "../../classes/CssProperty/TextDecorationLine";
+import Animation from "../../classes/CssProperty/Animation";
 import BorderWidth from "../../classes/CssProperty/BorderWidth";
 import BorderStyle from "../../classes/CssProperty/BorderStyle";
 import BorderColor from "../../classes/CssProperty/BorderColor";
@@ -45,6 +46,9 @@ export default class RandomCss extends React.Component<Props> {
         {
           this.props.text.split('').map((character, i) => {
             const randomizables: Randomizable[] = [];
+            if (this.props.options.css.animation) {
+              randomizables.push(new Animation());
+            }
             if (this.props.options.css.backgroundColor) {
               randomizables.push(new BackgroundColor(this.props.options.global.unsafe));
             }
