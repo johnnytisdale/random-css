@@ -1,0 +1,12 @@
+.random-css-container {
+	background-color:	white;
+	display:			flex;
+	padding:			.25rem;
+	position:			relative;
+
+    >div {
+        box-sizing: border-box;
+        overflow: 	visible;
+        text-align: center;
+    }
+}
