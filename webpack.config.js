@@ -2,7 +2,6 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-	entry: '/src/index.tsx',
     externals: {
         react: {          
             commonjs: "react",
@@ -20,18 +19,12 @@ module.exports = {
   	module: {
     	rules: [
 	      	{
-		        test: /\.(js|jsx|ts|tsx)$/,
+		        test: /\.(js|jsx)$/,
 		        exclude: /node_modules/,
-		        use: [
-					"babel-loader",
-					"ts-loader"
-				]
+		        use: {
+		          	loader: "babel-loader"
+		        }
 	      	},
-			/*{
-				test: /\.tsx?$/,
-				use: 'ts-loader',
-				exclude: /node_modules/,
-			},*/
 	      	{
 		        test: /\.s[ac]ss$/i,
 	        	use: [
@@ -56,8 +49,6 @@ module.exports = {
         alias: {
             'react': path.resolve(__dirname, './node_modules/react'),
           	'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-        },
-		extensions: ['.tsx', '.ts', '.js']
-    },
-
+        }
+    }
 };

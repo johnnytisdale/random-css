@@ -2,22 +2,19 @@
 	"author": "Johnny Tisdale",
 	"description": "Fully customizable hyperdynamic styling.",
 	"devDependencies": {
-		"@babel/core": "^7.15.5",
-		"@babel/preset-env": "^7.15.4",
-		"@babel/preset-react": "^7.14.5",
-		"@babel/preset-typescript": "^7.15.0",
-		"babel-loader": "^8.2.2",
+		"@babel/core": "^7.9.0",
+		"@babel/preset-env": "^7.9.5",
+		"@babel/preset-react": "^7.9.4",
+		"babel-loader": "^8.1.0",
 		"css-loader": "^3.5.3",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "^4.2.0",
-		"node-sass": "^6.0.1",
+		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"sass-loader": "^12.1.0",
+		"sass-loader": "^8.0.2",
 		"style-loader": "^1.2.1",
-		"ts-loader": "^9.2.5",
-		"typescript": "^4.4.2",
-		"webpack": "^5.52.0",
+		"webpack": "^4.42.1",
 		"webpack-cli": "^3.3.11"
 	},
 	"keywords": [],
@@ -32,13 +29,7 @@
 		"access": "public"
 	},
 	"scripts": {
-		"dev": "webpack --mode development",
-		"prod": "webpack --mode production",
-		"watch": "webpack --mode development --watch"
+		"build": "webpack --mode production"
 	},
-	"version": "1.1.1",
-	"dependencies": {
-		"@types/react": "^17.0.24",
-		"@types/react-dom": "^17.0.9"
-	}
+	"version": "1.1.0"
 }
