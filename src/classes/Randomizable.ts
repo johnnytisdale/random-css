@@ -23,6 +23,10 @@ export default abstract class Randomizable {
         return array[this.getRandomNumber(0, array.length - 1)];
     }
 
+    protected getRandomBoolean(): boolean {
+        return this.getRandomNumber(0, 1) === 1;
+    }
+
     protected getRandomNumber(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
