@@ -6,7 +6,6 @@ export default class FontStyle extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
-  protected separator: string = ', ';
   public name: string = "fontStyle";
 
   constructor() {
