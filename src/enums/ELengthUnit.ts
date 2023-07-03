@@ -7,6 +7,7 @@ enum ELengthUnit {
   IN = 'in',
   LH = 'lh',
   MM = 'mm',
+  NONE = '',
   PC = 'pc',
   PT = 'pt',
   PX = 'px',

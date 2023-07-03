@@ -21,7 +21,7 @@ export default abstract class CssProperty extends Randomizable {
   protected keywordLimit: number = 0;
   protected separator = " ";
 
-  protected ELengthUnit: ELengthUnit = ELengthUnit.PX;
+  protected lengthUnit: ELengthUnit = ELengthUnit.PX;
 
   protected EValueTypes: Array<EValueType>;
 
@@ -68,8 +68,8 @@ export default abstract class CssProperty extends Randomizable {
     return keywords.join(this.separator);
   }
 
-  private getRandomLengthValue(): string {
-    return `${this.getRandomNumber(this.minLength, this.maxLength)}${this.ELengthUnit}`;
+  protected getRandomLengthValue(): string {
+    return `${this.getRandomNumber(this.minLength, this.maxLength)}${this.lengthUnit}`;
   }
 
   private getRandomPercentageValue(min: number = 0, max: number = 100): string {
@@ -77,16 +77,22 @@ export default abstract class CssProperty extends Randomizable {
   }
 
   public getRandomValue(): string {
-    if (this.acceptsKeywords) {
-      return this.getRandomKeywordValue();
-    } else if (this.acceptsColors) {
-      return this.getRandomColorValue();
-    } else if (this.acceptsLengths) {
-      return this.getRandomLengthValue();
-    } else if (this.acceptsPercentages) {
-      return this.getRandomPercentageValue();
-    } else {
-      return `This class (${this.name}) does not accept any value types.`;
+    const getValueFunctions: Array<() => string> = [];
+    if (this.acceptsColors) {
+      getValueFunctions.push(this.getRandomColorValue.bind(this));
     }
+    if (this.acceptsKeywords) {
+      getValueFunctions.push(this.getRandomKeywordValue.bind(this));
+    }
+    if (this.acceptsLengths) {
+      getValueFunctions.push(this.getRandomLengthValue.bind(this));
+    }
+    if (this.acceptsPercentages) {
+      getValueFunctions.push(this.getRandomPercentageValue.bind(this));
+    }
+    const index = getValueFunctions.length === 1
+      ? 0
+      : this.getRandomNumber(0, getValueFunctions.length - 1);
+    return getValueFunctions[index]();
   }
 }

@@ -1,41 +1,28 @@
-import EFontFamily from "../../enums/EFontFamily";
-import EFontFamilyGeneric from "../../enums/EFontFamilyGeneric";
+import ECssProperty from "../../enums/ECssProperty";
+import ELengthUnit from "../../enums/ELengthUnit";
 import CssProperty from "./CssProperty";
 
-export default class FontStyle extends CssProperty {
+export default class FontWeight extends CssProperty {
 
   protected acceptsColors = false;
-  protected acceptsLengths = false;
+  protected acceptsLengths = true;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
-  protected keywordGroups: Array<Array<string>>;
-  protected keywordLimit: number = 1;
-  protected separator: string = ', ';
-  public name: string = "fontStyle";
+  protected lengthUnit: ELengthUnit = ELengthUnit.NONE;
+  public name: string = ECssProperty.fontWeight;
 
   constructor() {
     super();
   }
 
   protected keywords: string[] = [
-    "italic",
-    "oblique",
+    "bold",
+    "bolder",
+    "lighter",
     "normal",
-  ];;
+  ];
 
-  protected getRandomKeywordValue(): string {
-    let keyword = this.getRandomArrayElement(this.keywords);
-    if (keyword == "oblique") {
-      const hasDegrees = this.getRandomBoolean();
-      if (hasDegrees) {
-        const degrees = this.getRandomNumber(0, 90);
-        const isNegative = degrees === 0
-          ? false
-          : this.getRandomBoolean();
-        keyword = `${keyword} ${isNegative ? '-' : ''}${degrees}deg`;
-      }
-    }
-    return keyword;
+  protected getRandomLengthValue(): string {
+    return `${this.getRandomNumber(1, 9) * 100}`;
   }
-
 }

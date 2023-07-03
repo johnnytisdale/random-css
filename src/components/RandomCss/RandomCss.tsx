@@ -13,6 +13,7 @@ import BorderRadius from "../../classes/CssProperty/BorderRadius";
 import IOptions from "../../interfaces/IOptions";
 import FontFamily from "../../classes/CssProperty/FontFamily";
 import FontStyle from "../../classes/CssProperty/FontStyle";
+import FontWeight from "../../classes/CssProperty/FontWeight";
 
 interface Props {
   clearReset: Function;
@@ -67,6 +68,9 @@ export default class RandomCss extends React.Component<Props> {
             }
             if (this.props.options.css.fontStyle) {
               randomizables.push(new FontStyle());
+            }
+            if (this.props.options.css.fontWeight) {
+              randomizables.push(new FontWeight());
             }
             if (this.props.options.css.textDecorationColor) {
               randomizables.push(new TextDecorationColor(this.props.options.global.unsafe));
