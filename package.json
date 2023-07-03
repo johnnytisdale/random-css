@@ -2,43 +2,36 @@
 	"author": "Johnny Tisdale",
 	"description": "Fully customizable hyperdynamic styling.",
 	"devDependencies": {
-		"@babel/core": "^7.15.5",
-		"@babel/preset-env": "^7.15.4",
-		"@babel/preset-react": "^7.14.5",
-		"@babel/preset-typescript": "^7.15.0",
-		"babel-loader": "^8.2.2",
-		"css-loader": "^3.5.3",
-		"html-loader": "^1.1.0",
-		"html-webpack-plugin": "^4.2.0",
-		"node-sass": "^6.0.1",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"sass-loader": "^12.1.0",
-		"style-loader": "^1.2.1",
-		"ts-loader": "^9.2.5",
-		"typescript": "^4.4.2",
-		"webpack": "^5.52.0",
-		"webpack-cli": "^3.3.11"
+		"@babel/preset-react": "^7.16.7",
+		"@babel/preset-typescript": "^7.16.7",
+		"@types/react": "^18.0.8",
+		"@types/react-dom": "^17.0.9",
+		"axios": "^0.27.2",
+		"babel-loader": "^8.2.5",
+		"css-loader": "^6.7.1",
+		"html-webpack-plugin": "^5.5.0",
+		"sass": "^1.51.0",
+		"sass-loader": "^12.6.0",
+		"style-loader": "^3.3.1",
+		"typescript": "^5.1.6",
+		"webpack": "^5.72.0",
+		"webpack-cli": "^4.9.2"
 	},
 	"keywords": [],
 	"license": "ISC",
 	"main": "dist/index.js",
 	"name": "random-css",
 	"peerDependencies": {
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1"
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
-		"dev": "webpack --mode development",
-		"prod": "webpack --mode production",
-		"watch": "webpack --mode development --watch"
+		"dev": "webpack --mode development --env environment=development",
+		"prod": "webpack --mode production --env environment=production",
+		"watch": "webpack --mode development --env environment=development --watch"
 	},
-	"version": "1.1.1",
-	"dependencies": {
-		"@types/react": "^17.0.24",
-		"@types/react-dom": "^17.0.9"
-	}
+	"version": "1.1.2"
 }
