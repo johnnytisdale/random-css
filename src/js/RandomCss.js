@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM 			from "react-dom";
 import style 				from '../style.scss';
 import * as methods 		from './methods';
 
@@ -8,19 +7,19 @@ export default class RandomCSS extends Component {
 	constructor(props) {
 		super(props);
 
-		//methods
-		for (let method in methods) this[method] = methods[method].bind(this);
+		//bind methods
+		for (let method in methods) { this[method] = methods[method].bind(this); }
 
-		//properties
+		//set immutable properties (this.leet, this.sections, this.unicode)
 		this.setProperties();
 
-		//set defaults in case props are not passed
+		//set defaults in case props were not passed
 		this.setDefaults();
 
-		//state
+		//set initial state (this.state)
 		this.initializeState(props);
 
-		//start the loop
+		//start the infinite loop
 		this.initializeInterval();
 	}
 

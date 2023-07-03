@@ -92,6 +92,5 @@ export default function setOptions() {
 	}
 	*/
 	
-	console.log(options);
 	return options;
 }

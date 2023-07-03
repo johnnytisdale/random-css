@@ -1,3 +1,4 @@
+//unicode variations of each letter of the alphabet
 export const unicode = {
     "a":  [
               {
