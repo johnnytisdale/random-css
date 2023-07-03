@@ -9,7 +9,15 @@ import { createRoot } from 'react-dom/client';
 
 type Props = {};
 
-type IState = {
+type State = {
+
+  form: {
+    css: {
+      selectAll: boolean,
+      selectNone: boolean
+    }
+  };
+
   options: IOptions;
 
   /**
@@ -20,11 +28,17 @@ type IState = {
   reset: string[];
 }
 
-class Form extends React.Component<Props, IState> {
+class Form extends React.Component<Props, State> {
 
   constructor(props: React.ReactPropTypes) {
     super(props);
     this.state = {
+      form: {
+        css: {
+          selectAll: false,
+          selectNone: false
+        }
+      },
       options: {
         css: {},
         global: {
@@ -48,6 +62,52 @@ class Form extends React.Component<Props, IState> {
     console.log("Form mounted.");
   }
 
+  private toggleAll(e: React.ChangeEvent<HTMLInputElement>, select: boolean) {
+    const formOptions = this.state.form;
+    if (!e.target.checked) {
+      if (select) {
+        formOptions.css.selectAll = false;
+      } else {
+        formOptions.css.selectNone = false;
+      }
+      this.setState({ form: formOptions });
+    } else {
+      formOptions.css.selectAll = select;
+      formOptions.css.selectNone = !select;
+      const options = this.state.options;
+      const reset = this.state.reset;
+      Object.values(ECssProperty).forEach(property => {
+        options.css[property] = select;
+        if (!select) {
+          reset.push(property);
+        }
+      });
+      this.setState({
+        form: formOptions,
+        options: options,
+        reset: reset,
+      });
+    }
+  }
+
+  toggleCssProperty(propertyName: ECssProperty, checked: boolean): void {
+    const form = this.state.form;
+    const options = this.state.options;
+    const reset = this.state.reset;
+    options.css[propertyName] = checked;
+    if (!checked) {
+      reset.push(propertyName);
+      form.css.selectAll = false;
+    } else {
+      form.css.selectNone = false;
+    }
+    this.setState({
+      form: form,
+      options: options,
+      reset: reset
+    });
+  }
+
   render(): React.ReactNode {
     console.log("Form rendered.");
     return (
@@ -64,6 +124,8 @@ class Form extends React.Component<Props, IState> {
 
         {/* dev form */}
         <div id='dev-form'>
+
+          {/* global options */}
           <div className='section'>
             <div className='title'>Global options</div>
             <div className='options'>
@@ -97,13 +159,34 @@ class Form extends React.Component<Props, IState> {
               </div>
             </div>
           </div>
+
           {/* css */}
-          <div className='section'>
+          <div className='section' id='css-options'>
             <div className='title'>CSS options</div>
             <div className='options'>
+              <div id='select-all-css' className='option'>
+                <div className='label'>select all</div>
+                <div className='input'>
+                  <input
+                    type='checkbox'
+                    checked={this.state.form.css.selectAll}
+                    onChange={e => this.toggleAll(e, true)}
+                  />
+                </div>
+              </div>
+              <div id='select-none-css' className='option'>
+                <div className='label'>select none</div>
+                <div className='input'>
+                  <input
+                    type='checkbox'
+                    checked={this.state.form.css.selectNone}
+                    onChange={e => this.toggleAll(e, false)}
+                  />
+                </div>
+              </div>
               {
                 Object.values(ECssProperty).map((propertyName, index) => (
-                  <div key={index} id='select-all-css' className='option'>
+                  <div key={index} className='option'>
                     <div className='label'>{propertyName}</div>
                     <div className='input'>
                       <input
@@ -111,7 +194,7 @@ class Form extends React.Component<Props, IState> {
                         checked={this.state.options.css[propertyName]}
                         onChange={e => {
                           console.log(`toggling ${propertyName}`)
-                          this.togglECssProperty(ECssProperty[propertyName], e.target.checked);
+                          this.toggleCssProperty(ECssProperty[propertyName], e.target.checked);
                         }}
                       />
                     </div>
@@ -123,19 +206,6 @@ class Form extends React.Component<Props, IState> {
         </div>
       </>
     );
-  }
-
-  togglECssProperty(propertyName: ECssProperty, checked: boolean): void {
-    const options = this.state.options;
-    const reset = this.state.reset;
-    options.css[propertyName] = checked;
-    if (!checked) {
-      reset.push(propertyName);
-    }
-    this.setState({
-      options: options,
-      reset: reset
-    });
   }
 }
 
