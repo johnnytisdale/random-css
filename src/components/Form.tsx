@@ -37,11 +37,11 @@ class Form extends React.Component<Props, IState> {
     }
 
     // Set CSS properties to false if they are undefined.
-    for (const propertyName of Object.keys(ECssProperty)) {
+    Object.values(ECssProperty).forEach(propertyName => {
       if (typeof this.state.options.css[propertyName] == "undefined") {
         this.state.options.css[propertyName] = false;
       }
-    }
+    });
   }
 
   componentDidMount() {
@@ -102,7 +102,7 @@ class Form extends React.Component<Props, IState> {
             <div className='title'>CSS options</div>
             <div className='options'>
               {
-                Object.values(ECssProperty).map((propertyName: string, index: number) => (
+                Object.values(ECssProperty).map((propertyName, index) => (
                   <div key={index} id='select-all-css' className='option'>
                     <div className='label'>{propertyName}</div>
                     <div className='input'>
