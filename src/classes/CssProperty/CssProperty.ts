@@ -3,8 +3,6 @@ import ELengthUnit from "../../enums/ELengthUnit";
 import EValueType from "../../enums/EValueType";
 import Randomizable from "../Randomizable";
 
-const SEPARATOR = " ";
-
 export default abstract class CssProperty extends Randomizable {
 
   constructor(unsafe: boolean = false) {
@@ -21,6 +19,7 @@ export default abstract class CssProperty extends Randomizable {
 
   protected keywords: Array<string>;
   protected keywordLimit: number = 0;
+  protected separator = " ";
 
   protected ELengthUnit: ELengthUnit = ELengthUnit.PX;
 
@@ -46,7 +45,7 @@ export default abstract class CssProperty extends Randomizable {
     return this.getRandomArrayElement(Object.values(EColor));
   }
 
-  private getRandomKeywordValue(): string {
+  protected getRandomKeywordValue(): string {
     console.log(`Getting random ${this.name} value...`);
     console.log(`Limit is ${String(this.keywordLimit)}...`);
     if (this.keywordLimit === 1) {
@@ -57,7 +56,7 @@ export default abstract class CssProperty extends Randomizable {
       : this.keywordLimit;
     const numberOfKeywords = this.getRandomNumber(1, limit);
     if (numberOfKeywords === limit) {
-      return this.keywords.join(SEPARATOR);
+      return this.keywords.join(this.separator);
     }
     let availableKeywords = this.keywords.map(keyword => keyword);
     const keywords: Array<string> = [];
@@ -66,7 +65,7 @@ export default abstract class CssProperty extends Randomizable {
       keywords.push(availableKeywords[index]);
       availableKeywords = availableKeywords.splice(index);
     }
-    return keywords.join(SEPARATOR);
+    return keywords.join(this.separator);
   }
 
   private getRandomLengthValue(): string {
@@ -90,5 +89,4 @@ export default abstract class CssProperty extends Randomizable {
       return `This class (${this.name}) does not accept any value types.`;
     }
   }
-
 }

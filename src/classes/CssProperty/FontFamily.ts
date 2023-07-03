@@ -8,15 +8,28 @@ export default class FontFamily extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
-  protected keywordLimit: number = 1;
+  protected keywordGroups: Array<Array<string>>;
+  protected keywordLimit: number = 2;
+  protected separator: string = ', ';
   public name: string = "fontFamily";
 
   constructor() {
     super();
-    this.keywords = [
-      ...Object.values(EFontFamily),
-      ...Object.values(EFontFamilyGeneric),
+    this.keywordGroups = [
+      Object.values(EFontFamily),
+      Object.values(EFontFamilyGeneric),
     ];
+  }
+
+  protected getRandomKeywordValue(): string {
+    const keywords: Array<string> = [
+      `"${this.getRandomArrayElement(this.keywordGroups[0])}"`
+    ];
+    const numberOfKeywords = this.getRandomNumber(1, this.keywordLimit);
+    if (numberOfKeywords === 2) {
+      keywords.push(this.getRandomArrayElement(this.keywordGroups[1]));
+    }
+    return keywords.join(this.separator);
   }
 
 }
