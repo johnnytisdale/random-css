@@ -11,8 +11,9 @@ import BorderStyle from "../../classes/CssProperty/BorderStyle";
 import BorderColor from "../../classes/CssProperty/BorderColor";
 import BorderRadius from "../../classes/CssProperty/BorderRadius";
 import IOptions from "../../interfaces/IOptions";
+import FontFamily from "../../classes/CssProperty/FontFamily";
 
-interface IProps {
+interface Props {
   clearReset: Function;
   options: IOptions;
   reset: string[];
@@ -20,9 +21,9 @@ interface IProps {
   text: string;
 }
 
-export default class RandomCss extends React.Component<IProps> {
+export default class RandomCss extends React.Component<Props> {
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     console.log("    RandomCss constructed.");
   }
@@ -42,36 +43,31 @@ export default class RandomCss extends React.Component<IProps> {
         {
           this.props.text.split('').map((character, i) => {
             const randomizables: Randomizable[] = [];
-
+            if (this.props.options.css.backgroundColor) {
+              randomizables.push(new BackgroundColor(this.props.options.global.unsafe));
+            }
             if (this.props.options.css.borderColor) {
-              console.log('Randomizing borderColor');
               randomizables.push(new BorderColor(this.props.options.global.unsafe));
             }
             if (this.props.options.css.borderRadius) {
-              console.log('Randomizing borderRadius');
               randomizables.push(new BorderRadius());
             }
             if (this.props.options.css.borderStyle) {
-              console.log('Randomizing borderStyle');
               randomizables.push(new BorderStyle());
             }
             if (this.props.options.css.borderWidth) {
-              console.log('Randomizing borderWidth');
               randomizables.push(new BorderWidth(1, 3));
             }
             if (this.props.options.css.color) {
               randomizables.push(new Color(this.props.options.global.unsafe));
             }
-            if (this.props.options.css.backgroundColor) {
-              console.log('Randomizing backgroundColor');
-              randomizables.push(new BackgroundColor(this.props.options.global.unsafe));
+            if (this.props.options.css.fontFamily) {
+              randomizables.push(new FontFamily());
             }
             if (this.props.options.css.textDecorationColor) {
-              console.log('Randomizing textDecorationColor');
               randomizables.push(new TextDecorationColor(this.props.options.global.unsafe));
             }
             if (this.props.options.css.textDecorationLine) {
-              console.log('Randomizing textDecorationLine');
               randomizables.push(new TextDecorationLine());
             }
             return (
@@ -91,7 +87,7 @@ export default class RandomCss extends React.Component<IProps> {
     );
   }
 
-  componentDidUpdate(prevProps: IProps) {
+  componentDidUpdate(prevProps: Props) {
     console.log("    RandomCss updated.");
     if (this.props.reset.length) {
       this.props.clearReset();
