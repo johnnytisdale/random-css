@@ -13,7 +13,7 @@ module.exports = env => {
 	if (env.environment != 'production') {
 		plugins.push(
 			new HtmlWebpackPlugin({
-				template: 'src/index.html',
+				template: 'src/html/index.html',
 				title: 'Random CSS'
 			})
 		);

@@ -21,7 +21,7 @@
  ## Testing
  1. npm install
  2. npm run watch
- 3. Open index.html in browser.
+ 3. Open dist/index.html in browser.
 
  ## Authors
  * **Johnny Tisdale** - [github](https://github.com/johnnytisdale) | [website](https://johnnytisdale.com) 
