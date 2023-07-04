@@ -1,7 +1,9 @@
-import * as React from "react";
+import AppliedOptions from "../types/AppliedOptions";
 import ECssProperty from "../enums/ECssProperty";
 import Randomizable from "../classes/Randomizable";
-import AppliedOptions from "../types/AppliedOptions";
+
+import * as CSS from 'csstype';
+import * as React from "react";
 
 type Props = {
   character: string;
@@ -106,6 +108,8 @@ export default class Character extends React.Component<Props, State> {
         id={this.id}
         style={{
           ...this.state.style,
+          ...(this.state.style.fontWeight !== undefined && { fontWeight: this.state.style.fontWeight as CSS.Property.FontWeight }),
+          ...(this.state.style.textDecorationStyle !== undefined && { textDecorationStyle: this.state.style.textDecorationStyle as CSS.Property.TextDecorationStyle }),
           height: this.props.height,
           width: this.props.width
         }}
