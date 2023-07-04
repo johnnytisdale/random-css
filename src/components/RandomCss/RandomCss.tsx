@@ -16,6 +16,7 @@ import FontStyle from "../../classes/CSS/FontStyle";
 import FontWeight from "../../classes/CSS/FontWeight";
 import Options from "../../types/Options";
 import ECssProperty from "../../enums/ECssProperty";
+import Glyph from "../../classes/Glyph";
 
 interface Props {
   options: Options;
@@ -51,7 +52,7 @@ export default class RandomCss extends React.Component<Props, State> {
       .filter(value => value != null);
   }
 
-  private getRandomizables(): Randomizable[] {
+  private getRandomizables(character: string): Randomizable[] {
     const randomizables: Array<Randomizable> = [];
     if (this.props.options.css.animation) {
       randomizables.push(new Animation());
@@ -89,6 +90,13 @@ export default class RandomCss extends React.Component<Props, State> {
     if (this.props.options.css.textDecorationLine) {
       randomizables.push(new TextDecorationLine());
     }
+    if (this.props.options.glyph.leet || this.props.options.glyph.unicode) {
+      randomizables.push(new Glyph(
+        character,
+        this.props.options.glyph.leet,
+        this.props.options.glyph.unicode
+      ));
+    }
     return randomizables;
   }
 
@@ -110,7 +118,7 @@ export default class RandomCss extends React.Component<Props, State> {
               && this.props.options.global.ignoreSpaces;
             const randomizables: Randomizable[] = ignore
               ? []
-              : this.getRandomizables();
+              : this.getRandomizables(character);
             const reset = ignore
               ? this.state.stylesToResetForSpaces
               : this.state.stylesToReset;

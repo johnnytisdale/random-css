@@ -11,9 +11,10 @@ interface Props {
     width: number | string;
 }
 
-interface State {
+type State = {
     backgroundColor?: string;
     color?: string;
+    glyph?: string;
 }
 
 const DEFAULTS = {
@@ -31,7 +32,7 @@ export default class Character extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.id = `character-${this.props.index}`;
-        const initialState = {};
+        const initialState = { glyph: this.props.character };
         Object.values(ECssProperty).forEach(property => {
             initialState[property] = undefined;
         });
@@ -94,7 +95,7 @@ export default class Character extends React.Component<Props, State> {
                     width: this.props.width
                 }}
             >
-                {this.props.character}
+                {this.state.glyph}
             </div>
         );
     }

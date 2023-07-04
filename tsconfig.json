@@ -4,8 +4,8 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "lib": [
-        "dom",
-        "ESNext.String"
+      "dom",
+      "ESNext.String"
     ],
     "module": "es6",
     "moduleResolution": "node",
@@ -14,5 +14,8 @@
     "resolveJsonModule": true,
     "target": "es5"
   },
-  "include": ["typings", "src"]
+  "include": [
+    "typings",
+    "src"
+  ]
 }
