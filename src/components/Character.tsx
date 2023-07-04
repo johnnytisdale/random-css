@@ -1,13 +1,14 @@
 import * as React from "react";
 import ECssProperty from "../enums/ECssProperty";
 import Randomizable from "../classes/Randomizable";
+import AppliedOptions from "../types/AppliedOptions";
 
 type Props = {
   character: string;
   height: number | string;
   index: number;
   randomizables: Randomizable[];
-  reset: Array<ECssProperty | 'glyph'>;
+  reset: AppliedOptions;
   width: number | string;
 }
 
@@ -74,16 +75,25 @@ export default class Character extends React.Component<Props, State> {
       style: this.state.style
     };
     let update = false;
-    this.props.reset.forEach(property => {
-      if (property === 'glyph') {
-        newState.glyph = this.props.character;
-        console.log(`            Resetting ${property} to default value: ${this.props.character}.`);
-      } else {
-        console.log(`            Resetting ${property} to default value: ${this.default[property]}.`);
-        newState.style[property] = this.default[property];
-      }
+    this.props.reset.css.forEach(property => {
+      console.log(`            Resetting ${property} to default value: ${this.default[property]}.`);
       update = true;
+      newState.style[property] = this.default[property];
+
     });
+    if (this.props.reset.glyph.length) {
+      let hasGlyph = false;
+      for (const randomizable of this.props.randomizables) {
+        if (randomizable.name === 'glyph') {
+          hasGlyph = true;
+        }
+      }
+      if (!hasGlyph) {
+        console.log(`            Resetting glyph to default value: ${this.props.character}.`);
+        update = true;
+        newState.glyph = this.props.character;
+      }
+    }
     if (update) {
       this.setState(newState);
     }

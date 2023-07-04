@@ -17,39 +17,50 @@ import FontWeight from "../../classes/CSS/FontWeight";
 import Options from "../../types/Options";
 import ECssProperty from "../../enums/ECssProperty";
 import Glyph from "../../classes/Glyph";
+import GlyphOption from "../../enums/EGlyphOption";
+import AppliedOptions from "../../types/AppliedOptions";
 
-interface Props {
+type Props = {
   options: Options;
   size: number;
   text: string;
 }
 
 type State = {
-  stylesToReset: Array<ECssProperty | 'glyph'>,
-  stylesToResetForSpaces: Array<ECssProperty | 'glyph'>,
+  reset: AppliedOptions,
+  resetForSpaces: AppliedOptions,
 };
 
 export default class RandomCss extends React.Component<Props, State> {
 
-  private appliedStyles: Array<ECssProperty>;
+  private appliedOptions: AppliedOptions = { css: [], glyph: [] };
   private spacesHaveStyle: boolean = false;
 
   constructor(props: Props) {
     super(props);
     console.log("    RandomCss constructed.");
     this.state = {
-      stylesToReset: [],
-      stylesToResetForSpaces: []
+      reset: { css: [], glyph: [] },
+      resetForSpaces: { css: [], glyph: [] }
     };
     this.getRandomizables = this.getRandomizables.bind(this);
-    this.setAppliedStyles = this.setAppliedStyles.bind(this);
-    this.setAppliedStyles();
+    this.setAppliedOptions = this.setAppliedOptions.bind(this);
+    this.setAppliedOptions();
   }
 
-  private setAppliedStyles(): void {
-    this.appliedStyles = Object.entries(this.props.options.css)
-      .map((entry: [ECssProperty, boolean]) => entry[1] ? entry[0] : null)
-      .filter(value => value != null);
+  private setAppliedOptions(): void {
+    this.appliedOptions.css = Object.entries(this.props.options.css)
+      .map(
+        ([cssProperty, checked]: [ECssProperty, boolean]) => checked
+          ? cssProperty
+          : null
+      ).filter(value => value != null);
+    this.appliedOptions.glyph = Object.entries(this.props.options.glyph)
+      .map(
+        ([glyphOption, checked]: [GlyphOption, boolean]) => checked
+          ? glyphOption
+          : null
+      ).filter(value => value != null);
   }
 
   private getRandomizables(character: string): Randomizable[] {
@@ -120,8 +131,8 @@ export default class RandomCss extends React.Component<Props, State> {
               ? []
               : this.getRandomizables(character);
             const reset = ignore
-              ? this.state.stylesToResetForSpaces
-              : this.state.stylesToReset;
+              ? this.state.resetForSpaces
+              : this.state.reset;
             return (
               <Character
                 key={i}
@@ -141,36 +152,62 @@ export default class RandomCss extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     console.log("    RandomCss updated.");
-    if (this.state.stylesToReset.length) {
-      this.setState({ stylesToReset: [] });
+    if (this.state.reset.css.length || this.state.reset.glyph.length) {
+      this.setState({ reset: { css: [], glyph: [] } });
       return;
     }
-    if (this.state.stylesToReset.length === 0 && prevState.stylesToReset.length !== 0) {
+    if (
+      (this.state.reset.css.length === 0 && prevState.reset.css.length !== 0) ||
+      (this.state.reset.glyph.length === 0 && prevState.reset.glyph.length !== 0)
+    ) {
+      return;
+    }
+    const reset: AppliedOptions = { css: [], glyph: [] };
+    Object.entries(this.props.options.css).forEach(([cssProperty, checked]: [ECssProperty, boolean]) => {
+      if (!checked && this.appliedOptions.css.includes(cssProperty)) {
+        console.log('Adding ' + cssProperty + ' to reset');
+        reset.css.push(cssProperty);
+      }
+    });
+    Object.entries(this.props.options.glyph).forEach(([glyphOption, checked]: [GlyphOption, boolean]) => {
+      if (!checked && this.appliedOptions.glyph.includes(glyphOption)) {
+        console.log('Adding ' + glyphOption + ' to reset');
+        reset.glyph.push(glyphOption);
+      }
+    });
+    console.log({ reset });
+    this.setAppliedOptions();
+    if (reset.css.length || reset.glyph.length) {
+      console.log({ reset });
+      this.setState({ reset });
+    }
+    if (this.state.resetForSpaces.css.length || this.state.resetForSpaces.glyph.length) {
+      this.spacesHaveStyle = false;
+      this.setState({ resetForSpaces: { css: [], glyph: [] } });
+      return;
+    }
+    if (
+      (this.state.resetForSpaces.css.length === 0 && prevState.resetForSpaces.css.length !== 0) ||
+      (this.state.resetForSpaces.glyph.length === 0 && prevState.resetForSpaces.glyph.length !== 0)
+    ) {
       return;
     }
     const hasSpace = this.props.text.indexOf(' ') >= 0;
-    const stylesToReset: Array<ECssProperty> = [];
-    Object.entries(this.props.options.css).forEach(([cssProperty, checked]: [ECssProperty, boolean]) => {
-      if (!checked && this.appliedStyles.includes(cssProperty)) {
-        stylesToReset.push(cssProperty);
-      }
-    });
-    this.setAppliedStyles();
-    if (stylesToReset.length) {
-      this.setState({ stylesToReset });
-    }
-    if (this.state.stylesToResetForSpaces.length) {
-      this.spacesHaveStyle = false;
-      this.setState({ stylesToResetForSpaces: [] });
-      return;
-    }
-    if (this.state.stylesToResetForSpaces.length === 0 && prevState.stylesToResetForSpaces.length !== 0) {
-      return;
-    }
     if (hasSpace && this.props.options.global.ignoreSpaces && this.spacesHaveStyle) {
-      this.setState({ stylesToResetForSpaces: this.appliedStyles.map(style => style) });
+      console.log('reset: spaces have style...');
+      this.setState({
+        resetForSpaces: {
+          css: this.appliedOptions.css.map(option => option),
+          glyph: this.appliedOptions.glyph.map(option => option)
+        }
+      });
       return;
     }
-    this.spacesHaveStyle = hasSpace && this.appliedStyles.length > 0 && !this.props.options.global.ignoreSpaces;
+    this.spacesHaveStyle = hasSpace &&
+      (
+        this.appliedOptions.css.length > 0 ||
+        this.appliedOptions.glyph.length > 0
+      ) &&
+      !this.props.options.global.ignoreSpaces;
   }
 }
