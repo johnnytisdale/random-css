@@ -25,8 +25,8 @@ interface Props {
 }
 
 type State = {
-  stylesToReset: Array<ECssProperty>,
-  stylesToResetForSpaces: Array<ECssProperty>,
+  stylesToReset: Array<ECssProperty | 'glyph'>,
+  stylesToResetForSpaces: Array<ECssProperty | 'glyph'>,
 };
 
 export default class RandomCss extends React.Component<Props, State> {
