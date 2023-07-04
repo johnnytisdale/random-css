@@ -1,11 +1,11 @@
 import "../styles/Form.scss";
 
 import ECssProperty from "../enums/ECssProperty";
-import IOptions from "../interfaces/IOptions";
 import RandomCss from "./RandomCss/RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
+import Options from "../types/Options";
 
 type Props = {};
 
@@ -18,14 +18,7 @@ type State = {
     }
   };
 
-  options: IOptions;
-
-  /**
-  * Properties that need to be reset. If a checkbox in this form is
-  * unchecked, then the corresponding property needs to be reset to its
-  * default value.
-  */
-  reset: string[];
+  options: Options;
 }
 
 class Form extends React.Component<Props, State> {
@@ -42,12 +35,12 @@ class Form extends React.Component<Props, State> {
       options: {
         css: {},
         global: {
+          ignoreSpaces: false,
           size: 3,
           text: 'random css',
           unsafe: false
         }
       },
-      reset: [],
     }
 
     // Set CSS properties to false if they are undefined.
@@ -75,17 +68,12 @@ class Form extends React.Component<Props, State> {
       formOptions.css.selectAll = select;
       formOptions.css.selectNone = !select;
       const options = this.state.options;
-      const reset = this.state.reset;
       Object.values(ECssProperty).forEach(property => {
         options.css[property] = select;
-        if (!select) {
-          reset.push(property);
-        }
       });
       this.setState({
         form: formOptions,
         options: options,
-        reset: reset,
       });
     }
   }
@@ -93,10 +81,8 @@ class Form extends React.Component<Props, State> {
   toggleCssProperty(propertyName: ECssProperty, checked: boolean): void {
     const form = this.state.form;
     const options = this.state.options;
-    const reset = this.state.reset;
     options.css[propertyName] = checked;
     if (!checked) {
-      reset.push(propertyName);
       form.css.selectAll = false;
     } else {
       form.css.selectNone = false;
@@ -104,7 +90,6 @@ class Form extends React.Component<Props, State> {
     this.setState({
       form: form,
       options: options,
-      reset: reset
     });
   }
 
@@ -114,9 +99,7 @@ class Form extends React.Component<Props, State> {
       <>
         <div id="top">
           <RandomCss
-            clearReset={() => this.setState({ reset: [] })}
             options={this.state.options}
-            reset={this.state.reset}
             size={this.state.options.global.size}
             text={this.state.options.global.text}
           />
@@ -152,6 +135,20 @@ class Form extends React.Component<Props, State> {
                     onChange={e => {
                       const options = this.state.options;
                       options.global.unsafe = e.target.checked;
+                      this.setState({ options: options });
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='option'>
+                <div className='label'>ignore spaces</div>
+                <div className='input'>
+                  <input
+                    type='checkbox'
+                    checked={this.state.options.global.ignoreSpaces}
+                    onChange={e => {
+                      const options = this.state.options;
+                      options.global.ignoreSpaces = e.target.checked;
                       this.setState({ options: options });
                     }}
                   />

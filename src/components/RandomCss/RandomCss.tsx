@@ -11,24 +11,85 @@ import BorderWidth from "../../classes/CssProperty/BorderWidth";
 import BorderStyle from "../../classes/CssProperty/BorderStyle";
 import BorderColor from "../../classes/CssProperty/BorderColor";
 import BorderRadius from "../../classes/CssProperty/BorderRadius";
-import IOptions from "../../interfaces/IOptions";
 import FontFamily from "../../classes/CssProperty/FontFamily";
 import FontStyle from "../../classes/CssProperty/FontStyle";
 import FontWeight from "../../classes/CssProperty/FontWeight";
+import Options from "../../types/Options";
+import ECssProperty from "../../enums/ECssProperty";
 
 interface Props {
-  clearReset: Function;
-  options: IOptions;
-  reset: string[];
+  options: Options;
   size: number;
   text: string;
 }
 
-export default class RandomCss extends React.Component<Props> {
+type State = {
+  stylesToReset: Array<ECssProperty>,
+  stylesToResetForSpaces: Array<ECssProperty>,
+};
+
+export default class RandomCss extends React.Component<Props, State> {
+
+  private appliedStyles: Array<ECssProperty>;
+  private spacesHaveStyle: boolean = false;
 
   constructor(props: Props) {
     super(props);
     console.log("    RandomCss constructed.");
+    this.state = {
+      stylesToReset: [],
+      stylesToResetForSpaces: []
+    };
+    this.getRandomizables = this.getRandomizables.bind(this);
+    this.setAppliedStyles = this.setAppliedStyles.bind(this);
+    this.setAppliedStyles();
+  }
+
+  private setAppliedStyles(): void {
+    this.appliedStyles = Object.entries(this.props.options.css)
+      .map((entry: [ECssProperty, boolean]) => entry[1] ? entry[0] : null)
+      .filter(value => value != null);
+  }
+
+  private getRandomizables(): Randomizable[] {
+    const randomizables: Array<Randomizable> = [];
+    if (this.props.options.css.animation) {
+      randomizables.push(new Animation());
+    }
+    if (this.props.options.css.backgroundColor) {
+      randomizables.push(new BackgroundColor(this.props.options.global.unsafe));
+    }
+    if (this.props.options.css.borderColor) {
+      randomizables.push(new BorderColor(this.props.options.global.unsafe));
+    }
+    if (this.props.options.css.borderRadius) {
+      randomizables.push(new BorderRadius());
+    }
+    if (this.props.options.css.borderStyle) {
+      randomizables.push(new BorderStyle());
+    }
+    if (this.props.options.css.borderWidth) {
+      randomizables.push(new BorderWidth(1, 3));
+    }
+    if (this.props.options.css.color) {
+      randomizables.push(new Color(this.props.options.global.unsafe));
+    }
+    if (this.props.options.css.fontFamily) {
+      randomizables.push(new FontFamily());
+    }
+    if (this.props.options.css.fontStyle) {
+      randomizables.push(new FontStyle());
+    }
+    if (this.props.options.css.fontWeight) {
+      randomizables.push(new FontWeight());
+    }
+    if (this.props.options.css.textDecorationColor) {
+      randomizables.push(new TextDecorationColor(this.props.options.global.unsafe));
+    }
+    if (this.props.options.css.textDecorationLine) {
+      randomizables.push(new TextDecorationLine());
+    }
+    return randomizables;
   }
 
   render(): React.ReactNode {
@@ -45,43 +106,14 @@ export default class RandomCss extends React.Component<Props> {
       <div className="random-css-container" style={{ fontSize: size, margin: "auto", width: "min-content" }}>
         {
           this.props.text.split('').map((character, i) => {
-            const randomizables: Randomizable[] = [];
-            if (this.props.options.css.animation) {
-              randomizables.push(new Animation());
-            }
-            if (this.props.options.css.backgroundColor) {
-              randomizables.push(new BackgroundColor(this.props.options.global.unsafe));
-            }
-            if (this.props.options.css.borderColor) {
-              randomizables.push(new BorderColor(this.props.options.global.unsafe));
-            }
-            if (this.props.options.css.borderRadius) {
-              randomizables.push(new BorderRadius());
-            }
-            if (this.props.options.css.borderStyle) {
-              randomizables.push(new BorderStyle());
-            }
-            if (this.props.options.css.borderWidth) {
-              randomizables.push(new BorderWidth(1, 3));
-            }
-            if (this.props.options.css.color) {
-              randomizables.push(new Color(this.props.options.global.unsafe));
-            }
-            if (this.props.options.css.fontFamily) {
-              randomizables.push(new FontFamily());
-            }
-            if (this.props.options.css.fontStyle) {
-              randomizables.push(new FontStyle());
-            }
-            if (this.props.options.css.fontWeight) {
-              randomizables.push(new FontWeight());
-            }
-            if (this.props.options.css.textDecorationColor) {
-              randomizables.push(new TextDecorationColor(this.props.options.global.unsafe));
-            }
-            if (this.props.options.css.textDecorationLine) {
-              randomizables.push(new TextDecorationLine());
-            }
+            const ignore = character === ' '
+              && this.props.options.global.ignoreSpaces;
+            const randomizables: Randomizable[] = ignore
+              ? []
+              : this.getRandomizables();
+            const reset = ignore
+              ? this.state.stylesToResetForSpaces
+              : this.state.stylesToReset;
             return (
               <Character
                 key={i}
@@ -89,7 +121,7 @@ export default class RandomCss extends React.Component<Props> {
                 height={`${this.props.size * 1.1875}rem`}
                 index={i}
                 randomizables={randomizables}
-                reset={this.props.reset}
+                reset={reset}
                 width={size}
               />
             );
@@ -99,10 +131,38 @@ export default class RandomCss extends React.Component<Props> {
     );
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     console.log("    RandomCss updated.");
-    if (this.props.reset.length) {
-      this.props.clearReset();
+    if (this.state.stylesToReset.length) {
+      this.setState({ stylesToReset: [] });
+      return;
     }
+    if (this.state.stylesToReset.length === 0 && prevState.stylesToReset.length !== 0) {
+      return;
+    }
+    const hasSpace = this.props.text.indexOf(' ') >= 0;
+    const stylesToReset: Array<ECssProperty> = [];
+    Object.entries(this.props.options.css).forEach(([cssProperty, checked]: [ECssProperty, boolean]) => {
+      if (!checked && this.appliedStyles.includes(cssProperty)) {
+        stylesToReset.push(cssProperty);
+      }
+    });
+    this.setAppliedStyles();
+    if (stylesToReset.length) {
+      this.setState({ stylesToReset });
+    }
+    if (this.state.stylesToResetForSpaces.length) {
+      this.spacesHaveStyle = false;
+      this.setState({ stylesToResetForSpaces: [] });
+      return;
+    }
+    if (this.state.stylesToResetForSpaces.length === 0 && prevState.stylesToResetForSpaces.length !== 0) {
+      return;
+    }
+    if (hasSpace && this.props.options.global.ignoreSpaces && this.spacesHaveStyle) {
+      this.setState({ stylesToResetForSpaces: this.appliedStyles.map(style => style) });
+      return;
+    }
+    this.spacesHaveStyle = hasSpace && this.appliedStyles.length > 0 && !this.props.options.global.ignoreSpaces;
   }
 }

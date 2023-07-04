@@ -1,4 +1,9 @@
-export default interface IGlobalOptions {
+type GlobalOptions = {
+
+    /**
+     * If true, random styles will not be applied to spaces.
+     */
+    ignoreSpaces: boolean;
 
     /**
      * Font size, measured in rem.
@@ -16,3 +21,5 @@ export default interface IGlobalOptions {
      */
     unsafe: boolean;
 }
+
+export default GlobalOptions;
