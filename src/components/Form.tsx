@@ -39,6 +39,10 @@ class Form extends React.Component<Props, State> {
           size: 3,
           text: 'random css',
           unsafe: false
+        },
+        glyph: {
+          leet: false,
+          unicode: false
         }
       },
     }
@@ -110,7 +114,7 @@ class Form extends React.Component<Props, State> {
 
           {/* global options */}
           <div className='section'>
-            <div className='title'>Global options</div>
+            <div className='title'>global options</div>
             <div className='options'>
               <div className='option'>
                 <div className='label'>text</div>
@@ -159,7 +163,7 @@ class Form extends React.Component<Props, State> {
 
           {/* css */}
           <div className='section' id='css-options'>
-            <div className='title'>CSS options</div>
+            <div className='title'>css options</div>
             <div className='options'>
               <div id='select-all-css' className='option'>
                 <div className='label'>select all</div>
@@ -198,6 +202,41 @@ class Form extends React.Component<Props, State> {
                   </div>
                 ))
               }
+            </div>
+          </div>
+
+          { /* glyph */}
+          <div className='section' id='glyph-options'>
+            <div className='title'>glyph options</div>
+            <div className='options'>
+              <div id='1337' className='option'>
+                <div className='label'>1337</div>
+                <div className='input'>
+                  <input
+                    type='checkbox'
+                    checked={this.state.options.glyph.leet}
+                    onChange={e => {
+                      const options = this.state.options;
+                      options.glyph.leet = e.target.checked;
+                      this.setState({ options });
+                    }}
+                  />
+                </div>
+              </div>
+              <div id='unicode' className='option'>
+                <div className='label'>unicode</div>
+                <div className='input'>
+                  <input
+                    type='checkbox'
+                    checked={this.state.options.glyph.unicode}
+                    onChange={e => {
+                      const options = this.state.options;
+                      options.glyph.unicode = e.target.checked;
+                      this.setState({ options });
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
