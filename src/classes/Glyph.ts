@@ -1,13 +1,7 @@
 import leetJSON from "../json/leet.json";
 import unicodeJSON from "../json/unicode.json";
 
-import Letter from "../enums/ELowercaseLetter";
 import Randomizable from "./Randomizable";
-
-type UnicodeObject = {
-  desciption: string,
-  unicode: string
-};
 
 export default class Glyph extends Randomizable {
 
