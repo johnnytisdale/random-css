@@ -1,7 +1,7 @@
 import ECssProperty from "../enums/ECssProperty";
 
-type TCssOptions = {
+type CssOptions = {
     [key in ECssProperty]?: boolean;
 };
 
-export default TCssOptions;
+export default CssOptions;
