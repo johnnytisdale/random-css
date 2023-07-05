@@ -21,7 +21,7 @@ type State = {
   options: Options;
 }
 
-class Form extends React.Component<Props, State> {
+export default class Form extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
@@ -101,7 +101,7 @@ class Form extends React.Component<Props, State> {
     console.log("Form rendered.");
     return (
       <>
-        <div id="top">
+        <div id="top" data-testid="top">
           <RandomCss
             options={this.state.options}
             size={this.state.options.global.size}
