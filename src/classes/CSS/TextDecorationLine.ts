@@ -2,19 +2,18 @@ import CssProperty from "./CssProperty";
 
 export default class TextDecorationLine extends CssProperty {
 
-  acceptsColors = false;
-  acceptsLengths = false;
-  acceptsPercentages = false;
-  acceptsKeywords = true;
+  protected acceptsColors = false;
+  protected acceptsLengths = false;
+  protected acceptsPercentages = false;
+  protected acceptsKeywords = true;
+  public name = "textDecorationLine";
 
-  name = "textDecorationLine";
-
-  keywords = [
+  protected keywords = [
     "blink",
     "line-through",
     "overline",
     "underline",
   ];
 
-  keywordLimit = 0;
+  protected keywordLimit = 0;
 }

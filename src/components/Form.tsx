@@ -7,7 +7,7 @@ import * as React from "react";
 import { createRoot } from 'react-dom/client';
 import Options from "../types/Options";
 
-type Props = {};
+type Props = Record<string, never>;
 
 type State = {
 
@@ -23,7 +23,7 @@ type State = {
 
 class Form extends React.Component<Props, State> {
 
-  constructor(props: React.ReactPropTypes) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       form: {

@@ -9,8 +9,8 @@ export default class FontFamily extends CssProperty {
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
   protected keywordGroups: Array<Array<string>>;
-  protected separator: string = ', ';
-  public name: string = "fontFamily";
+  protected separator = ', ';
+  public name = "fontFamily";
 
   constructor() {
     super();

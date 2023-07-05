@@ -5,7 +5,7 @@ import Randomizable from "../Randomizable";
 
 export default abstract class CssProperty extends Randomizable {
 
-  constructor(unsafe: boolean = false) {
+  constructor(unsafe = false) {
     super();
     this.unsafe = unsafe;
   }
@@ -18,22 +18,22 @@ export default abstract class CssProperty extends Randomizable {
   protected abstract acceptsPercentages: boolean;
 
   protected keywords: Array<string>;
-  protected keywordLimit: number = 0;
+  protected keywordLimit = 0;
   protected separator = " ";
 
   protected lengthUnit: ELengthUnit = ELengthUnit.PX;
 
   protected EValueTypes: Array<EValueType>;
 
-  protected rMin: number = 0;
-  protected rMax: number = 255;
-  protected gMin: number = 0;
-  protected gMax: number = 255;
-  protected bMin: number = 0;
-  protected bMax: number = 255;
+  protected rMin = 0;
+  protected rMax = 255;
+  protected gMin = 0;
+  protected gMax = 255;
+  protected bMin = 0;
+  protected bMax = 255;
 
-  protected minLength: number = 0;
-  protected maxLength: number = 3;
+  protected minLength = 0;
+  protected maxLength = 3;
 
   private getRandomColorValue(): string {
     if (this.unsafe) {
@@ -72,7 +72,7 @@ export default abstract class CssProperty extends Randomizable {
     return `${this.getRandomNumber(this.minLength, this.maxLength)}${this.lengthUnit}`;
   }
 
-  private getRandomPercentageValue(min: number = 0, max: number = 100): string {
+  private getRandomPercentageValue(min = 0, max = 100): string {
     return `${this.getRandomNumber(min, max)}%`;
   }
 

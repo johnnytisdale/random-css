@@ -4,7 +4,7 @@ export default abstract class Randomizable {
     abstract name: string;
 
     private limit: number;
-    private ticks: number = 0;
+    private ticks = 0;
 
     constructor() {
         this.reset();
@@ -19,6 +19,7 @@ export default abstract class Randomizable {
         return this.getRandomValue();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     protected getRandomArrayElement(array: Array<any>) {
         return array[this.getRandomNumber(0, array.length - 1)];
     }

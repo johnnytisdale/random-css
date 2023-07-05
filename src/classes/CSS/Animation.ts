@@ -6,7 +6,7 @@ export default class Animation extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsKeywords = false;
   protected acceptsPercentages = false;
-  public name: string = "animation";
+  public name = "animation";
 
   private easingFunctions: Array<string> = [
     'linear',

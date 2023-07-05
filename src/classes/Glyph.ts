@@ -5,7 +5,7 @@ import Randomizable from "./Randomizable";
 
 export default class Glyph extends Randomizable {
 
-  public name: string = 'glyph';
+  public name = 'glyph';
 
   private glyphs: Array<string> = [this.character];
 

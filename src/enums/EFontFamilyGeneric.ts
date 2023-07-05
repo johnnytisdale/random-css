@@ -12,6 +12,6 @@ enum EFontFamilyGeneric {
   UI_SANS_SERIF = 'ui-sans-serif',
   UI_SERIF = 'ui-serif',
   UI_ROUNDED = 'ui-rounded',
-};
+}
 
 export default EFontFamilyGeneric;

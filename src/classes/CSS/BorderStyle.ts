@@ -6,8 +6,8 @@ export default class BorderStyle extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
-  protected keywordLimit: number = 4;
-  public name: string = "borderStyle";
+  protected keywordLimit = 4;
+  public name = "borderStyle";
 
   /* Keyword values */
   protected keywords: string[] = [

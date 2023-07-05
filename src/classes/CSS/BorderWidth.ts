@@ -12,11 +12,10 @@ export default class BorderWidth extends CssProperty {
     }
   }
 
-  acceptsColors = false;
-  acceptsLengths = true;
-  acceptsPercentages = false;
-  acceptsKeywords = false;
-
-  name: string = "borderWidth";
+  protected acceptsColors = false;
+  protected acceptsLengths = true;
+  protected acceptsPercentages = false;
+  protected acceptsKeywords = false;
+  public name = "borderWidth";
 
 }

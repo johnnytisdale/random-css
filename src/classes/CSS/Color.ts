@@ -2,11 +2,10 @@ import CssProperty from "./CssProperty";
 
 export default class Color extends CssProperty {
 
-  acceptsColors = true;
-  acceptsLengths = false;
-  acceptsPercentages = false;
-  acceptsKeywords = false;
-
-  name: string = "color";
+  protected acceptsColors = true;
+  protected acceptsLengths = false;
+  protected acceptsPercentages = false;
+  protected acceptsKeywords = false;
+  public name = "color";
 
 }
