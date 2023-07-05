@@ -31,12 +31,12 @@ interface Props {
 interface State {
   reset: AppliedOptions,
   resetForSpaces: AppliedOptions,
-};
+}
 
 export default class RandomCss extends React.Component<Props, State> {
 
   private appliedOptions: AppliedOptions = { css: [], glyph: [] };
-  private spacesHaveStyle: boolean = false;
+  private spacesHaveStyle = false;
 
   constructor(props: Props) {
     super(props);

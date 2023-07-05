@@ -32,7 +32,7 @@ export default class Character extends React.Component<Props, State> {
   default: Style = {};
   id: string;
   interval: NodeJS.Timer | null;
-  ticks: number = 0;
+  ticks = 0;
 
   constructor(props: Props) {
     super(props);
@@ -54,7 +54,7 @@ export default class Character extends React.Component<Props, State> {
     const style = getComputedStyle(element);
     Object.keys(ECssProperty).forEach((cssProperty: ECssProperty) => {
 
-      this.default[cssProperty] = DEFAULTS.hasOwnProperty(cssProperty)
+      this.default[cssProperty] = Object.prototype.hasOwnProperty.call(DEFAULTS, cssProperty)
         ? DEFAULTS[cssProperty]
         : style[cssProperty];
     });
@@ -64,12 +64,11 @@ export default class Character extends React.Component<Props, State> {
     console.log("        Character mounted.");
   }
 
-  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
+  componentDidUpdate(): void {
     console.log("        Character updated.");
-    let randLength: number = this.props.randomizables.length;
-    if (!randLength && this.interval) {
+    if (!this.props.randomizables.length && this.interval) {
       this.stopTicking();
-    } else if (randLength && !this.interval) {
+    } else if (this.props.randomizables.length && !this.interval) {
       this.startTicking();
     }
     const newState: State = {
@@ -127,7 +126,7 @@ export default class Character extends React.Component<Props, State> {
         glyph: this.state.glyph,
         style: this.state.style,
       };
-      for (let randomizable of this.props.randomizables) {
+      for (const randomizable of this.props.randomizables) {
         const name = randomizable.name as ECssProperty | 'glyph';
         const newValue = randomizable.isLimitReached();
         const comparator = name === 'glyph'
