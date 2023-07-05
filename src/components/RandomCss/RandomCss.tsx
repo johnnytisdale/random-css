@@ -1,32 +1,34 @@
-import * as React from "react";
-import BackgroundColor from "../../classes/CSS/BackgroundColor";
-import Character from "../Character";
-import Color from "../../classes/CSS/Color";
-import Randomizable from "../../classes/Randomizable";
 import "./style.scss";
-import TextDecorationColor from "../../classes/CSS/TextDecorationColor";
-import TextDecorationLine from "../../classes/CSS/TextDecorationLine";
+
 import Animation from "../../classes/CSS/Animation";
-import BorderWidth from "../../classes/CSS/BorderWidth";
-import BorderStyle from "../../classes/CSS/BorderStyle";
+import AppliedOptions from "../../types/AppliedOptions";
+import BackgroundColor from "../../classes/CSS/BackgroundColor";
 import BorderColor from "../../classes/CSS/BorderColor";
 import BorderRadius from "../../classes/CSS/BorderRadius";
+import BorderStyle from "../../classes/CSS/BorderStyle";
+import BorderWidth from "../../classes/CSS/BorderWidth";
+import Character from "../Character";
+import Color from "../../classes/CSS/Color";
+import ECssProperty from "../../enums/ECssProperty";
 import FontFamily from "../../classes/CSS/FontFamily";
 import FontStyle from "../../classes/CSS/FontStyle";
 import FontWeight from "../../classes/CSS/FontWeight";
-import Options from "../../types/Options";
-import ECssProperty from "../../enums/ECssProperty";
 import Glyph from "../../classes/Glyph";
 import GlyphOption from "../../enums/EGlyphOption";
-import AppliedOptions from "../../types/AppliedOptions";
+import Options from "../../types/Options";
+import Randomizable from "../../classes/Randomizable";
+import TextDecorationColor from "../../classes/CSS/TextDecorationColor";
+import TextDecorationLine from "../../classes/CSS/TextDecorationLine";
 
-type Props = {
+import * as React from "react";
+
+interface Props {
   options: Options;
   size: number;
   text: string;
 }
 
-type State = {
+interface State {
   reset: AppliedOptions,
   resetForSpaces: AppliedOptions,
 };
