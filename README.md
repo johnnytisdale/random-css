@@ -1,6 +1,9 @@
  # Random CSS
  Randomize your style.
 
+ ## Note
+ This branch is embarrassingly out of date. Check out [version2](https://github.com/johnnytisdale/random-css/tree/version2)!
+
  ## Testing
  1. Uncomment the commented lines in in src/index.js.
  2. npm run build
