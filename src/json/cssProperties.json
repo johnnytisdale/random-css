@@ -8,7 +8,7 @@
         "camelCase": "backgroundColor",
         "type": "color"
     },
-   "border-color": {
+    "border-color": {
         "camelCase": "borderColor",
         "type": "color"
     },
@@ -62,29 +62,6 @@
             "\"Times New Roman\"",
             "Times",
             "Verdana"
-        ]
-    },
-    "font-kerning": {
-        "camelCase": "fontKerning",
-        "type": "array",
-        "values": [
-            "none",
-            "normal"
-        ]
-    },
-    "font-stretch": {
-        "camelCase": "fontStretch",
-        "type": "array",
-        "values": [
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded"
         ]
     },
     "font-style": {

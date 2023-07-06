@@ -1,7 +1,7 @@
 import "../styles/Form.scss";
 
 import ECssProperty from "../enums/ECssProperty";
-import RandomCss from "./RandomCss/RandomCss";
+import RandomCss from "./RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
@@ -112,7 +112,7 @@ export default class Form extends React.Component<Props, State> {
         {/* dev form */}
         <div id='dev-form'>
 
-          {/* global options */}
+          {/* Global options */}
           <div className='section'>
             <div className='title'>global options</div>
             <div className='options'>
