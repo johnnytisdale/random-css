@@ -104,6 +104,7 @@ export default class Character extends React.Component<Props, State> {
     console.log("        Character rendered.");
     return (
       <div
+        data-testid={this.id}
         id={this.id}
         style={{
           ...this.state.style,

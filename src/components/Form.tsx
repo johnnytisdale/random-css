@@ -120,6 +120,7 @@ export default class Form extends React.Component<Props, State> {
                 <div className='label'>text</div>
                 <div className='input'>
                   <input
+                    data-testid='randomcss-form-text'
                     type='text'
                     value={this.state.options.global.text}
                     onChange={e => {

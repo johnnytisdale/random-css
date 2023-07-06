@@ -37,6 +37,7 @@ export default class RandomCss extends React.Component<Props, State> {
 
   private appliedOptions: AppliedOptions = { css: [], glyph: [] };
   private spacesHaveStyle = false;
+  private renderCount = 0;
 
   constructor(props: Props) {
     super(props);
@@ -115,6 +116,8 @@ export default class RandomCss extends React.Component<Props, State> {
 
   render(): React.ReactNode {
 
+    this.renderCount++;
+
     console.log("    RandomCss rendered.");
 
     /**
@@ -137,7 +140,7 @@ export default class RandomCss extends React.Component<Props, State> {
               : this.state.reset;
             return (
               <Character
-                key={i}
+                key={`randomcss-character-render${this.renderCount}-${i}`}
                 character={character}
                 height={`${this.props.size * 1.1875}rem`}
                 index={i}
