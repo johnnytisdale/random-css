@@ -1,165 +1,165 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
 #app {
-    text-align: center;
+  text-align: center;
 }
 
 #top {
-    background-color: white;
-    border-bottom: 1px solid black;
-    padding-bottom: 1rem;
-    position: sticky;
-    top: 0;
+  background-color: white;
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+  position: sticky;
+  top: 0;
 }
 
 #dev-form {
-    border: 1px solid black;
-    display: inline-block;
-    font-size: 1rem;
-    margin: 2rem 0;
-    text-align: left;
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 2rem 0;
+  text-align: left;
 
-    .section {
-        border-bottom: 1px solid black;
-        padding: 1rem;
+  .section {
+    border-bottom: 1px solid black;
+    padding: 1rem;
 
-        &#css-options {
-            .options {
-                #select-none-css {
-                    margin-bottom: 1rem;
-                }
-            }
+    &#css-options {
+      .options {
+        #select-none-css {
+          margin-bottom: 1rem;
         }
-
-        &#export-options {
-            >.options {
-                >.option {
-                    &#export-textarea {
-                        >.input {
-                            width: 100%;
-
-                            >textarea {
-                                margin-right: 1rem;
-                                resize: none;
-                                width: 95%;
-                            }
-                        }
-
-                        margin-bottom: .5rem;
-                    }
-
-                    &#export-button {
-                        >.input {
-                            text-align: center;
-                            width: 100%;
-                        }
-                    }
-
-                }
-            }
-        }
-
-        .title {
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .options {
-            .option {
-                display: flex;
-
-                .label {
-                    padding-right: 1rem;
-                    width: 100%;
-                }
-            }
-        }
+      }
     }
+
+    &#export-options {
+      >.options {
+        >.option {
+          &#export-textarea {
+            >.input {
+              width: 100%;
+
+              >textarea {
+                margin-right: 1rem;
+                resize: none;
+                width: 95%;
+              }
+            }
+
+            margin-bottom: .5rem;
+          }
+
+          &#export-button {
+            >.input {
+              text-align: center;
+              width: 100%;
+            }
+          }
+
+        }
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .options {
+      .option {
+        display: flex;
+
+        .label {
+          padding-right: 1rem;
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 .popup-container {
-    position: relative;
-    display: inline-block;
-    cursor: default;
+  position: relative;
+  display: inline-block;
+  cursor: default;
 
-    .popup-text {
-        visibility: hidden;
-        width: 160px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 8px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -80px;
+  .popup-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
 
-        // arrow
-        &::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-        &.show {
-            visibility: visible;
-            -webkit-animation: fadeIn 1s;
-            animation: fadeIn 1s;
-        }
-
-        &.hide {
-            visibility: visible;
-            -webkit-animation: fadeOut 1s forwards;
-            animation: fadeOut 1s forwards;
-        }
+    // arrow
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
     }
+
+    &.show {
+      visibility: visible;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+    }
+
+    &.hide {
+      visibility: visible;
+      -webkit-animation: fadeOut 1s forwards;
+      animation: fadeOut 1s forwards;
+    }
+  }
 }
 
 @-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
