@@ -11,6 +11,8 @@ type Props = Record<string, never>;
 
 type State = {
 
+  copied: boolean | null,
+
   form: {
     css: {
       selectAll: boolean,
@@ -26,6 +28,7 @@ export default class Form extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      copied: null,
       form: {
         css: {
           selectAll: false,
@@ -236,6 +239,44 @@ export default class Form extends React.Component<Props, State> {
                       this.setState({ options });
                     }}
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          { /* export */}
+          <div className='section' id='export-options'>
+            <div className='title'>export</div>
+            <div className='options'>
+              <div id='export-textarea' className='option'>
+                <div className='input'>
+                  <textarea
+                    disabled={true}
+                    value={JSON.stringify(this.state.options)}
+                  />
+                </div>
+              </div>
+              <div id='export-button' className='option'>
+                <div className='input popup-container'>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        JSON.stringify(this.state.options)
+                      );
+                      this.setState(
+                        { copied: true },
+                        () => {
+                          setTimeout(
+                            () => this.setState({ copied: false }),
+                            1500
+                          );
+                        }
+                      );
+                    }}
+                  >
+                    copy
+                  </button>
+                  <div className={`popup-text${this.state.copied === true ? ' show' : this.state.copied === false ? ' hide' : ''}`}>copied!</div>
                 </div>
               </div>
             </div>
