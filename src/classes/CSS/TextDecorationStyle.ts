@@ -1,9 +1,9 @@
 import CssProperty from "./CssProperty";
 import cssProperties from "../../json/cssProperties.json";
 
-const json = cssProperties['text-decoration-line'];
+const json = cssProperties['text-decoration-style'];
 
-export default class TextDecorationLine extends CssProperty {
+export default class TextDecorationStyle extends CssProperty {
 
   protected acceptsColors = false;
   protected acceptsLengths = false;

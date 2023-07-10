@@ -1,6 +1,9 @@
 import EFontFamily from "../../enums/EFontFamily";
 import EFontFamilyGeneric from "../../enums/EFontFamilyGeneric";
 import CssProperty from "./CssProperty";
+import cssProperties from "../../json/cssProperties.json";
+
+const json = cssProperties['font-family'];
 
 export default class FontFamily extends CssProperty {
 
@@ -10,7 +13,7 @@ export default class FontFamily extends CssProperty {
   protected acceptsPercentages = false;
   protected keywordGroups: Array<Array<string>>;
   protected separator = ', ';
-  public name = "fontFamily";
+  public name = json.camelCase;
 
   constructor() {
     super();

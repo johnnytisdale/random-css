@@ -21,6 +21,7 @@ import TextDecorationColor from "../classes/CSS/TextDecorationColor";
 import TextDecorationLine from "../classes/CSS/TextDecorationLine";
 
 import * as React from "react";
+import TextDecorationStyle from "../classes/CSS/TextDecorationStyle";
 
 interface Props {
   options: Options;
@@ -81,7 +82,7 @@ export default class RandomCss extends React.Component<Props, State> {
       randomizables.push(new BorderRadius());
     }
     if (this.props.options.css.borderStyle) {
-      randomizables.push(new BorderStyle());
+      randomizables.push(new BorderStyle(this.props.options.global.unsafe));
     }
     if (this.props.options.css.borderWidth) {
       randomizables.push(new BorderWidth(1, 3));
@@ -93,7 +94,7 @@ export default class RandomCss extends React.Component<Props, State> {
       randomizables.push(new FontFamily());
     }
     if (this.props.options.css.fontStyle) {
-      randomizables.push(new FontStyle());
+      randomizables.push(new FontStyle(this.props.options.global.unsafe));
     }
     if (this.props.options.css.fontWeight) {
       randomizables.push(new FontWeight());
@@ -103,6 +104,9 @@ export default class RandomCss extends React.Component<Props, State> {
     }
     if (this.props.options.css.textDecorationLine) {
       randomizables.push(new TextDecorationLine());
+    }
+    if (this.props.options.css.textDecorationStyle) {
+      randomizables.push(new TextDecorationStyle());
     }
     if (this.props.options.glyph.leet || this.props.options.glyph.unicode) {
       randomizables.push(new Glyph(
@@ -146,6 +150,7 @@ export default class RandomCss extends React.Component<Props, State> {
                 index={i}
                 randomizables={randomizables}
                 reset={reset}
+                unsafe={this.props.options.global.unsafe}
                 width={size}
               />
             );

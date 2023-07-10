@@ -11,6 +11,7 @@ type Props = {
   index: number;
   randomizables: Randomizable[];
   reset: AppliedOptions;
+  unsafe: boolean;
   width: number | string;
 }
 
@@ -39,6 +40,7 @@ export default class Character extends React.Component<Props, State> {
     this.id = `character-${this.props.index}`;
     const initialState: State = { glyph: this.props.character, style: {} };
     this.state = initialState;
+    this.getClassname = this.getClassname.bind(this);
     this.startTicking = this.startTicking.bind(this);
     console.log("        Character constructed.");
   }
@@ -100,16 +102,35 @@ export default class Character extends React.Component<Props, State> {
     }
   }
 
+  private getClassname(): string {
+    const classNames: Array<string> = [];
+    Object.keys(this.state.style).forEach((cssProperty: ECssProperty) => {
+      classNames.push(
+        `random-css-${cssProperty}-${this.state.style[cssProperty]
+          .replaceAll('"', '')
+          .replaceAll(' ', '-')
+          .replaceAll('%', '')
+        }`
+      );
+    });
+    return classNames.join(' ');
+  }
+
   render(): React.ReactNode {
     console.log("        Character rendered.");
     return (
       <div
+        className={this.props.unsafe ? '' : this.getClassname()}
         data-testid={this.id}
         id={this.id}
         style={{
-          ...this.state.style,
-          ...(this.state.style.fontWeight !== undefined && { fontWeight: this.state.style.fontWeight as CSS.Property.FontWeight }),
-          ...(this.state.style.textDecorationStyle !== undefined && { textDecorationStyle: this.state.style.textDecorationStyle as CSS.Property.TextDecorationStyle }),
+
+          ...(this.props.unsafe && {
+            ...this.state.style,
+            ...(this.state.style.fontWeight !== undefined && { fontWeight: this.state.style.fontWeight as CSS.Property.FontWeight }),
+            ...(this.state.style.textDecorationStyle !== undefined && { textDecorationStyle: this.state.style.textDecorationStyle as CSS.Property.TextDecorationStyle }),
+          }),
+
           height: this.props.height,
           width: this.props.width
         }}

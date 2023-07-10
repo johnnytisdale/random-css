@@ -1,4 +1,7 @@
 import CssProperty from "./CssProperty";
+import cssProperties from "../../json/cssProperties.json";
+
+const json = cssProperties['border-width'];
 
 export default class BorderWidth extends CssProperty {
 
@@ -16,6 +19,6 @@ export default class BorderWidth extends CssProperty {
   protected acceptsLengths = true;
   protected acceptsPercentages = false;
   protected acceptsKeywords = false;
-  public name = "borderWidth";
+  public name = json.camelCase;
 
 }

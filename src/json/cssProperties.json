@@ -1,8 +1,46 @@
 {
     "animation": {
         "camelCase": "animation",
-        "type": "function",
-        "function": "animate"
+        "type": "animation",
+        "durations": [
+            "1s",
+            "2s",
+            "3s"
+        ],
+        "easingFunctions": [
+            "linear",
+            "ease",
+            "ease-in",
+            "ease-out",
+            "ease-in-out",
+            "step-start",
+            "step-end"
+        ],
+        "iterationCounts": [
+            "infinite",
+            "1",
+            "2",
+            "3"
+        ],
+        "directions": [
+            "alternate",
+            "alternate-reverse",
+            "normal",
+            "reverse"
+        ],
+        "fillModes": [
+            "backwards",
+            "both",
+            "forwards"
+        ],
+        "names": [
+            "rotate",
+            "scaleDown",
+            "scaleUp",
+            "skewX",
+            "skewXY",
+            "skewY"
+        ]
     },
     "background-color": {
         "camelCase": "backgroundColor",
@@ -14,8 +52,7 @@
     },
     "border-radius": {
         "camelCase": "borderRadius",
-        "type": "function",
-        "function": "getBorderRadius"
+        "type": "percentage"
     },
     "border-style": {
         "camelCase": "borderStyle",
@@ -34,10 +71,12 @@
     },
     "border-width": {
         "camelCase": "borderWidth",
-        "type": "range",
-        "min": 1,
-        "max": 5,
-        "unit": "px"
+        "type": "array",
+        "values": [
+            "1px",
+            "2px",
+            "3px"
+        ]
     },
     "color": {
         "camelCase": "color",
@@ -99,7 +138,11 @@
             "600",
             "700",
             "800",
-            "900"
+            "900",
+            "bold",
+            "bolder",
+            "lighter",
+            "normal"
         ]
     },
     "text-decoration-color": {
@@ -117,6 +160,17 @@
             "overline",
             "overline underline",
             "underline"
+        ]
+    },
+    "text-decoration-style": {
+        "camelCase": "textDecorationStyle",
+        "type": "array",
+        "values": [
+            "dashed",
+            "dotted",
+            "double",
+            "solid",
+            "wavy"
         ]
     }
 }

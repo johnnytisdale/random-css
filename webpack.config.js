@@ -2,11 +2,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 	path = require('path'),
 	webpack = require('webpack');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = env => {
 
 	const plugins = [
 		new webpack.DefinePlugin({
 			ENV: JSON.stringify(env.environment),
+		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: "src/styles/random.css" },
+			]
 		})
 	];
 

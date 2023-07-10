@@ -5,12 +5,9 @@ import Randomizable from "../Randomizable";
 
 export default abstract class CssProperty extends Randomizable {
 
-  constructor(unsafe = false) {
+  constructor(protected unsafe = false) {
     super();
-    this.unsafe = unsafe;
   }
-
-  private unsafe: boolean;
 
   protected abstract acceptsColors: boolean;
   protected abstract acceptsKeywords: boolean;
@@ -18,6 +15,9 @@ export default abstract class CssProperty extends Randomizable {
   protected abstract acceptsPercentages: boolean;
 
   protected keywords: Array<string>;
+  // NOTE: Moving away from using keywordLimit. Instead of programmatically
+  // combining keywords, we are just including all combinations in the keywords
+  // array, which comes from cssProperties.json
   protected keywordLimit = 0;
   protected separator = " ";
 

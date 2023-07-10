@@ -1,4 +1,7 @@
 import CssProperty from "./CssProperty";
+import cssProperties from "../../json/cssProperties.json";
+
+const json = cssProperties['font-style'];
 
 export default class FontStyle extends CssProperty {
 
@@ -6,21 +9,14 @@ export default class FontStyle extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
-  public name = "fontStyle";
+  public name = json.camelCase;
 
-  constructor() {
-    super();
-  }
-
-  protected keywords: string[] = [
-    "italic",
-    "oblique",
-    "normal",
-  ];
+  protected keywords = json.values;
 
   protected getRandomKeywordValue(): string {
     let keyword = this.getRandomArrayElement(this.keywords);
-    if (keyword == "oblique") {
+    // TODO: Support oblique deg when unsafe === false
+    if (this.unsafe && keyword == "oblique") {
       const hasDegrees = this.getRandomBoolean();
       if (hasDegrees) {
         const degrees = this.getRandomNumber(0, 90);

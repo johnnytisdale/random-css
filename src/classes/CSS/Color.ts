@@ -1,4 +1,7 @@
 import CssProperty from "./CssProperty";
+import cssProperties from "../../json/cssProperties.json";
+
+const json = cssProperties['color'];
 
 export default class Color extends CssProperty {
 
@@ -6,6 +9,6 @@ export default class Color extends CssProperty {
   protected acceptsLengths = false;
   protected acceptsPercentages = false;
   protected acceptsKeywords = false;
-  public name = "color";
+  public name = json.camelCase;
 
 }
