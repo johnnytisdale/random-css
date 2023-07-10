@@ -17,8 +17,7 @@ export default class FontStyle extends CssProperty {
     let keyword = this.getRandomArrayElement(this.keywords);
     // TODO: Support oblique deg when unsafe === false
     if (this.unsafe && keyword == "oblique") {
-      const hasDegrees = this.getRandomBoolean();
-      if (hasDegrees) {
+      if (this.getRandomBoolean()) {
         const degrees = this.getRandomNumber(0, 90);
         const isNegative = degrees === 0
           ? false
