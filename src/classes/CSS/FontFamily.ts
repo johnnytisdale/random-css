@@ -1,7 +1,7 @@
 import EFontFamily from "../../enums/EFontFamily";
 import EFontFamilyGeneric from "../../enums/EFontFamilyGeneric";
 import CssProperty from "./CssProperty";
-import cssProperties from "../../json/cssProperties.json";
+import * as cssProperties from "../../json/cssProperties.json";
 
 const json = cssProperties['font-family'];
 

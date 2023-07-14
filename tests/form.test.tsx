@@ -1,5 +1,4 @@
 import Form from '../src/components/Form';
-import Letter from "../src/enums/Letter";
 import * as unicodeJSON from "../src/json/unicode.json";
 
 import * as React from 'react';
@@ -7,34 +6,32 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 
 describe('Form', () => {
-  const { getByTestId } = render(<Form />);
+  const { getAllByTestId, getByTestId } = render(<Form />);
   const top = getByTestId("top");
   expect(top).toBeInTheDocument();
   const defaultText = "random css";
-  describe(`renders characters ${defaultText}`, () => {
-    for (let i = 0; i < defaultText.length; i++) {
-      test(`renders character ${i}: ${defaultText[i]}`, () => {
-        const char = getByTestId(`character-${String(i)}`);
-        expect(char).toBeInTheDocument();
-        expect(char).toHaveTextContent(defaultText[i]);
+  describe("renders characters", () => {
+    const chars = getAllByTestId("character");
+    expect(chars.length).toBe(defaultText.length);
+    chars.forEach((char, i) => {
+      test(`renders character ${i + 1}: ${defaultText[i]}`, () => {
+        expect(char.textContent).toBe(defaultText[i]);
       });
-    }
+    });
   });
 
-  // describe('unicode characters work', () => {
-  //   // const { getByTestId } = render(<Form />);
-  //   const text = getByTestId("randomcss-form-text");
-  //   expect(text).toBeInTheDocument();
-  //   Object.values(Letter).forEach((letter: Letter) => {
-  //     unicodeJSON[letter].forEach(({ description, unicode }) => {
-  //       it(description, () => {
-  //         const string = String.fromCodePoint(parseInt(unicode, 16));
-  //         fireEvent.change(text, { target: { value: '' } });
-  //         fireEvent.change(text, { target: { value: string } });
-  //         const char = getByTestId('character-0');
-  //         expect(char).toBeInTheDocument();
-  //       });
-  //     });
-  //   });
-  // });
+  describe('unicode characters work', () => {
+    // const { getByTestId } = render(<Form />);
+    const text = getByTestId("randomcss-form-text");
+    expect(text).toBeInTheDocument();
+
+
+    test(unicodeJSON['x'][0].description, () => {
+      const str = String.fromCodePoint(parseInt(unicodeJSON['x'][0].unicode, 16));
+      expect(str.length).toBe(1);
+      fireEvent.change(text, { target: { value: str } });
+      const chars = getAllByTestId("character");
+      expect(chars.length).toBe(1);
+    });
+  });
 });

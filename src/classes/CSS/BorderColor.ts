@@ -1,5 +1,5 @@
 import CssProperty from "./CssProperty";
-import cssProperties from "../../json/cssProperties.json";
+import * as cssProperties from "../../json/cssProperties.json";
 
 const json = cssProperties['border-color'];
 

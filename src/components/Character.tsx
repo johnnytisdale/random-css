@@ -121,7 +121,7 @@ export default class Character extends React.Component<Props, State> {
     return (
       <div
         className={this.props.unsafe ? '' : this.getClassname()}
-        data-testid={this.id}
+        data-testid="character"
         id={this.id}
         style={{
 
