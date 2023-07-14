@@ -1,27 +1,27 @@
-name: NodeJS with Webpack
+name: Node.js CI
 
 on:
   push:
-    branches: [ "version2" ]
+    branches: [ version2 ]
   pull_request:
-    branches: [ "version2" ]
+    branches: [ version2 ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x, 16.x, 18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-      run: |
-        npm run prod
-        npm run dev
-        npm run test
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run prod
+      - run: npn run test
+      - run: npm test
