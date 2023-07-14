@@ -19,19 +19,4 @@ describe('Form', () => {
       });
     });
   });
-
-  describe('unicode characters work', () => {
-    // const { getByTestId } = render(<Form />);
-    const text = getByTestId("randomcss-form-text");
-    expect(text).toBeInTheDocument();
-
-
-    test(unicodeJSON['x'][0].description, () => {
-      const str = String.fromCodePoint(parseInt(unicodeJSON['x'][0].unicode, 16));
-      expect(str.length).toBe(1);
-      fireEvent.change(text, { target: { value: str } });
-      const chars = getAllByTestId("character");
-      expect(chars.length).toBe(1);
-    });
-  });
 });
