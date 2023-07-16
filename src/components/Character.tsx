@@ -138,7 +138,7 @@ export default class Character extends React.Component<Props, State> {
 
   startTicking(): void {
     this.interval = setInterval(() => {
-      console.log("            Tick.", Math.random());
+      // console.log("            Tick.", Math.random());
       let update = false;
       const newState: State = {
         glyph: this.state.glyph,

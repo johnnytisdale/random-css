@@ -123,7 +123,8 @@ export default class RandomCss extends React.Component<Props, State> {
 
     /**
      * This value serves as both the font size and the width of the divs
-     * that contain the characters.
+     * that contain the characters. The height of the divs will be equal to this
+     * value multiplied by 1.1875.
      */
     const size = `${this.props.size}rem`;
 
@@ -141,7 +142,8 @@ export default class RandomCss extends React.Component<Props, State> {
               : this.state.reset;
             return (
               <Character
-                key={`randomcss-character-render${this.renderCount}-${i}`}
+                // key={`randomcss-character-render${this.renderCount}-${i}`}
+                key={`${i}-${character}`}
                 character={character}
                 height={`${this.props.size * 1.1875}rem`}
                 index={i}
