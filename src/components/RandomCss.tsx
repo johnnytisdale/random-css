@@ -142,7 +142,6 @@ export default class RandomCss extends React.Component<Props, State> {
               : this.state.reset;
             return (
               <Character
-                // key={`randomcss-character-render${this.renderCount}-${i}`}
                 key={`${i}-${character}`}
                 character={character}
                 height={`${this.props.size * 1.1875}rem`}
