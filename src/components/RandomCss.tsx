@@ -42,7 +42,6 @@ export default class RandomCss extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    console.log("    RandomCss constructed.");
     this.state = {
       reset: { css: [], glyph: [] },
       resetForSpaces: { css: [], glyph: [] }
@@ -122,8 +121,6 @@ export default class RandomCss extends React.Component<Props, State> {
 
     this.renderCount++;
 
-    console.log("    RandomCss rendered.");
-
     /**
      * This value serves as both the font size and the width of the divs
      * that contain the characters.
@@ -161,7 +158,6 @@ export default class RandomCss extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    console.log("    RandomCss updated.");
     if (this.state.reset.css.length || this.state.reset.glyph.length) {
       this.setState({ reset: { css: [], glyph: [] } });
       return;
@@ -185,7 +181,6 @@ export default class RandomCss extends React.Component<Props, State> {
         reset.glyph.push(glyphOption);
       }
     });
-    console.log({ reset });
     this.setAppliedOptions();
     if (reset.css.length || reset.glyph.length) {
       console.log({ reset });

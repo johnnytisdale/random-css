@@ -42,7 +42,6 @@ export default class Character extends React.Component<Props, State> {
     this.state = initialState;
     this.getClassname = this.getClassname.bind(this);
     this.startTicking = this.startTicking.bind(this);
-    console.log("        Character constructed.");
   }
 
   componentDidMount() {
@@ -63,11 +62,9 @@ export default class Character extends React.Component<Props, State> {
     if (this.props.randomizables.length) {
       this.startTicking();
     }
-    console.log("        Character mounted.");
   }
 
   componentDidUpdate(): void {
-    console.log("        Character updated.");
     if (!this.props.randomizables.length && this.interval) {
       this.stopTicking();
     } else if (this.props.randomizables.length && !this.interval) {
@@ -117,7 +114,6 @@ export default class Character extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-    console.log("        Character rendered.");
     return (
       <div
         className={this.props.unsafe ? '' : this.getClassname()}

@@ -58,10 +58,6 @@ export default class Form extends React.Component<Props, State> {
     });
   }
 
-  componentDidMount() {
-    console.log("Form mounted.");
-  }
-
   private toggleAll(e: React.ChangeEvent<HTMLInputElement>, select: boolean) {
     const formOptions = this.state.form;
     if (!e.target.checked) {
@@ -101,7 +97,6 @@ export default class Form extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-    console.log("Form rendered.");
     return (
       <>
         <div id="top" data-testid="top">
