@@ -1,5 +1,4 @@
 import Form from '../src/components/Form';
-import * as unicodeJSON from "../src/json/unicode.json";
 
 import * as React from 'react';
 import '@testing-library/jest-dom';

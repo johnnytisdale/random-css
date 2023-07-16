@@ -48,9 +48,10 @@
 	"scripts": {
 		"css": "py src/python/cssGenerator.py",
 		"dev": "webpack --mode development --env environment=development",
+		"lint": "npx eslint src --max-warnings=0",
 		"prod": "webpack --mode production --env environment=production",
-		"watch": "webpack --mode development --env environment=development --watch",
-		"test": "jest --verbose"
+		"test": "jest --verbose",
+		"watch": "webpack --mode development --env environment=development --watch"
 	},
 	"version": "1.1.2"
 }
