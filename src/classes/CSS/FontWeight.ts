@@ -1,4 +1,3 @@
-import ECssProperty from "../../enums/ECssProperty";
 import CssProperty from "./CssProperty";
 import * as cssProperties from "../../json/cssProperties.json";
 
