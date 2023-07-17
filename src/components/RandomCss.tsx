@@ -19,9 +19,9 @@ import Options from "../types/Options";
 import Randomizable from "../classes/Randomizable";
 import TextDecorationColor from "../classes/CSS/TextDecorationColor";
 import TextDecorationLine from "../classes/CSS/TextDecorationLine";
+import TextDecorationStyle from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
-import TextDecorationStyle from "../classes/CSS/TextDecorationStyle";
 
 interface Props {
   options: Options;
