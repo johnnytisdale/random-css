@@ -1,5 +1,5 @@
-import EFontFamily from "../../enums/EFontFamily";
-import EFontFamilyGeneric from "../../enums/EFontFamilyGeneric";
+import FontFamilyName from "../../enums/FontFamilyName";
+import FontGenericName from "../../enums/FontGenericName";
 import CssProperty from "./CssProperty";
 import * as cssProperties from "../../json/cssProperties.json";
 
@@ -18,17 +18,16 @@ export default class FontFamily extends CssProperty {
   constructor() {
     super();
     this.keywordGroups = [
-      Object.values(EFontFamily),
-      Object.values(EFontFamilyGeneric),
+      Object.values(FontFamilyName),
+      Object.values(FontGenericName),
     ];
   }
 
   protected getRandomKeywordValue(): string {
     const keywords: Array<string> = [
-      `"${this.getRandomArrayElement(this.keywordGroups[0])}"`
+      this.getRandomArrayElement(this.keywordGroups[0])
     ];
-    const numberOfKeywords = this.getRandomNumber(1, this.keywordLimit);
-    if (numberOfKeywords === 2) {
+    if (this.getRandomBoolean()) {
       keywords.push(this.getRandomArrayElement(this.keywordGroups[1]));
     }
     return keywords.join(this.separator);

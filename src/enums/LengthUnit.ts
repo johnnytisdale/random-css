@@ -1,4 +1,4 @@
-enum ELengthUnit {
+enum LengthUnit {
   CH = 'cd',
   CM = 'cm',
   EM = 'em',
@@ -22,4 +22,4 @@ enum ELengthUnit {
   VW = 'vw',
 }
 
-export default ELengthUnit;
+export default LengthUnit;

@@ -1,6 +1,6 @@
-import EColor from "../../enums/EColor";
-import ELengthUnit from "../../enums/ELengthUnit";
-import EValueType from "../../enums/EValueType";
+import EColor from "../../enums/Color";
+import LengthUnit from "../../enums/LengthUnit";
+import ValueType from "../../enums/ValueType";
 import Randomizable from "../Randomizable";
 
 export default abstract class CssProperty extends Randomizable {
@@ -21,9 +21,9 @@ export default abstract class CssProperty extends Randomizable {
   protected keywordLimit = 0;
   protected separator = " ";
 
-  protected lengthUnit: ELengthUnit = ELengthUnit.PX;
+  protected lengthUnit: LengthUnit = LengthUnit.PX;
 
-  protected EValueTypes: Array<EValueType>;
+  protected EValueTypes: Array<ValueType>;
 
   protected rMin = 0;
   protected rMax = 255;

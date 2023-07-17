@@ -1,5 +1,5 @@
 import AppliedOptions from "../types/AppliedOptions";
-import ECssProperty from "../enums/ECssProperty";
+import ECssProperty from "../enums/CssProperty";
 import Randomizable from "../classes/Randomizable";
 
 import * as CSS from 'csstype';

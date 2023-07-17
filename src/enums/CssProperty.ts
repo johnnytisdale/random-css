@@ -1,4 +1,4 @@
-enum ECssProperty {
+enum CssProperty {
     animation = 'animation',
     backgroundColor = 'backgroundColor',
     borderColor = 'borderColor',
@@ -14,4 +14,4 @@ enum ECssProperty {
     textDecorationStyle = 'textDecorationStyle'
 }
 
-export default ECssProperty;
+export default CssProperty;

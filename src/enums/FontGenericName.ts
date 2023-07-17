@@ -1,4 +1,4 @@
-enum EFontFamilyGeneric {
+enum FontGenericName {
   CURSIVE = 'cursive',
   EMOJI = 'emoji',
   FANGSONG = 'fangsong',
@@ -14,4 +14,4 @@ enum EFontFamilyGeneric {
   UI_ROUNDED = 'ui-rounded',
 }
 
-export default EFontFamilyGeneric;
+export default FontGenericName;

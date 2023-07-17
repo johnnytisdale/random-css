@@ -1,4 +1,4 @@
-enum EColor {
+enum Color {
     ALICE_BLUE = "AliceBlue",
     ANTIQUE_WHITE = "AntiqueWhite",
     AQUA = "Aqua",
@@ -142,4 +142,4 @@ enum EColor {
     YELLOW_GREEN = "YellowGreen",
 }
 
-export default EColor;
+export default Color;

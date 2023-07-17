@@ -1,6 +1,6 @@
 import "../styles/Form.scss";
 
-import ECssProperty from "../enums/ECssProperty";
+import ECssProperty from "../enums/CssProperty";
 import RandomCss from "./RandomCss";
 
 import * as React from "react";

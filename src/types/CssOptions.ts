@@ -1,4 +1,4 @@
-import ECssProperty from "../enums/ECssProperty";
+import ECssProperty from "../enums/CssProperty";
 
 type CssOptions = {
     [key in ECssProperty]?: boolean;

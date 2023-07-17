@@ -1,7 +1,7 @@
-enum EGlobalOption {
+enum GlobalOption {
     size = "size",
     text = "text",
     unsafe = "unsafe"
 }
 
-export default EGlobalOption;
+export default GlobalOption;

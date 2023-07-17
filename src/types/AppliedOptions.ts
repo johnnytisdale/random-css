@@ -1,5 +1,5 @@
-import ECssProperty from "../enums/ECssProperty";
-import GlyphOption from "../enums/EGlyphOption";
+import ECssProperty from "../enums/CssProperty";
+import GlyphOption from "../enums/GlyphOption";
 
 type AppliedOptions = {
   css: Array<ECssProperty>;
