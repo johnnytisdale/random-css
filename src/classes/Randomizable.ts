@@ -3,20 +3,16 @@ export default abstract class Randomizable {
     abstract getRandomValue(): string;
     abstract name: string;
 
-    private limit: number;
+    private limit = this.getRandomNumber(1, 10);
     private ticks = 0;
 
-    constructor() {
-        this.reset();
-    }
-
-    public isLimitReached(): false | string {
+    public isLimitReached(): boolean {
         this.ticks++;
-        if (this.ticks < this.limit) {
-            return false;
+        const isLimitReached = this.ticks >= this.limit;
+        if (isLimitReached) {
+            this.reset();
         }
-        this.reset();
-        return this.getRandomValue();
+        return isLimitReached;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

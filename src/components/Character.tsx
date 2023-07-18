@@ -131,7 +131,8 @@ export default class Character extends React.Component<Props, State> {
           width: this.props.width
         }}
       >
-        {this.state.glyph}
+        { /* TODO: figure out why this.state.glyph is sometimes undefined! */ }
+        {this.state.glyph ?? this.props.character}
       </div>
     );
   }
@@ -145,12 +146,15 @@ export default class Character extends React.Component<Props, State> {
         style: this.state.style,
       };
       for (const randomizable of this.props.randomizables) {
+        if (!randomizable.isLimitReached()) {
+          continue;
+        }
         const name = randomizable.name as ECssProperty | 'glyph';
-        const newValue = randomizable.isLimitReached();
+        const newValue = randomizable.getRandomValue();
         const comparator = name === 'glyph'
           ? this.state.glyph
           : this.state.style[name];
-        if (newValue !== false && newValue != comparator) {
+        if (newValue !== comparator) {
           if (name === 'glyph') {
             newState.glyph = newValue;
           } else {
