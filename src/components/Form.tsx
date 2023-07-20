@@ -9,7 +9,7 @@ import Options from "../types/Options";
 
 type Props = Record<string, never>;
 
-type State = {
+interface State {
 
   copied: boolean | null,
 

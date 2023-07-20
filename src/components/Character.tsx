@@ -5,7 +5,7 @@ import Randomizable from "../classes/Randomizable";
 import * as CSS from 'csstype';
 import * as React from "react";
 
-type Props = {
+interface Props {
   character: string;
   height: number | string;
   index: number;
@@ -19,7 +19,7 @@ type Style = {
   [key in ECssProperty]?: string;
 }
 
-type State = {
+interface State {
   style: Style;
   glyph?: string;
 }

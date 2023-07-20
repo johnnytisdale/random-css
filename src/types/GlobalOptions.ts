@@ -1,4 +1,4 @@
-type GlobalOptions = {
+interface GlobalOptions {
 
     /**
      * If true, random styles will not be applied to spaces.

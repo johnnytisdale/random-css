@@ -1,7 +1,7 @@
 import ECssProperty from "../enums/CssProperty";
 import GlyphOption from "../enums/GlyphOption";
 
-type AppliedOptions = {
+interface AppliedOptions {
   css: Array<ECssProperty>;
   glyph: Array<GlyphOption>;
 }

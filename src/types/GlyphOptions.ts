@@ -1,4 +1,4 @@
-type GlyphOptions = {
+interface GlyphOptions {
   leet: boolean;
   unicode: boolean;
 }
