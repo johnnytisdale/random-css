@@ -8,7 +8,6 @@ import RandomCss from "./RandomCss";
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
 import FormSectionOption from "./FormSectionOption";
-import GlobalOptions from "../types/GlobalOptions";
 
 type Props = Record<string, never>;
 
