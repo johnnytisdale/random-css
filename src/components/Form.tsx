@@ -98,6 +98,13 @@ export default class Form extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
+    const popupClassName = 'popup-text' + (
+      this.state.copied === true
+        ? ' show'
+        : this.state.copied === false
+        ? ' hide'
+        : ''
+    );
     return (
       <>
         <div id="top" data-testid="top">
@@ -261,7 +268,9 @@ export default class Form extends React.Component<Props, State> {
                 >
                   copy
                 </button>
-                <div className={`popup-text${this.state.copied === true ? ' show' : this.state.copied === false ? ' hide' : ''}`}>copied!</div>
+                <div className={popupClassName}>
+                  copied!
+                </div>
               </div>
             </div>
           </FormSection>
