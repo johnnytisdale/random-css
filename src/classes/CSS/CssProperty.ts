@@ -46,8 +46,6 @@ export default abstract class CssProperty extends Randomizable {
   }
 
   protected getRandomKeywordValue(): string {
-    console.log(`Getting random ${this.name} value...`);
-    console.log(`Limit is ${String(this.keywordLimit)}...`);
     if (this.keywordLimit === 1) {
       return this.getRandomArrayElement(Object.values(this.keywords));
     }

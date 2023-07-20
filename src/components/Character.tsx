@@ -113,6 +113,8 @@ export default class Character extends React.Component<Props, State> {
     return classNames.join(' ');
   }
 
+  // TODO: Figure out why unchecking border color sets classname to
+  // random-css-borderColor-rgb(0,-0,-0)
   render(): React.ReactNode {
     return (
       <div
