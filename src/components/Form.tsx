@@ -46,8 +46,12 @@ export default class Form extends React.Component<Props, State> {
           unsafe: false
         },
         glyph: {
-          leet: false,
-          unicode: false
+          leet: {
+            enabled: false
+          },
+          unicode: {
+            enabled: false
+          }
         }
       },
     }
@@ -55,7 +59,7 @@ export default class Form extends React.Component<Props, State> {
     // Set CSS properties to false if they are undefined.
     Object.values(ECssProperty).forEach(propertyName => {
       if (typeof this.state.options.css[propertyName] == "undefined") {
-        this.state.options.css[propertyName] = false;
+        this.state.options.css[propertyName] = {enabled: false};
       }
     });
   }
@@ -74,7 +78,7 @@ export default class Form extends React.Component<Props, State> {
       formOptions.css.selectNone = !select;
       const options = this.state.options;
       Object.values(ECssProperty).forEach(property => {
-        options.css[property] = select;
+        options.css[property].enabled = select;
       });
       this.setState({
         form: formOptions,
@@ -86,7 +90,7 @@ export default class Form extends React.Component<Props, State> {
   toggleCssProperty(propertyName: ECssProperty, checked: boolean): void {
     const form = this.state.form;
     const options = this.state.options;
-    options.css[propertyName] = checked;
+    options.css[propertyName].enabled = checked;
     if (!checked) {
       form.css.selectAll = false;
     } else {
@@ -173,7 +177,7 @@ export default class Form extends React.Component<Props, State> {
             {
               Object.values(ECssProperty).map((propertyName, index) => (
                 <FormSectionOption
-                  checked={this.state.options.css[propertyName]}
+                  checked={this.state.options.css[propertyName].enabled}
                   key={index}
                   label={propertyName}
                   onChange={e => {
@@ -192,23 +196,23 @@ export default class Form extends React.Component<Props, State> {
           { /* glyph */}
           <FormSection id='glyph-options' title="glyph options">
             <FormSectionOption
-              checked={this.state.options.glyph.leet}
+              checked={this.state.options.glyph.leet.enabled}
               id='1337'
               label="1337"
               onChange={e => {
                 const options = this.state.options;
-                options.glyph.leet = e.target.checked;
+                options.glyph.leet.enabled = e.target.checked;
                 this.setState({ options });
               }}
               type='checkbox'
             />
             <FormSectionOption
-              checked={this.state.options.glyph.unicode}
+              checked={this.state.options.glyph.unicode.enabled}
               id='unicode'
               label="unicode"
               onChange={e => {
                 const options = this.state.options;
-                options.glyph.unicode = e.target.checked;
+                options.glyph.unicode.enabled = e.target.checked;
                 this.setState({ options });
               }}
               type='checkbox'

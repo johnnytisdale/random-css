@@ -1,7 +1,9 @@
-import ECssProperty from "../enums/CssProperty";
+import Option from "../interfaces/Option";
+import CssProperty from "../enums/CssProperty";
+
 
 type CssOptions = {
-    [key in ECssProperty]?: boolean;
+    [key in CssProperty]?: Option;
 };
 
 export default CssOptions;

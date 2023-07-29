@@ -1,6 +1,8 @@
+import Option from "../interfaces/Option";
+
 interface GlyphOptions {
-  leet: boolean;
-  unicode: boolean;
+  leet: Option;
+  unicode: Option;
 }
 
 export default GlyphOptions;

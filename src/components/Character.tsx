@@ -65,9 +65,9 @@ export default class Character extends React.Component<Props, State> {
   }
 
   componentDidUpdate(): void {
-    if (!this.props.randomizables.length && this.interval) {
+    if (this.props.randomizables.length === 0 && this.interval !== null) {
       this.stopTicking();
-    } else if (this.props.randomizables.length && !this.interval) {
+    } else if (this.props.randomizables.length > 0 && this.interval === null) {
       this.startTicking();
     }
     const newState: State = {
@@ -86,9 +86,10 @@ export default class Character extends React.Component<Props, State> {
       for (const randomizable of this.props.randomizables) {
         if (randomizable.name === 'glyph') {
           hasGlyph = true;
+          break;
         }
       }
-      if (!hasGlyph) {
+      if (hasGlyph === true) {
         console.log(`            Resetting glyph to default value: ${this.props.character}.`);
         update = true;
         newState.glyph = this.props.character;
@@ -153,6 +154,9 @@ export default class Character extends React.Component<Props, State> {
         }
         const name = randomizable.name as ECssProperty | 'glyph';
         const newValue = randomizable.getRandomValue();
+        if (newValue === undefined) {
+          continue;
+        }
         const comparator = name === 'glyph'
           ? this.state.glyph
           : this.state.style[name];
