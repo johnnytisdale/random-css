@@ -23,7 +23,6 @@ import TextDecorationStyle from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
 import Option from "../interfaces/Option";
-import OptionName from "../types/OptionName";
 
 interface Props {
   options: Options;
