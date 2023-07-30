@@ -1,6 +1,5 @@
 import "../styles/Form.scss";
 
-import ECssProperty from "../enums/CssProperty";
 import FormSection from "./FormSection";
 import Options from "../types/Options";
 import RandomCss from "./RandomCss";
@@ -8,6 +7,8 @@ import RandomCss from "./RandomCss";
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
 import FormSectionOption from "./FormSectionOption";
+import CssProperty from "../enums/CssProperty";
+import GlyphOption from "../enums/GlyphOption";
 
 type Props = Record<string, never>;
 
@@ -45,23 +46,9 @@ export default class Form extends React.Component<Props, State> {
           text: 'random css',
           unsafe: false
         },
-        glyph: {
-          leet: {
-            enabled: false
-          },
-          unicode: {
-            enabled: false
-          }
-        }
+        glyph: {}
       },
     }
-
-    // Set CSS properties to false if they are undefined.
-    Object.values(ECssProperty).forEach(propertyName => {
-      if (typeof this.state.options.css[propertyName] == "undefined") {
-        this.state.options.css[propertyName] = {enabled: false};
-      }
-    });
   }
 
   private toggleAll(e: React.ChangeEvent<HTMLInputElement>, select: boolean) {
@@ -77,8 +64,8 @@ export default class Form extends React.Component<Props, State> {
       formOptions.css.selectAll = select;
       formOptions.css.selectNone = !select;
       const options = this.state.options;
-      Object.values(ECssProperty).forEach(property => {
-        options.css[property].enabled = select;
+      Object.values(CssProperty).forEach(cssProperty => {
+        this.toggleCssProperty(cssProperty, select);
       });
       this.setState({
         form: formOptions,
@@ -87,10 +74,13 @@ export default class Form extends React.Component<Props, State> {
     }
   }
 
-  toggleCssProperty(propertyName: ECssProperty, checked: boolean): void {
+  toggleCssProperty(cssProperty: CssProperty, checked: boolean): void {
     const form = this.state.form;
     const options = this.state.options;
-    options.css[propertyName].enabled = checked;
+    if (options.css[cssProperty] === undefined) {
+      options.css[cssProperty] = { enabled: false };
+    }
+    options.css[cssProperty].enabled = checked;
     if (!checked) {
       form.css.selectAll = false;
     } else {
@@ -110,11 +100,27 @@ export default class Form extends React.Component<Props, State> {
         ? ' hide'
         : ''
     );
+    const optionsToExport: Options = {
+      css: {},
+      global: this.state.options.global,
+      glyph: {}
+    };
+    Object.values(CssProperty).forEach(cssProperty => {
+      if (this.state.options.css?.[cssProperty]?.enabled === true) {
+        optionsToExport.css[cssProperty] = this.state.options.css[cssProperty];
+      }
+    });
+    Object.values(GlyphOption).forEach(glyphOption => {
+      if (this.state.options.glyph?.[glyphOption]?.enabled === true) {
+        optionsToExport.glyph[glyphOption] =
+          this.state.options.glyph[glyphOption];
+      }
+    });
     return (
       <>
         <div id="top" data-testid="top">
           <RandomCss
-            options={this.state.options}
+            options={optionsToExport}
             size={this.state.options.global.size}
             text={this.state.options.global.text}
           />
@@ -175,15 +181,17 @@ export default class Form extends React.Component<Props, State> {
               type='checkbox'
             />
             {
-              Object.values(ECssProperty).map((propertyName, index) => (
+              Object.values(CssProperty).map((propertyName, index) => (
                 <FormSectionOption
-                  checked={this.state.options.css[propertyName].enabled}
+                  checked={
+                    this.state.options.css?.[propertyName]?.enabled === true
+                  }
                   key={index}
                   label={propertyName}
                   onChange={e => {
                     console.log(`toggling ${propertyName}`)
                     this.toggleCssProperty(
-                      ECssProperty[propertyName],
+                      CssProperty[propertyName],
                       e.target.checked
                     );
                   }}
@@ -196,22 +204,28 @@ export default class Form extends React.Component<Props, State> {
           { /* glyph */}
           <FormSection id='glyph-options' title="glyph options">
             <FormSectionOption
-              checked={this.state.options.glyph.leet.enabled}
+              checked={this.state.options.glyph?.leet?.enabled === true}
               id='1337'
               label="1337"
               onChange={e => {
                 const options = this.state.options;
+                if (options.glyph.leet === undefined) {
+                  options.glyph.leet = { enabled: false };
+                }
                 options.glyph.leet.enabled = e.target.checked;
                 this.setState({ options });
               }}
               type='checkbox'
             />
             <FormSectionOption
-              checked={this.state.options.glyph.unicode.enabled}
+              checked={this.state.options.glyph?.unicode?.enabled === true}
               id='unicode'
               label="unicode"
               onChange={e => {
                 const options = this.state.options;
+                if (options.glyph.unicode === undefined) {
+                  options.glyph.unicode = { enabled: false };
+                }
                 options.glyph.unicode.enabled = e.target.checked;
                 this.setState({ options });
               }}
@@ -225,7 +239,7 @@ export default class Form extends React.Component<Props, State> {
               <div className='input'>
                 <textarea
                   disabled={true}
-                  value={JSON.stringify(this.state.options)}
+                  value={JSON.stringify(optionsToExport)}
                 />
               </div>
             </div>
@@ -234,7 +248,7 @@ export default class Form extends React.Component<Props, State> {
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      JSON.stringify(this.state.options)
+                      JSON.stringify(optionsToExport)
                     );
                     this.setState(
                       { copied: true },

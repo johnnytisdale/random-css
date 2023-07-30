@@ -60,11 +60,11 @@ export default class RandomCss extends React.Component<Props, State> {
           : null
       ).filter(value => value != null);
     this.appliedOptions.glyph = Object.entries(this.props.options.glyph)
-      .map(
-        ([glyphOption, option]: [GlyphOption, Option]) => option.enabled === true
+      .map(([glyphOption, option]: [GlyphOption, Option]) => (
+        option.enabled === true
           ? glyphOption
           : null
-      ).filter(value => value != null);
+      )).filter(value => value != null);
   }
 
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
@@ -101,20 +101,13 @@ export default class RandomCss extends React.Component<Props, State> {
   private getRandomizables(character: string): Randomizable[] {
     const randomizables: Array<Randomizable> = [];
     Object.values(CssProperty).forEach(optionName => {
-      if (
-        this.props.options.css[optionName] !== undefined &&
-        this.props.options.css[optionName].enabled === true
-      ) {
+      if (this.props.options.css?.[optionName]?.enabled === true) {
         randomizables.push(this.getRandomizableForCssProperty(optionName));
       }
     });
-    const isLeetEnabled = (
-      this.props.options.glyph.leet !== undefined &&
-      this.props.options.glyph.leet.enabled === true
-    );
+    const isLeetEnabled = this.props.options.glyph?.leet?.enabled === true;
     const isUnicodeEnabled = (
-      this.props.options.glyph.unicode !== undefined &&
-      this.props.options.glyph.unicode.enabled === true
+      this.props.options.glyph?.unicode?.enabled === true
     );
     if (isLeetEnabled || isUnicodeEnabled) {
       randomizables.push(new Glyph(character, isLeetEnabled, isUnicodeEnabled));
@@ -134,7 +127,14 @@ export default class RandomCss extends React.Component<Props, State> {
     const size = `${this.props.size}rem`;
 
     return (
-      <div className="random-css-container" style={{ fontSize: size, margin: "auto", width: "min-content" }}>
+      <div
+        className="random-css-container"
+        style={{
+          fontSize: size,
+          margin: "auto",
+          width: "min-content"
+        }}
+      >
         {
           this.props.text.split('').map((character, i) => {
             const ignore = character === ' '
@@ -164,25 +164,37 @@ export default class RandomCss extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if (this.state.reset.css.length || this.state.reset.glyph.length) {
+    if (this.state.reset.css.length > 0 || this.state.reset.glyph.length > 0) {
       this.setState({ reset: { css: [], glyph: [] } });
       return;
     }
+
+    // Prevent infinite re-renders when resetting stuff.
     if (
       (this.state.reset.css.length === 0 && prevState.reset.css.length !== 0) ||
-      (this.state.reset.glyph.length === 0 && prevState.reset.glyph.length !== 0)
+      (
+        this.state.reset.glyph.length === 0 &&
+        prevState.reset.glyph.length !== 0
+      )
     ) {
       return;
     }
+
     const reset: AppliedOptions = { css: [], glyph: [] };
-    Object.entries(this.props.options.css).forEach(([cssProperty, cssOption]: [CssProperty, Option]) => {
-      if (cssOption.enabled === false && this.appliedOptions.css.includes(cssProperty)) {
+    Object.values(CssProperty).forEach(cssProperty => {
+      if (
+        this.props.options.css?.[cssProperty]?.enabled !== true &&
+        this.appliedOptions.css.includes(cssProperty)
+      ) {
         console.log('Adding ' + cssProperty + ' to reset');
         reset.css.push(cssProperty);
       }
     });
-    Object.entries(this.props.options.glyph).forEach(([glyphOption, option]: [GlyphOption, Option]) => {
-      if (option.enabled === false && this.appliedOptions.glyph.includes(glyphOption)) {
+    Object.values(GlyphOption).forEach(glyphOption => {
+      if (
+        this.props.options.glyph?.[glyphOption]?.enabled !== true &&
+        this.appliedOptions.glyph.includes(glyphOption)
+      ) {
         console.log('Adding ' + glyphOption + ' to reset');
         reset.glyph.push(glyphOption);
       }
@@ -192,19 +204,32 @@ export default class RandomCss extends React.Component<Props, State> {
       console.log({ reset });
       this.setState({ reset });
     }
-    if (this.state.resetForSpaces.css.length || this.state.resetForSpaces.glyph.length) {
+    if (
+      this.state.resetForSpaces.css.length ||
+      this.state.resetForSpaces.glyph.length
+    ) {
       this.spacesHaveStyle = false;
       this.setState({ resetForSpaces: { css: [], glyph: [] } });
       return;
     }
     if (
-      (this.state.resetForSpaces.css.length === 0 && prevState.resetForSpaces.css.length !== 0) ||
-      (this.state.resetForSpaces.glyph.length === 0 && prevState.resetForSpaces.glyph.length !== 0)
+      (
+        this.state.resetForSpaces.css.length === 0 &&
+        prevState.resetForSpaces.css.length !== 0
+      ) ||
+      (
+        this.state.resetForSpaces.glyph.length === 0 &&
+        prevState.resetForSpaces.glyph.length !== 0
+      )
     ) {
       return;
     }
     const hasSpace = this.props.text.indexOf(' ') >= 0;
-    if (hasSpace && this.props.options.global.ignoreSpaces && this.spacesHaveStyle) {
+    if (
+      hasSpace &&
+      this.props.options.global.ignoreSpaces &&
+      this.spacesHaveStyle
+    ) {
       console.log('reset: spaces have style...');
       this.setState({
         resetForSpaces: {
@@ -219,6 +244,6 @@ export default class RandomCss extends React.Component<Props, State> {
         this.appliedOptions.css.length > 0 ||
         this.appliedOptions.glyph.length > 0
       ) &&
-      !this.props.options.global.ignoreSpaces;
+      this.props.options.global.ignoreSpaces !== false;
   }
 }
