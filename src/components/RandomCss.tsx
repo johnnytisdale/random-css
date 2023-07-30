@@ -186,7 +186,6 @@ export default class RandomCss extends React.Component<Props, State> {
         this.props.options.css?.[cssProperty]?.enabled !== true &&
         this.appliedOptions.css.includes(cssProperty)
       ) {
-        console.log('Adding ' + cssProperty + ' to reset');
         reset.css.push(cssProperty);
       }
     });
@@ -195,13 +194,11 @@ export default class RandomCss extends React.Component<Props, State> {
         this.props.options.glyph?.[glyphOption]?.enabled !== true &&
         this.appliedOptions.glyph.includes(glyphOption)
       ) {
-        console.log('Adding ' + glyphOption + ' to reset');
         reset.glyph.push(glyphOption);
       }
     });
     this.setAppliedOptions();
     if (reset.css.length || reset.glyph.length) {
-      console.log({ reset });
       this.setState({ reset });
     }
     if (
@@ -230,7 +227,6 @@ export default class RandomCss extends React.Component<Props, State> {
       this.props.options.global.ignoreSpaces &&
       this.spacesHaveStyle
     ) {
-      console.log('reset: spaces have style...');
       this.setState({
         resetForSpaces: {
           css: this.appliedOptions.css.map(option => option),

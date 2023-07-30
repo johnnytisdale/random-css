@@ -189,7 +189,6 @@ export default class Form extends React.Component<Props, State> {
                   key={index}
                   label={propertyName}
                   onChange={e => {
-                    console.log(`toggling ${propertyName}`)
                     this.toggleCssProperty(
                       CssProperty[propertyName],
                       e.target.checked
@@ -276,6 +275,5 @@ export default class Form extends React.Component<Props, State> {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("The page has loaded.")
   createRoot(document.getElementById('app')).render(<Form />);
 });

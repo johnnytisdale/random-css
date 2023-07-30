@@ -48,7 +48,6 @@ export default class Character extends React.Component<Props, State> {
     // Get the default CSS values.
     const element = document.getElementById(this.id);
     if (element == null) {
-      console.log(`Failed to get element ${this.id}!`)
       return;
     }
     const style = getComputedStyle(element);
@@ -78,9 +77,6 @@ export default class Character extends React.Component<Props, State> {
     };
     let update = false;
     this.props.reset.css.forEach(property => {
-      console.log(
-        `Resetting ${property} to default value: ${this.default[property]}.`
-      );
       update = true;
       newState.style[property] = this.default[property];
 
@@ -102,9 +98,6 @@ export default class Character extends React.Component<Props, State> {
        * is not also checked. 
        */
       if (hasGlyph === false) {
-        console.log(
-          `Resetting glyph to default value: ${this.props.character}.`
-        );
         update = true;
         newState.glyph = this.props.character;
       }
@@ -161,7 +154,6 @@ export default class Character extends React.Component<Props, State> {
 
   startTicking(): void {
     this.interval = setInterval(() => {
-      // console.log("Tick.", Math.random());
       let update = false;
       const newState: State = {
         glyph: this.state.glyph,
@@ -186,16 +178,9 @@ export default class Character extends React.Component<Props, State> {
             newState.style[name] = newValue;
           }
           update = true;
-        } else if (newValue) {
-          console.log("newValue = ", newValue, ", so not updating.");
         }
       }
       if (update) {
-        console.log(
-          this.props.character,
-          ": Setting state: ",
-          JSON.stringify(newState)
-        );
         this.setState(newState);
       }
     }, 300);
