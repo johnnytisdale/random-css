@@ -1,5 +1,5 @@
 import AppliedOptions from "../types/AppliedOptions";
-import ECssProperty from "../enums/CssProperty";
+import CssProperty from "../enums/CssProperty";
 import Randomizable from "../classes/Randomizable";
 
 import * as CSS from 'csstype';
@@ -16,7 +16,7 @@ interface Props {
 }
 
 type Style = {
-  [key in ECssProperty]?: string;
+  [key in CssProperty]?: string;
 }
 
 interface State {
@@ -52,7 +52,7 @@ export default class Character extends React.Component<Props, State> {
       return;
     }
     const style = getComputedStyle(element);
-    Object.keys(ECssProperty).forEach((cssProperty: ECssProperty) => {
+    Object.keys(CssProperty).forEach((cssProperty: CssProperty) => {
 
       this.default[cssProperty] = Object.prototype.hasOwnProperty.call(DEFAULTS, cssProperty)
         ? DEFAULTS[cssProperty]
@@ -108,7 +108,7 @@ export default class Character extends React.Component<Props, State> {
   }
 
   private getClassname(): string {
-    return Object.keys(this.state.style).map((cssProperty: ECssProperty) => (
+    return Object.keys(this.state.style).map((cssProperty: CssProperty) => (
       `random-css-${cssProperty}-${this.state.style[cssProperty]
         .replaceAll('"', '')
         .replaceAll(' ', '-')
@@ -164,7 +164,7 @@ export default class Character extends React.Component<Props, State> {
         if (!randomizable.isLimitReached()) {
           continue;
         }
-        const name = randomizable.name as ECssProperty | 'glyph';
+        const name = randomizable.name as CssProperty | 'glyph';
         const newValue = randomizable.getRandomValue();
         if (newValue === undefined) {
           continue;

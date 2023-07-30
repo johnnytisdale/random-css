@@ -15,6 +15,7 @@ import FontStyle from "../classes/CSS/FontStyle";
 import FontWeight from "../classes/CSS/FontWeight";
 import Glyph from "../classes/Glyph";
 import GlyphOption from "../enums/GlyphOption";
+import Option from "../interfaces/Option";
 import Options from "../types/Options";
 import Randomizable from "../classes/Randomizable";
 import TextDecorationColor from "../classes/CSS/TextDecorationColor";
@@ -22,7 +23,6 @@ import TextDecorationLine from "../classes/CSS/TextDecorationLine";
 import TextDecorationStyle from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
-import Option from "../interfaces/Option";
 
 interface Props {
   options: Options;

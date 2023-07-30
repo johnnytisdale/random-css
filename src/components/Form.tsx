@@ -1,14 +1,14 @@
 import "../styles/Form.scss";
 
+import CssProperty from "../enums/CssProperty";
 import FormSection from "./FormSection";
+import FormSectionOption from "./FormSectionOption";
+import GlyphOption from "../enums/GlyphOption";
 import Options from "../types/Options";
 import RandomCss from "./RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
-import FormSectionOption from "./FormSectionOption";
-import CssProperty from "../enums/CssProperty";
-import GlyphOption from "../enums/GlyphOption";
 
 type Props = Record<string, never>;
 
