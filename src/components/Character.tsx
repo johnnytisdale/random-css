@@ -32,14 +32,13 @@ export default class Character extends React.Component<Props, State> {
 
   default: Style = {};
   id: string;
-  interval: NodeJS.Timer | null;
+  interval: NodeJS.Timer | null = null;
   ticks = 0;
 
   constructor(props: Props) {
     super(props);
     this.id = `character-${this.props.index}`;
-    const initialState: State = { glyph: this.props.character, style: {} };
-    this.state = initialState;
+    this.state = { glyph: this.props.character, style: {} };
     this.getClassname = this.getClassname.bind(this);
     this.startTicking = this.startTicking.bind(this);
   }
@@ -59,7 +58,7 @@ export default class Character extends React.Component<Props, State> {
         ? DEFAULTS[cssProperty]
         : style[cssProperty];
     });
-    if (this.props.randomizables.length) {
+    if (this.props.randomizables.length > 0) {
       this.startTicking();
     }
   }
@@ -81,15 +80,23 @@ export default class Character extends React.Component<Props, State> {
       newState.style[property] = this.default[property];
 
     });
-    if (this.props.reset.glyph.length) {
+    if (this.props.reset.glyph.length > 0) {
       let hasGlyph = false;
+      /**
+       * TODO: Define randomizables as an object to reduce the complexity of
+       * checking for the existence of a particular randomizable.
+       */
       for (const randomizable of this.props.randomizables) {
         if (randomizable.name === 'glyph') {
           hasGlyph = true;
           break;
         }
       }
-      if (hasGlyph === true) {
+      /**
+       * Only reset the character to its default value if the other glyph option
+       * is not also checked. 
+       */
+      if (hasGlyph === false) {
         console.log(`            Resetting glyph to default value: ${this.props.character}.`);
         update = true;
         newState.glyph = this.props.character;
@@ -101,17 +108,13 @@ export default class Character extends React.Component<Props, State> {
   }
 
   private getClassname(): string {
-    const classNames: Array<string> = [];
-    Object.keys(this.state.style).forEach((cssProperty: ECssProperty) => {
-      classNames.push(
-        `random-css-${cssProperty}-${this.state.style[cssProperty]
-          .replaceAll('"', '')
-          .replaceAll(' ', '-')
-          .replaceAll('%', '')
-        }`
-      );
-    });
-    return classNames.join(' ');
+    return Object.keys(this.state.style).map((cssProperty: ECssProperty) => (
+      `random-css-${cssProperty}-${this.state.style[cssProperty]
+        .replaceAll('"', '')
+        .replaceAll(' ', '-')
+        .replaceAll('%', '')
+      }`
+    )).join(' ');
   }
 
   // TODO: Figure out why unchecking border color sets classname to
@@ -123,13 +126,22 @@ export default class Character extends React.Component<Props, State> {
         data-testid="character"
         id={this.id}
         style={{
-
           ...(this.props.unsafe && {
             ...this.state.style,
-            ...(this.state.style.fontWeight !== undefined && { fontWeight: this.state.style.fontWeight as CSS.Property.FontWeight }),
-            ...(this.state.style.textDecorationStyle !== undefined && { textDecorationStyle: this.state.style.textDecorationStyle as CSS.Property.TextDecorationStyle }),
+            ...(
+              this.state.style.fontWeight !== undefined && {
+                fontWeight:
+                  this.state.style.fontWeight as CSS.Property.FontWeight
+              }
+            ),
+            ...(
+              this.state.style.textDecorationStyle !== undefined && {
+                textDecorationStyle:
+                  this.state.style.textDecorationStyle as
+                    CSS.Property.TextDecorationStyle 
+              }
+            ),
           }),
-
           height: this.props.height,
           width: this.props.width
         }}

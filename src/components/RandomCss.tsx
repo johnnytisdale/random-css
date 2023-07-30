@@ -107,13 +107,17 @@ export default class RandomCss extends React.Component<Props, State> {
       ) {
         randomizables.push(this.getRandomizableForCssProperty(optionName));
       }
-    })
-    if (this.props.options.glyph.leet || this.props.options.glyph.unicode) {
-      randomizables.push(new Glyph(
-        character,
-        this.props.options.glyph.leet.enabled,
-        this.props.options.glyph.unicode.enabled
-      ));
+    });
+    const isLeetEnabled = (
+      this.props.options.glyph.leet !== undefined &&
+      this.props.options.glyph.leet.enabled === true
+    );
+    const isUnicodeEnabled = (
+      this.props.options.glyph.unicode !== undefined &&
+      this.props.options.glyph.unicode.enabled === true
+    );
+    if (isLeetEnabled || isUnicodeEnabled) {
+      randomizables.push(new Glyph(character, isLeetEnabled, isUnicodeEnabled));
     }
     return randomizables;
   }
