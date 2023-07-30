@@ -54,7 +54,10 @@ export default class Character extends React.Component<Props, State> {
     const style = getComputedStyle(element);
     Object.keys(CssProperty).forEach((cssProperty: CssProperty) => {
 
-      this.default[cssProperty] = Object.prototype.hasOwnProperty.call(DEFAULTS, cssProperty)
+      this.default[cssProperty] = Object.prototype.hasOwnProperty.call(
+        DEFAULTS,
+        cssProperty
+      )
         ? DEFAULTS[cssProperty]
         : style[cssProperty];
     });
@@ -75,7 +78,9 @@ export default class Character extends React.Component<Props, State> {
     };
     let update = false;
     this.props.reset.css.forEach(property => {
-      console.log(`            Resetting ${property} to default value: ${this.default[property]}.`);
+      console.log(
+        `Resetting ${property} to default value: ${this.default[property]}.`
+      );
       update = true;
       newState.style[property] = this.default[property];
 
@@ -97,7 +102,9 @@ export default class Character extends React.Component<Props, State> {
        * is not also checked. 
        */
       if (hasGlyph === false) {
-        console.log(`            Resetting glyph to default value: ${this.props.character}.`);
+        console.log(
+          `Resetting glyph to default value: ${this.props.character}.`
+        );
         update = true;
         newState.glyph = this.props.character;
       }
@@ -154,7 +161,7 @@ export default class Character extends React.Component<Props, State> {
 
   startTicking(): void {
     this.interval = setInterval(() => {
-      // console.log("            Tick.", Math.random());
+      // console.log("Tick.", Math.random());
       let update = false;
       const newState: State = {
         glyph: this.state.glyph,
@@ -180,11 +187,15 @@ export default class Character extends React.Component<Props, State> {
           }
           update = true;
         } else if (newValue) {
-          console.log("            newValue = ", newValue, ", so not updating.");
+          console.log("newValue = ", newValue, ", so not updating.");
         }
       }
       if (update) {
-        console.log('            ', this.props.character + ": Setting state: " + JSON.stringify(newState));
+        console.log(
+          this.props.character,
+          ": Setting state: ",
+          JSON.stringify(newState)
+        );
         this.setState(newState);
       }
     }, 300);
