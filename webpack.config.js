@@ -21,8 +21,7 @@ module.exports = env => {
 	if (!isProduction) {
 		plugins.push(
 			new HtmlWebpackPlugin({
-				filename: 'form.html',
-				template: 'src/html/form.html',
+				template: 'src/html/index.html',
 				title: 'Random CSS'
 			})
 		);
