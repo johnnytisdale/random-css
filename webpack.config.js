@@ -1,8 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'),
-	path = require('path'),
-	webpack = require('webpack');
-
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = env => {
 
@@ -14,7 +13,7 @@ module.exports = env => {
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
-				{ from: "src/styles/random.css" },
+				{ from: 'src/styles/random.css' },
 			]
 		})
 	];
@@ -22,14 +21,15 @@ module.exports = env => {
 	if (!isProduction) {
 		plugins.push(
 			new HtmlWebpackPlugin({
-				template: 'src/html/index.html',
+				filename: 'form.html',
+				template: 'src/html/form.html',
 				title: 'Random CSS'
 			})
 		);
 	}
 
 	return {
-		entry: `./src/components/${isProduction ? 'RandomCss' : 'Form'}.tsx`,
+		entry: `./src/${isProduction ? 'js/index.js' : 'components/Form.tsx'}`,
 		module: {
 			rules: [
 				{
@@ -53,10 +53,20 @@ module.exports = env => {
 		output: {
 			filename: 'index.js',
 			path: path.resolve(__dirname, 'dist'),
+			library: 'random-css',
+			libraryTarget: 'umd',
+			umdNamedDefine: true
 		},
 		plugins: plugins,
 		resolve: {
-			extensions: [".js", ".json", ".ts", ".tsx"],
-		}
+			extensions: ['.js', '.json', '.ts', '.tsx'],
+		},
+		...(!isProduction && {
+			devtool: 'source-map',
+			mode: 'development',
+			optimization: {
+				minimize: false
+			},
+		})
 	}
 };

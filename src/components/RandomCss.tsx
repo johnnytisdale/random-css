@@ -26,7 +26,6 @@ import * as React from "react";
 
 interface Props {
   options: Options;
-  size: number;
   text: string;
 }
 
@@ -124,7 +123,7 @@ export default class RandomCss extends React.Component<Props, State> {
      * that contain the characters. The height of the divs will be equal to this
      * value multiplied by 1.1875.
      */
-    const size = `${this.props.size}rem`;
+    const size = `${this.props.options.global.size}rem`;
 
     return (
       <div
@@ -149,7 +148,7 @@ export default class RandomCss extends React.Component<Props, State> {
               <Character
                 key={`${i}-${character}`}
                 character={character}
-                height={`${this.props.size * 1.1875}rem`}
+                height={`${this.props.options.global.size * 1.1875}rem`}
                 index={i}
                 randomizables={randomizables}
                 reset={reset}

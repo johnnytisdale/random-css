@@ -49,7 +49,7 @@
 		"css": "py src/python/cssGenerator.py",
 		"dev": "webpack --mode development --env environment=development",
 		"lint": "npx eslint src --max-warnings=0",
-		"prepublishOnly": "rm -R dist; npm run prod",
+		"prepublishOnly": "del /F /Q dist && npm run prod",
 		"prod": "webpack --mode production --env environment=production",
 		"test": "jest --verbose",
 		"watch": "webpack --mode development --env environment=development --watch"

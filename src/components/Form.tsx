@@ -121,7 +121,6 @@ export default class Form extends React.Component<Props, State> {
         <div id="top" data-testid="top">
           <RandomCss
             options={optionsToExport}
-            size={this.state.options.global.size}
             text={this.state.options.global.text}
           />
         </div>
