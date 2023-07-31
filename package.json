@@ -53,5 +53,5 @@
 		"test": "jest --verbose",
 		"watch": "webpack --mode development --env environment=development --watch"
 	},
-	"version": "2.0.0"
+	"version": "2.0.1"
 }
