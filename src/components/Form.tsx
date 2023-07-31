@@ -241,7 +241,7 @@ export default class Form extends React.Component<Props, State> {
                   {' '}
                   <a href="random.css" target="_blank">external CSS file</a>
                   {' '}
-                  and ensure that it is specified the
+                  and ensure that it is specified in the
                   {' '}
                   <a
                     href={
