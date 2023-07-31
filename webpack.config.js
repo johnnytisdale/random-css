@@ -6,6 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = env => {
 
+	const isProduction = env.environment === 'production';
+
 	const plugins = [
 		new webpack.DefinePlugin({
 			ENV: JSON.stringify(env.environment),
@@ -17,7 +19,7 @@ module.exports = env => {
 		})
 	];
 
-	if (env.environment != 'production') {
+	if (!isProduction) {
 		plugins.push(
 			new HtmlWebpackPlugin({
 				template: 'src/html/index.html',
@@ -27,7 +29,7 @@ module.exports = env => {
 	}
 
 	return {
-		entry: './src/components/Form.tsx',
+		entry: `./src/components/${isProduction ? 'RandomCss' : 'Form'}.tsx`,
 		module: {
 			rules: [
 				{
