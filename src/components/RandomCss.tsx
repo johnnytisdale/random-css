@@ -54,16 +54,18 @@ export default class RandomCss extends React.Component<Props, State> {
   private setAppliedOptions(): void {
     this.appliedOptions.css = Object.entries(this.props.options.css)
       .map(
-        ([cssProperty, cssOption]: [CssProperty, Option]) => cssOption.enabled
-          ? cssProperty
-          : null
-      ).filter(value => value != null);
+        ([cssProperty, cssOption]: [CssProperty, Option]) => (
+          cssOption.enabled === true
+            ? cssProperty
+            : null
+        )
+      ).filter(Boolean);
     this.appliedOptions.glyph = Object.entries(this.props.options.glyph)
       .map(([glyphOption, option]: [GlyphOption, Option]) => (
         option.enabled === true
           ? glyphOption
           : null
-      )).filter(value => value != null);
+      )).filter(Boolean);
   }
 
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
@@ -138,10 +140,10 @@ export default class RandomCss extends React.Component<Props, State> {
           this.props.text.split('').map((character, i) => {
             const ignore = character === ' '
               && this.props.options.global.ignoreSpaces;
-            const randomizables: Randomizable[] = ignore
+            const randomizables: Randomizable[] = ignore === true
               ? []
               : this.getRandomizables(character);
-            const reset = ignore
+            const reset = ignore === true
               ? this.state.resetForSpaces
               : this.state.reset;
             return (
@@ -201,8 +203,8 @@ export default class RandomCss extends React.Component<Props, State> {
       this.setState({ reset });
     }
     if (
-      this.state.resetForSpaces.css.length ||
-      this.state.resetForSpaces.glyph.length
+      this.state.resetForSpaces.css.length > 0 ||
+      this.state.resetForSpaces.glyph.length > 0
     ) {
       this.spacesHaveStyle = false;
       this.setState({ resetForSpaces: { css: [], glyph: [] } });
@@ -221,24 +223,26 @@ export default class RandomCss extends React.Component<Props, State> {
       return;
     }
     const hasSpace = this.props.text.indexOf(' ') >= 0;
-    if (
-      hasSpace &&
-      this.props.options.global.ignoreSpaces &&
-      this.spacesHaveStyle
-    ) {
-      this.setState({
-        resetForSpaces: {
-          css: this.appliedOptions.css.map(option => option),
-          glyph: this.appliedOptions.glyph.map(option => option)
-        }
-      });
-      return;
-    }
-    this.spacesHaveStyle = hasSpace &&
+    this.spacesHaveStyle = (
+      hasSpace === true &&
       (
         this.appliedOptions.css.length > 0 ||
         this.appliedOptions.glyph.length > 0
       ) &&
-      this.props.options.global.ignoreSpaces !== false;
+      this.props.options.global.ignoreSpaces !== false
+    );
+    if (
+      hasSpace === true &&
+      this.props.options.global.ignoreSpaces === true &&
+      this.spacesHaveStyle === true
+    ) {
+      this.setState({
+        resetForSpaces: {
+          css: this.appliedOptions.css,
+          glyph: this.appliedOptions.glyph
+        }
+      });
+      return;
+    }
   }
 }
