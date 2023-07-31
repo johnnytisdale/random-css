@@ -44,7 +44,7 @@ export default class Form extends React.Component<Props, State> {
           ignoreSpaces: false,
           size: 3,
           text: 'random css',
-          unsafe: false
+          unsafe: true
         },
         glyph: {}
       },
@@ -233,6 +233,40 @@ export default class Form extends React.Component<Props, State> {
 
           { /* export */}
           <FormSection id='export-options' title="export">
+            {
+              this.state.options.global.unsafe === false && (
+                <div id='export-unsafe-css'>
+                  You didn't select the unsafe option. Thanks for being security
+                  minded! Don't forget to use the
+                  {' '}
+                  <a href="random.css" target="_blank">external CSS file</a>
+                  {' '}
+                  and ensure that it is specified the
+                  {' '}
+                  <a
+                    href={
+                      "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
+                        "Headers/Content-Security-Policy/style-src"
+                    }
+                    target="_blank"
+                  >
+                    style-src
+                  </a>
+                  {' '}
+                  directive of your
+                  {' '}
+                  <a
+                    href={
+                      "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
+                        "Headers/Content-Security-Policy"
+                    }
+                    target="_blank"
+                  >
+                    Content Security Policy
+                  </a>.
+                </div>
+              )
+            }
             <div id='export-textarea' className='option'>
               <div className='input'>
                 <textarea
