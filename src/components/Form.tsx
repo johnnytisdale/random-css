@@ -51,6 +51,17 @@ export default class Form extends React.Component<Props, State> {
     }
   }
 
+  private getValidSize(size: number): number {
+    if (size > 10) {
+      return 10;
+    } else if (size < .25) {
+      return .25;
+    } else if (size % .25 !== 0) {
+      return parseFloat((Math.round(size * 4) / 4).toFixed(2));
+    }
+    return size;
+  }
+
   private toggleAll(e: React.ChangeEvent<HTMLInputElement>, select: boolean) {
     const formOptions = this.state.form;
     if (!e.target.checked) {
@@ -152,81 +163,102 @@ export default class Form extends React.Component<Props, State> {
 
           {/* Global options */}
           <FormSection id="global-options" title="global options">
-            <FormSectionOption
-              label="text"
-              testID="randomcss-form-text"
-              type="text"
-              value={this.state.options.global.text}
-              onChange={e => {
-                const options = this.state.options;
-                options.global.text = e.target.value;
-                this.setState({ options: options });
-              }}
-            />
-            <FormSectionOption
-              label="size"
-              type='number'
-              value={this.state.options.global.size}
-              onChange={e => {
-                const options = this.state.options;
-                options.global.size = parseInt(e.target.value);
-                this.setState({ options: options });
-              }}
-            />
-            <FormSectionOption
-              label="unsafe"
-              type='checkbox'
-              checked={this.state.options.global.unsafe}
-              onChange={e => {
-                const options = this.state.options;
-                options.global.unsafe = e.target.checked;
-                this.setState({ options: options });
-              }}
-            />
-            <FormSectionOption
-              checked={this.state.options.global.ignoreSpaces}
-              label="ignore spaces"
-              type='checkbox'
-              onChange={e => {
-                const options = this.state.options;
-                options.global.ignoreSpaces = e.target.checked;
-                this.setState({ options: options });
-              }}
-            />
+            <FormSectionOption label="text">
+              <input
+                data-testid="randomcss-form-text"
+                onChange={e => {
+                  const options = this.state.options;
+                  options.global.text = e.target.value;
+                  this.setState({ options: options });
+                }}
+                type="text"
+                value={this.state.options.global.text}
+              />
+            </FormSectionOption>
+            <FormSectionOption label="size">
+              <input
+                {
+                  ...(
+                      this.state.options.global.unsafe === false &&
+                      {
+                        max: "10",
+                        min: ".25",
+                        step: "0.25"
+                      }
+                  )
+                }
+                type='number'
+                value={this.state.options.global.size}
+                onChange={e => {
+                  const options = this.state.options;
+                  options.global.size = options.global.unsafe === true
+                    ? parseFloat(e.target.value)
+                    : this.getValidSize(parseFloat(e.target.value));
+                  this.setState({ options: options });
+                }}
+              />
+            </FormSectionOption>
+            <FormSectionOption label="unsafe">
+              <input
+                checked={this.state.options.global.unsafe}
+                type='checkbox'
+                onChange={e => {
+                  const options = this.state.options;
+                  options.global.unsafe = e.target.checked;
+                  if (e.target.checked === false) {
+                    options.global.size = this.getValidSize(
+                      options.global.size
+                    );
+                  }
+                  this.setState({ options: options });
+                }}
+              />
+            </FormSectionOption>
+            <FormSectionOption label="ignore spaces">
+              <input
+                checked={this.state.options.global.ignoreSpaces}
+                type='checkbox'
+                onChange={e => {
+                  const options = this.state.options;
+                  options.global.ignoreSpaces = e.target.checked;
+                  this.setState({ options: options });
+                }}
+              />
+            </FormSectionOption>
           </FormSection>
 
           {/* css */}
           <FormSection id='css-options' title="css options">
-            <FormSectionOption
-              checked={this.state.form.css.selectAll}
-              id='select-all-css'
-              label="select all"
-              onChange={e => this.toggleAll(e, true)}
-              type='checkbox'
-            />
-            <FormSectionOption
-              checked={this.state.form.css.selectNone}
-              id='select-none-css'
-              label="select none"
-              onChange={e => this.toggleAll(e, false)}
-              type='checkbox'
-            />
+            <FormSectionOption id='select-all-css' label="select all">
+              <input
+                checked={this.state.form.css.selectAll}
+                type='checkbox'
+                onChange={e => this.toggleAll(e, true)}
+              />
+            </FormSectionOption>
+            <FormSectionOption id='select-none-css' label="select none">
+              <input
+                checked={this.state.form.css.selectNone}
+                type='checkbox'
+                onChange={e => this.toggleAll(e, false)}
+              />
+            </FormSectionOption>
             {
               Object.values(CssProperty).map((propertyName, index) => (
-                <FormSectionOption
-                  checked={
-                    this.state.options.css?.[propertyName]?.enabled === true
-                  }
-                  key={index}
-                  label={propertyName}
-                  onChange={e => {
-                    this.toggleCssProperty(
-                      CssProperty[propertyName],
-                      e.target.checked
-                    );
-                  }}
-                  type='checkbox'
-                />
+                <FormSectionOption key={index} label={propertyName}>
+                  <input
+                    checked={
+                      this.state.options.css?.[propertyName]?.enabled === true
+                    }
+                    type='checkbox'
+                    onChange={e => {
+                      this.toggleCssProperty(
+                        CssProperty[propertyName],
+                        e.target.checked
+                      );
+                    }}
+                  />
+                </FormSectionOption>
               ))
             }
           </FormSection>
@@ -234,23 +266,29 @@ export default class Form extends React.Component<Props, State> {
           { /* glyph */}
           <FormSection id='glyph-options' title="glyph options">
             <FormSectionOption
-              checked={this.state.options.glyph?.leet?.enabled === true}
               id='1337'
               label="1337"
-              onChange={e => {
-                this.toggleGlyphOption(GlyphOption.LEET, e.target.checked);
-              }}
-              type='checkbox'
-            />
+            >
+              <input
+                checked={this.state.options.glyph?.leet?.enabled === true}
+                type='checkbox'
+                onChange={e => {
+                  this.toggleGlyphOption(GlyphOption.LEET, e.target.checked);
+                }}
+              />
+            </FormSectionOption>
             <FormSectionOption
-              checked={this.state.options.glyph?.unicode?.enabled === true}
               id='unicode'
               label="unicode"
-              onChange={e => {
-                this.toggleGlyphOption(GlyphOption.UNICODE, e.target.checked);
-              }}
-              type='checkbox'
-            />
+            >
+              <input
+                checked={this.state.options.glyph?.unicode?.enabled === true}
+                type='checkbox'
+                onChange={e => {
+                  this.toggleGlyphOption(GlyphOption.UNICODE, e.target.checked);
+                }}
+              />
+            </FormSectionOption>
           </FormSection>
 
           { /* export */}
