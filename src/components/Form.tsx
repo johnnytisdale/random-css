@@ -129,7 +129,7 @@ export default class Form extends React.Component<Props, State> {
         <div id='dev-form'>
 
           {/* Global options */}
-          <FormSection title="global options">
+          <FormSection id="global-options" title="global options">
             <FormSectionOption
               label="text"
               testID="randomcss-form-text"
@@ -138,6 +138,16 @@ export default class Form extends React.Component<Props, State> {
               onChange={e => {
                 const options = this.state.options;
                 options.global.text = e.target.value;
+                this.setState({ options: options });
+              }}
+            />
+            <FormSectionOption
+              label="size"
+              type='number'
+              value={this.state.options.global.size}
+              onChange={e => {
+                const options = this.state.options;
+                options.global.size = parseInt(e.target.value);
                 this.setState({ options: options });
               }}
             />
