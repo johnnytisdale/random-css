@@ -38,7 +38,6 @@ export default class RandomCss extends React.Component<Props, State> {
 
   private appliedOptions: AppliedOptions = { css: [], glyph: [] };
   private spacesHaveStyle = false;
-  private renderCount = 0;
 
   constructor(props: Props) {
     super(props);
@@ -115,8 +114,6 @@ export default class RandomCss extends React.Component<Props, State> {
   }
 
   render(): React.ReactNode {
-
-    this.renderCount++;
 
     /**
      * This value serves as both the font size and the width of the divs
