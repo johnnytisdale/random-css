@@ -41,7 +41,7 @@ export default class Form extends React.Component<Props, State> {
       options: {
         css: {},
         global: {
-          ignoreSpaces: false,
+          ignoreSpaces: true,
           size: 3,
           text: 'random css',
           unsafe: true
