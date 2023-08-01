@@ -29,7 +29,7 @@ much out of the question. `rgb()` accepts three integers, each ranging from 0 to
 rules for just *one* property results in a stylesheet that is over 1GB in size.
 
 So when using external CSS, we use the
-[color keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#color_keywords),
+[color keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color),
 of which there are only 142.
 
 
