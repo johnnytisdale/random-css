@@ -22,6 +22,20 @@ body {
   text-align: left;
   width: min-content;
 
+  .options {
+    >.option {
+      display: flex;
+      >.label {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-right: 1rem;
+        user-select: none;
+          -webkit-user-select: none;
+        width: 100%;
+      }
+    }
+  }
+
   .section {
     border-bottom: 1px solid black;
     padding: 1rem;
@@ -84,14 +98,49 @@ body {
       margin-bottom: 1rem;
     }
 
-    .options {
+    >.options {
       >.option {
-        display: flex;
+
+        &.expanded {
+          border-top: 1px solid black;
+        }
+
+        &:not(.expanded) {
+          >.label {
+            border-top: 1px dotted black;
+          }
+        }
 
         >.label {
-          padding-right: 1rem;
-          width: 100%;
+          border-bottom: 1px dotted black;
+          &:not(:hover) {
+            border-color: transparent;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+          >.chevron {
+            margin-right: .25rem;
+          }
         }
+      }
+
+      >.expanded-content {
+        border-bottom: 1px solid black;
+        padding-bottom: .5rem;
+        >.subsection {
+
+          >.label {
+            padding-top: .5rem;
+            margin-left: 1rem;
+            font-variant: small-caps;
+          }
+
+          >.options {
+            margin-left: 1rem;
+          }
+        }
+
       }
     }
   }

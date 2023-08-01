@@ -79,7 +79,7 @@ export default class RandomCss extends React.Component<Props, State> {
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
     switch (option) {
       case CssProperty.animation:
-        return new Animation();
+        return new Animation(this.props.options.css.animation);
       case CssProperty.backgroundColor:
         return new BackgroundColor(this.props.options.global.unsafe);
       case CssProperty.borderColor:

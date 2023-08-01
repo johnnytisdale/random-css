@@ -1,7 +1,13 @@
 import CssProperty from "./CssProperty";
 import * as cssProperties from "../../json/cssProperties.json";
+import Option from "../../interfaces/Option";
+import AnimationTransformation from "../../enums/AnimationTransformation";
 
 const json = cssProperties['animation'];
+
+export interface AnimationOption extends Option {
+  transformations?: AnimationTransformation[];
+}
 
 export default class Animation extends CssProperty {
 
@@ -17,7 +23,13 @@ export default class Animation extends CssProperty {
   private easingFunctions = json.easingFunctions;
   private fillModes = json.fillModes;
   private iterationCounts = json.iterationCounts;
-  private names = json.names;
+  private transformations: AnimationTransformation[];
+
+  constructor(private options: AnimationOption) {
+    super();
+    this.transformations = options.transformations ??
+      Object.values(AnimationTransformation);
+  }
 
   public getRandomValue(): string {
     return [
@@ -28,7 +40,7 @@ export default class Animation extends CssProperty {
       this.getRandomArrayElement(this.directions),
       this.getRandomArrayElement(this.fillModes),
       'running', // play state
-      this.getRandomArrayElement(this.names),
+      this.getRandomArrayElement(this.transformations),
     ].join(' ');
   }
 

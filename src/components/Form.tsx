@@ -9,6 +9,10 @@ import RandomCss from "./RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
+import FormSectionOptionAnimation from "./Form/FormSectionOptionAnimation";
+import Option from "../interfaces/Option";
+import { AnimationOption } from "../classes/CSS/Animation";
+import AnimationTransformation from "../enums/AnimationTransformation";
 
 type Props = Record<string, never>;
 
@@ -39,7 +43,12 @@ export default class Form extends React.Component<Props, State> {
         }
       },
       options: {
-        css: {},
+        css: {
+          animation: {
+            enabled: false,
+            transformations: Object.values(AnimationTransformation)
+          }
+        },
         global: {
           ignoreSpaces: true,
           size: 3,
@@ -48,7 +57,7 @@ export default class Form extends React.Component<Props, State> {
         },
         glyph: {}
       },
-    }
+    };
   }
 
   private getValidSize(size: number): number {
@@ -91,6 +100,7 @@ export default class Form extends React.Component<Props, State> {
     if (options.css[cssProperty] === undefined) {
       options.css[cssProperty] = { enabled: false };
     }
+
     /**
      * Defining using the spread operator is necessary to avoid problems with
      * prevProps in componentDidUpdate of the RandomCss component. If we don't
@@ -243,23 +253,39 @@ export default class Form extends React.Component<Props, State> {
                 onChange={e => this.toggleAll(e, false)}
               />
             </FormSectionOption>
+            <FormSectionOptionAnimation
+              option={this.state.options.css.animation}
+              setOption={(option: AnimationOption) => {
+                const options = this.state.options;
+                options.css.animation = option;
+                this.setState({ options });
+              }}
+            />
             {
-              Object.values(CssProperty).map((propertyName, index) => (
-                <FormSectionOption key={index} label={propertyName}>
-                  <input
-                    checked={
-                      this.state.options.css?.[propertyName]?.enabled === true
-                    }
-                    type='checkbox'
-                    onChange={e => {
-                      this.toggleCssProperty(
-                        CssProperty[propertyName],
-                        e.target.checked
-                      );
-                    }}
-                  />
-                </FormSectionOption>
-              ))
+              Object.values(CssProperty).map((propertyName, index) => {
+                if (propertyName === CssProperty.animation) {
+                  return;
+                }
+                return (
+                  <FormSectionOption
+                    key={index}
+                    label={propertyName}
+                  >
+                    <input
+                      checked={
+                        this.state.options.css?.[propertyName]?.enabled === true
+                      }
+                      type='checkbox'
+                      onChange={e => {
+                        this.toggleCssProperty(
+                          CssProperty[propertyName],
+                          e.target.checked
+                        );
+                      }}
+                    />
+                  </FormSectionOption>
+                );
+              })
             }
           </FormSection>
 
