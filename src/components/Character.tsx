@@ -39,8 +39,6 @@ export default class Character extends React.Component<Props, State> {
     super(props);
     this.id = `character-${this.props.index}`;
     this.state = { glyph: this.props.character, style: {} };
-    this.getClassname = this.getClassname.bind(this);
-    this.startTicking = this.startTicking.bind(this);
   }
 
   componentDidMount() {

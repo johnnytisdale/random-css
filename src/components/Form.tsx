@@ -80,7 +80,17 @@ export default class Form extends React.Component<Props, State> {
     if (options.css[cssProperty] === undefined) {
       options.css[cssProperty] = { enabled: false };
     }
-    options.css[cssProperty].enabled = checked;
+    /**
+     * Defining using the spread operator is necessary to avoid problems with
+     * prevProps in componentDidUpdate of the RandomCss component. If we don't
+     * create a clone like this then prevProps will point to the same object as
+     * the new props so the values in prevProps will reflect the updated values
+     * instead of the previous values.
+     */
+    options.css[cssProperty] = {
+      ...options.css[cssProperty],
+      ...{ enabled: checked }
+    };
     if (!checked) {
       form.css.selectAll = false;
     } else {
@@ -90,6 +100,18 @@ export default class Form extends React.Component<Props, State> {
       form: form,
       options: options,
     });
+  }
+
+  toggleGlyphOption(glyphOption: GlyphOption, checked: boolean): void {
+    const options = this.state.options;
+    if (options.glyph[glyphOption] === undefined) {
+      options.glyph[glyphOption] = { enabled: false };
+    }
+    options.glyph[glyphOption] = {
+      ...options.glyph[glyphOption],
+      ...{ enabled: checked }
+    };
+    this.setState({ options: options });
   }
 
   render(): React.ReactNode {
@@ -216,12 +238,7 @@ export default class Form extends React.Component<Props, State> {
               id='1337'
               label="1337"
               onChange={e => {
-                const options = this.state.options;
-                if (options.glyph.leet === undefined) {
-                  options.glyph.leet = { enabled: false };
-                }
-                options.glyph.leet.enabled = e.target.checked;
-                this.setState({ options });
+                this.toggleGlyphOption(GlyphOption.LEET, e.target.checked);
               }}
               type='checkbox'
             />
@@ -230,12 +247,7 @@ export default class Form extends React.Component<Props, State> {
               id='unicode'
               label="unicode"
               onChange={e => {
-                const options = this.state.options;
-                if (options.glyph.unicode === undefined) {
-                  options.glyph.unicode = { enabled: false };
-                }
-                options.glyph.unicode.enabled = e.target.checked;
-                this.setState({ options });
+                this.toggleGlyphOption(GlyphOption.UNICODE, e.target.checked);
               }}
               type='checkbox'
             />

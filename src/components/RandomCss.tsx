@@ -36,7 +36,6 @@ interface State {
 
 export default class RandomCss extends React.Component<Props, State> {
 
-  private appliedOptions: AppliedOptions = { css: [], glyph: [] };
   private spacesHaveStyle = false;
 
   constructor(props: Props) {
@@ -45,24 +44,23 @@ export default class RandomCss extends React.Component<Props, State> {
       reset: { css: [], glyph: [] },
       resetForSpaces: { css: [], glyph: [] }
     };
-    this.getRandomizables = this.getRandomizables.bind(this);
-    this.setAppliedOptions = this.setAppliedOptions.bind(this);
-    this.setAppliedOptions();
   }
 
-  private setAppliedOptions(): void {
-    this.appliedOptions.css = Object.entries(this.props.options.css)
-      .map(([cssProperty, cssOption]: [CssProperty, Option]) => (
-        cssOption.enabled === true
-          ? cssProperty
-          : null
-      )).filter(Boolean);
-    this.appliedOptions.glyph = Object.entries(this.props.options.glyph)
+  private getAppliedOptions(): AppliedOptions {
+    return {
+      css: Object.entries(this.props.options.css)
+        .map(([cssProperty, cssOption]: [CssProperty, Option]) => (
+          cssOption.enabled === true
+            ? cssProperty
+            : null
+        )).filter(Boolean),
+      glyph: Object.entries(this.props.options.glyph)
       .map(([glyphOption, option]: [GlyphOption, Option]) => (
         option.enabled === true
           ? glyphOption
           : null
-      )).filter(Boolean);
+      )).filter(Boolean)
+    };
   }
 
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
@@ -164,7 +162,7 @@ export default class RandomCss extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props, prevState: State) {
 
     /**
-     * Just reset one or more CSS properties (or glyph) back to its default
+     * We just reset one or more CSS properties (or glyph) back to its default
      * value, which caused componentDidUpdate to be called again. Clear the
      * arrays in this.state.reset and return to avoid infinite re-renders.
      */
@@ -174,7 +172,7 @@ export default class RandomCss extends React.Component<Props, State> {
     }
 
     /**
-     * Just cleared the arrays in this.state.reset, which caused
+     * We just cleared the arrays in this.state.reset, which caused
      * componentDidUpdate to be called again. Return to avoid infinite
      * re-renders.
      */
@@ -194,20 +192,14 @@ export default class RandomCss extends React.Component<Props, State> {
      */
     const reset: AppliedOptions = {
       css: Object.values(CssProperty).filter(cssProperty => (
-        this.props.options.css?.[cssProperty]?.enabled !== true &&
-        this.appliedOptions.css.includes(cssProperty)
+        prevProps.options.css?.[cssProperty]?.enabled === true &&
+        this.props.options.css?.[cssProperty]?.enabled !== true
       )),
       glyph: Object.values(GlyphOption).filter(glyphOption => (
-        this.props.options.glyph?.[glyphOption]?.enabled !== true &&
-        this.appliedOptions.glyph.includes(glyphOption)
+        prevProps.options.glyph?.[glyphOption]?.enabled === true &&
+        this.props.options.glyph?.[glyphOption]?.enabled !== true 
       ))
     };
-
-    /**
-     * Keep up with which options have been applied.
-     * TODO: Why not just use prevProps.options?
-     */
-    this.setAppliedOptions();
 
     /**
      * One or more CSS properties or glyph options has been removed. Reset the
@@ -218,9 +210,9 @@ export default class RandomCss extends React.Component<Props, State> {
     }
 
     /**
-     * Just enabled ignoreSpaces and then reset one or more CSS properties for 
-     * spaces in the text, which caused componentDidUpdate to be called again.
-     * Clear the arrays in this.state.reset and return to avoid infinite
+     * We just enabled ignoreSpaces and then reset one or more CSS properties
+     * for spaces in the text, which caused componentDidUpdate to be called
+     * again. Clear the arrays in this.state.reset and return to avoid infinite
      * re-renders.
      * TODO: No point in this.state.resetForSpaces.glyph?
      */
@@ -264,12 +256,7 @@ export default class RandomCss extends React.Component<Props, State> {
       this.spacesHaveStyle === true
     ) {
       this.spacesHaveStyle = false;
-      this.setState({
-        resetForSpaces: {
-          css: this.appliedOptions.css,
-          glyph: this.appliedOptions.glyph
-        }
-      });
+      this.setState({ resetForSpaces: this.getAppliedOptions() });
       return;
     }
 
@@ -277,12 +264,10 @@ export default class RandomCss extends React.Component<Props, State> {
      * Determine whether any CSS properties are being randomized for spaces in
      * the text.
      */
+    const appliedOptions = this.getAppliedOptions();
     this.spacesHaveStyle = (
       hasSpace === true &&
-      (
-        this.appliedOptions.css.length > 0 ||
-        this.appliedOptions.glyph.length > 0
-      ) &&
+      (appliedOptions.css.length > 0 || appliedOptions.glyph.length > 0) &&
       this.props.options.global.ignoreSpaces === false
     );
   }
