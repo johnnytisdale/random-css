@@ -7,12 +7,11 @@ import * as React from "react";
 
 interface Props {
   character: string;
-  height: number | string;
   index: number;
   randomizables: Randomizable[];
   reset: AppliedOptions;
+  size: number;
   unsafe: boolean;
-  width: number | string;
 }
 
 type Style = {
@@ -105,14 +104,19 @@ export default class Character extends React.Component<Props, State> {
     }
   }
 
-  private getClassname(): string {
-    return Object.keys(this.state.style).map((cssProperty: CssProperty) => (
-      `random-css-${cssProperty}-${this.state.style[cssProperty]
-        .replaceAll('"', '')
-        .replaceAll(' ', '-')
-        .replaceAll('%', '')
-      }`
-    )).join(' ');
+  private getClassName(): string {
+    return [
+      this.props.unsafe === false
+        ? `random-css-character-${String(this.props.size).replaceAll('.', '-')}`
+        : null,
+      ...Object.keys(this.state.style).map((cssProperty: CssProperty) => (
+        `random-css-${cssProperty}-${this.state.style[cssProperty]
+          .replaceAll('"', '')
+          .replaceAll(' ', '-')
+          .replaceAll('%', '')
+        }`
+      ))
+    ].filter(Boolean).join(' ');
   }
 
   // TODO: Figure out why unchecking border color sets classname to
@@ -120,29 +124,31 @@ export default class Character extends React.Component<Props, State> {
   render(): React.ReactNode {
     return (
       <div
-        className={this.props.unsafe ? '' : this.getClassname()}
+        className={this.props.unsafe === true ? '' : this.getClassName()}
         data-testid="character"
         id={this.id}
-        style={{
-          ...(this.props.unsafe && {
-            ...this.state.style,
-            ...(
-              this.state.style.fontWeight !== undefined && {
-                fontWeight:
-                  this.state.style.fontWeight as CSS.Property.FontWeight
-              }
-            ),
-            ...(
-              this.state.style.textDecorationStyle !== undefined && {
-                textDecorationStyle:
-                  this.state.style.textDecorationStyle as
-                    CSS.Property.TextDecorationStyle 
-              }
-            ),
-          }),
-          height: this.props.height,
-          width: this.props.width
-        }}
+        style={
+          this.props.unsafe === false
+            ? null
+            : {
+              height: `${this.props.size * 1.1875}rem`,
+              width: `${this.props.size}rem`,
+              ...this.state.style,
+              ...(
+                this.state.style.fontWeight !== undefined && {
+                  fontWeight:
+                    this.state.style.fontWeight as CSS.Property.FontWeight
+                }
+              ),
+              ...(
+                this.state.style.textDecorationStyle !== undefined && {
+                  textDecorationStyle:
+                    this.state.style.textDecorationStyle as
+                      CSS.Property.TextDecorationStyle
+                }
+              ),
+            }
+          }
       >
         { /* TODO: figure out why this.state.glyph is sometimes undefined! */ }
         {this.state.glyph ?? this.props.character}

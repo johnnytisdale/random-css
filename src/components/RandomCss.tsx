@@ -63,6 +63,19 @@ export default class RandomCss extends React.Component<Props, State> {
     };
   }
 
+  private getClassName(): string {
+    return [
+      "random-css-container",
+      this.props.options.global.unsafe === false
+        ? `random-css-container-${
+          String(this.props.options.global.size).replaceAll('.', '-')
+        }`
+        : null
+    ]
+      .filter(Boolean)
+      .join(' ');
+  }
+
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
     switch (option) {
       case CssProperty.animation:
@@ -122,12 +135,17 @@ export default class RandomCss extends React.Component<Props, State> {
 
     return (
       <div
-        className="random-css-container"
-        style={{
-          fontSize: size,
-          margin: "auto",
-          width: "min-content"
-        }}
+        className={this.getClassName()}
+        {
+          ...(
+            this.props.options.global.unsafe === true &&
+            {
+              style: {
+                fontSize: size
+              }
+            }
+          )
+        }
       >
         {
           this.props.text.split('').map((character, i) => {
@@ -145,12 +163,11 @@ export default class RandomCss extends React.Component<Props, State> {
               <Character
                 key={`${i}-${character}`}
                 character={character}
-                height={`${this.props.options.global.size * 1.1875}rem`}
                 index={i}
                 randomizables={randomizables}
                 reset={reset}
+                size={this.props.options.global.size}
                 unsafe={this.props.options.global.unsafe}
-                width={size}
               />
             );
           })

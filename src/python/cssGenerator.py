@@ -29,12 +29,17 @@ cssFile.write("}\n")
 rem = 0
 while rem < 10:
     rem += .25
+    remString = str(rem)
+    if remString.endswith(".0"):
+        remString = remString[:-2]
+    else:
+        remString = remString.replace(".", "-")
     cssFile.write(".random-css-container-" +
-                  str(rem).replace(".", "-") + " {\n")
+                  remString + " {\n")
     cssFile.write("\tfont-size: " + str(rem) + "rem;\n")
     cssFile.write("}\n")
     cssFile.write(".random-css-character-" +
-                  str(rem).replace(".", "-") + " {\n")
+                  remString + " {\n")
     cssFile.write("\theight: " + str(rem * 1.1875) + "rem;\n")
     cssFile.write("\twidth:  " + str(rem) + "rem;\n")
     cssFile.write("}\n")
