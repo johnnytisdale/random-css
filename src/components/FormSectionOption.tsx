@@ -4,17 +4,21 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import * as React from "react";
 
 interface Props {
-  children: React.ReactNode,
-  expandedContent?: React.ReactNode,
+  children?: React.ReactNode,
   id?: string,
+  // input: React.ReactNode,
+  input: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
   label: string,
 }
 
 const FormSectionOption = ({
   children,
   id,
+  input,
   label,
-  expandedContent
 }: Props): React.ReactNode => {
   const [expanded, setExpanded] = React.useState(false);
   return (
@@ -23,13 +27,13 @@ const FormSectionOption = ({
         <div
           className='label'
           onClick={
-            expandedContent !== undefined
+            children !== undefined
               ? () => setExpanded(!expanded)
               : null
             }
         >
           {
-            expandedContent !== undefined && (
+            children !== undefined && (
               <span className="chevron">
                 <FontAwesomeIcon
                   icon={expanded ? faCaretDown : faCaretRight}
@@ -43,13 +47,16 @@ const FormSectionOption = ({
           </div>
         </div>
         <div className='input'>
-          {children}
+          {/* { input } */}
+          <input
+            {...input}
+          />
         </div>
       </div>
       {
-        expanded && expandedContent !== undefined && (
+        expanded && children !== undefined && (
           <div className="expanded-content">
-            {expandedContent}
+            {children}
           </div>
         )
       }

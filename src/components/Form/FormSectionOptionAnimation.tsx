@@ -18,12 +18,24 @@ const FormSectionOptionAnimation = ({
     () =>  option?.enabled === true,
     [option?.enabled]
   );
-  console.log({animationOption: option});
   return (
     <FormSectionOption
       label="animation"
-      expandedContent={
-        <div className="subsection">
+      input={{
+        checked: enabled,
+        type: "checkbox",
+        onChange: e => {
+          setOption({
+            ...(option ?? {
+              enabled: false,
+              transformations: Object.values(AnimationTransformation)
+            }),
+            ...{ enabled: e.target.checked }
+          });
+          }
+      }}
+    >
+      <div className="subsection">
           <div className="label">transformations</div>
           <div className="options">
             {
@@ -57,23 +69,8 @@ const FormSectionOptionAnimation = ({
                 </div>
               ))
             }
-          </div> 
+          </div>
         </div>
-      }
-    >
-      <input
-        checked={enabled}
-        type="checkbox"
-        onChange={e => {
-          setOption({
-            ...(option ?? {
-              enabled: false,
-              transformations: Object.values(AnimationTransformation)
-            }),
-            ...{ enabled: e.target.checked }
-          });
-        }}
-      />
     </FormSectionOption>
   );
 }

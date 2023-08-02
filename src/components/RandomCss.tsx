@@ -214,7 +214,7 @@ export default class RandomCss extends React.Component<Props, State> {
       )),
       glyph: Object.values(GlyphOption).filter(glyphOption => (
         prevProps.options.glyph?.[glyphOption]?.enabled === true &&
-        this.props.options.glyph?.[glyphOption]?.enabled !== true 
+        this.props.options.glyph?.[glyphOption]?.enabled !== true
       ))
     };
 
@@ -261,7 +261,7 @@ export default class RandomCss extends React.Component<Props, State> {
 
     // Determine whether there any spaces in the text.
     const hasSpace = this.props.text.indexOf(' ') >= 0;
-    
+
     /**
      * There are spaces in the text and ignoreSpaces has just been enabled.
      * Update state to reflect the CSS properties that need to be reset to their

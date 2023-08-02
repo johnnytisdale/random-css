@@ -24,8 +24,15 @@ export default abstract class Randomizable {
         return this.getRandomNumber(0, 1) === 1;
     }
 
-    protected getRandomNumber(min: number, max: number) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+    protected getRandomNumber(
+        min: number,
+        max: number,
+        integerOnly = true
+    ) {
+        const rando = Math.random() * (max - min + 1) + min;
+        return integerOnly === true
+            ? Math.floor(rando)
+            : parseFloat(rando.toFixed(2));
     }
 
     private reset() {

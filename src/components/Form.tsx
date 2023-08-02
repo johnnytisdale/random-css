@@ -1,18 +1,18 @@
 import "../styles/Form.scss";
 
+import { AnimationOption } from "../classes/CSS/Animation";
+import AnimationTransformation from "../enums/AnimationTransformation";
 import CssProperty from "../enums/CssProperty";
 import FormSection from "./FormSection";
 import FormSectionOption from "./FormSectionOption";
+import FormSectionOptionAnimation from "./Form/FormSectionOptionAnimation";
 import GlyphOption from "../enums/GlyphOption";
 import Options from "../types/Options";
 import RandomCss from "./RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
-import FormSectionOptionAnimation from "./Form/FormSectionOptionAnimation";
-import Option from "../interfaces/Option";
-import { AnimationOption } from "../classes/CSS/Animation";
-import AnimationTransformation from "../enums/AnimationTransformation";
+
 
 type Props = Record<string, never>;
 
@@ -173,46 +173,46 @@ export default class Form extends React.Component<Props, State> {
 
           {/* Global options */}
           <FormSection id="global-options" title="global options">
-            <FormSectionOption label="text">
-              <input
-                data-testid="randomcss-form-text"
-                onChange={e => {
+            <FormSectionOption
+              input={{
+                // 'data-testid': "randomcss-form-text",
+                type: "text",
+                value: this.state.options.global.text,
+                onChange: e => {
                   const options = this.state.options;
                   options.global.text = e.target.value;
                   this.setState({ options: options });
-                }}
-                type="text"
-                value={this.state.options.global.text}
-              />
-            </FormSectionOption>
-            <FormSectionOption label="size">
-              <input
-                {
-                  ...(
-                      this.state.options.global.unsafe === false &&
-                      {
-                        max: "10",
-                        min: ".25",
-                        step: "0.25"
-                      }
-                  )
                 }
-                type='number'
-                value={this.state.options.global.size}
-                onChange={e => {
+              }}
+              label="text"
+            />
+            <FormSectionOption
+              input={{
+                ...(
+                  this.state.options.global.unsafe === false &&
+                  {
+                    max: "10",
+                    min: ".25",
+                    step: "0.25"
+                  }
+                ),
+                type: 'number',
+                value: this.state.options.global.size,
+                onChange: e => {
                   const options = this.state.options;
                   options.global.size = options.global.unsafe === true
                     ? parseFloat(e.target.value)
                     : this.getValidSize(parseFloat(e.target.value));
                   this.setState({ options: options });
-                }}
-              />
-            </FormSectionOption>
-            <FormSectionOption label="unsafe">
-              <input
-                checked={this.state.options.global.unsafe}
-                type='checkbox'
-                onChange={e => {
+                }
+              }}
+              label="size"
+            />
+            <FormSectionOption
+              input={{
+                checked: this.state.options.global.unsafe,
+                type: "checkbox",
+                onChange: e => {
                   const options = this.state.options;
                   options.global.unsafe = e.target.checked;
                   if (e.target.checked === false) {
@@ -221,38 +221,44 @@ export default class Form extends React.Component<Props, State> {
                     );
                   }
                   this.setState({ options: options });
-                }}
-              />
-            </FormSectionOption>
-            <FormSectionOption label="ignore spaces">
-              <input
-                checked={this.state.options.global.ignoreSpaces}
-                type='checkbox'
-                onChange={e => {
+                },
+              }}
+              label="unsafe"
+            />
+            <FormSectionOption
+              input={{
+                checked: this.state.options.global.ignoreSpaces,
+                type: "checkbox",
+                onChange: e => {
                   const options = this.state.options;
                   options.global.ignoreSpaces = e.target.checked;
                   this.setState({ options: options });
-                }}
-              />
-            </FormSectionOption>
+                }
+              }}
+              label="ignore spaces"
+            />
           </FormSection>
 
           {/* css */}
           <FormSection id='css-options' title="css options">
-            <FormSectionOption id='select-all-css' label="select all">
-              <input
-                checked={this.state.form.css.selectAll}
-                type='checkbox'
-                onChange={e => this.toggleAll(e, true)}
-              />
-            </FormSectionOption>
-            <FormSectionOption id='select-none-css' label="select none">
-              <input
-                checked={this.state.form.css.selectNone}
-                type='checkbox'
-                onChange={e => this.toggleAll(e, false)}
-              />
-            </FormSectionOption>
+            <FormSectionOption
+              id='select-all-css'
+              input={{
+                checked: this.state.form.css.selectAll,
+                type: "checkbox",
+                onChange: e => this.toggleAll(e, true)
+              }}
+              label="select all"
+            />
+            <FormSectionOption
+              id='select-none-css'
+              input={{
+                checked: this.state.form.css.selectNone,
+                type: "checkbox",
+                onChange: e => this.toggleAll(e, false)
+              }}
+              label="select none"
+            />
             <FormSectionOptionAnimation
               option={this.state.options.css.animation}
               setOption={(option: AnimationOption) => {
@@ -268,22 +274,21 @@ export default class Form extends React.Component<Props, State> {
                 }
                 return (
                   <FormSectionOption
-                    key={index}
-                    label={propertyName}
-                  >
-                    <input
-                      checked={
+                    input={{
+                      checked: (
                         this.state.options.css?.[propertyName]?.enabled === true
-                      }
-                      type='checkbox'
-                      onChange={e => {
+                      ),
+                      type: "checkbox",
+                      onChange: e => {
                         this.toggleCssProperty(
                           CssProperty[propertyName],
                           e.target.checked
                         );
-                      }}
-                    />
-                  </FormSectionOption>
+                      }
+                    }}
+                    key={index}
+                    label={propertyName}
+                  />
                 );
               })
             }
@@ -293,28 +298,26 @@ export default class Form extends React.Component<Props, State> {
           <FormSection id='glyph-options' title="glyph options">
             <FormSectionOption
               id='1337'
-              label="1337"
-            >
-              <input
-                checked={this.state.options.glyph?.leet?.enabled === true}
-                type='checkbox'
-                onChange={e => {
+              input={{
+                checked: this.state.options.glyph?.leet?.enabled === true,
+                type: "checkbox",
+                onChange: e => {
                   this.toggleGlyphOption(GlyphOption.LEET, e.target.checked);
-                }}
-              />
-            </FormSectionOption>
+                }
+              }}
+              label="1337"
+            />
             <FormSectionOption
               id='unicode'
-              label="unicode"
-            >
-              <input
-                checked={this.state.options.glyph?.unicode?.enabled === true}
-                type='checkbox'
-                onChange={e => {
+              input={{
+                checked: this.state.options.glyph?.unicode?.enabled === true,
+                type: "checkbox",
+                onChange: e => {
                   this.toggleGlyphOption(GlyphOption.UNICODE, e.target.checked);
-                }}
-              />
-            </FormSectionOption>
+                }
+              }}
+              label="unicode"
+            />
           </FormSection>
 
           { /* export */}
