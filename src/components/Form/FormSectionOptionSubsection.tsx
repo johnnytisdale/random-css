@@ -5,10 +5,10 @@ interface Props {
   label: string,
 }
 
-const FormSectionOptionSubsection = ({
+function FormSectionOptionSubsection({
   children,
   label
-}: Props): React.ReactNode => {
+}: Props): React.ReactNode {
   return (
     <div className="subsection">
       <div className="label">{label}</div>

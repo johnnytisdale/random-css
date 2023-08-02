@@ -7,7 +7,7 @@ module.exports = env => ({
 	entry: './src/' + (
 		env.environment === 'production'
 			? 'js/index.js'
-			: 'components/Form.tsx'
+			: 'components/Form/Form.tsx'
 	),
 	module: {
 		rules: [
@@ -46,7 +46,7 @@ module.exports = env => ({
 			]
 		}),
 		...(
-			env.environment !== 'production' 
+			env.environment !== 'production'
 				? [
 					new HtmlWebpackPlugin({
 						template: 'src/html/index.html',

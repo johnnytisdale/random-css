@@ -1,17 +1,20 @@
-import "../styles/Form.scss";
+import "../../styles/Form.scss";
 
-import { AnimationOption } from "../classes/CSS/Animation";
-import AnimationTransformation from "../enums/AnimationTransformation";
-import CssProperty from "../enums/CssProperty";
+import { AnimationOption } from "../../classes/CSS/Animation";
+import AnimationTransformation from "../../enums/AnimationTransformation";
+import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
 import FormSectionOption from "./FormSectionOption";
-import FormSectionOptionAnimation from "./Form/FormSectionOptionAnimation";
-import GlyphOption from "../enums/GlyphOption";
-import Options from "../types/Options";
-import RandomCss from "./RandomCss";
+import FormSectionOptionAnimation from "./Animation/FormSectionOptionAnimation";
+import GlyphOption from "../../enums/GlyphOption";
+import Options from "../../types/Options";
+import RandomCss from "../RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
+import AnimationDirection from "../../enums/AnimationDirection";
+import AnimationFillMode from "../../enums/AnimationFillMode";
+import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
 
 
 type Props = Record<string, never>;
@@ -46,6 +49,9 @@ export default class Form extends React.Component<Props, State> {
         css: {
           animation: {
             enabled: false,
+            directions: Object.values(AnimationDirection),
+            easingFunctions: Object.values(AnimationEasingFunction),
+            fillModes: Object.values(AnimationFillMode),
             transformations: Object.values(AnimationTransformation)
           }
         },
