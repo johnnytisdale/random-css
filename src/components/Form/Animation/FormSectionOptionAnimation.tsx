@@ -1,8 +1,4 @@
 import { AnimationOption } from "../../../classes/CSS/Animation";
-import AnimationDirection from "../../../enums/AnimationDirection";
-import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
-import AnimationFillMode from "../../../enums/AnimationFillMode";
-import AnimationTransformation from "../../../enums/AnimationTransformation";
 import FormSectionOptionAnimationSubsectionDirections from "./FormSectionOptionAnimationSubsectionDirections";
 import FormSectionOptionAnimationSubsectionEasingFunctions from "./FormSectionOptionAnimationSubsectionEasingFunctions";
 import FormSectionOptionAnimationSubsectionFillModes from "./FormSectionOptionAnimationSubsectionFillModes";
