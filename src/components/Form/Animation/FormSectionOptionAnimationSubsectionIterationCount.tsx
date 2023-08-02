@@ -1,17 +1,18 @@
-import { AnimationOption } from "../../../classes/CSS/Animation";
+import {
+  AnimationOption,
+  DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
+  DEFAULT_ANIMATION_ITERATION_COUNT_MIN
+} from "../../../classes/CSS/Animation";
+import FormSectionOptionRange from "../FormSectionOptionRange";
 import FormSectionOptionSubsection from "../FormSectionOptionSubsection";
 
 import * as React from "react";
-import FormSectionOptionRange from "./FormSectionOptionRange";
 
 interface Props {
   enabled: boolean,
   option: AnimationOption;
   setOption: (option: AnimationOption) => void,
 }
-
-const iterationCountMax = 3;
-const iterationCountMin = .5;
 
 const FormSectionOptionAnimationSubsectionIterationCount = ({
   enabled,
@@ -88,10 +89,10 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
       </div>
       <FormSectionOptionRange
         disabled={!enabled}
-        max={iterationCountMax}
-        min={iterationCountMin}
-        maxValue={option?.iterationCount?.max ?? iterationCountMax}
-        minValue={option?.iterationCount?.min ?? iterationCountMin}
+        max={DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
+        min={DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
+        maxValue={option?.iterationCount?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
+        minValue={option?.iterationCount?.min ?? DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
         setValues={(min: number, max: number) =>  setOption({
           ...option,
           ...{

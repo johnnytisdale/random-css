@@ -1,14 +1,16 @@
-import { AnimationOption } from "../../../classes/CSS/Animation";
-import FormSectionOptionAnimationSubsectionDirections from "./FormSectionOptionAnimationSubsectionDirections";
-import FormSectionOptionAnimationSubsectionEasingFunctions from "./FormSectionOptionAnimationSubsectionEasingFunctions";
-import FormSectionOptionAnimationSubsectionFillModes from "./FormSectionOptionAnimationSubsectionFillModes";
-import FormSectionOptionAnimationSubsectionTransformations from "./FormSectionOptionAnimationSubsectionTransformations";
+import AnimationDirection from "../../../enums/AnimationDirection";
+import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
+import AnimationFillMode from "../../../enums/AnimationFillMode";
+import { AnimationOption, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
+import AnimationTransformation from "../../../enums/AnimationTransformation";
 import FormSectionOption from "../FormSectionOption";
+import FormSectionOptionAnimationSubsectionIterationCount from "./FormSectionOptionAnimationSubsectionIterationCount";
+import FormSectionOptionArray from "../FormSectionOptionArray";
+import FormSectionOptionRange from "../FormSectionOptionRange";
+import FormSectionOptionSubsection from "../FormSectionOptionSubsection";
 
 import * as React from "react";
 import { useMemo } from "react";
-import FormSectionOptionAnimationSubsectionDuration from "./FormSectionOptionAnimationSubsectionDuration";
-import FormSectionOptionAnimationSubsectionIterationCount from "./FormSectionOptionAnimationSubsectionIterationCount";
 
 interface Props {
   option: AnimationOption;
@@ -37,36 +39,59 @@ const FormSectionOptionAnimation = ({
           }
       }}
     >
-      <FormSectionOptionAnimationSubsectionDirections
-        enabled={enabled}
-        option={option}
-        setOption={setOption}
-      />
-      <FormSectionOptionAnimationSubsectionDuration
-        enabled={enabled}
-        option={option}
-        setOption={setOption}
-      />
-      <FormSectionOptionAnimationSubsectionEasingFunctions
-        enabled={enabled}
-        option={option}
-        setOption={setOption}
-      />
-      <FormSectionOptionAnimationSubsectionFillModes
-        enabled={enabled}
-        option={option}
-        setOption={setOption}
-      />
+      <FormSectionOptionSubsection label='directions'>
+        <FormSectionOptionArray
+          disabled={enabled === false}
+          possibleValues={Object.values(AnimationDirection)}
+          setValues={directions => setOption({...option, ...{ directions }})}
+          values={option?.directions ?? []}
+        />
+      </FormSectionOptionSubsection>
+      <FormSectionOptionSubsection label='duration'>
+        <FormSectionOptionRange
+          disabled={!enabled}
+          max={DEFAULT_ANIMATION_DURATION_MAX}
+          min={DEFAULT_ANIMATION_DURATION_MIN}
+          maxValue={option?.durationMax ?? DEFAULT_ANIMATION_DURATION_MAX}
+          minValue={option?.durationMin ?? DEFAULT_ANIMATION_DURATION_MIN}
+          setValues={(min: number, max: number) => setOption(
+            {...option, ...{durationMax: max, durationMin: min}}
+          )}
+        />
+      </FormSectionOptionSubsection>
+      <FormSectionOptionSubsection label='easing functions'>
+        <FormSectionOptionArray
+          disabled={enabled === false}
+          possibleValues={Object.values(AnimationEasingFunction)}
+          setValues={easingFunctions => setOption(
+            {...option, ...{ easingFunctions }}
+          )}
+          values={option?.easingFunctions ?? []}
+        />
+      </FormSectionOptionSubsection>
+      <FormSectionOptionSubsection label='fill modes'>
+        <FormSectionOptionArray
+          disabled={enabled === false}
+          possibleValues={Object.values(AnimationFillMode)}
+          setValues={fillModes => setOption({...option, ...{ fillModes }})}
+          values={option?.fillModes ?? []}
+        />
+      </FormSectionOptionSubsection>
       <FormSectionOptionAnimationSubsectionIterationCount
         enabled={enabled}
         option={option}
         setOption={setOption}
       />
-      <FormSectionOptionAnimationSubsectionTransformations
-        enabled={enabled}
-        option={option}
-        setOption={setOption}
-      />
+      <FormSectionOptionSubsection label='transformations'>
+        <FormSectionOptionArray
+          disabled={enabled === false}
+          possibleValues={Object.values(AnimationTransformation)}
+          setValues={transformations => setOption(
+            {...option, ...{ transformations }}
+          )}
+          values={option?.transformations ?? []}
+        />
+      </FormSectionOptionSubsection>
     </FormSectionOption>
   );
 }

@@ -1,6 +1,6 @@
 import "../../styles/Form.scss";
 
-import { AnimationOption } from "../../classes/CSS/Animation";
+import { AnimationOption, DEFAULT_ANIMATION_DIRECTIONS, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN, DEFAULT_ANIMATION_EASING_FUNCTIONS, DEFAULT_ANIMATION_FILL_MODES, DEFAULT_ANIMATION_ITERATION_COUNT, DEFAULT_ANIMATION_TRANSFORMATIONS } from "../../classes/CSS/Animation";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
@@ -49,20 +49,13 @@ export default class Form extends React.Component<Props, State> {
         css: {
           animation: {
             enabled: false,
-            directions: Object.values(AnimationDirection),
-            durationMax: 3000,
-            durationMin: 300,
-            easingFunctions: Object.values(AnimationEasingFunction),
-            fillModes: Object.values(AnimationFillMode),
-            iterationCount: {
-              infinite: true,
-              infiniteProbability: .5,
-              integersOnly: false,
-              max: 3,
-              min: .5,
-              zero: false,
-            },
-            transformations: Object.values(AnimationTransformation)
+            directions: DEFAULT_ANIMATION_DIRECTIONS,
+            durationMax: DEFAULT_ANIMATION_DURATION_MAX,
+            durationMin: DEFAULT_ANIMATION_DURATION_MIN,
+            easingFunctions: DEFAULT_ANIMATION_EASING_FUNCTIONS,
+            fillModes: DEFAULT_ANIMATION_FILL_MODES,
+            iterationCount: DEFAULT_ANIMATION_ITERATION_COUNT,
+            transformations: DEFAULT_ANIMATION_TRANSFORMATIONS
           }
         },
         global: {
