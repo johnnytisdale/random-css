@@ -175,7 +175,7 @@ export default class Form extends React.Component<Props, State> {
           <FormSection id="global-options" title="global options">
             <FormSectionOption
               input={{
-                // 'data-testid': "randomcss-form-text",
+                'data-testid': "randomcss-form-text",
                 type: "text",
                 value: this.state.options.global.text,
                 onChange: e => {

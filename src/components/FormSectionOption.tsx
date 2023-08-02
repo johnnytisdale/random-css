@@ -3,14 +3,17 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import * as React from "react";
 
+interface InputProps extends React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> {
+  'data-testid'?: string
+}
+
 interface Props {
   children?: React.ReactNode,
   id?: string,
-  // input: React.ReactNode,
-  input: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
+  input: InputProps,
   label: string,
 }
 
@@ -47,7 +50,6 @@ const FormSectionOption = ({
           </div>
         </div>
         <div className='input'>
-          {/* { input } */}
           <input
             {...input}
           />
