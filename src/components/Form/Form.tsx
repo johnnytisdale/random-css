@@ -1,7 +1,15 @@
 import "../../styles/Form.scss";
 
-import { AnimationOption, DEFAULT_ANIMATION_DIRECTIONS, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN, DEFAULT_ANIMATION_EASING_FUNCTIONS, DEFAULT_ANIMATION_FILL_MODES, DEFAULT_ANIMATION_ITERATION_COUNT, DEFAULT_ANIMATION_TRANSFORMATIONS } from "../../classes/CSS/Animation";
-import AnimationTransformation from "../../enums/AnimationTransformation";
+import {
+  AnimationOption,
+  DEFAULT_ANIMATION_DIRECTIONS,
+  DEFAULT_ANIMATION_DURATION_MAX,
+  DEFAULT_ANIMATION_DURATION_MIN,
+  DEFAULT_ANIMATION_EASING_FUNCTIONS,
+  DEFAULT_ANIMATION_FILL_MODES,
+  DEFAULT_ANIMATION_ITERATION_COUNT,
+  DEFAULT_ANIMATION_TRANSFORMATIONS
+} from "../../classes/CSS/Animation";
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
 import FormSectionOption from "./FormSectionOption";
@@ -12,24 +20,17 @@ import RandomCss from "../RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
-import AnimationDirection from "../../enums/AnimationDirection";
-import AnimationFillMode from "../../enums/AnimationFillMode";
-import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
-
 
 type Props = Record<string, never>;
 
 interface State {
-
   copied: boolean | null,
-
   form: {
     css: {
       selectAll: boolean,
       selectNone: boolean
     }
   };
-
   options: Options;
 }
 
