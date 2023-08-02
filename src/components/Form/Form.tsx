@@ -50,8 +50,18 @@ export default class Form extends React.Component<Props, State> {
           animation: {
             enabled: false,
             directions: Object.values(AnimationDirection),
+            durationMax: 3000,
+            durationMin: 300,
             easingFunctions: Object.values(AnimationEasingFunction),
             fillModes: Object.values(AnimationFillMode),
+            iterationCount: {
+              infinite: true,
+              infiniteProbability: .5,
+              integersOnly: false,
+              max: 3,
+              min: .5,
+              zero: false,
+            },
             transformations: Object.values(AnimationTransformation)
           }
         },

@@ -1,4 +1,5 @@
 import { AnimationOption } from "../../../classes/CSS/Animation";
+import FormSectionOptionRange from "./FormSectionOptionRange";
 import FormSectionOptionSubsection from "../FormSectionOptionSubsection";
 
 import * as React from "react";
@@ -9,6 +10,9 @@ interface Props {
   setOption: (option: AnimationOption) => void,
 }
 
+const max = 3000;
+const min = 300;
+
 const FormSectionOptionAnimationSubsectionDuration = ({
   enabled,
   option,
@@ -16,54 +20,16 @@ const FormSectionOptionAnimationSubsectionDuration = ({
 }: Props): React.ReactNode => {
   return (
     <FormSectionOptionSubsection label='duration'>
-      <div className="option">
-        <div className="label">min</div>
-        <input
-          disabled={enabled === false}
-          max="3000"
-          min="300"
-          type="range"
-          value={option.durationMin ?? 300}
-          onChange={e => {
-            const value = parseInt(e.target.value);
-            setOption({
-              ...option,
-              ...{
-                durationMin: parseInt(e.target.value),
-                ...(
-                  value > option.durationMax && {
-                    durationMax: value
-                  }
-                )
-              }
-            });
-          }}
-        />
-      </div>
-      <div className="option">
-        <div className="label">max</div>
-        <input
-          disabled={enabled === false}
-          max="3000"
-          min="300"
-          type="range"
-          value={option.durationMax ?? 3000}
-          onChange={e => {
-            const value = parseInt(e.target.value);
-            setOption({
-              ...option,
-              ...{
-                durationMax: value,
-                ...(
-                  value < option.durationMin && {
-                    durationMin: value
-                  }
-                )
-              }
-            });
-          }}
-        />
-      </div>
+      <FormSectionOptionRange
+        disabled={!enabled}
+        max={max}
+        min={min}
+        maxValue={option?.durationMax ?? max}
+        minValue={option?.durationMin ?? min}
+        setValues={(min: number, max: number) => setOption(
+          {...option, ...{durationMax: max, durationMin: min}}
+        )}
+      />
     </FormSectionOptionSubsection>
   );
 }
