@@ -7,6 +7,7 @@ import FormSectionOption from "../FormSectionOption";
 
 import * as React from "react";
 import { useMemo } from "react";
+import FormSectionOptionAnimationSubsectionDuration from "./FormSectionOptionAnimationSubsectionDuration";
 
 interface Props {
   option: AnimationOption;
@@ -36,6 +37,11 @@ const FormSectionOptionAnimation = ({
       }}
     >
       <FormSectionOptionAnimationSubsectionDirections
+        enabled={enabled}
+        option={option}
+        setOption={setOption}
+      />
+      <FormSectionOptionAnimationSubsectionDuration
         enabled={enabled}
         option={option}
         setOption={setOption}
