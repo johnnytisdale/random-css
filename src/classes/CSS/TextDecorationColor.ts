@@ -1,14 +1,8 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import CssProperty from "../../enums/CssProperty";
+import ColorProperty from "./ColorProperty";
 
-const json = cssProperties['text-decoration-color'];
+export default class TextDecorationColor extends ColorProperty {
 
-export default class BackgroundColor extends CssProperty {
-
-  protected acceptsColors = true;
-  protected acceptsLengths = false;
-  protected acceptsPercentages = false;
-  protected acceptsKeywords = false;
-  public name = json.camelCase;
+  public name = CssProperty.TEXT_DECORATION_COLOR;
 
 }

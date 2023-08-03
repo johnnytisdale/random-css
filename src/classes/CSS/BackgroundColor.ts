@@ -1,14 +1,8 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import ECssProperty from "../../enums/CssProperty";
+import ColorProperty from "./ColorProperty";
 
-const json = cssProperties['background-color'];
+export default class BackgroundColor extends ColorProperty {
 
-export default class BackgroundColor extends CssProperty {
-
-  protected acceptsColors = true;
-  protected acceptsLengths = false;
-  protected acceptsPercentages = false;
-  protected acceptsKeywords = false;
-  public name = json.camelCase;
+  public name = ECssProperty.BACKGROUND_COLOR;
 
 }

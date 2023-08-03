@@ -1,14 +1,8 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import ColorProperty from "./ColorProperty";
+import CssProperty from "../../enums/CssProperty";
 
-const json = cssProperties['border-color'];
+export default class BorderColor extends ColorProperty {
 
-export default class BackgroundColor extends CssProperty {
-
-  protected acceptsColors = true;
-  protected acceptsLengths = false;
-  protected acceptsPercentages = false;
-  protected acceptsKeywords = false;
-  public name = json.camelCase;
+  public name = CssProperty.BORDER_COLOR
 
 }

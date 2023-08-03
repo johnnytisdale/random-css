@@ -22,7 +22,7 @@ export default function FormSubsectionAnimation ({
   setOption
 }: Props): React.ReactNode {
   const enabled = useMemo(
-    () =>  option.enabled === true,
+    () => option.enabled === true,
     [option.enabled]
   );
   const setIterationCountOption = React.useCallback(
@@ -35,7 +35,7 @@ export default function FormSubsectionAnimation ({
       })
     },
     [option?.iterationCount, setOption]
-  )
+  );
   return (
     <FormOptionBoolean
       checked={enabled === true}

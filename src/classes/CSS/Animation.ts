@@ -68,7 +68,7 @@ export default class Animation extends CssProperty {
   protected acceptsKeywords = false;
   protected acceptsPercentages = false;
 
-  public name = ECssProperty.animation;
+  public name = ECssProperty.ANIMATION;
 
   private directions: AnimationDirection[];
   private durationMax: number;

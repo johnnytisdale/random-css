@@ -4,6 +4,7 @@ import {
   AnimationOption,
   DEFAULT_ANIMATION
 } from "../../classes/CSS/Animation";
+import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
 import FormOption from "./FormOption";
@@ -16,6 +17,9 @@ import RandomCss from "../RandomCss";
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
+import FormSubsectionColor from "./FormSubsectionColor";
+import ColorOption from "../../interfaces/ColorOptions";
+import CssOptions from "../../types/CssOptions";
 
 interface State {
   copied: boolean | null,
@@ -49,7 +53,11 @@ const initialState: State = {
   },
   options: {
     css: {
-      animation: { ...DEFAULT_ANIMATION }
+      animation: { ...DEFAULT_ANIMATION },
+      backgroundColor: { ...DEFAULT_COLOR_OPTIONS },
+      borderColor: { ...DEFAULT_COLOR_OPTIONS },
+      color: { ...DEFAULT_COLOR_OPTIONS },
+      textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
     },
     global: {
       ignoreSpaces: true,
@@ -72,6 +80,39 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.animation = {
         ...options.css.animation,
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setBackgroundColorOption = useCallback(
+    (option: ColorOption) => {
+      const options = state.options;
+      options.css.backgroundColor = {
+        ...options.css.backgroundColor,
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setColorOption = useCallback(
+    (
+      key: Extract<
+        keyof CssOptions,
+        | 'backgroundColor'
+        | 'borderColor'
+        | 'color'
+        | 'textDecorationColor'
+      >,
+      option: ColorOption
+    ) => {
+      const options = state.options;
+      options.css[key] = {
+        ...options.css[key],
         ...option
       };
       setState({ options });
@@ -278,9 +319,38 @@ export default function Form(): React.ReactNode {
             option={state.options.css.animation}
             setOption={setAnimationOption}
           />
+          <FormSubsectionColor
+            label="backgroundColor"
+            option={state.options.css.backgroundColor}
+            setOption={option => setColorOption("backgroundColor", option)}
+            unsafe={state.options.global.unsafe}
+          />
+          <FormSubsectionColor
+            label="borderColor"
+            option={state.options.css.borderColor}
+            setOption={option => setColorOption("borderColor", option)}
+            unsafe={state.options.global.unsafe}
+          />
+          <FormSubsectionColor
+            label="color"
+            option={state.options.css.color}
+            setOption={option => setColorOption("color", option)}
+            unsafe={state.options.global.unsafe}
+          />
+          <FormSubsectionColor
+            label="textDecorationColor"
+            option={state.options.css.textDecorationColor}
+            setOption={option => setColorOption("textDecorationColor", option)}
+            unsafe={state.options.global.unsafe}
+          />
           {
             Object.values(CssProperty).map((propertyName, index) => (
-              propertyName !== CssProperty.animation && (
+              propertyName !== CssProperty.ANIMATION &&
+              propertyName !== CssProperty.BACKGROUND_COLOR &&
+              propertyName !== CssProperty.BORDER_COLOR &&
+              propertyName !== CssProperty.COLOR &&
+              propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
+              (
                 <FormOptionBoolean
                   checked={
                     state.options.css?.[propertyName]?.enabled === true
@@ -288,7 +358,7 @@ export default function Form(): React.ReactNode {
                   key={index}
                   label={propertyName}
                   setChecked={checked => toggleCssProperty(
-                    CssProperty[propertyName],
+                    propertyName,
                     checked
                   )}
                 />

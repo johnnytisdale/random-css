@@ -15,7 +15,7 @@ interface Props {
 }
 
 type Style = {
-  [key in CssProperty]?: string;
+  [value in CssProperty]?: string;
 }
 
 interface State {
@@ -44,11 +44,11 @@ export default class Character extends React.Component<Props, State> {
 
     // Get the default CSS values.
     const element = document.getElementById(this.id);
-    if (element == null) {
+    if (element === null) {
       return;
     }
     const style = getComputedStyle(element);
-    Object.keys(CssProperty).forEach((cssProperty: CssProperty) => {
+    Object.values(CssProperty).forEach((cssProperty: CssProperty) => {
 
       this.default[cssProperty] = Object.prototype.hasOwnProperty.call(
         DEFAULTS,
@@ -92,7 +92,7 @@ export default class Character extends React.Component<Props, State> {
       }
       /**
        * Only reset the character to its default value if the other glyph option
-       * is not also checked. 
+       * is not also checked.
        */
       if (hasGlyph === false) {
         update = true;

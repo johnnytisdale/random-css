@@ -78,31 +78,43 @@ export default class RandomCss extends React.Component<Props, State> {
 
   private getRandomizableForCssProperty(option: CssProperty): Randomizable {
     switch (option) {
-      case CssProperty.animation:
+      case CssProperty.ANIMATION:
         return new Animation(this.props.options.css.animation);
-      case CssProperty.backgroundColor:
-        return new BackgroundColor(this.props.options.global.unsafe);
-      case CssProperty.borderColor:
-        return new BorderColor(this.props.options.global.unsafe);
-      case CssProperty.borderRadius:
+      case CssProperty.BACKGROUND_COLOR:
+        return new BackgroundColor(
+          this.props.options.css.backgroundColor,
+          this.props.options.global.unsafe
+        );
+      case CssProperty.BORDER_COLOR:
+        return new BorderColor(
+          this.props.options.css.borderColor,
+          this.props.options.global.unsafe
+        );
+      case CssProperty.BORDER_RADIUS:
         return new BorderRadius();
-      case CssProperty.borderStyle:
+      case CssProperty.BORDER_STYLE:
         return new BorderStyle(this.props.options.global.unsafe);
-      case CssProperty.borderWidth:
+      case CssProperty.BORDER_WIDTH:
         return new BorderWidth(1, 3);
-      case CssProperty.color:
-        return new Color(this.props.options.global.unsafe);
-      case CssProperty.fontFamily:
+      case CssProperty.COLOR:
+        return new Color(
+          this.props.options.css.color,
+          this.props.options.global.unsafe
+        );
+      case CssProperty.FONT_FAMILY:
         return new FontFamily();
-      case CssProperty.fontStyle:
+      case CssProperty.FONT_STYLE:
         return new FontStyle(this.props.options.global.unsafe);
-      case CssProperty.fontWeight:
+      case CssProperty.FONT_WEIGHT:
         return new FontWeight();
-      case CssProperty.textDecorationColor:
-        return new TextDecorationColor(this.props.options.global.unsafe);
-      case CssProperty.textDecorationLine:
+      case CssProperty.TEXT_DECORATION_COLOR:
+        return new TextDecorationColor(
+          this.props.options.css.textDecorationColor,
+          this.props.options.global.unsafe
+        );
+      case CssProperty.TEXT_DECORATION_LINE:
         return new TextDecorationLine();
-      case CssProperty.textDecorationStyle:
+      case CssProperty.TEXT_DECORATION_STYLE:
         return new TextDecorationStyle();
     }
   }

@@ -1,4 +1,3 @@
-import EColor from "../../enums/Color";
 import LengthUnit from "../../enums/LengthUnit";
 import ValueType from "../../enums/ValueType";
 import Randomizable from "../Randomizable";
@@ -9,7 +8,6 @@ export default abstract class CssProperty extends Randomizable {
     super();
   }
 
-  protected abstract acceptsColors: boolean;
   protected abstract acceptsKeywords: boolean;
   protected abstract acceptsLengths: boolean;
   protected abstract acceptsPercentages: boolean;
@@ -25,25 +23,8 @@ export default abstract class CssProperty extends Randomizable {
 
   protected EValueTypes: Array<ValueType>;
 
-  protected rMin = 0;
-  protected rMax = 255;
-  protected gMin = 0;
-  protected gMax = 255;
-  protected bMin = 0;
-  protected bMax = 255;
-
   protected minLength = 0;
   protected maxLength = 3;
-
-  private getRandomColorValue(): string {
-    if (this.unsafe) {
-      const red = this.getRandomNumber(this.rMin, this.rMax);
-      const green = this.getRandomNumber(this.gMin, this.gMax);
-      const blue = this.getRandomNumber(this.bMin, this.bMax);
-      return `rgb(${red}, ${green}, ${blue})`;
-    }
-    return this.getRandomArrayElement(Object.values(EColor));
-  }
 
   protected getRandomKeywordValue(): string {
     if (this.keywordLimit === 1) {
@@ -76,9 +57,6 @@ export default abstract class CssProperty extends Randomizable {
 
   public getRandomValue(): string {
     const getValueFunctions: Array<() => string> = [];
-    if (this.acceptsColors) {
-      getValueFunctions.push(this.getRandomColorValue.bind(this));
-    }
     if (this.acceptsKeywords) {
       getValueFunctions.push(this.getRandomKeywordValue.bind(this));
     }

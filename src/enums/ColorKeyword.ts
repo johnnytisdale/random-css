@@ -1,4 +1,4 @@
-enum Color {
+enum ColorKeyword {
     ALICE_BLUE = "AliceBlue",
     ANTIQUE_WHITE = "AntiqueWhite",
     AQUA = "Aqua",
@@ -142,4 +142,4 @@ enum Color {
     YELLOW_GREEN = "YellowGreen",
 }
 
-export default Color;
+export default ColorKeyword;
