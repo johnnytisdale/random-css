@@ -3,8 +3,9 @@ import {
   DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN
 } from "../../../classes/CSS/Animation";
-import FormSectionOptionRange from "../FormSectionOptionRange";
-import FormSectionOptionSubsection from "../FormSectionOptionSubsection";
+import FormOption from "../FormOption";
+import FormOptionRange from "../FormOptionRange";
+import FormSubsection from "../FormSubsection";
 
 import * as React from "react";
 
@@ -20,38 +21,36 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
   setOption
 }: Props): React.ReactNode => {
   return (
-    <FormSectionOptionSubsection label='iteration count'>
-      <div className="option">
-        <div className="label">infinite</div>
-        <input
-          checked={option.iterationCount.infinite === true}
-          disabled={enabled !== true}
-          type="checkbox"
-          onChange={e => {
-            setOption({
-              ...option,
-              ...{
-                iterationCount: {
-                  ...option.iterationCount ?? {},
-                  ...{
-                    infinite: e.target.checked
-                  }
+    <FormSubsection label='iteration count'>
+      <FormOption
+        label="infinite"
+        input={{
+          checked: option.iterationCount.infinite === true,
+          disabled: enabled !== true,
+          type: "checkbox",
+          onChange: e => setOption({
+            ...option,
+            ...{
+              iterationCount: {
+                ...option.iterationCount ?? {},
+                ...{
+                  infinite: e.target.checked
                 }
               }
-            });
-          }}
-        />
-      </div>
-      <div className="option">
-        <div className="label">infiniteProbability</div>
-        <input
-          disabled={enabled !== true}
-          max="1"
-          min=".1"
-          step=".01"
-          type="range"
-          value={option.iterationCount.infiniteProbability}
-          onChange={e => {
+            }
+          })
+        }}
+      />
+      <FormOption
+        label="infiniteProbability"
+        input={{
+          disabled: enabled !== true,
+          max: "1",
+          min: ".1",
+          step: ".01",
+          type: "range",
+          value: option.iterationCount.infiniteProbability,
+          onChange: e => {
             setOption({
               ...option,
               ...{
@@ -63,16 +62,16 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
                 }
               }
             });
-          }}
-        />
-      </div>
-      <div className="option">
-        <div className="label">integers only</div>
-        <input
-          checked={option.iterationCount.integersOnly === true}
-          disabled={enabled !== true}
-          type="checkbox"
-          onChange={e => {
+          }
+        }}
+      />
+      <FormOption
+        label="integers only"
+        input={{
+          checked: option.iterationCount.integersOnly === true,
+          disabled: enabled !== true,
+          type: "checkbox",
+          onChange: e => {
             setOption({
               ...option,
               ...{
@@ -84,10 +83,10 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
                 }
               }
             });
-          }}
-        />
-      </div>
-      <FormSectionOptionRange
+          }
+        }}
+      />
+      <FormOptionRange
         disabled={!enabled}
         max={DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
         min={DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
@@ -107,7 +106,28 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
         })}
         step="0.01"
       />
-    </FormSectionOptionSubsection>
+      <FormOption
+        label="zero"
+        input={{
+          checked: option.iterationCount.zero === true,
+          disabled: enabled !== true,
+          type: "checkbox",
+          onChange: e => {
+            setOption({
+              ...option,
+              ...{
+                iterationCount: {
+                  ...option.iterationCount ?? {},
+                  ...{
+                    zero: e.target.checked
+                  }
+                }
+              }
+            });
+          }
+        }}
+      />
+    </FormSubsection>
   );
 }
 

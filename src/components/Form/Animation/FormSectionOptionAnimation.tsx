@@ -3,11 +3,11 @@ import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
 import { AnimationOption, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
-import FormSectionOption from "../FormSectionOption";
+import FormOption from "../FormOption";
 import FormSectionOptionAnimationSubsectionIterationCount from "./FormSectionOptionAnimationSubsectionIterationCount";
-import FormSectionOptionArray from "../FormSectionOptionArray";
-import FormSectionOptionRange from "../FormSectionOptionRange";
-import FormSectionOptionSubsection from "../FormSectionOptionSubsection";
+import FormOptionArray from "../FormOptionArray";
+import FormOptionRange from "../FormOptionRange";
+import FormSubsection from "../FormSubsection";
 
 import * as React from "react";
 import { useMemo } from "react";
@@ -26,7 +26,7 @@ const FormSectionOptionAnimation = ({
     [option.enabled]
   );
   return (
-    <FormSectionOption
+    <FormOption
       label="animation"
       input={{
         checked: enabled,
@@ -39,16 +39,16 @@ const FormSectionOptionAnimation = ({
           }
       }}
     >
-      <FormSectionOptionSubsection label='directions'>
-        <FormSectionOptionArray
+      <FormSubsection label='directions'>
+        <FormOptionArray
           disabled={enabled === false}
           possibleValues={Object.values(AnimationDirection)}
           setValues={directions => setOption({...option, ...{ directions }})}
           values={option?.directions ?? []}
         />
-      </FormSectionOptionSubsection>
-      <FormSectionOptionSubsection label='duration'>
-        <FormSectionOptionRange
+      </FormSubsection>
+      <FormSubsection label='duration'>
+        <FormOptionRange
           disabled={!enabled}
           max={DEFAULT_ANIMATION_DURATION_MAX}
           min={DEFAULT_ANIMATION_DURATION_MIN}
@@ -58,9 +58,9 @@ const FormSectionOptionAnimation = ({
             {...option, ...{durationMax: max, durationMin: min}}
           )}
         />
-      </FormSectionOptionSubsection>
-      <FormSectionOptionSubsection label='easing functions'>
-        <FormSectionOptionArray
+      </FormSubsection>
+      <FormSubsection label='easing functions'>
+        <FormOptionArray
           disabled={enabled === false}
           possibleValues={Object.values(AnimationEasingFunction)}
           setValues={easingFunctions => setOption(
@@ -68,22 +68,22 @@ const FormSectionOptionAnimation = ({
           )}
           values={option?.easingFunctions ?? []}
         />
-      </FormSectionOptionSubsection>
-      <FormSectionOptionSubsection label='fill modes'>
-        <FormSectionOptionArray
+      </FormSubsection>
+      <FormSubsection label='fill modes'>
+        <FormOptionArray
           disabled={enabled === false}
           possibleValues={Object.values(AnimationFillMode)}
           setValues={fillModes => setOption({...option, ...{ fillModes }})}
           values={option?.fillModes ?? []}
         />
-      </FormSectionOptionSubsection>
+      </FormSubsection>
       <FormSectionOptionAnimationSubsectionIterationCount
         enabled={enabled}
         option={option}
         setOption={setOption}
       />
-      <FormSectionOptionSubsection label='transformations'>
-        <FormSectionOptionArray
+      <FormSubsection label='transformations'>
+        <FormOptionArray
           disabled={enabled === false}
           possibleValues={Object.values(AnimationTransformation)}
           setValues={transformations => setOption(
@@ -91,8 +91,8 @@ const FormSectionOptionAnimation = ({
           )}
           values={option?.transformations ?? []}
         />
-      </FormSectionOptionSubsection>
-    </FormSectionOption>
+      </FormSubsection>
+    </FormOption>
   );
 }
 

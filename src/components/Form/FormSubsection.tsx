@@ -5,7 +5,7 @@ interface Props {
   label: string,
 }
 
-function FormSectionOptionSubsection({
+function FormSubsection({
   children,
   label
 }: Props): React.ReactNode {
@@ -19,4 +19,4 @@ function FormSectionOptionSubsection({
   );
 }
 
-export default FormSectionOptionSubsection;
+export default FormSubsection;

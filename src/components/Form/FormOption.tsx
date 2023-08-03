@@ -17,7 +17,7 @@ interface Props {
   label: string,
 }
 
-const FormSectionOption = ({
+const FormOption = ({
   children,
   id,
   input,
@@ -66,4 +66,4 @@ const FormSectionOption = ({
   );
 }
 
-export default FormSectionOption;
+export default FormOption;

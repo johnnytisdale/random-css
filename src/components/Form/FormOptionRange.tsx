@@ -1,4 +1,5 @@
 import * as React from "react";
+import FormOption from "./FormOption";
 
 interface Props {
   disabled?: boolean,
@@ -12,7 +13,7 @@ interface Props {
   step?: string,
 }
 
-export default function FormSectionOptionRange ({
+export default function FormOptionRange ({
   disabled = false,
   max,
   min,
@@ -34,28 +35,28 @@ export default function FormSectionOptionRange ({
   );
   return (
     <>
-      <div className="option">
-        <div className="label">{minLabel}</div>
-        <input
-          {...sharedProps}
-          value={minValue}
-          onChange={e => {
+      <FormOption
+        label={minLabel}
+        input={{
+          ...sharedProps,
+          value: minValue,
+          onChange: e => {
             const value = parseFloat(e.target.value);
             setValues(value, value > maxValue ? value : maxValue);
-          }}
-        />
-      </div>
-      <div className="option">
-        <div className="label">{maxLabel}</div>
-        <input
-          {...sharedProps}
-          value={maxValue}
-          onChange={e => {
+          }
+        }}
+      />
+      <FormOption
+        label={maxLabel}
+        input={{
+          ...sharedProps,
+          value: maxValue,
+          onChange: e => {
             const value = parseFloat(e.target.value);
             setValues(value < minValue ? value : minValue, value);
-          }}
-        />
-      </div>
+          }
+        }}
+      />
     </>
   );
 }

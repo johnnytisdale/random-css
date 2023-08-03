@@ -12,7 +12,7 @@ import {
 } from "../../classes/CSS/Animation";
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
-import FormSectionOption from "./FormSectionOption";
+import FormOption from "./FormOption";
 import FormSectionOptionAnimation from "./Animation/FormSectionOptionAnimation";
 import GlyphOption from "../../enums/GlyphOption";
 import Options from "../../types/Options";
@@ -183,7 +183,7 @@ export default class Form extends React.Component<Props, State> {
 
           {/* Global options */}
           <FormSection id="global-options" title="global options">
-            <FormSectionOption
+            <FormOption
               input={{
                 'data-testid': "randomcss-form-text",
                 type: "text",
@@ -196,7 +196,7 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="text"
             />
-            <FormSectionOption
+            <FormOption
               input={{
                 ...(
                   this.state.options.global.unsafe === false &&
@@ -218,7 +218,7 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="size"
             />
-            <FormSectionOption
+            <FormOption
               input={{
                 checked: this.state.options.global.unsafe,
                 type: "checkbox",
@@ -235,7 +235,7 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="unsafe"
             />
-            <FormSectionOption
+            <FormOption
               input={{
                 checked: this.state.options.global.ignoreSpaces,
                 type: "checkbox",
@@ -251,7 +251,7 @@ export default class Form extends React.Component<Props, State> {
 
           {/* css */}
           <FormSection id='css-options' title="css options">
-            <FormSectionOption
+            <FormOption
               id='select-all-css'
               input={{
                 checked: this.state.form.css.selectAll,
@@ -260,7 +260,7 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="select all"
             />
-            <FormSectionOption
+            <FormOption
               id='select-none-css'
               input={{
                 checked: this.state.form.css.selectNone,
@@ -283,7 +283,7 @@ export default class Form extends React.Component<Props, State> {
                   return;
                 }
                 return (
-                  <FormSectionOption
+                  <FormOption
                     input={{
                       checked: (
                         this.state.options.css?.[propertyName]?.enabled === true
@@ -306,7 +306,7 @@ export default class Form extends React.Component<Props, State> {
 
           { /* glyph */}
           <FormSection id='glyph-options' title="glyph options">
-            <FormSectionOption
+            <FormOption
               id='1337'
               input={{
                 checked: this.state.options.glyph?.leet?.enabled === true,
@@ -317,7 +317,7 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="1337"
             />
-            <FormSectionOption
+            <FormOption
               id='unicode'
               input={{
                 checked: this.state.options.glyph?.unicode?.enabled === true,
