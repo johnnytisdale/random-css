@@ -1,3 +1,3 @@
 export default interface Option {
-  enabled: boolean;
+  enabled?: boolean;
 }

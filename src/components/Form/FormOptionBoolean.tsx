@@ -1,23 +1,25 @@
-import FormOption from "./FormOption";
+import FormOption, { CommonOptionProps } from "./FormOption";
 
 import * as React from "react";
 
-interface Props {
+interface Props extends CommonOptionProps {
   checked: boolean;
-  disabled?: boolean,
-  label: string,
-  setChecked: (checked: boolean) => void,
+  setChecked: (checked: boolean) => void;
 }
 
 export default function FormOptionBoolean ({
   checked,
+  children,
   disabled = false,
+  id,
   label,
   setChecked
 }: Props): React.ReactNode {
   return (
     <FormOption
+      children={children}
       label={label}
+      id={id}
       input={{
         checked,
         disabled,

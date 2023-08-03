@@ -1,49 +1,52 @@
 import AnimationDirection from "../../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
-import { AnimationOption, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
+import { AnimationIterationCountOptions, AnimationOption, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
-import FormOption from "../FormOption";
-import FormSectionOptionAnimationSubsectionIterationCount from "./FormSectionOptionAnimationSubsectionIterationCount";
 import FormOptionArray from "../FormOptionArray";
 import FormOptionRange from "../FormOptionRange";
+import FormSubsectionAnimationIterationCount from "./FormSubsectionAnimationIterationCount";
 import FormSubsection from "../FormSubsection";
 
 import * as React from "react";
 import { useMemo } from "react";
+import FormOptionBoolean from "../FormOptionBoolean";
 
 interface Props {
   option: AnimationOption;
   setOption: (option: AnimationOption) => void,
 }
 
-const FormSectionOptionAnimation = ({
+export default function FormSubsectionAnimation ({
   option,
   setOption
-}: Props): React.ReactNode => {
+}: Props): React.ReactNode {
   const enabled = useMemo(
     () =>  option.enabled === true,
     [option.enabled]
   );
+  const setIterationCountOption = React.useCallback(
+    (options: AnimationIterationCountOptions) => {
+      setOption({
+        iterationCount: {
+          ...option.iterationCount ?? {},
+          ...options
+        }
+      })
+    },
+    [option?.iterationCount, setOption]
+  )
   return (
-    <FormOption
+    <FormOptionBoolean
+      checked={enabled === true}
       label="animation"
-      input={{
-        checked: enabled,
-        type: "checkbox",
-        onChange: e => {
-          setOption({
-            ...option,
-            ...{ enabled: e.target.checked }
-          });
-          }
-      }}
+      setChecked={enabled => setOption({ enabled })}
     >
       <FormSubsection label='directions'>
         <FormOptionArray
           disabled={enabled === false}
           possibleValues={Object.values(AnimationDirection)}
-          setValues={directions => setOption({...option, ...{ directions }})}
+          setValues={directions => setOption({ directions })}
           values={option?.directions ?? []}
         />
       </FormSubsection>
@@ -54,9 +57,10 @@ const FormSectionOptionAnimation = ({
           min={DEFAULT_ANIMATION_DURATION_MIN}
           maxValue={option?.durationMax ?? DEFAULT_ANIMATION_DURATION_MAX}
           minValue={option?.durationMin ?? DEFAULT_ANIMATION_DURATION_MIN}
-          setValues={(min: number, max: number) => setOption(
-            {...option, ...{durationMax: max, durationMin: min}}
-          )}
+          setValues={(durationMin, durationMax) => setOption({
+            durationMax,
+            durationMin
+          })}
         />
       </FormSubsection>
       <FormSubsection label='easing functions'>
@@ -77,10 +81,10 @@ const FormSectionOptionAnimation = ({
           values={option?.fillModes ?? []}
         />
       </FormSubsection>
-      <FormSectionOptionAnimationSubsectionIterationCount
+      <FormSubsectionAnimationIterationCount
         enabled={enabled}
-        option={option}
-        setOption={setOption}
+        option={option?.iterationCount}
+        setOption={setIterationCountOption}
       />
       <FormSubsection label='transformations'>
         <FormOptionArray
@@ -92,8 +96,6 @@ const FormSectionOptionAnimation = ({
           values={option?.transformations ?? []}
         />
       </FormSubsection>
-    </FormOption>
+    </FormOptionBoolean>
   );
 }
-
-export default FormSectionOptionAnimation;

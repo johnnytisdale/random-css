@@ -13,13 +13,14 @@ import {
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
 import FormOption from "./FormOption";
-import FormSectionOptionAnimation from "./Animation/FormSectionOptionAnimation";
+import FormSubsectionAnimation from "./Animation/FormSubsectionAnimation";
 import GlyphOption from "../../enums/GlyphOption";
 import Options from "../../types/Options";
 import RandomCss from "../RandomCss";
 
 import * as React from "react";
 import { createRoot } from 'react-dom/client';
+import FormOptionBoolean from "./FormOptionBoolean";
 
 type Props = Record<string, never>;
 
@@ -68,6 +69,7 @@ export default class Form extends React.Component<Props, State> {
         glyph: {}
       },
     };
+    this.setAnimationOption = this.setAnimationOption.bind(this);
   }
 
   private getValidSize(size: number): number {
@@ -81,9 +83,9 @@ export default class Form extends React.Component<Props, State> {
     return size;
   }
 
-  private toggleAll(e: React.ChangeEvent<HTMLInputElement>, select: boolean) {
+  private toggleAll(checked: boolean, select: boolean) {
     const formOptions = this.state.form;
-    if (!e.target.checked) {
+    if (!checked) {
       if (select) {
         formOptions.css.selectAll = false;
       } else {
@@ -143,6 +145,15 @@ export default class Form extends React.Component<Props, State> {
       ...{ enabled: checked }
     };
     this.setState({ options: options });
+  }
+
+  private setAnimationOption(option: AnimationOption) {
+    const options = this.state.options;
+    options.css.animation = {
+      ...options.css.animation,
+      ...option
+    };
+    this.setState({ options });
   }
 
   render(): React.ReactNode {
@@ -218,115 +229,79 @@ export default class Form extends React.Component<Props, State> {
               }}
               label="size"
             />
-            <FormOption
-              input={{
-                checked: this.state.options.global.unsafe,
-                type: "checkbox",
-                onChange: e => {
-                  const options = this.state.options;
-                  options.global.unsafe = e.target.checked;
-                  if (e.target.checked === false) {
-                    options.global.size = this.getValidSize(
-                      options.global.size
-                    );
-                  }
-                  this.setState({ options: options });
-                },
-              }}
+            <FormOptionBoolean
+              checked={this.state.options.global.unsafe}
               label="unsafe"
-            />
-            <FormOption
-              input={{
-                checked: this.state.options.global.ignoreSpaces,
-                type: "checkbox",
-                onChange: e => {
-                  const options = this.state.options;
-                  options.global.ignoreSpaces = e.target.checked;
-                  this.setState({ options: options });
+              setChecked={unsafe => {
+                const options = this.state.options;
+                options.global.unsafe = unsafe;
+                if (unsafe === false) {
+                  options.global.size = this.getValidSize(options.global.size);
                 }
+                this.setState({ options });
               }}
+            />
+            <FormOptionBoolean
+              checked={this.state.options.global.ignoreSpaces === true}
               label="ignore spaces"
+              setChecked={ignoreSpaces => {
+                const options = this.state.options;
+                options.global.ignoreSpaces = ignoreSpaces;
+                this.setState({ options });
+              }}
             />
           </FormSection>
 
           {/* css */}
           <FormSection id='css-options' title="css options">
-            <FormOption
+            <FormOptionBoolean
+              checked={this.state.form.css.selectAll === true}
               id='select-all-css'
-              input={{
-                checked: this.state.form.css.selectAll,
-                type: "checkbox",
-                onChange: e => this.toggleAll(e, true)
-              }}
               label="select all"
+              setChecked={checked => this.toggleAll(checked, true)}
             />
-            <FormOption
+            <FormOptionBoolean
+              checked={this.state.form.css.selectNone}
               id='select-none-css'
-              input={{
-                checked: this.state.form.css.selectNone,
-                type: "checkbox",
-                onChange: e => this.toggleAll(e, false)
-              }}
               label="select none"
+              setChecked={checked => this.toggleAll(checked, false)}
             />
-            <FormSectionOptionAnimation
+            <FormSubsectionAnimation
               option={this.state.options.css.animation}
-              setOption={(option: AnimationOption) => {
-                const options = this.state.options;
-                options.css.animation = option;
-                this.setState({ options });
-              }}
+              setOption={this.setAnimationOption}
             />
             {
-              Object.values(CssProperty).map((propertyName, index) => {
-                if (propertyName === CssProperty.animation) {
-                  return;
-                }
-                return (
-                  <FormOption
-                    input={{
-                      checked: (
-                        this.state.options.css?.[propertyName]?.enabled === true
-                      ),
-                      type: "checkbox",
-                      onChange: e => {
-                        this.toggleCssProperty(
-                          CssProperty[propertyName],
-                          e.target.checked
-                        );
-                      }
-                    }}
+              Object.values(CssProperty).map((propertyName, index) => (
+                propertyName !== CssProperty.animation && (
+                  <FormOptionBoolean
+                    checked={
+                      this.state.options.css?.[propertyName]?.enabled === true
+                    }
                     key={index}
                     label={propertyName}
+                    setChecked={checked => this.toggleCssProperty(
+                      CssProperty[propertyName],
+                      checked
+                    )}
                   />
-                );
-              })
+                )
+              ))
             }
           </FormSection>
 
           { /* glyph */}
           <FormSection id='glyph-options' title="glyph options">
-            <FormOption
+            <FormOptionBoolean
+              checked={this.state.options.glyph?.leet?.enabled === true}
               id='1337'
-              input={{
-                checked: this.state.options.glyph?.leet?.enabled === true,
-                type: "checkbox",
-                onChange: e => {
-                  this.toggleGlyphOption(GlyphOption.LEET, e.target.checked);
-                }
-              }}
               label="1337"
+              setChecked={x => this.toggleGlyphOption(GlyphOption.LEET, x)}
             />
-            <FormOption
+            <FormOptionBoolean
+              checked={this.state.options.glyph?.unicode?.enabled === true}
               id='unicode'
-              input={{
-                checked: this.state.options.glyph?.unicode?.enabled === true,
-                type: "checkbox",
-                onChange: e => {
-                  this.toggleGlyphOption(GlyphOption.UNICODE, e.target.checked);
-                }
-              }}
               label="unicode"
+              setChecked={x => this.toggleGlyphOption(GlyphOption.UNICODE, x)}
             />
           </FormSection>
 

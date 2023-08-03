@@ -10,19 +10,23 @@ interface InputProps extends React.DetailedHTMLProps<
   'data-testid'?: string
 }
 
-interface Props {
-  children?: React.ReactNode,
-  id?: string,
-  input: InputProps,
-  label: string,
+export interface CommonOptionProps {
+  children?: React.ReactNode;
+  disabled?: boolean;
+  id?: string;
+  label?: string,
 }
 
-const FormOption = ({
+interface Props extends CommonOptionProps {
+  input: InputProps,
+}
+
+export default function FormOption ({
   children,
   id,
   input,
   label,
-}: Props): React.ReactNode => {
+}: Props): React.ReactNode {
   const [expanded, setExpanded] = React.useState(false);
   return (
     <>
@@ -65,5 +69,3 @@ const FormOption = ({
     </>
   );
 }
-
-export default FormOption;
