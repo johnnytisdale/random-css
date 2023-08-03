@@ -87,18 +87,6 @@ export default function Form(): React.ReactNode {
     [setState, state.options]
   );
 
-  const setBackgroundColorOption = useCallback(
-    (option: ColorOption) => {
-      const options = state.options;
-      options.css.backgroundColor = {
-        ...options.css.backgroundColor,
-        ...option
-      };
-      setState({ options });
-    },
-    [setState, state.options]
-  );
-
   const setColorOption = useCallback(
     (
       key: Extract<
