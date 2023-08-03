@@ -2,13 +2,7 @@ import "../../styles/Form.scss";
 
 import {
   AnimationOption,
-  DEFAULT_ANIMATION_DIRECTIONS,
-  DEFAULT_ANIMATION_DURATION_MAX,
-  DEFAULT_ANIMATION_DURATION_MIN,
-  DEFAULT_ANIMATION_EASING_FUNCTIONS,
-  DEFAULT_ANIMATION_FILL_MODES,
-  DEFAULT_ANIMATION_ITERATION_COUNT,
-  DEFAULT_ANIMATION_TRANSFORMATIONS
+  DEFAULT_ANIMATION
 } from "../../classes/CSS/Animation";
 import CssProperty from "../../enums/CssProperty";
 import FormSection from "./FormSection";
@@ -56,16 +50,7 @@ const initialState: State = {
   },
   options: {
     css: {
-      animation: {
-        enabled: false,
-        directions: DEFAULT_ANIMATION_DIRECTIONS,
-        durationMax: DEFAULT_ANIMATION_DURATION_MAX,
-        durationMin: DEFAULT_ANIMATION_DURATION_MIN,
-        easingFunctions: DEFAULT_ANIMATION_EASING_FUNCTIONS,
-        fillModes: DEFAULT_ANIMATION_FILL_MODES,
-        iterationCount: DEFAULT_ANIMATION_ITERATION_COUNT,
-        transformations: DEFAULT_ANIMATION_TRANSFORMATIONS
-      }
+      animation: DEFAULT_ANIMATION
     },
     global: {
       ignoreSpaces: true,
