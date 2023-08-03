@@ -1,9 +1,11 @@
 import {
+  AnimationIterationCountOptions,
   AnimationOption,
   DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN
 } from "../../../classes/CSS/Animation";
 import FormOption from "../FormOption";
+import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionRange from "../FormOptionRange";
 import FormSubsection from "../FormSubsection";
 
@@ -20,26 +22,27 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
   option,
   setOption
 }: Props): React.ReactNode => {
+
+  const setIterationCountOption = React.useCallback(
+    (value: AnimationIterationCountOptions) => setOption({
+      ...option,
+      ...{
+        iterationCount: {
+          ...option.iterationCount ?? {},
+          ...{value}
+        }
+      }
+    }),
+    [option, setOption]
+  );
+
   return (
-    <FormSubsection label='iteration count'>
-      <FormOption
+    <FormSubsection label="iteration count">
+      <FormOptionBoolean
+        checked={option?.iterationCount?.infinite === true}
+        disabled={enabled !== true}
         label="infinite"
-        input={{
-          checked: option.iterationCount.infinite === true,
-          disabled: enabled !== true,
-          type: "checkbox",
-          onChange: e => setOption({
-            ...option,
-            ...{
-              iterationCount: {
-                ...option.iterationCount ?? {},
-                ...{
-                  infinite: e.target.checked
-                }
-              }
-            }
-          })
-        }}
+        setChecked={infinite => setIterationCountOption({ infinite })}
       />
       <FormOption
         label="infiniteProbability"
@@ -50,82 +53,35 @@ const FormSectionOptionAnimationSubsectionIterationCount = ({
           step: ".01",
           type: "range",
           value: option.iterationCount.infiniteProbability,
-          onChange: e => {
-            setOption({
-              ...option,
-              ...{
-                iterationCount: {
-                  ...option.iterationCount ?? {},
-                  ...{
-                    infiniteProbability: parseFloat(e.target.value)
-                  }
-                }
-              }
-            });
-          }
+          onChange: e => setIterationCountOption({
+            infiniteProbability: parseFloat(e.target.value)
+          })
         }}
       />
-      <FormOption
+      <FormOptionBoolean
+        checked={option?.iterationCount?.integersOnly === true}
+        disabled={enabled !== true}
         label="integers only"
-        input={{
-          checked: option.iterationCount.integersOnly === true,
-          disabled: enabled !== true,
-          type: "checkbox",
-          onChange: e => {
-            setOption({
-              ...option,
-              ...{
-                iterationCount: {
-                  ...option.iterationCount ?? {},
-                  ...{
-                    integersOnly: e.target.checked
-                  }
-                }
-              }
-            });
-          }
-        }}
+        setChecked={integersOnly => setIterationCountOption({ integersOnly })}
       />
       <FormOptionRange
         disabled={!enabled}
         max={DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
         min={DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
-        maxValue={option?.iterationCount?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
-        minValue={option?.iterationCount?.min ?? DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
-        setValues={(min: number, max: number) =>  setOption({
-          ...option,
-          ...{
-            iterationCount: {
-              ...option.iterationCount ?? {},
-              ...{
-                max: max,
-                min: min
-              }
-            }
-          }
-        })}
+        maxValue={
+          option?.iterationCount?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX
+        }
+        minValue={
+          option?.iterationCount?.min ?? DEFAULT_ANIMATION_ITERATION_COUNT_MIN
+        }
+        setValues={(min, max) => setIterationCountOption({ max, min })}
         step="0.01"
       />
-      <FormOption
+      <FormOptionBoolean
+        checked={option.iterationCount.zero === true}
+        disabled={enabled !== true}
         label="zero"
-        input={{
-          checked: option.iterationCount.zero === true,
-          disabled: enabled !== true,
-          type: "checkbox",
-          onChange: e => {
-            setOption({
-              ...option,
-              ...{
-                iterationCount: {
-                  ...option.iterationCount ?? {},
-                  ...{
-                    zero: e.target.checked
-                  }
-                }
-              }
-            });
-          }
-        }}
+        setChecked={zero => setIterationCountOption({ zero })}
       />
     </FormSubsection>
   );
