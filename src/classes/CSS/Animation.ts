@@ -81,23 +81,18 @@ export default class Animation extends CssProperty {
 
   constructor(options: AnimationOption) {
     super();
-    this.directions = options.directions ?? DEFAULT_ANIMATION_DIRECTIONS;
+    this.directions = options.directions ?? [ ...DEFAULT_ANIMATION_DIRECTIONS ];
     this.durationMax = options.durationMax ?? DEFAULT_ANIMATION_DURATION_MAX;
     this.durationMin = options.durationMin ?? DEFAULT_ANIMATION_DURATION_MIN
     this.easingFunctions = options.easingFunctions ??
-      DEFAULT_ANIMATION_EASING_FUNCTIONS;
-    this.fillModes = options.fillModes ?? DEFAULT_ANIMATION_FILL_MODES;
+      [ ...DEFAULT_ANIMATION_EASING_FUNCTIONS ];
+    this.fillModes = options.fillModes ?? [ ...DEFAULT_ANIMATION_FILL_MODES ];
     this.iterationCount = {
-      infinite: true,
-      infiniteProbability: .5,
-      integersOnly: false,
-      max: 3,
-      min: .5,
-      zero: false,
+      ...DEFAULT_ANIMATION_ITERATION_COUNT,
       ...options.iterationCount ?? {}
     };
     this.transformations = options.transformations ??
-      DEFAULT_ANIMATION_TRANSFORMATIONS;
+      [ ...DEFAULT_ANIMATION_TRANSFORMATIONS ];
   }
 
   private getIterationCount(): string {

@@ -17,7 +17,6 @@ import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
 
-
 interface State {
   copied: boolean | null,
   form: {
@@ -50,7 +49,7 @@ const initialState: State = {
   },
   options: {
     css: {
-      animation: DEFAULT_ANIMATION
+      animation: { ...DEFAULT_ANIMATION }
     },
     global: {
       ignoreSpaces: true,
