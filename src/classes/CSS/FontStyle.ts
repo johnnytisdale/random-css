@@ -5,7 +5,6 @@ const json = cssProperties['font-style'];
 
 export default class FontStyle extends CssProperty {
 
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;

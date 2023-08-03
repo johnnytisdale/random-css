@@ -63,7 +63,6 @@ export const DEFAULT_ANIMATION = {
 
 export default class Animation extends CssProperty {
 
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsKeywords = false;
   protected acceptsPercentages = false;

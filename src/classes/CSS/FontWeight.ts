@@ -5,7 +5,6 @@ const json = cssProperties['font-weight'];
 
 export default class FontWeight extends CssProperty {
 
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;

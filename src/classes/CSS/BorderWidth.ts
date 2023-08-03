@@ -15,7 +15,6 @@ export default class BorderWidth extends CssProperty {
     }
   }
 
-  protected acceptsColors = false;
   protected acceptsLengths = true;
   protected acceptsPercentages = false;
   protected acceptsKeywords = false;

@@ -4,7 +4,6 @@ import * as cssProperties from "../../json/cssProperties.json";
 const json = cssProperties['border-style'];
 
 export default class BorderStyle extends CssProperty {
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;

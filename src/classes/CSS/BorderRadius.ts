@@ -5,7 +5,6 @@ const json = cssProperties['border-radius'];
 
 export default class BorderRadius extends CssProperty {
 
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsPercentages = true;
   protected acceptsKeywords = false;

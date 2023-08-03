@@ -7,7 +7,6 @@ const json = cssProperties['font-family'];
 
 export default class FontFamily extends CssProperty {
 
-  protected acceptsColors = false;
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
   protected acceptsPercentages = false;
