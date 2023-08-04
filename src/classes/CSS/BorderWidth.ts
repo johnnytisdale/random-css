@@ -7,7 +7,7 @@ import LengthProperty, {
   LengthOptions
 } from "./LengthProperty";
 
-export const DEFAULT_BORDER_WIDTH_ENABLED = true;
+export const DEFAULT_BORDER_WIDTH_ENABLED = false;
 
 export const DEFAULT_BORDER_WIDTH: LengthOptions = {
   ...DEFAULT_LENGTH_OPTIONS,
