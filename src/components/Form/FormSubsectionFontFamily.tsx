@@ -3,18 +3,18 @@ import FontGenericName from "../../enums/FontGenericName";
 import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
+import FormOptionProbability from "./FormOptionProbability";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
 import { useMemo } from "react";
-import FormOptionProbability from "./FormOptionProbability";
 
 interface Props {
   option: FontFamilyOptions;
   setOption: (option: FontFamilyOptions) => void,
 }
 
-export default function FormSubsectionBorderRadius ({
+export default function FormSubsectionFontFamily ({
   option,
   setOption
 }: Props): React.ReactNode {
@@ -24,17 +24,13 @@ export default function FormSubsectionBorderRadius ({
   );
   return (
     <FormOptionBoolean
-      checked={
-        option?.enabled === true
-      }
+      checked={option?.enabled === true}
       label="fontFamily"
       setChecked={enabled => setOption({ enabled })}
     >
       <FormSubsection label="value types">
         <FormOptionBoolean
-          checked={
-            option?.includeFamilyNames === true
-          }
+          checked={option?.includeFamilyNames === true}
           label="includeFamilyNames"
           setChecked={includeFamilyNames => (
             !includeFamilyNames &&
@@ -44,9 +40,7 @@ export default function FormSubsectionBorderRadius ({
           )}
         />
         <FormOptionBoolean
-          checked={
-            option?.includeGenericNames === true
-          }
+          checked={option?.includeGenericNames === true}
           label="includeGenericNames"
           setChecked={includeGenericNames => (
             !includeGenericNames &&
@@ -56,9 +50,7 @@ export default function FormSubsectionBorderRadius ({
           ) }
         />
         <FormOptionBoolean
-          checked={
-            option?.includeFallbacks === true
-          }
+          checked={option?.includeFallbacks === true}
           label="includeFallbacks"
           setChecked={includeFallbacks => (
             !includeFallbacks &&

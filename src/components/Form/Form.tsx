@@ -25,6 +25,8 @@ import RandomCss from "../RandomCss";
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
+import { DEFAULT_FONT_STYLE, FontStyleOptions } from "../../classes/CSS/FontStyle";
+import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
 
 interface State {
   copied: boolean | null,
@@ -54,6 +56,7 @@ const initialState: State = {
       borderStyle: { ...DEFAULT_BORDER_STYLE },
       color: { ...DEFAULT_COLOR_OPTIONS },
       fontFamily: { ...DEFAULT_FONT_FAMILY },
+      fontStyle: { ...DEFAULT_FONT_STYLE },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
     },
     global: {
@@ -96,18 +99,6 @@ export default function Form(): React.ReactNode {
     [setState, state.options]
   );
 
-  const setFontFamilyOption = useCallback(
-    (option: FontFamilyOptions) => {
-      const options = state.options;
-      options.css.fontFamily = {
-        ...options.css.fontFamily,
-        ...option
-      };
-      setState({ options });
-    },
-    [setState, state.options]
-  );
-
   const setColorOption = useCallback(
     (
       key: Extract<
@@ -122,6 +113,30 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css[key] = {
         ...options.css[key],
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setFontFamilyOption = useCallback(
+    (option: FontFamilyOptions) => {
+      const options = state.options;
+      options.css.fontFamily = {
+        ...options.css.fontFamily,
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setFontStyleOption = useCallback(
+    (option: FontStyleOptions) => {
+      const options = state.options;
+      options.css.fontStyle = {
+        ...options.css.fontStyle,
         ...option
       };
       setState({ options });
@@ -382,7 +397,10 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("textDecorationColor", option)}
             unsafe={state.options.global.unsafe}
           />
-
+          <FormSubsectionFontStyle
+            option={state.options.css.fontStyle}
+            setOption={setFontStyleOption}
+          />
           {
             Object.values(CssProperty).map((propertyName, index) => (
               propertyName !== CssProperty.ANIMATION &&
@@ -392,6 +410,7 @@ export default function Form(): React.ReactNode {
               propertyName !== CssProperty.BORDER_STYLE &&
               propertyName !== CssProperty.COLOR &&
               propertyName !== CssProperty.FONT_FAMILY &&
+              propertyName !== CssProperty.FONT_STYLE &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
               (
                 <FormOptionBoolean

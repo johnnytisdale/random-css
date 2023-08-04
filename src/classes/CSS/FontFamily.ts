@@ -13,7 +13,7 @@ export interface FontFamilyOptions extends Option {
   includeGenericNames?: boolean;
 }
 
-export const DEFAULT_FONT_FAMILY_ENABLED = true;
+export const DEFAULT_FONT_FAMILY_ENABLED = false;
 export const DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY = .5;
 export const DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES = Object.values(
   FontFamilyName

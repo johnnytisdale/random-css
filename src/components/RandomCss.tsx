@@ -107,7 +107,10 @@ export default class RandomCss extends React.Component<Props, State> {
       case CssProperty.FONT_FAMILY:
         return new FontFamily(this.props.options.css.fontFamily);
       case CssProperty.FONT_STYLE:
-        return new FontStyle(this.props.options.global.unsafe);
+        return new FontStyle(
+          this.props.options.css?.fontStyle,
+          this.props.options.global.unsafe
+        );
       case CssProperty.FONT_WEIGHT:
         return new FontWeight();
       case CssProperty.TEXT_DECORATION_COLOR:
