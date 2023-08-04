@@ -50,7 +50,7 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
   AnimationTransformation
 );
-export const DEFAULT_ANIMATION: AnimationOptions = {
+export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   directions: DEFAULT_ANIMATION_DIRECTIONS,
   durationMax: DEFAULT_ANIMATION_DURATION_MAX,
   durationMin: DEFAULT_ANIMATION_DURATION_MIN,

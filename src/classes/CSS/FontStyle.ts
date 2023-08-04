@@ -18,7 +18,7 @@ export const DEFAULT_FONT_STYLE_FONT_STYLES = Object.values(FontStyleKeyword);
 export const DEFAULT_FONT_STYLE_MAX_DEGREES = 90;
 export const DEFAULT_FONT_STYLE_MIN_DEGREES = -90;
 
-export const DEFAULT_FONT_STYLE: FontStyleOptions = {
+export const DEFAULT_FONT_STYLE_OPTIONS: FontStyleOptions = {
   degrees: DEFAULT_FONT_STYLE_DEGREES,
   degreesProbability: DEFAULT_FONT_STYLE_DEGREES_PROBABILITY,
   enabled: DEFAULT_FONT_STYLE_ENABLED,

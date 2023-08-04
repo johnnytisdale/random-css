@@ -13,7 +13,7 @@ export const DEFAULT_TEXT_DECORATION_STYLE_STYLES = Object.values(
 );
 
 // TODO: Append OPTIONS to names
-export const DEFAULT_TEXT_DECORATION_STYLE: TextDecorationStyleOptions = {
+export const DEFAULT_TEXT_DECORATION_STYLE_OPTIONS: TextDecorationStyleOptions = {
   enabled: DEFAULT_TEXT_DECORATION_STYLE_ENABLED,
   styles: DEFAULT_TEXT_DECORATION_STYLE_STYLES
 };
