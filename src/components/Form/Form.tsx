@@ -1,15 +1,24 @@
 import "../../styles/Form.scss";
 
-import {
-  AnimationOptions,
-  DEFAULT_ANIMATION
-} from "../../classes/CSS/Animation";
-import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
+import { AnimationOptions, DEFAULT_ANIMATION } from "../../classes/CSS/Animation";
+import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS } from "../../classes/CSS/BorderRadius";
+import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
+import ColorOption from "../../interfaces/ColorOptions";
+import CssOptions from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
-import FormSection from "./FormSection";
+import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
+import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
+import { DEFAULT_FONT_FAMILY } from "../../classes/CSS/FontFamily";
+import FontFamilyName from "../../enums/FontFamilyName";
+import FontGenericName from "../../enums/FontGenericName";
 import FormOption from "./FormOption";
+import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
+import FormSection from "./FormSection";
+import FormSubsection from "./FormSubsection";
 import FormSubsectionAnimation from "./Animation/FormSubsectionAnimation";
+import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
+import FormSubsectionColor from "./FormSubsectionColor";
 import GlyphOption from "../../enums/GlyphOption";
 import Options from "../../types/Options";
 import RandomCss from "../RandomCss";
@@ -17,15 +26,6 @@ import RandomCss from "../RandomCss";
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
-import FormSubsectionColor from "./FormSubsectionColor";
-import ColorOption from "../../interfaces/ColorOptions";
-import CssOptions from "../../interfaces/CssOptions";
-import FormOptionArray from "./FormOptionArray";
-import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
-import FormSubsection from "./FormSubsection";
-import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS } from "../../classes/CSS/BorderRadius";
-import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
 
 interface State {
   copied: boolean | null,
@@ -36,17 +36,6 @@ interface State {
     }
   };
   options: Options;
-}
-
-function getValidSize(size: number): number {
-  if (size > 10) {
-    return 10;
-  } else if (size < .25) {
-    return .25;
-  } else if (size % .25 !== 0) {
-    return parseFloat((Math.round(size * 4) / 4).toFixed(2));
-  }
-  return size;
 }
 
 const initialState: State = {
@@ -65,6 +54,7 @@ const initialState: State = {
       borderRadius: { ...DEFAULT_BORDER_RADIUS },
       borderStyle: { ...DEFAULT_BORDER_STYLE },
       color: { ...DEFAULT_COLOR_OPTIONS },
+      fontFamily: { ...DEFAULT_FONT_FAMILY },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
     },
     global: {
@@ -358,10 +348,10 @@ export default function Form(): React.ReactNode {
                 possibleValues={Object.values(BorderStyleKeyword)}
                 setValues={keywords => {
                   const options = state.options;
-                  options.css.borderStyle.keywords = keywords;
+                  options.css.borderStyle.borderStyles = keywords;
                   setState({ options });
                 }}
-                values={state.options.css.borderStyle.keywords}
+                values={state.options.css.borderStyle.borderStyles}
               />
             </FormSubsection>
           </FormOptionBoolean>
@@ -371,6 +361,39 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("color", option)}
             unsafe={state.options.global.unsafe}
           />
+          <FormOptionBoolean
+            checked={
+              state.options.css?.fontFamily?.enabled === true
+            }
+            label="fontFamily"
+            setChecked={checked => toggleCssProperty(
+              CssProperty.FONT_FAMILY,
+              checked
+            )}
+          >
+            <FormSubsection label="family names">
+              <FormOptionArray
+                possibleValues={Object.values(FontFamilyName)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.fontFamily.fontFamilyNames = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css.fontFamily.fontFamilyNames}
+              />
+            </FormSubsection>
+            <FormSubsection label="generic names">
+              <FormOptionArray
+                possibleValues={Object.values(FontGenericName)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.fontFamily.fontGenericNames = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css.fontFamily.fontGenericNames}
+              />
+            </FormSubsection>
+          </FormOptionBoolean>
           <FormSubsectionColor
             label="textDecorationColor"
             option={state.options.css.textDecorationColor}
@@ -386,6 +409,7 @@ export default function Form(): React.ReactNode {
               propertyName !== CssProperty.BORDER_RADIUS &&
               propertyName !== CssProperty.BORDER_STYLE &&
               propertyName !== CssProperty.COLOR &&
+              propertyName !== CssProperty.FONT_FAMILY &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
               (
                 <FormOptionBoolean
@@ -489,6 +513,17 @@ export default function Form(): React.ReactNode {
       </div>
     </>
   );
+}
+
+function getValidSize(size: number): number {
+  if (size > 10) {
+    return 10;
+  } else if (size < .25) {
+    return .25;
+  } else if (size % .25 !== 0) {
+    return parseFloat((Math.round(size * 4) / 4).toFixed(2));
+  }
+  return size;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
