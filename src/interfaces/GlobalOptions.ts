@@ -25,7 +25,7 @@ export default interface GlobalOptions {
     /**
      * The text to which randomized styles will be applied.
      */
-    text?: string;
+    text: string;
 
     /**
      * If true, use inline CSS, which is considered unsafe because it is
