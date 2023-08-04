@@ -28,7 +28,7 @@ export default abstract class ColorProperty extends CssProperty {
   private rMin: number;
   private colorKeywords: ColorKeyword[];
 
-  constructor(private options: ColorOptions, protected unsafe: boolean) {
+  constructor(options: ColorOptions, protected unsafe: boolean) {
     super(unsafe);
     this.bMax = options.bMax ?? DEFAULT_COLOR_MAX;
     this.bMin = options.bMin ?? DEFAULT_COLOR_MIN;

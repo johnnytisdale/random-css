@@ -36,6 +36,7 @@ import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 import { DEFAULT_BORDER_WIDTH } from "../../classes/CSS/BorderWidth";
 import FormOptionLength from "./FormOptionLength";
 import { LengthOptions } from "../../classes/CSS/LengthProperty";
+import { DEFAULT_GLOBAL_OPTIONS } from "../../interfaces/GlobalOptions";
 
 interface State {
   copied: boolean | null,
@@ -72,12 +73,7 @@ const initialState: State = {
       textDecorationLine: { ...DEFAULT_TEXT_DECORATION_LINE },
       textDecorationStyle: { ...DEFAULT_TEXT_DECORATION_STYLE }
     },
-    global: {
-      ignoreSpaces: true,
-      size: 3,
-      text: 'random css',
-      unsafe: true
-    },
+    global: { ...DEFAULT_GLOBAL_OPTIONS },
     glyph: {}
   },
 };
