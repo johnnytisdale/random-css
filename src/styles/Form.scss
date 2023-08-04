@@ -102,27 +102,30 @@ body {
     >.options {
       >.option {
 
-        &.expanded {
-          border-top: 1px solid black;
-        }
+        &.expandable {
+          &.expanded {
+            border-top: 1px solid black;
+          }
 
-        &:not(.expanded) {
+          &:not(.expanded) {
+            >.label {
+              border-top: 1px dotted black;
+            }
+          }
+
           >.label {
-            border-top: 1px dotted black;
+            border-bottom: 1px dotted black;
+            &:not(:hover) {
+              border-color: transparent;
+            }
+            &:hover {
+              cursor: pointer;
+            }
+            >.chevron {
+              margin-right: .25rem;
+            }
           }
-        }
 
-        >.label {
-          border-bottom: 1px dotted black;
-          &:not(:hover) {
-            border-color: transparent;
-          }
-          &:hover {
-            cursor: pointer;
-          }
-          >.chevron {
-            margin-right: .25rem;
-          }
         }
       }
 

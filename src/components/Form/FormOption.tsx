@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import * as React from "react";
+import { useMemo } from 'react';
 
 interface InputProps extends React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -28,9 +29,17 @@ export default function FormOption ({
   label,
 }: Props): React.ReactNode {
   const [expanded, setExpanded] = React.useState(false);
+  const className = useMemo(
+    () => [
+      "option",
+      children !== undefined ? "expandable" : null,
+      expanded ? "expanded" : null
+    ].filter(Boolean).join(" "),
+    [children, expanded]
+  );
   return (
     <>
-      <div id={id} className={`option${expanded ? ' expanded' : ''}`}>
+      <div id={id} className={className}>
         <div
           className='label'
           onClick={
