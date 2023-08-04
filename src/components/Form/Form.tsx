@@ -9,8 +9,6 @@ import CssProperty from "../../enums/CssProperty";
 import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
 import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
 import { DEFAULT_FONT_FAMILY, FontFamilyOptions } from "../../classes/CSS/FontFamily";
-import FontFamilyName from "../../enums/FontFamilyName";
-import FontGenericName from "../../enums/FontGenericName";
 import FormOption from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
@@ -19,6 +17,7 @@ import FormSubsection from "./FormSubsection";
 import FormSubsectionAnimation from "./Animation/FormSubsectionAnimation";
 import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
 import FormSubsectionColor from "./FormSubsectionColor";
+import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
 import GlyphOption from "../../enums/GlyphOption";
 import Options from "../../types/Options";
 import RandomCss from "../RandomCss";
@@ -26,7 +25,6 @@ import RandomCss from "../RandomCss";
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
-import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
 
 interface State {
   copied: boolean | null,

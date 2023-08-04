@@ -1,10 +1,10 @@
 import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS_MAX_CORNERS, DEFAULT_BORDER_RADIUS_MAX_RADIUS, DEFAULT_BORDER_RADIUS_MIN_CORNERS, DEFAULT_BORDER_RADIUS_MIN_RADIUS } from "../../classes/CSS/BorderRadius";
-import FormOption from "./FormOption";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 
 import * as React from "react";
 import { useMemo } from "react";
+import FormOptionProbability from "./FormOptionProbability";
 
 interface Props {
   option: BorderRadiusOptions;
@@ -31,25 +31,11 @@ export default function FormSubsectionBorderRadius ({
         label="slash"
         setChecked={slash => setOption({ slash })}
       />
-      {
-        /**
-         * TODO: FormOptionProbability. Use here and for infiniteProbability
-         * in animation iteration count subsection.
-         */
-      }
-      <FormOption
+      <FormOptionProbability
         label="slashProbability"
-        input={{
-          disabled: !enabled || !option?.slash,
-          max: "1",
-          min: ".1",
-          step: ".01",
-          type: "range",
-          value: option?.slashProbability,
-          onChange: e => setOption({
-            slashProbability: parseFloat(e.target.value)
-          })
-        }}
+        disabled={!enabled || !option?.slash}
+        value={option?.slashProbability}
+        setProbability={slashProbability => setOption({ slashProbability })}
       />
       <FormOptionRange
         disabled={!enabled}

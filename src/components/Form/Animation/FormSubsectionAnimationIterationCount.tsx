@@ -3,8 +3,8 @@ import {
   DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN
 } from "../../../classes/CSS/Animation";
-import FormOption from "../FormOption";
 import FormOptionBoolean from "../FormOptionBoolean";
+import FormOptionProbability from "../FormOptionProbability";
 import FormOptionRange from "../FormOptionRange";
 import FormSubsection from "../FormSubsection";
 
@@ -29,19 +29,13 @@ export default function FormSubsectionAnimationIterationCount ({
         label="infinite"
         setChecked={infinite => setOption({ infinite })}
       />
-      <FormOption
+      <FormOptionProbability
         label="infiniteProbability"
-        input={{
-          disabled: !enabled || !option?.infinite,
-          max: "1",
-          min: ".1",
-          step: ".01",
-          type: "range",
-          value: option?.infiniteProbability,
-          onChange: e => setOption({
-            infiniteProbability: parseFloat(e.target.value)
-          })
-        }}
+        disabled={!enabled || !option?.infinite}
+        value={option?.infiniteProbability}
+        setProbability={
+          infiniteProbability => setOption({ infiniteProbability })
+        }
       />
       <FormOptionBoolean
         checked={option?.integersOnly === true}

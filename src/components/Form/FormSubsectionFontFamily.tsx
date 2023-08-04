@@ -7,6 +7,7 @@ import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
 import { useMemo } from "react";
+import FormOptionProbability from "./FormOptionProbability";
 
 interface Props {
   option: FontFamilyOptions;
@@ -32,18 +33,6 @@ export default function FormSubsectionBorderRadius ({
       <FormSubsection label="value types">
         <FormOptionBoolean
           checked={
-            option?.includeFallbacks === true
-          }
-          label="includeFallbacks"
-          setChecked={includeFallbacks => (
-            !includeFallbacks &&
-            !option.includeFamilyNames &&
-            !option.includeGenericNames ||
-            setOption({ includeFallbacks })
-          )}
-        />
-        <FormOptionBoolean
-          checked={
             option?.includeFamilyNames === true
           }
           label="includeFamilyNames"
@@ -65,6 +54,26 @@ export default function FormSubsectionBorderRadius ({
             !option.includeFamilyNames ||
             setOption({ includeGenericNames })
           ) }
+        />
+        <FormOptionBoolean
+          checked={
+            option?.includeFallbacks === true
+          }
+          label="includeFallbacks"
+          setChecked={includeFallbacks => (
+            !includeFallbacks &&
+            !option.includeFamilyNames &&
+            !option.includeGenericNames ||
+            setOption({ includeFallbacks })
+          )}
+        />
+        <FormOptionProbability
+          label="fallbackProbability"
+          disabled={disabled || !option?.includeFallbacks}
+          value={option?.fallbackProbability}
+          setProbability={
+            fallbackProbability => setOption({ fallbackProbability })
+          }
         />
       </FormSubsection>
       <FormSubsection label="family names">
