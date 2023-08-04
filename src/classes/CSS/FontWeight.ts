@@ -7,7 +7,6 @@ export default class FontWeight extends CssProperty {
 
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
-  protected acceptsPercentages = false;
   protected keywordLimit = 1;
   public name = json.camelCase;
 

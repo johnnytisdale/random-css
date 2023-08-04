@@ -124,7 +124,9 @@ export default class Character extends React.Component<Props, State> {
   render(): React.ReactNode {
     return (
       <div
-        className={this.props.unsafe === true ? '' : this.getClassName()}
+        className={
+          this.props.unsafe ? 'random-css-character' : this.getClassName()
+        }
         data-testid="character"
         id={this.id}
         style={

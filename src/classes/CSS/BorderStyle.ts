@@ -5,7 +5,7 @@ import KeywordProperty from "./KeywordProperty";
 
 export const DEFAULT_BORDER_STYLE_ENABLED = false;
 export const DEFAULT_BORDER_STYLE_KEYWORDS = Object.values(BorderStyleKeyword);
-export const DEFAULT_BORDER_STYLE = {
+export const DEFAULT_BORDER_STYLE: KeywordOptions<BorderStyleKeyword> = {
   enabled: DEFAULT_BORDER_STYLE_ENABLED,
   keywords: DEFAULT_BORDER_STYLE_KEYWORDS
 };

@@ -21,7 +21,6 @@ export const DEFAULT_COLOR_OPTIONS: ColorOptions = {
 export default abstract class ColorProperty extends CssProperty {
 
   protected acceptsLengths = false;
-  protected acceptsPercentages = false;
 
   private bMax: number;
   private bMin: number;

@@ -6,7 +6,6 @@ const json = cssProperties['text-decoration-line'];
 export default class TextDecorationLine extends CssProperty {
 
   protected acceptsLengths = false;
-  protected acceptsPercentages = false;
   protected acceptsKeywords = true;
   public name = json.camelCase;
 

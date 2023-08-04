@@ -9,7 +9,6 @@ export default abstract class CssProperty extends Randomizable {
   }
 
   protected abstract acceptsLengths: boolean;
-  protected abstract acceptsPercentages: boolean;
 
   protected separator = " ";
 
@@ -24,17 +23,10 @@ export default abstract class CssProperty extends Randomizable {
     return `${this.getRandomNumber(this.minLength, this.maxLength)}${this.lengthUnit}`;
   }
 
-  private getRandomPercentageValue(min = 0, max = 100): string {
-    return `${this.getRandomNumber(min, max)}%`;
-  }
-
   public getRandomValue(): string {
     const getValueFunctions: Array<() => string> = [];
     if (this.acceptsLengths) {
       getValueFunctions.push(this.getRandomLengthValue.bind(this));
-    }
-    if (this.acceptsPercentages) {
-      getValueFunctions.push(this.getRandomPercentageValue.bind(this));
     }
     const index = getValueFunctions.length === 1
       ? 0

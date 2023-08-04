@@ -16,8 +16,6 @@ export default class BorderWidth extends CssProperty {
   }
 
   protected acceptsLengths = true;
-  protected acceptsPercentages = false;
-  protected acceptsKeywords = false;
   public name = json.camelCase;
 
 }

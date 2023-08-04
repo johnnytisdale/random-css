@@ -9,7 +9,6 @@ export default class FontFamily extends CssProperty {
 
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
-  protected acceptsPercentages = false;
   protected keywordGroups: Array<Array<string>>;
   protected separator = ', ';
   public name = json.camelCase;

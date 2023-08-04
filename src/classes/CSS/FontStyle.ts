@@ -7,7 +7,6 @@ export default class FontStyle extends CssProperty {
 
   protected acceptsLengths = false;
   protected acceptsKeywords = true;
-  protected acceptsPercentages = false;
   public name = json.camelCase;
 
   protected keywords = json.values;

@@ -1,7 +1,7 @@
 import "../../styles/Form.scss";
 
 import {
-  AnimationOption,
+  AnimationOptions,
   DEFAULT_ANIMATION
 } from "../../classes/CSS/Animation";
 import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
@@ -19,11 +19,13 @@ import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
 import FormSubsectionColor from "./FormSubsectionColor";
 import ColorOption from "../../interfaces/ColorOptions";
-import CssOptions from "../../types/CssOptions";
+import CssOptions from "../../interfaces/CssOptions";
 import FormOptionArray from "./FormOptionArray";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
 import FormSubsection from "./FormSubsection";
+import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS } from "../../classes/CSS/BorderRadius";
+import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
 
 interface State {
   copied: boolean | null,
@@ -60,6 +62,7 @@ const initialState: State = {
       animation: { ...DEFAULT_ANIMATION },
       backgroundColor: { ...DEFAULT_COLOR_OPTIONS },
       borderColor: { ...DEFAULT_COLOR_OPTIONS },
+      borderRadius: { ...DEFAULT_BORDER_RADIUS },
       borderStyle: { ...DEFAULT_BORDER_STYLE },
       color: { ...DEFAULT_COLOR_OPTIONS },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
@@ -81,10 +84,22 @@ export default function Form(): React.ReactNode {
   );
 
   const setAnimationOption = useCallback(
-    (option: AnimationOption) => {
+    (option: AnimationOptions) => {
       const options = state.options;
       options.css.animation = {
         ...options.css.animation,
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setBorderRadiusOption = useCallback(
+    (option: BorderRadiusOptions) => {
+      const options = state.options;
+      options.css.borderRadius = {
+        ...options.css.borderRadius,
         ...option
       };
       setState({ options });
@@ -323,6 +338,10 @@ export default function Form(): React.ReactNode {
             option={state.options.css.borderColor}
             setOption={option => setColorOption("borderColor", option)}
             unsafe={state.options.global.unsafe}
+          />
+          <FormSubsectionBorderRadius
+            option={state.options.css.borderRadius}
+            setOption={setBorderRadiusOption}
           />
           <FormOptionBoolean
             checked={

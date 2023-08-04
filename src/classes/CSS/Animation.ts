@@ -15,7 +15,7 @@ export interface AnimationIterationCountOptions {
   zero?: boolean
 }
 
-export interface AnimationOption extends Options {
+export interface AnimationOptions extends Options {
   directions?: AnimationDirection[];
   durationMax?: number;
   durationMin?: number;
@@ -50,7 +50,7 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
   AnimationTransformation
 );
-export const DEFAULT_ANIMATION = {
+export const DEFAULT_ANIMATION: AnimationOptions = {
   directions: DEFAULT_ANIMATION_DIRECTIONS,
   durationMax: DEFAULT_ANIMATION_DURATION_MAX,
   durationMin: DEFAULT_ANIMATION_DURATION_MIN,
@@ -64,8 +64,6 @@ export const DEFAULT_ANIMATION = {
 export default class Animation extends CssProperty {
 
   protected acceptsLengths = false;
-  protected acceptsKeywords = false;
-  protected acceptsPercentages = false;
 
   public name = ECssProperty.ANIMATION;
 
@@ -78,7 +76,7 @@ export default class Animation extends CssProperty {
   private iterationCount: AnimationIterationCountOptions;
   private transformations: AnimationTransformation[];
 
-  constructor(options: AnimationOption) {
+  constructor(options: AnimationOptions) {
     super();
     this.directions = options.directions ?? [ ...DEFAULT_ANIMATION_DIRECTIONS ];
     this.durationMax = options.durationMax ?? DEFAULT_ANIMATION_DURATION_MAX;

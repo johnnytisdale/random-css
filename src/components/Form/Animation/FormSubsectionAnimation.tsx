@@ -1,7 +1,7 @@
 import AnimationDirection from "../../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
-import { AnimationIterationCountOptions, AnimationOption, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
+import { AnimationIterationCountOptions, AnimationOptions, DEFAULT_ANIMATION_DURATION_MAX, DEFAULT_ANIMATION_DURATION_MIN } from "../../../classes/CSS/Animation";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
 import FormOptionArray from "../FormOptionArray";
 import FormOptionRange from "../FormOptionRange";
@@ -13,8 +13,8 @@ import { useMemo } from "react";
 import FormOptionBoolean from "../FormOptionBoolean";
 
 interface Props {
-  option: AnimationOption;
-  setOption: (option: AnimationOption) => void,
+  option: AnimationOptions;
+  setOption: (option: AnimationOptions) => void,
 }
 
 export default function FormSubsectionAnimation ({
