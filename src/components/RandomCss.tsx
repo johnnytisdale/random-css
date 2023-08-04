@@ -93,7 +93,10 @@ export default class RandomCss extends React.Component<Props, State> {
       case CssProperty.BORDER_RADIUS:
         return new BorderRadius();
       case CssProperty.BORDER_STYLE:
-        return new BorderStyle(this.props.options.global.unsafe);
+        return new BorderStyle(
+          this.props.options.css.borderStyle,
+          this.props.options.global.unsafe
+        );
       case CssProperty.BORDER_WIDTH:
         return new BorderWidth(1, 3);
       case CssProperty.COLOR:

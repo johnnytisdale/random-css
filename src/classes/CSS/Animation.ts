@@ -4,7 +4,7 @@ import AnimationFillMode from "../../enums/AnimationFillMode";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
 import ECssProperty from "../../enums/CssProperty";
-import Option from "../../interfaces/Option";
+import Options from "../../interfaces/Option";
 
 export interface AnimationIterationCountOptions {
   infinite?: boolean,
@@ -15,7 +15,7 @@ export interface AnimationIterationCountOptions {
   zero?: boolean
 }
 
-export interface AnimationOption extends Option {
+export interface AnimationOption extends Options {
   directions?: AnimationDirection[];
   durationMax?: number;
   durationMin?: number;

@@ -20,6 +20,10 @@ import { createRoot } from 'react-dom/client';
 import FormSubsectionColor from "./FormSubsectionColor";
 import ColorOption from "../../interfaces/ColorOptions";
 import CssOptions from "../../types/CssOptions";
+import FormOptionArray from "./FormOptionArray";
+import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
+import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
+import FormSubsection from "./FormSubsection";
 
 interface State {
   copied: boolean | null,
@@ -56,6 +60,7 @@ const initialState: State = {
       animation: { ...DEFAULT_ANIMATION },
       backgroundColor: { ...DEFAULT_COLOR_OPTIONS },
       borderColor: { ...DEFAULT_COLOR_OPTIONS },
+      borderStyle: { ...DEFAULT_BORDER_STYLE },
       color: { ...DEFAULT_COLOR_OPTIONS },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
     },
@@ -319,6 +324,28 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("borderColor", option)}
             unsafe={state.options.global.unsafe}
           />
+          <FormOptionBoolean
+            checked={
+              state.options.css?.borderStyle?.enabled === true
+            }
+            label="borderStyle"
+            setChecked={checked => toggleCssProperty(
+              CssProperty.BORDER_STYLE,
+              checked
+            )}
+          >
+            <FormSubsection>
+              <FormOptionArray
+                possibleValues={Object.values(BorderStyleKeyword)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.borderStyle.keywords = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css.borderStyle.keywords}
+              />
+            </FormSubsection>
+          </FormOptionBoolean>
           <FormSubsectionColor
             label="color"
             option={state.options.css.color}
@@ -331,11 +358,13 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("textDecorationColor", option)}
             unsafe={state.options.global.unsafe}
           />
+
           {
             Object.values(CssProperty).map((propertyName, index) => (
               propertyName !== CssProperty.ANIMATION &&
               propertyName !== CssProperty.BACKGROUND_COLOR &&
               propertyName !== CssProperty.BORDER_COLOR &&
+              propertyName !== CssProperty.BORDER_STYLE &&
               propertyName !== CssProperty.COLOR &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
               (

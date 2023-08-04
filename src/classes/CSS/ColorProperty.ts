@@ -22,7 +22,6 @@ export default abstract class ColorProperty extends CssProperty {
 
   protected acceptsLengths = false;
   protected acceptsPercentages = false;
-  protected acceptsKeywords = false;
 
   private bMax: number;
   private bMin: number;

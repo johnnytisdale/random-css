@@ -23,7 +23,7 @@ body {
   width: min-content;
 
   .options {
-    >.option {
+    .option {
       display: flex;
       >.label {
         display: flex;
@@ -130,8 +130,9 @@ body {
         padding-bottom: .5rem;
         >.subsection {
 
+          padding-top: .5rem;
+
           >.label {
-            padding-top: .5rem;
             margin-left: 1rem;
             font-variant: small-caps;
           }

@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface Props {
   children: React.ReactNode,
-  label: string,
+  label?: string,
 }
 
 export default function FormSubsection({
@@ -11,7 +11,9 @@ export default function FormSubsection({
 }: Props): React.ReactNode {
   return (
     <div className="subsection">
-      <div className="label">{label}</div>
+      {label !== undefined && (
+        <div className="label">{label}</div>
+      )}
       <div className="options">
         { children }
       </div>

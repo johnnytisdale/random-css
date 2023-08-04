@@ -1,14 +1,22 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
+import CssProperty from "../../enums/CssProperty";
+import KeywordOptions from "../../interfaces/KeywordOptions";
+import KeywordProperty from "./KeywordProperty";
 
-const json = cssProperties['border-style'];
+export const DEFAULT_BORDER_STYLE_ENABLED = false;
+export const DEFAULT_BORDER_STYLE_KEYWORDS = Object.values(BorderStyleKeyword);
+export const DEFAULT_BORDER_STYLE = {
+  enabled: DEFAULT_BORDER_STYLE_ENABLED,
+  keywords: DEFAULT_BORDER_STYLE_KEYWORDS
+};
 
-export default class BorderStyle extends CssProperty {
-  protected acceptsLengths = false;
-  protected acceptsKeywords = true;
-  protected acceptsPercentages = false;
-  // TODO: Support multiple values when unsafe === false
+export default class BorderStyle extends KeywordProperty {
+
   protected keywordLimit = this.unsafe ? 4 : 1;
-  protected keywords = json.values;
-  public name = json.camelCase;
+  public name = CssProperty.BORDER_STYLE;
+
+  constructor(options: KeywordOptions<BorderStyleKeyword>, unsafe: boolean) {
+    super(unsafe);
+    this.keywords = options.keywords ?? [ ...DEFAULT_BORDER_STYLE_KEYWORDS ];
+  }
 }

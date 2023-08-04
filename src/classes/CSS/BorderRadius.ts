@@ -7,7 +7,6 @@ export default class BorderRadius extends CssProperty {
 
   protected acceptsLengths = false;
   protected acceptsPercentages = true;
-  protected acceptsKeywords = false;
   public name = json.camelCase;
 
   // TODO: support multiple values

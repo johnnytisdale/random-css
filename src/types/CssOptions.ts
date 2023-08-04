@@ -1,21 +1,23 @@
-import Option from "../interfaces/Option";
+import Options from "../interfaces/Option";
 import { AnimationOption } from "../classes/CSS/Animation";
+import KeywordOptions from "../interfaces/KeywordOptions";
+import BorderStyleKeyword from "../enums/BorderStyleKeyword";
 
 
 type CssOptions = {
     animation?: AnimationOption;
-    backgroundColor?: Option;
-    borderColor?: Option;
-    borderRadius?: Option;
-    borderStyle?: Option;
-    borderWidth?: Option;
-    color?: Option;
-    fontFamily?: Option;
-    fontStyle?: Option;
-    fontWeight?: Option;
-    textDecorationColor?: Option;
-    textDecorationLine?: Option;
-    textDecorationStyle?: Option;
+    backgroundColor?: Options;
+    borderColor?: Options;
+    borderRadius?: Options;
+    borderStyle?: KeywordOptions<BorderStyleKeyword>;
+    borderWidth?: Options;
+    color?: Options;
+    fontFamily?: Options;
+    fontStyle?: Options;
+    fontWeight?: Options;
+    textDecorationColor?: Options;
+    textDecorationLine?: Options;
+    textDecorationStyle?: Options;
 };
 
 export default CssOptions;
