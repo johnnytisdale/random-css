@@ -27,6 +27,8 @@ import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
 import { DEFAULT_FONT_STYLE, FontStyleOptions } from "../../classes/CSS/FontStyle";
 import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
+import { DEFAULT_FONT_WEIGHT } from "../../classes/CSS/FontWeight";
+import FontWeightValue from "../../enums/FontWeightValue";
 
 interface State {
   copied: boolean | null,
@@ -57,6 +59,7 @@ const initialState: State = {
       color: { ...DEFAULT_COLOR_OPTIONS },
       fontFamily: { ...DEFAULT_FONT_FAMILY },
       fontStyle: { ...DEFAULT_FONT_STYLE },
+      fontWeight: { ...DEFAULT_FONT_WEIGHT },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
     },
     global: {
@@ -391,15 +394,37 @@ export default function Form(): React.ReactNode {
             option={state.options.css.fontFamily}
             setOption={option => setFontFamilyOption(option)}
           />
+          <FormSubsectionFontStyle
+            option={state.options.css.fontStyle}
+            setOption={setFontStyleOption}
+          />
+          <FormOptionBoolean
+            checked={
+              state.options.css?.fontWeight?.enabled === true
+            }
+            label="fontWeight"
+            setChecked={checked => toggleCssProperty(
+              CssProperty.FONT_WEIGHT,
+              checked
+            )}
+          >
+            <FormSubsection>
+              <FormOptionArray
+                possibleValues={Object.values(FontWeightValue)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.fontWeight.fontWeights = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css?.fontWeight?.fontWeights}
+              />
+            </FormSubsection>
+          </FormOptionBoolean>
           <FormSubsectionColor
             label="textDecorationColor"
             option={state.options.css.textDecorationColor}
             setOption={option => setColorOption("textDecorationColor", option)}
             unsafe={state.options.global.unsafe}
-          />
-          <FormSubsectionFontStyle
-            option={state.options.css.fontStyle}
-            setOption={setFontStyleOption}
           />
           {
             Object.values(CssProperty).map((propertyName, index) => (
@@ -411,6 +436,7 @@ export default function Form(): React.ReactNode {
               propertyName !== CssProperty.COLOR &&
               propertyName !== CssProperty.FONT_FAMILY &&
               propertyName !== CssProperty.FONT_STYLE &&
+              propertyName !== CssProperty.FONT_WEIGHT &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
               (
                 <FormOptionBoolean

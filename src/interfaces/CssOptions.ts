@@ -4,6 +4,8 @@ import { BorderStyleOptions } from "../classes/CSS/BorderStyle";
 import ColorOptions from "./ColorOptions";
 import { FontFamilyOptions } from "../classes/CSS/FontFamily";
 import Options from "./Option";
+import { FontWeightOptions } from "../classes/CSS/FontWeight";
+import { FontStyleOptions } from "../classes/CSS/FontStyle";
 
 export default interface CssOptions {
     animation?: AnimationOptions;
@@ -14,8 +16,8 @@ export default interface CssOptions {
     borderWidth?: Options;
     color?: ColorOptions;
     fontFamily?: FontFamilyOptions;
-    fontStyle?: Options;
-    fontWeight?: Options;
+    fontStyle?: FontStyleOptions;
+    fontWeight?: FontWeightOptions;
     textDecorationColor?: ColorOptions;
     textDecorationLine?: Options;
     textDecorationStyle?: Options;

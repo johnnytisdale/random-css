@@ -13,7 +13,7 @@ export interface FontStyleOptions extends Option {
 
 export const DEFAULT_FONT_STYLE_DEGREES = true;
 export const DEFAULT_FONT_STYLE_DEGREES_PROBABILITY = .5;
-export const DEFAULT_FONT_STYLE_ENABLED = true;
+export const DEFAULT_FONT_STYLE_ENABLED = false;
 export const DEFAULT_FONT_STYLE_FONT_STYLES = Object.values(FontStyleKeyword);
 export const DEFAULT_FONT_STYLE_MAX_DEGREES = 90;
 export const DEFAULT_FONT_STYLE_MIN_DEGREES = -90;

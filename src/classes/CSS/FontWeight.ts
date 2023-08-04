@@ -1,14 +1,30 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import CssProperty from "../../enums/CssProperty";
+import FontWeightValue from "../../enums/FontWeightValue";
+import Option from "../../interfaces/Option";
+import KeywordProperty from "./KeywordProperty";
 
-const json = cssProperties['font-weight'];
+export interface FontWeightOptions extends Option {
+  fontWeights?: FontWeightValue[];
+}
 
-export default class FontWeight extends CssProperty {
+export const DEFAULT_FONT_WEIGHT_ENABLED = true;
+export const DEFAULT_FONT_WEIGHT_FONT_WEIGHTS = Object.values(FontWeightValue);
+
+export const DEFAULT_FONT_WEIGHT: FontWeightOptions = {
+  enabled: DEFAULT_FONT_WEIGHT_ENABLED,
+  fontWeights: DEFAULT_FONT_WEIGHT_FONT_WEIGHTS
+};
+
+export default class FontWeight extends KeywordProperty {
 
   protected acceptsLengths = false;
-  protected acceptsKeywords = true;
-  protected keywordLimit = 1;
-  public name = json.camelCase;
+  public name = CssProperty.FONT_WEIGHT;
 
-  protected keywords: string[] = json.values;
+  protected keywords: string[];
+
+  constructor(options: FontWeightOptions) {
+    super();
+    this.keywords = options.fontWeights ??
+      [ ...DEFAULT_FONT_WEIGHT_FONT_WEIGHTS ];
+  }
 }
