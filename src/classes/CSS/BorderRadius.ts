@@ -31,7 +31,6 @@ export const DEFAULT_BORDER_RADIUS: BorderRadiusOptions = {
 
 export default class BorderRadius extends CssProperty {
 
-  protected acceptsLengths = false;
   public name = ECssProperty.BORDER_RADIUS;
 
   constructor(private options: BorderRadiusOptions) {

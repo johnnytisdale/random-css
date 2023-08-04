@@ -98,7 +98,7 @@ export default class RandomCss extends React.Component<Props, State> {
           this.props.options.global.unsafe
         );
       case CssProperty.BORDER_WIDTH:
-        return new BorderWidth(1, 3);
+        return new BorderWidth(this.props.options.css.borderWidth);
       case CssProperty.COLOR:
         return new Color(
           this.props.options.css.color,
@@ -119,9 +119,13 @@ export default class RandomCss extends React.Component<Props, State> {
           this.props.options.global.unsafe
         );
       case CssProperty.TEXT_DECORATION_LINE:
-        return new TextDecorationLine(this.props.options.css.textDecorationLine);
+        return new TextDecorationLine(
+          this.props.options.css.textDecorationLine
+        );
       case CssProperty.TEXT_DECORATION_STYLE:
-        return new TextDecorationStyle();
+        return new TextDecorationStyle(
+          this.props.options.css.textDecorationStyle
+        );
     }
   }
 

@@ -43,7 +43,6 @@ export default class FontFamily extends CssProperty {
   private includeFallbacks: boolean;
   private includeFamilyNames: boolean;
   private includeGenericNames: boolean;
-  protected acceptsLengths = false;
   protected separator = ", ";
   public name = ECssProperty.FONT_FAMILY;
 

@@ -34,19 +34,16 @@ export default class FontStyle extends CssProperty {
   private fontStyles: FontStyleKeyword[];
   private maxDegrees: number;
   private minDegrees: number;
-  protected acceptsLengths = false;
   public name = ECssProperty.FONT_STYLE;
 
   constructor(options: FontStyleOptions, unsafe: boolean) {
     super(unsafe);
-    console.log(options);
     this.degrees = options?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
     this.degreesProbability = options?.degreesProbability ??
       DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;
     this.fontStyles = options?.fontStyles ?? DEFAULT_FONT_STYLE_FONT_STYLES;
     this.maxDegrees = options?.maxDegrees ?? DEFAULT_FONT_STYLE_MAX_DEGREES;
     this.minDegrees = options?.minDegrees ?? DEFAULT_FONT_STYLE_MIN_DEGREES;
-    console.log(this.fontStyles);
   }
 
   public getRandomValue(): string {

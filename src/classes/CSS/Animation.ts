@@ -63,10 +63,6 @@ export const DEFAULT_ANIMATION: AnimationOptions = {
 
 export default class Animation extends CssProperty {
 
-  protected acceptsLengths = false;
-
-  public name = ECssProperty.ANIMATION;
-
   private directions: AnimationDirection[];
   private durationMax: number;
   private durationMin: number;
@@ -75,6 +71,7 @@ export default class Animation extends CssProperty {
   private fillModes: AnimationFillMode[];
   private iterationCount: AnimationIterationCountOptions;
   private transformations: AnimationTransformation[];
+  public name = ECssProperty.ANIMATION;
 
   constructor(options: AnimationOptions) {
     super();

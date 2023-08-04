@@ -31,6 +31,11 @@ import { DEFAULT_FONT_WEIGHT } from "../../classes/CSS/FontWeight";
 import FontWeightValue from "../../enums/FontWeightValue";
 import { DEFAULT_TEXT_DECORATION_LINE } from "../../classes/CSS/TextDecorationLine";
 import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
+import { DEFAULT_TEXT_DECORATION_STYLE } from "../../classes/CSS/TextDecorationStyle";
+import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
+import { DEFAULT_BORDER_WIDTH } from "../../classes/CSS/BorderWidth";
+import FormOptionLength from "./FormOptionLength";
+import { LengthOptions } from "../../classes/CSS/LengthProperty";
 
 interface State {
   copied: boolean | null,
@@ -58,12 +63,14 @@ const initialState: State = {
       borderColor: { ...DEFAULT_COLOR_OPTIONS },
       borderRadius: { ...DEFAULT_BORDER_RADIUS },
       borderStyle: { ...DEFAULT_BORDER_STYLE },
+      borderWidth: { ...DEFAULT_BORDER_WIDTH },
       color: { ...DEFAULT_COLOR_OPTIONS },
       fontFamily: { ...DEFAULT_FONT_FAMILY },
       fontStyle: { ...DEFAULT_FONT_STYLE },
       fontWeight: { ...DEFAULT_FONT_WEIGHT },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
-      textDecorationLine: { ...DEFAULT_TEXT_DECORATION_LINE }
+      textDecorationLine: { ...DEFAULT_TEXT_DECORATION_LINE },
+      textDecorationStyle: { ...DEFAULT_TEXT_DECORATION_STYLE }
     },
     global: {
       ignoreSpaces: true,
@@ -100,6 +107,18 @@ export default function Form(): React.ReactNode {
         ...options.css.borderRadius,
         ...option
       };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setLengthOption = useCallback(
+    (
+      key: Extract<keyof CssOptions, "borderWidth">,
+      option: LengthOptions
+    ) => {
+      const options = state.options;
+      options.css[key] = { ...options.css[key], ...option };
       setState({ options });
     },
     [setState, state.options]
@@ -346,23 +365,23 @@ export default function Form(): React.ReactNode {
             setChecked={checked => toggleAll(checked, false)}
           />
           <FormSubsectionAnimation
-            option={state.options.css.animation}
+            option={state.options.css?.animation}
             setOption={setAnimationOption}
           />
           <FormSubsectionColor
             label="backgroundColor"
-            option={state.options.css.backgroundColor}
+            option={state.options.css?.backgroundColor}
             setOption={option => setColorOption("backgroundColor", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionColor
             label="borderColor"
-            option={state.options.css.borderColor}
+            option={state.options.css?.borderColor}
             setOption={option => setColorOption("borderColor", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionBorderRadius
-            option={state.options.css.borderRadius}
+            option={state.options.css?.borderRadius}
             setOption={setBorderRadiusOption}
           />
           <FormOptionBoolean
@@ -381,22 +400,29 @@ export default function Form(): React.ReactNode {
                   options.css.borderStyle.borderStyles = keywords;
                   setState({ options });
                 }}
-                values={state.options.css.borderStyle.borderStyles}
+                values={state.options.css?.borderStyle.borderStyles}
               />
             </FormSubsection>
           </FormOptionBoolean>
+          <FormOptionLength
+            label="borderWidth"
+            option={state.options.css?.borderWidth}
+            setOption={
+              option => setLengthOption(CssProperty.BORDER_WIDTH, option)
+            }
+          />
           <FormSubsectionColor
             label="color"
-            option={state.options.css.color}
+            option={state.options.css?.color}
             setOption={option => setColorOption("color", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionFontFamily
-            option={state.options.css.fontFamily}
+            option={state.options.css?.fontFamily}
             setOption={option => setFontFamilyOption(option)}
           />
           <FormSubsectionFontStyle
-            option={state.options.css.fontStyle}
+            option={state.options.css?.fontStyle}
             setOption={setFontStyleOption}
           />
           <FormOptionBoolean
@@ -421,7 +447,7 @@ export default function Form(): React.ReactNode {
           </FormOptionBoolean>
           <FormSubsectionColor
             label="textDecorationColor"
-            option={state.options.css.textDecorationColor}
+            option={state.options.css?.textDecorationColor}
             setOption={option => setColorOption("textDecorationColor", option)}
             unsafe={state.options.global.unsafe}
           />
@@ -444,36 +470,33 @@ export default function Form(): React.ReactNode {
                   options.css.textDecorationLine.lines = keywords;
                   setState({ options });
                 }}
-                values={state.options.css.textDecorationLine.lines}
+                values={state.options.css?.textDecorationLine.lines}
               />
             </FormSubsection>
           </FormOptionBoolean>
-          {
-            Object.values(CssProperty).map((propertyName, index) => (
-              propertyName !== CssProperty.ANIMATION &&
-              propertyName !== CssProperty.BACKGROUND_COLOR &&
-              propertyName !== CssProperty.BORDER_COLOR &&
-              propertyName !== CssProperty.BORDER_RADIUS &&
-              propertyName !== CssProperty.BORDER_STYLE &&
-              propertyName !== CssProperty.COLOR &&
-              propertyName !== CssProperty.FONT_FAMILY &&
-              propertyName !== CssProperty.FONT_STYLE &&
-              propertyName !== CssProperty.FONT_WEIGHT &&
-              propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
-              propertyName !== CssProperty.TEXT_DECORATION_LINE &&
-              (
-                <FormOptionBoolean
-                  checked={state.options.css?.[propertyName]?.enabled === true}
-                  key={index}
-                  label={propertyName}
-                  setChecked={checked => toggleCssProperty(
-                    propertyName,
-                    checked
-                  )}
-                />
-              )
-            ))
-          }
+          <FormOptionBoolean
+            checked={state.options.css?.textDecorationStyle?.enabled === true}
+            label="textDecorationStyle"
+            setChecked={checked => toggleCssProperty(
+              CssProperty.TEXT_DECORATION_STYLE,
+              checked
+            )}
+          >
+            <FormSubsection>
+              <FormOptionArray
+                disabled={
+                  state.options.css?.textDecorationStyle?.enabled !== true
+                }
+                possibleValues={Object.values(TextDecorationStyleKeyword)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.textDecorationStyle.styles = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css?.textDecorationStyle.styles}
+              />
+            </FormSubsection>
+          </FormOptionBoolean>
         </FormSection>
 
         { /* glyph */}

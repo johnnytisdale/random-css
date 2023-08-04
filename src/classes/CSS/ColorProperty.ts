@@ -20,15 +20,12 @@ export const DEFAULT_COLOR_OPTIONS: ColorOptions = {
 
 export default abstract class ColorProperty extends CssProperty {
 
-  protected acceptsLengths = false;
-
   private bMax: number;
   private bMin: number;
   private gMax: number;
   private gMin: number;
   private rMax: number;
   private rMin: number;
-
   private colorKeywords: ColorKeyword[];
 
   constructor(private options: ColorOptions, protected unsafe: boolean) {

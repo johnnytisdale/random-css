@@ -3,23 +3,25 @@ import { BorderRadiusOptions } from "../classes/CSS/BorderRadius";
 import { BorderStyleOptions } from "../classes/CSS/BorderStyle";
 import ColorOptions from "./ColorOptions";
 import { FontFamilyOptions } from "../classes/CSS/FontFamily";
-import Options from "./Option";
-import { FontWeightOptions } from "../classes/CSS/FontWeight";
 import { FontStyleOptions } from "../classes/CSS/FontStyle";
+import { FontWeightOptions } from "../classes/CSS/FontWeight";
+import { LengthOptions } from "../classes/CSS/LengthProperty";
 import { TextDecorationLineOptions } from "../classes/CSS/TextDecorationLine";
+import { TextDecorationStyleOptions } from "../classes/CSS/TextDecorationStyle";
 
+// TODO: Move this to CssProperty.ts
 export default interface CssOptions {
     animation?: AnimationOptions;
     backgroundColor?: ColorOptions;
     borderColor?: ColorOptions;
     borderRadius?: BorderRadiusOptions;
     borderStyle?: BorderStyleOptions;
-    borderWidth?: Options;
+    borderWidth?: LengthOptions;
     color?: ColorOptions;
     fontFamily?: FontFamilyOptions;
     fontStyle?: FontStyleOptions;
     fontWeight?: FontWeightOptions;
     textDecorationColor?: ColorOptions;
     textDecorationLine?: TextDecorationLineOptions;
-    textDecorationStyle?: Options;
+    textDecorationStyle?: TextDecorationStyleOptions;
 }

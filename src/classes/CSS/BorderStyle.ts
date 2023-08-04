@@ -7,7 +7,7 @@ export interface BorderStyleOptions extends Option {
   borderStyles?: BorderStyleKeyword[];
 }
 
-export const DEFAULT_BORDER_STYLE_ENABLED = false;
+export const DEFAULT_BORDER_STYLE_ENABLED = true;
 export const DEFAULT_BORDER_STYLE_KEYWORDS = Object.values(BorderStyleKeyword);
 export const DEFAULT_BORDER_STYLE: BorderStyleOptions = {
   enabled: DEFAULT_BORDER_STYLE_ENABLED,

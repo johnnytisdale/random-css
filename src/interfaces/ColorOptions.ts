@@ -1,6 +1,7 @@
 import Color from "../enums/ColorKeyword";
 import Options from "./Option";
 
+// TODO: Move this to Color.ts
 export default interface ColorOptions extends Options {
   bMax?: number;
   bMin?: number;

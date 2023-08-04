@@ -1,21 +1,31 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import CssProperty from "../../enums/CssProperty";
+import LengthProperty, {
+  DEFAULT_LENGTH_MAX,
+  DEFAULT_LENGTH_MIN,
+  DEFAULT_LENGTH_OPTIONS,
+  DEFAULT_LENGTH_UNITS,
+  LengthOptions
+} from "./LengthProperty";
 
-const json = cssProperties['border-width'];
+export const DEFAULT_BORDER_WIDTH_ENABLED = true;
 
-export default class BorderWidth extends CssProperty {
+export const DEFAULT_BORDER_WIDTH: LengthOptions = {
+  ...DEFAULT_LENGTH_OPTIONS,
+  enabled: DEFAULT_BORDER_WIDTH_ENABLED
+};
 
-  constructor(min?: number, max?: number) {
+export default class BorderWidth extends LengthProperty {
+
+  protected max;
+  protected min;
+  protected units;
+
+  public name = CssProperty.BORDER_WIDTH;
+
+  constructor(options: LengthOptions) {
     super();
-    if (min != undefined) {
-      this.minLength = min;
-    }
-    if (max != undefined) {
-      this.maxLength = max;
-    }
+    this.max = options.max ?? DEFAULT_LENGTH_MAX;
+    this.min = options.min ?? DEFAULT_LENGTH_MIN;
+    this.units = options.units ?? [ ...DEFAULT_LENGTH_UNITS ];
   }
-
-  protected acceptsLengths = true;
-  public name = json.camelCase;
-
 }

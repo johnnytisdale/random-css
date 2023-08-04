@@ -2,8 +2,6 @@ import CssProperty from "./CssProperty";
 
 export default abstract class KeywordProperty extends CssProperty {
 
-  protected acceptsLengths = false;
-
   protected abstract keywords: Array<string>;
   protected keywordLimit = 0;
 

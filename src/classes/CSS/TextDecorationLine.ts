@@ -7,7 +7,7 @@ export interface TextDecorationLineOptions extends Option {
   lines?: TextDecorationLineKeyword[];
 }
 
-export const DEFAULT_TEXT_DECORATION_LINE_ENABLED = true;
+export const DEFAULT_TEXT_DECORATION_LINE_ENABLED = false;
 export const DEFAULT_TEXT_DECORATION_LINE_LINES = Object.values(
   TextDecorationLineKeyword
 );
@@ -19,7 +19,6 @@ export const DEFAULT_TEXT_DECORATION_LINE: TextDecorationLineOptions = {
 
 export default class TextDecorationLine extends KeywordProperty {
 
-  protected acceptsLengths = false;
   protected keywords: string[];
   public name = CssProperty.TEXT_DECORATION_LINE;
 

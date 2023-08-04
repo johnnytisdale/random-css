@@ -17,10 +17,8 @@ export const DEFAULT_FONT_WEIGHT: FontWeightOptions = {
 
 export default class FontWeight extends KeywordProperty {
 
-  protected acceptsLengths = false;
-  public name = CssProperty.FONT_WEIGHT;
-
   protected keywords: string[];
+  public name = CssProperty.FONT_WEIGHT;
 
   constructor(options: FontWeightOptions) {
     super();
