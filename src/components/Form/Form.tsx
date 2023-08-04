@@ -394,6 +394,7 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
+                disabled={state.options.css?.borderStyle?.enabled !== true}
                 possibleValues={Object.values(BorderStyleKeyword)}
                 setValues={keywords => {
                   const options = state.options;
@@ -435,6 +436,7 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
+                disabled={state.options.css?.fontWeight?.enabled !== true}
                 possibleValues={Object.values(FontWeightValue)}
                 setValues={keywords => {
                   const options = state.options;

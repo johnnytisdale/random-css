@@ -7,7 +7,6 @@ import FormOptionProbability from "./FormOptionProbability";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
-import { useMemo } from "react";
 
 interface Props {
   option: FontFamilyOptions;
@@ -18,19 +17,17 @@ export default function FormSubsectionFontFamily ({
   option,
   setOption
 }: Props): React.ReactNode {
-  const disabled = useMemo(
-    () => option?.enabled !== true,
-    [option?.enabled]
-  );
+  const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
-      checked={option?.enabled === true}
+      checked={!disabled}
       label="fontFamily"
       setChecked={enabled => setOption({ enabled })}
     >
       <FormSubsection label="value types">
         <FormOptionBoolean
           checked={option?.includeFamilyNames === true}
+          {...{ disabled }}
           label="includeFamilyNames"
           setChecked={includeFamilyNames => (
             !includeFamilyNames &&
@@ -41,6 +38,7 @@ export default function FormSubsectionFontFamily ({
         />
         <FormOptionBoolean
           checked={option?.includeGenericNames === true}
+          {...{ disabled }}
           label="includeGenericNames"
           setChecked={includeGenericNames => (
             !includeGenericNames &&
@@ -51,6 +49,7 @@ export default function FormSubsectionFontFamily ({
         />
         <FormOptionBoolean
           checked={option?.includeFallbacks === true}
+          {...{ disabled }}
           label="includeFallbacks"
           setChecked={includeFallbacks => (
             !includeFallbacks &&
@@ -70,7 +69,7 @@ export default function FormSubsectionFontFamily ({
       </FormSubsection>
       <FormSubsection label="family names">
         <FormOptionArray
-          disabled={disabled}
+          {...{ disabled }}
           displayValue={family => String(family).replaceAll('"', '')}
           possibleValues={Object.values(FontFamilyName)}
           setValues={fontFamilyNames => (
@@ -82,7 +81,7 @@ export default function FormSubsectionFontFamily ({
       </FormSubsection>
       <FormSubsection label="generic names">
         <FormOptionArray
-          disabled={disabled}
+          {...{ disabled }}
           possibleValues={Object.values(FontGenericName)}
           setValues={fontGenericNames => (
             fontGenericNames.length &&

@@ -7,7 +7,6 @@ import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
-import { useMemo } from "react";
 
 interface Props extends CommonOptionProps {
   option: ColorOption;
@@ -21,13 +20,10 @@ export default function FormOptionColor ({
   setOption,
   unsafe
 }: Props): React.ReactNode {
-  const enabled = useMemo(
-    () => option.enabled === true,
-    [option.enabled]
-  );
+  const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
-      checked={enabled === true}
+      checked={!disabled}
       label={label}
       setChecked={enabled => setOption({ enabled })}
     >
@@ -37,7 +33,7 @@ export default function FormOptionColor ({
             <>
               <FormSubsection label='red'>
                 <FormOptionRange
-                  disabled={!enabled}
+                  {...{ disabled }}
                   max={255}
                   min={0}
                   maxValue={option?.rMax ?? 255}
@@ -47,7 +43,7 @@ export default function FormOptionColor ({
               </FormSubsection>
               <FormSubsection label='green'>
                 <FormOptionRange
-                  disabled={!enabled}
+                  {...{ disabled }}
                   max={255}
                   min={0}
                   maxValue={option?.gMax ?? 255}
@@ -57,7 +53,7 @@ export default function FormOptionColor ({
               </FormSubsection>
               <FormSubsection label='blue'>
                 <FormOptionRange
-                  disabled={!enabled}
+                  {...{ disabled }}
                   max={255}
                   min={0}
                   maxValue={option?.bMax ?? 255}
@@ -70,7 +66,7 @@ export default function FormOptionColor ({
           : (
             <FormSubsection label='keywords'>
               <FormOptionArray
-                disabled={enabled === false}
+                {...{ disabled }}
                 possibleValues={Object.values(Color)}
                 setValues={colorKeywords => setOption({ colorKeywords })}
                 values={option?.colorKeywords ?? []}

@@ -9,7 +9,6 @@ import FormSubsectionAnimationIterationCount from "./FormSubsectionAnimationIter
 import FormSubsection from "../FormSubsection";
 
 import * as React from "react";
-import { useMemo } from "react";
 import FormOptionBoolean from "../FormOptionBoolean";
 
 interface Props {
@@ -21,10 +20,7 @@ export default function FormSubsectionAnimation ({
   option,
   setOption
 }: Props): React.ReactNode {
-  const enabled = useMemo(
-    () => option.enabled === true,
-    [option.enabled]
-  );
+  const disabled = option?.enabled !== true;
   const setIterationCountOption = React.useCallback(
     (options: AnimationIterationCountOptions) => {
       setOption({
@@ -38,13 +34,13 @@ export default function FormSubsectionAnimation ({
   );
   return (
     <FormOptionBoolean
-      checked={enabled === true}
+      checked={!disabled}
       label="animation"
       setChecked={enabled => setOption({ enabled })}
     >
       <FormSubsection label='directions'>
         <FormOptionArray
-          disabled={enabled === false}
+          {...{ disabled }}
           possibleValues={Object.values(AnimationDirection)}
           setValues={directions => setOption({ directions })}
           values={option?.directions ?? []}
@@ -52,7 +48,7 @@ export default function FormSubsectionAnimation ({
       </FormSubsection>
       <FormSubsection label='duration'>
         <FormOptionRange
-          disabled={!enabled}
+          {...{ disabled }}
           max={DEFAULT_ANIMATION_DURATION_MAX}
           min={DEFAULT_ANIMATION_DURATION_MIN}
           maxValue={option?.durationMax ?? DEFAULT_ANIMATION_DURATION_MAX}
@@ -65,7 +61,7 @@ export default function FormSubsectionAnimation ({
       </FormSubsection>
       <FormSubsection label='easing functions'>
         <FormOptionArray
-          disabled={enabled === false}
+          {...{ disabled }}
           possibleValues={Object.values(AnimationEasingFunction)}
           setValues={easingFunctions => setOption(
             {...option, ...{ easingFunctions }}
@@ -75,20 +71,21 @@ export default function FormSubsectionAnimation ({
       </FormSubsection>
       <FormSubsection label='fill modes'>
         <FormOptionArray
-          disabled={enabled === false}
+          {...{ disabled }}
           possibleValues={Object.values(AnimationFillMode)}
           setValues={fillModes => setOption({...option, ...{ fillModes }})}
           values={option?.fillModes ?? []}
         />
       </FormSubsection>
       <FormSubsectionAnimationIterationCount
-        enabled={enabled}
+        // TODO: Change prop name to disabled.
+        enabled={!disabled}
         option={option?.iterationCount}
         setOption={setIterationCountOption}
       />
       <FormSubsection label='transformations'>
         <FormOptionArray
-          disabled={enabled === false}
+          {...{ disabled }}
           possibleValues={Object.values(AnimationTransformation)}
           setValues={transformations => setOption(
             {...option, ...{ transformations }}

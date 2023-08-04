@@ -3,7 +3,6 @@ import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 
 import * as React from "react";
-import { useMemo } from "react";
 import FormOptionProbability from "./FormOptionProbability";
 
 interface Props {
@@ -15,30 +14,27 @@ export default function FormSubsectionBorderRadius ({
   option,
   setOption
 }: Props): React.ReactNode {
-  const enabled = useMemo(
-    () => option.enabled === true,
-    [option.enabled]
-  );
+  const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
-      checked={enabled === true}
+      checked={!disabled}
       label="borderRadius"
       setChecked={enabled => setOption({ enabled })}
     >
       <FormOptionBoolean
         checked={option?.slash === true}
-        disabled={!enabled}
+        {...{ disabled }}
         label="slash"
         setChecked={slash => setOption({ slash })}
       />
       <FormOptionProbability
         label="slashProbability"
-        disabled={!enabled || !option?.slash}
+        disabled={disabled || !option?.slash}
         value={option?.slashProbability}
         setProbability={slashProbability => setOption({ slashProbability })}
       />
       <FormOptionRange
-        disabled={!enabled}
+        {...{ disabled }}
         max={DEFAULT_BORDER_RADIUS_MAX_CORNERS}
         min={DEFAULT_BORDER_RADIUS_MIN_CORNERS}
         maxLabel="maxCorners"
@@ -51,7 +47,7 @@ export default function FormSubsectionBorderRadius ({
         })}
       />
       <FormOptionRange
-        disabled={!enabled}
+        {...{ disabled }}
         max={DEFAULT_BORDER_RADIUS_MAX_RADIUS}
         min={DEFAULT_BORDER_RADIUS_MIN_RADIUS}
         maxLabel="maxRadius"

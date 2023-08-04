@@ -4,7 +4,6 @@ import FormOptionProbability from "./FormOptionProbability";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
-import { useMemo } from "react";
 import { DEFAULT_FONT_STYLE_MAX_DEGREES, DEFAULT_FONT_STYLE_MIN_DEGREES, FontStyleOptions } from "../../classes/CSS/FontStyle";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
 import FormOptionRange from "./FormOptionRange";
@@ -18,10 +17,7 @@ export default function FormSubsectionFontStyle ({
   option,
   setOption
 }: Props): React.ReactNode {
-  const disabled = useMemo(
-    () => option?.enabled !== true,
-    [option?.enabled]
-  );
+  const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={option?.enabled === true}
@@ -30,7 +26,7 @@ export default function FormSubsectionFontStyle ({
     >
       <FormSubsection label="styles">
         <FormOptionArray
-          disabled={disabled}
+          {...{ disabled }}
           possibleValues={Object.values(FontStyleKeyword)}
           setValues={fontStyles => (
             fontStyles.length &&
