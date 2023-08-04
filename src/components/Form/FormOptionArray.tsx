@@ -4,6 +4,7 @@ import * as React from "react";
 
 interface Props<T> extends CommonOptionProps {
   disabled?: boolean,
+  displayValue?: (value: T) => string,
   possibleValues: T[],
   setValues: (values: T[]) => void,
   values: T[],
@@ -11,13 +12,14 @@ interface Props<T> extends CommonOptionProps {
 
 export default function FormOptionArray<T>({
   disabled = false,
+  displayValue,
   possibleValues,
   setValues,
   values
 }: Props<T>): React.ReactNode {
   return possibleValues.map(value => (
     <FormOption
-      label={String(value)}
+      label={displayValue === undefined ? String(value) : displayValue(value)}
       input={{
         checked: values.includes(value),
         disabled,

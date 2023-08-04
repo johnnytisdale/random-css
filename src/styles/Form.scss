@@ -127,18 +127,19 @@ body {
 
       >.expanded-content {
         border-bottom: 1px solid black;
-        padding-bottom: .5rem;
-        >.subsection {
-
-          padding-top: .5rem;
-
-          >.label {
-            margin-left: 1rem;
-            font-variant: small-caps;
+        >.option {
+          &:first-child {
+            margin-top: 1rem;
           }
+        }
+        >.subsection {
+          border-top: 1px solid black;
+          margin-left: 1rem;
+          margin-top: .5rem;
+          >.label {
+            text-decoration: underline;
+            font-variant: small-caps;
 
-          >.options {
-            margin-left: 1rem;
           }
         }
 

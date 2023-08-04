@@ -8,7 +8,7 @@ import CssOptions from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
 import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
 import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
-import { DEFAULT_FONT_FAMILY } from "../../classes/CSS/FontFamily";
+import { DEFAULT_FONT_FAMILY, FontFamilyOptions } from "../../classes/CSS/FontFamily";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
 import FormOption from "./FormOption";
@@ -26,6 +26,7 @@ import RandomCss from "../RandomCss";
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
+import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
 
 interface State {
   copied: boolean | null,
@@ -90,6 +91,18 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.borderRadius = {
         ...options.css.borderRadius,
+        ...option
+      };
+      setState({ options });
+    },
+    [setState, state.options]
+  );
+
+  const setFontFamilyOption = useCallback(
+    (option: FontFamilyOptions) => {
+      const options = state.options;
+      options.css.fontFamily = {
+        ...options.css.fontFamily,
         ...option
       };
       setState({ options });
@@ -361,39 +374,10 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("color", option)}
             unsafe={state.options.global.unsafe}
           />
-          <FormOptionBoolean
-            checked={
-              state.options.css?.fontFamily?.enabled === true
-            }
-            label="fontFamily"
-            setChecked={checked => toggleCssProperty(
-              CssProperty.FONT_FAMILY,
-              checked
-            )}
-          >
-            <FormSubsection label="family names">
-              <FormOptionArray
-                possibleValues={Object.values(FontFamilyName)}
-                setValues={keywords => {
-                  const options = state.options;
-                  options.css.fontFamily.fontFamilyNames = keywords;
-                  setState({ options });
-                }}
-                values={state.options.css.fontFamily.fontFamilyNames}
-              />
-            </FormSubsection>
-            <FormSubsection label="generic names">
-              <FormOptionArray
-                possibleValues={Object.values(FontGenericName)}
-                setValues={keywords => {
-                  const options = state.options;
-                  options.css.fontFamily.fontGenericNames = keywords;
-                  setState({ options });
-                }}
-                values={state.options.css.fontFamily.fontGenericNames}
-              />
-            </FormSubsection>
-          </FormOptionBoolean>
+          <FormSubsectionFontFamily
+            option={state.options.css.fontFamily}
+            setOption={option => setFontFamilyOption(option)}
+          />
           <FormSubsectionColor
             label="textDecorationColor"
             option={state.options.css.textDecorationColor}
