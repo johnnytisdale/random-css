@@ -1,4 +1,4 @@
-import CssOptions from "../interfaces/CssOptions";
+import CssOptions from "./CssOptions";
 import GlobalOptions from "./GlobalOptions";
 import GlyphOptions from "./GlyphOptions";
 

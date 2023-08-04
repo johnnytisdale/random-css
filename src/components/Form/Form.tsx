@@ -19,7 +19,7 @@ import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
 import FormSubsectionColor from "./FormSubsectionColor";
 import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
 import GlyphOption from "../../enums/GlyphOption";
-import Options from "../../types/Options";
+import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
 
 import * as React from "react";

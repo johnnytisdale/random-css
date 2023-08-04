@@ -1,7 +1,7 @@
 import "../styles/RandomCss.scss";
 
 import Animation from "../classes/CSS/Animation";
-import AppliedOptions from "../types/AppliedOptions";
+import AppliedOptions from "../interfaces/AppliedOptions";
 import BackgroundColor from "../classes/CSS/BackgroundColor";
 import BorderColor from "../classes/CSS/BorderColor";
 import BorderRadius from "../classes/CSS/BorderRadius";
@@ -16,7 +16,7 @@ import FontWeight from "../classes/CSS/FontWeight";
 import Glyph from "../classes/Glyph";
 import GlyphOption from "../enums/GlyphOption";
 import Option from "../interfaces/Option";
-import Options from "../types/Options";
+import Options from "../interfaces/Options";
 import Randomizable from "../classes/Randomizable";
 import TextDecorationColor from "../classes/CSS/TextDecorationColor";
 import TextDecorationLine from "../classes/CSS/TextDecorationLine";

@@ -1,4 +1,4 @@
-import Options from "../interfaces/Option";
+import Options from "./Option";
 
 interface GlyphOptions {
   leet?: Options;

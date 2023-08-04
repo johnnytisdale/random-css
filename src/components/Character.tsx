@@ -1,4 +1,4 @@
-import AppliedOptions from "../types/AppliedOptions";
+import AppliedOptions from "../interfaces/AppliedOptions";
 import CssProperty from "../enums/CssProperty";
 import Randomizable from "../classes/Randomizable";
 
