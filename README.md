@@ -39,7 +39,7 @@ of which there are only 142.
 3. Open dist/index.html in browser.
 
 ## Authors
-* **Johnny Tisdale** - [github](https://github.com/johnnytisdale) | [website](https://johnnytisdale.com) 
+* **Johnny Tisdale** - [github](https://github.com/johnnytisdale) | [website](https://johnnytisdale.com)
 
 ## License
 This project is licensed under the ISC License. See [LICENSE.md](LICENSE.md) for details.

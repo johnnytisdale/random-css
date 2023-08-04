@@ -150,12 +150,12 @@ for name in cssProperties:
     for property in cssProperty:
 
         print("\t" + property)
-        
+
         #get the value of this property
         value = cssProperty[property]
         if isinstance(value, str):
             print("\t\t" + value)
-            
+
         else:
             print("\t\t" + str(type(value)))
 """

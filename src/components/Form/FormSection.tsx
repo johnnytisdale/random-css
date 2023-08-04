@@ -19,7 +19,7 @@ export default class Form extends React.Component<Props> {
         <div className='options'>
           {this.props.children}
         </div>
-      </div> 
+      </div>
     );
   }
 }
