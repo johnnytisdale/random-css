@@ -383,6 +383,7 @@ export default function Form(): React.ReactNode {
               propertyName !== CssProperty.ANIMATION &&
               propertyName !== CssProperty.BACKGROUND_COLOR &&
               propertyName !== CssProperty.BORDER_COLOR &&
+              propertyName !== CssProperty.BORDER_RADIUS &&
               propertyName !== CssProperty.BORDER_STYLE &&
               propertyName !== CssProperty.COLOR &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
