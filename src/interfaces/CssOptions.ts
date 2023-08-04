@@ -6,6 +6,7 @@ import { FontFamilyOptions } from "../classes/CSS/FontFamily";
 import Options from "./Option";
 import { FontWeightOptions } from "../classes/CSS/FontWeight";
 import { FontStyleOptions } from "../classes/CSS/FontStyle";
+import { TextDecorationLineOptions } from "../classes/CSS/TextDecorationLine";
 
 export default interface CssOptions {
     animation?: AnimationOptions;
@@ -19,6 +20,6 @@ export default interface CssOptions {
     fontStyle?: FontStyleOptions;
     fontWeight?: FontWeightOptions;
     textDecorationColor?: ColorOptions;
-    textDecorationLine?: Options;
+    textDecorationLine?: TextDecorationLineOptions;
     textDecorationStyle?: Options;
 }

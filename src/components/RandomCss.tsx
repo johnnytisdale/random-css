@@ -119,7 +119,7 @@ export default class RandomCss extends React.Component<Props, State> {
           this.props.options.global.unsafe
         );
       case CssProperty.TEXT_DECORATION_LINE:
-        return new TextDecorationLine();
+        return new TextDecorationLine(this.props.options.css.textDecorationLine);
       case CssProperty.TEXT_DECORATION_STYLE:
         return new TextDecorationStyle();
     }

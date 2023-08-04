@@ -7,7 +7,7 @@ export interface FontWeightOptions extends Option {
   fontWeights?: FontWeightValue[];
 }
 
-export const DEFAULT_FONT_WEIGHT_ENABLED = true;
+export const DEFAULT_FONT_WEIGHT_ENABLED = false;
 export const DEFAULT_FONT_WEIGHT_FONT_WEIGHTS = Object.values(FontWeightValue);
 
 export const DEFAULT_FONT_WEIGHT: FontWeightOptions = {

@@ -29,6 +29,8 @@ import { DEFAULT_FONT_STYLE, FontStyleOptions } from "../../classes/CSS/FontStyl
 import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
 import { DEFAULT_FONT_WEIGHT } from "../../classes/CSS/FontWeight";
 import FontWeightValue from "../../enums/FontWeightValue";
+import { DEFAULT_TEXT_DECORATION_LINE } from "../../classes/CSS/TextDecorationLine";
+import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
 
 interface State {
   copied: boolean | null,
@@ -61,6 +63,7 @@ const initialState: State = {
       fontStyle: { ...DEFAULT_FONT_STYLE },
       fontWeight: { ...DEFAULT_FONT_WEIGHT },
       textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
+      textDecorationLine: { ...DEFAULT_TEXT_DECORATION_LINE }
     },
     global: {
       ignoreSpaces: true,
@@ -363,9 +366,7 @@ export default function Form(): React.ReactNode {
             setOption={setBorderRadiusOption}
           />
           <FormOptionBoolean
-            checked={
-              state.options.css?.borderStyle?.enabled === true
-            }
+            checked={state.options.css?.borderStyle?.enabled === true}
             label="borderStyle"
             setChecked={checked => toggleCssProperty(
               CssProperty.BORDER_STYLE,
@@ -399,9 +400,7 @@ export default function Form(): React.ReactNode {
             setOption={setFontStyleOption}
           />
           <FormOptionBoolean
-            checked={
-              state.options.css?.fontWeight?.enabled === true
-            }
+            checked={state.options.css?.fontWeight?.enabled === true}
             label="fontWeight"
             setChecked={checked => toggleCssProperty(
               CssProperty.FONT_WEIGHT,
@@ -426,6 +425,29 @@ export default function Form(): React.ReactNode {
             setOption={option => setColorOption("textDecorationColor", option)}
             unsafe={state.options.global.unsafe}
           />
+          <FormOptionBoolean
+            checked={state.options.css?.textDecorationLine?.enabled === true}
+            label="textDecorationLine"
+            setChecked={checked => toggleCssProperty(
+              CssProperty.TEXT_DECORATION_LINE,
+              checked
+            )}
+          >
+            <FormSubsection>
+              <FormOptionArray
+                disabled={
+                  state.options.css?.textDecorationLine?.enabled !== true
+                }
+                possibleValues={Object.values(TextDecorationLineKeyword)}
+                setValues={keywords => {
+                  const options = state.options;
+                  options.css.textDecorationLine.lines = keywords;
+                  setState({ options });
+                }}
+                values={state.options.css.textDecorationLine.lines}
+              />
+            </FormSubsection>
+          </FormOptionBoolean>
           {
             Object.values(CssProperty).map((propertyName, index) => (
               propertyName !== CssProperty.ANIMATION &&
@@ -438,11 +460,10 @@ export default function Form(): React.ReactNode {
               propertyName !== CssProperty.FONT_STYLE &&
               propertyName !== CssProperty.FONT_WEIGHT &&
               propertyName !== CssProperty.TEXT_DECORATION_COLOR &&
+              propertyName !== CssProperty.TEXT_DECORATION_LINE &&
               (
                 <FormOptionBoolean
-                  checked={
-                    state.options.css?.[propertyName]?.enabled === true
-                  }
+                  checked={state.options.css?.[propertyName]?.enabled === true}
                   key={index}
                   label={propertyName}
                   setChecked={checked => toggleCssProperty(

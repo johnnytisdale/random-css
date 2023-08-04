@@ -1,15 +1,30 @@
-import CssProperty from "./CssProperty";
-import * as cssProperties from "../../json/cssProperties.json";
+import CssProperty from "../../enums/CssProperty";
+import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
+import Option from "../../interfaces/Option";
+import KeywordProperty from "./KeywordProperty";
 
-const json = cssProperties['text-decoration-line'];
+export interface TextDecorationLineOptions extends Option {
+  lines?: TextDecorationLineKeyword[];
+}
 
-export default class TextDecorationLine extends CssProperty {
+export const DEFAULT_TEXT_DECORATION_LINE_ENABLED = true;
+export const DEFAULT_TEXT_DECORATION_LINE_LINES = Object.values(
+  TextDecorationLineKeyword
+);
+
+export const DEFAULT_TEXT_DECORATION_LINE: TextDecorationLineOptions = {
+  enabled: DEFAULT_TEXT_DECORATION_LINE_ENABLED,
+  lines: DEFAULT_TEXT_DECORATION_LINE_LINES
+};
+
+export default class TextDecorationLine extends KeywordProperty {
 
   protected acceptsLengths = false;
-  protected acceptsKeywords = true;
-  public name = json.camelCase;
+  protected keywords: string[];
+  public name = CssProperty.TEXT_DECORATION_LINE;
 
-  protected keywords = json.values;
-
-  protected keywordLimit = 1;
+  constructor(options: TextDecorationLineOptions) {
+    super();
+    this.keywords = options.lines ?? [ ...DEFAULT_TEXT_DECORATION_LINE_LINES ];
+  }
 }
