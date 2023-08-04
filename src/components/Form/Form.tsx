@@ -1,42 +1,37 @@
 import "../../styles/Form.scss";
 
-import { AnimationOptions, DEFAULT_ANIMATION } from "../../classes/CSS/Animation";
-import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS } from "../../classes/CSS/BorderRadius";
+import { AnimationOptions } from "../../classes/CSS/Animation";
+import { BorderRadiusOptions } from "../../classes/CSS/BorderRadius";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
 import CssOptions from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
-import { DEFAULT_BORDER_STYLE } from "../../classes/CSS/BorderStyle";
-import { DEFAULT_COLOR_OPTIONS } from "../../classes/CSS/ColorProperty";
-import { DEFAULT_FONT_FAMILY, FontFamilyOptions } from "../../classes/CSS/FontFamily";
+import { DEFAULT_CSS_OPTIONS } from "../../classes/CSS/CssProperty";
+import { DEFAULT_GLOBAL_OPTIONS } from "../../interfaces/GlobalOptions";
+import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
+import { FontStyleOptions } from "../../classes/CSS/FontStyle";
+import FontWeightValue from "../../enums/FontWeightValue";
 import FormOption from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
+import FormOptionLength from "./FormOptionLength";
 import FormSection from "./FormSection";
 import FormSubsection from "./FormSubsection";
 import FormSubsectionAnimation from "./Animation/FormSubsectionAnimation";
 import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
 import FormSubsectionColor from "./FormSubsectionColor";
 import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
+import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
 import GlyphOption from "../../enums/GlyphOption";
+import { LengthOptions } from "../../classes/CSS/LengthProperty";
 import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
+import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
+import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 
 import * as React from "react";
 import { useCallback, useMemo, useReducer } from "react";
 import { createRoot } from 'react-dom/client';
-import { DEFAULT_FONT_STYLE, FontStyleOptions } from "../../classes/CSS/FontStyle";
-import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
-import { DEFAULT_FONT_WEIGHT } from "../../classes/CSS/FontWeight";
-import FontWeightValue from "../../enums/FontWeightValue";
-import { DEFAULT_TEXT_DECORATION_LINE } from "../../classes/CSS/TextDecorationLine";
-import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
-import { DEFAULT_TEXT_DECORATION_STYLE } from "../../classes/CSS/TextDecorationStyle";
-import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
-import { DEFAULT_BORDER_WIDTH } from "../../classes/CSS/BorderWidth";
-import FormOptionLength from "./FormOptionLength";
-import { LengthOptions } from "../../classes/CSS/LengthProperty";
-import { DEFAULT_GLOBAL_OPTIONS } from "../../interfaces/GlobalOptions";
 
 interface State {
   copied: boolean | null,
@@ -58,21 +53,7 @@ const initialState: State = {
     }
   },
   options: {
-    css: {
-      animation: { ...DEFAULT_ANIMATION },
-      backgroundColor: { ...DEFAULT_COLOR_OPTIONS },
-      borderColor: { ...DEFAULT_COLOR_OPTIONS },
-      borderRadius: { ...DEFAULT_BORDER_RADIUS },
-      borderStyle: { ...DEFAULT_BORDER_STYLE },
-      borderWidth: { ...DEFAULT_BORDER_WIDTH },
-      color: { ...DEFAULT_COLOR_OPTIONS },
-      fontFamily: { ...DEFAULT_FONT_FAMILY },
-      fontStyle: { ...DEFAULT_FONT_STYLE },
-      fontWeight: { ...DEFAULT_FONT_WEIGHT },
-      textDecorationColor: { ...DEFAULT_COLOR_OPTIONS },
-      textDecorationLine: { ...DEFAULT_TEXT_DECORATION_LINE },
-      textDecorationStyle: { ...DEFAULT_TEXT_DECORATION_STYLE }
-    },
+    css: { ...DEFAULT_CSS_OPTIONS },
     global: { ...DEFAULT_GLOBAL_OPTIONS },
     glyph: {}
   },

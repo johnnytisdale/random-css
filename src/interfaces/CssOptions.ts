@@ -9,7 +9,6 @@ import { LengthOptions } from "../classes/CSS/LengthProperty";
 import { TextDecorationLineOptions } from "../classes/CSS/TextDecorationLine";
 import { TextDecorationStyleOptions } from "../classes/CSS/TextDecorationStyle";
 
-// TODO: Move this to CssProperty.ts
 export default interface CssOptions {
     animation?: AnimationOptions;
     backgroundColor?: ColorOptions;
