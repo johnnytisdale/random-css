@@ -9,7 +9,7 @@ export interface BorderStyleOptions extends Option {
 
 export const DEFAULT_BORDER_STYLE_ENABLED = false;
 export const DEFAULT_BORDER_STYLE_KEYWORDS = Object.values(BorderStyleKeyword);
-export const DEFAULT_BORDER_STYLE: BorderStyleOptions = {
+export const DEFAULT_BORDER_STYLE_OPTIONS: BorderStyleOptions = {
   enabled: DEFAULT_BORDER_STYLE_ENABLED,
   borderStyles: DEFAULT_BORDER_STYLE_KEYWORDS
 };
@@ -22,6 +22,7 @@ export default class BorderStyle extends KeywordProperty {
 
   constructor(options: BorderStyleOptions, unsafe: boolean) {
     super(unsafe);
-    this.keywords = options.borderStyles ?? [ ...DEFAULT_BORDER_STYLE_KEYWORDS ];
+    this.keywords = options.borderStyles
+      ?? [ ...DEFAULT_BORDER_STYLE_KEYWORDS ];
   }
 }

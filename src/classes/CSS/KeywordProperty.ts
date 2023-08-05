@@ -2,7 +2,7 @@ import CssProperty from "./CssProperty";
 
 export default abstract class KeywordProperty extends CssProperty {
 
-  protected abstract keywords: Array<string>;
+  protected abstract keywords: string[];
   protected keywordLimit = 0;
 
   public getRandomValue(): string {
