@@ -1,8 +1,6 @@
 import {
   AnimationIterationCountOptions,
   DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
-  DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
-  DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE
 } from "../../../classes/CSS/Animation";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionProbability from "../FormOptionProbability";
