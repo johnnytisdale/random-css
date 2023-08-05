@@ -52,6 +52,7 @@
 		"prepublishOnly": "del /F /Q dist && npm run prod",
 		"prod": "webpack --mode production --env environment=production",
 		"test": "jest --verbose",
+		"test-prod": "webpack --mode production --env environment=test",
 		"watch": "webpack --mode development --env environment=development --watch"
 	},
 	"version": "2.0.7",
