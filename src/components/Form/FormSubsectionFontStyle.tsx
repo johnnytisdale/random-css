@@ -11,11 +11,13 @@ import FormOptionRange from "./FormOptionRange";
 interface Props {
   option: FontStyleOptions;
   setOption: (option: FontStyleOptions) => void,
+  unsafe: boolean
 }
 
 export default function FormSubsectionFontStyle ({
   option,
-  setOption
+  setOption,
+  unsafe
 }: Props): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
@@ -39,7 +41,9 @@ export default function FormSubsectionFontStyle ({
         <FormOptionBoolean
           checked={option?.degrees === true}
           disabled={
-            disabled || !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
+            disabled ||
+            !unsafe ||
+            !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }
           label="degrees"
           setChecked={degrees => setOption({ degrees })}
@@ -48,6 +52,7 @@ export default function FormSubsectionFontStyle ({
           label="degreesProbability"
           disabled={
             disabled ||
+            !unsafe ||
             !option?.degrees ||
             !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }
@@ -59,6 +64,7 @@ export default function FormSubsectionFontStyle ({
         <FormOptionRange
           disabled={
             disabled ||
+            !unsafe ||
             !option?.degrees ||
             !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }

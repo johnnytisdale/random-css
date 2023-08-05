@@ -414,6 +414,7 @@ export default function Form(): React.ReactNode {
           <FormSubsectionFontStyle
             option={state.options.css?.fontStyle}
             setOption={setFontStyleOption}
+            unsafe={state.options.global?.unsafe}
           />
           <FormOptionBoolean
             checked={state.options.css?.fontWeight?.enabled === true}
