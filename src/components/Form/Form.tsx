@@ -312,6 +312,18 @@ export default function Form(): React.ReactNode {
               if (unsafe === false) {
                 options.global.size = getValidSize(options.global.size);
               }
+              // if (options.css?.animation?.durationMax > durationMaxLimit) {
+              //   newState.durationMax = durationMaxLimit;
+              //   update = true;
+              // }
+              // if (options.css?.animation?.durationMin < durationMinLimit) {
+              //   newState.durationMin = durationMinLimit;
+              //   update = true;
+              // }
+              // if (update) {
+              //   console.log('setting state: ', newState);
+              //   setOption(newState);
+              // }
               setState({ options });
             }}
           />
@@ -343,6 +355,7 @@ export default function Form(): React.ReactNode {
           <FormSubsectionAnimation
             option={state.options.css?.animation}
             setOption={setAnimationOption}
+            unsafe={state.options.global?.unsafe === true}
           />
           <FormSubsectionColor
             label="backgroundColor"

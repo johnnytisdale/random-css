@@ -1,7 +1,8 @@
 import {
   AnimationIterationCountOptions,
   DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
-  DEFAULT_ANIMATION_ITERATION_COUNT_MIN
+  DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
+  DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE
 } from "../../../classes/CSS/Animation";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionProbability from "../FormOptionProbability";
@@ -13,13 +14,17 @@ import * as React from "react";
 interface Props {
   enabled: boolean,
   option: AnimationIterationCountOptions;
+  minLimit: number;
   setOption: (option: AnimationIterationCountOptions) => void,
+  unsafe: boolean
 }
 
 export default function FormSubsectionAnimationIterationCount ({
   enabled,
+  minLimit,
   option,
-  setOption
+  setOption,
+  unsafe
 }: Props): React.ReactNode {
   return (
     <FormSubsection label="iteration count">
@@ -39,22 +44,20 @@ export default function FormSubsectionAnimationIterationCount ({
       />
       <FormOptionBoolean
         checked={option?.integersOnly === true}
-        disabled={enabled !== true}
+        disabled={enabled !== true || !unsafe}
         label="integers only"
         setChecked={integersOnly => setOption({ integersOnly })}
       />
       <FormOptionRange
         disabled={!enabled}
         max={DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
-        min={DEFAULT_ANIMATION_ITERATION_COUNT_MIN}
+        min={minLimit}
         maxValue={
           option?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX
         }
-        minValue={
-          option?.min ?? DEFAULT_ANIMATION_ITERATION_COUNT_MIN
-        }
+        minValue={option?.min ?? minLimit}
         setValues={(min, max) => setOption({ max, min })}
-        step="0.01"
+        step={unsafe ? "0.01" : "1"}
       />
       <FormOptionBoolean
         checked={option.zero === true}
