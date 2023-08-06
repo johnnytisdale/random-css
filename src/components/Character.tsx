@@ -1,16 +1,17 @@
-import AppliedOptions from "../interfaces/AppliedOptions";
 import CssProperty from "../enums/CssProperty";
+import OptionName from "../types/OptionName";
 import Randomizable from "../classes/Randomizable";
+import Randomizables from "../interfaces/Randomizables";
+import Timeouts from "../interfaces/Timeouts";
 
-import * as CSS from 'csstype';
+import { Property as CssPropertyType } from 'csstype';
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
 interface Props {
   character: string;
   index: number;
-  randomizables: Randomizable[];
-  reset: AppliedOptions;
+  randomizables: Randomizables | null;
   size: number;
   unsafe: boolean;
 }
@@ -32,71 +33,52 @@ export default function Character({
   character,
   index,
   randomizables,
-  reset,
   size,
   unsafe
 }: Props): React.ReactNode {
 
   const defaults = useRef<Style>({});
   const id = useMemo(() => `character-${index}`, [index]);
-  const interval = useRef<NodeJS.Timer>(null);
-  const _randomizables = useRef<Randomizable[]>(randomizables);
-
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
     { glyph: character, style: {} }
   );
-
-  const startTicking = useCallback(
-    () => {
-      interval.current = (
-        setInterval(() => {
-          let update = false;
-          const newState: State = {
-            glyph: state.glyph,
-            style: state.style,
-          };
-          for (const randomizable of _randomizables.current) {
-            if (!randomizable.isLimitReached()) {
-              continue;
-            }
-            const name = randomizable.name as CssProperty | 'glyph';
-            const newValue = randomizable.getRandomValue();
-            if (newValue === undefined) {
-              continue;
-            }
-            const comparator = name === 'glyph'
-              ? state.glyph
-              : state.style[name];
-            if (newValue !== comparator) {
-              if (name === 'glyph') {
-                newState.glyph = newValue;
-              } else {
-                newState.style[name] = newValue;
-              }
-              update = true;
-            }
-          }
-          if (update) {
-            setState(newState);
-          }
-        }, 300)
-      );
-    },
-    [_randomizables]
+  const _randomizables = useRef<Randomizables>(randomizables);
+  const timeouts = useRef(
+    [ ...Object.values(CssProperty), 'glyph' ].reduce(
+      (accumulated, key) => ({
+        ...accumulated,
+        [key]: null, 
+      }),
+      {}
+    ) as Timeouts
   );
 
-  // componentDidMount
+  const reset = useCallback(
+    (key: OptionName) => {
+      const newState: State = { ...state };
+      if (key === "glyph") {
+        newState.glyph = character;
+      } else {
+        newState.style[key] = defaults.current[key];
+      }
+      setState(newState);
+      timeouts.current[key] = null;
+    },
+    [character, defaults.current, setState, state, timeouts.current]
+  );
+
+  /**
+   * When the component mounts, record the default CSS values.
+   */
   useEffect(
     () => {
-      // Get the default CSS values.
       const element = document.getElementById(id);
       if (element === null) {
         return;
       }
       const style = getComputedStyle(element);
       Object.values(CssProperty).forEach((cssProperty: CssProperty) => {
-
         defaults.current[cssProperty] = Object.prototype.hasOwnProperty.call(
           DEFAULTS,
           cssProperty
@@ -104,64 +86,95 @@ export default function Character({
           ? DEFAULTS[cssProperty]
           : style[cssProperty];
       });
-      if (randomizables.length > 0) {
-        startTicking();
-      }
-
-      // componentWillUnmount
-      return () => {
-        clearInterval(interval.current);
-        interval.current = null;
-      }
     },
     []
   );
 
-  // componentDidUpdate
-  useEffect(
-    () => {
-      _randomizables.current = randomizables;
-      if (randomizables.length === 0 && interval.current !== null) {
-        clearInterval(interval.current);
-        interval.current = null;
-      } else if (randomizables.length > 0 && interval.current === null) {
-        startTicking();
+  const timeoutFunction = useCallback(
+    (randomizable: Randomizable, key: OptionName) => {
+      if (randomizable === undefined) {
+        return reset(key);
       }
-      const newState: State = {
-        glyph: state.glyph,
-        style: state.style
-      };
-      let update = false;
-      reset.css.forEach(property => {
-        update = true;
-        newState.style[property] = defaults.current[property];
-      });
-      if (reset.glyph.length > 0) {
-        let hasGlyph = false;
-        /**
-         * TODO: Define randomizables as an object to reduce the complexity of
-         * checking for the existence of a particular randomizable.
-         */
-        for (const randomizable of randomizables) {
-          if (randomizable.name === 'glyph') {
-            hasGlyph = true;
-            break;
+      if (randomizable == null || _randomizables.current[key] == null) {
+        return;
+      }
+      const name = randomizable.name as OptionName; 
+      const newState = { ...state };
+      const newValue = randomizable.getRandomValue();
+      if (newValue !== undefined) {
+        const comparator = name === 'glyph'
+          ? state.glyph
+          : state.style[name];
+        if (newValue !== comparator) {
+          if (name === 'glyph') {
+            newState.glyph = newValue;
+          } else {
+            newState.style[name] = newValue;
           }
         }
-        /**
-         * Only reset the character to its default value if the other glyph option
-         * is not also checked.
-         */
-        if (hasGlyph === false) {
-          update = true;
-          newState.glyph = character;
-        }
+        setState(newState);
       }
+      timeouts.current[name] = setTimeout(
+        () => timeoutFunction(_randomizables.current[name], name),
+        (_randomizables.current[name] == null)
+          ? 0
+          : _randomizables.current[name].getRandomNumber(300, 3000)
+      );
+    },
+    [_randomizables.current, state, timeouts.current]
+  );
+
+  // randomizables changed
+  useEffect(
+    () => {
+      _randomizables.current ={ ...randomizables };
+      const newState = { ...state };
+      let update = false;
+
+      /**
+       * This condition is usually met when ignoreSpaces changes to true.
+       */
+      if (randomizables == null) {
+        for (const _ of [...Object.values(CssProperty), 'glyph']) {
+          const key = _ as OptionName;
+          if (timeouts.current[key]) {
+            update = true;
+            if (key === "glyph") {
+              newState.glyph = character;
+            } else {
+              newState.style[key] = defaults.current[key];
+            }
+          }
+        }
+        if (update) {
+          setState(newState);
+        }
+        return;
+      }
+      Object.entries(_randomizables.current).forEach(([_, randomizable]) => {
+        const key = _ as OptionName;
+        if (randomizable == null) {
+          if (timeouts.current[key] == null) {
+            return;
+          }
+          update = true;
+          if (key === "glyph") {
+            newState.glyph = character;
+          } else {
+            newState.style[key] = defaults.current[key];
+          }
+        } else {
+          timeouts.current[key] = setTimeout(
+            () => timeoutFunction(randomizable, key),
+            randomizable == null ? 0 : randomizable.getRandomNumber(300, 3000)
+          );
+        }
+      });
       if (update) {
         setState(newState);
       }
     },
-    [interval.current, randomizables, reset, state]
+    [randomizables]
   );
 
   const getClassName = useCallback(
@@ -199,14 +212,14 @@ export default function Character({
             ...(
               state.style.fontWeight !== undefined && {
                 fontWeight:
-                  state.style.fontWeight as CSS.Property.FontWeight
+                  state.style.fontWeight as CssPropertyType.FontWeight
               }
             ),
             ...(
               state.style.textDecorationStyle !== undefined && {
                 textDecorationStyle:
                   state.style.textDecorationStyle as
-                    CSS.Property.TextDecorationStyle
+                    CssPropertyType.TextDecorationStyle
               }
             ),
           }

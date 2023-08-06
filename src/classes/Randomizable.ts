@@ -24,7 +24,7 @@ export default abstract class Randomizable {
         return this.getRandomNumber(0, 1) === 1;
     }
 
-    protected getRandomNumber(
+    public getRandomNumber(
         min: number,
         max: number,
         integerOnly = true
