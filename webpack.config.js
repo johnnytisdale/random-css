@@ -5,14 +5,11 @@ const webpack = require('webpack');
 
 module.exports = env => {
 
-  const entry = env.environment === "development"
+  const entry = env.environment === "form"
     ? "./src/components/Form/Form.tsx"
-    : env.environment === "production"
-    ? "./src/js/index.js"
-    : {
-      index: "./src/js/index.js",
-      test: "./src/js/test.jsx"
-    };
+    : env.environment === "test"
+    ? { test: "./src/js/test.jsx" }
+    : "./src/js/index.js";
 
   return {
     entry,
@@ -53,9 +50,10 @@ module.exports = env => {
         ]
       }),
       ...(
-        env.environment === "development"
+        env.environment === "form"
           ? [
             new HtmlWebpackPlugin({
+              filename: "form.html",
               template: 'src/html/index.html',
               title: 'Random CSS'
             })
@@ -75,12 +73,16 @@ module.exports = env => {
     resolve: {
       extensions: ['.js', '.json', '.ts', '.tsx'],
     },
-    ...(env.environment == "development" && {
-      devtool: 'source-map',
-      mode: 'development',
-      optimization: {
-        minimize: false
-      },
-    })
-  };
+    ...(
+      env.environment !== "production"
+        ? {
+          devtool: 'source-map',
+          mode: 'development',
+          optimization: {
+            minimize: false
+          }
+        }
+        : {}
+    )
+  }
 };
