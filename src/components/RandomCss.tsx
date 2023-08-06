@@ -50,16 +50,14 @@ const ignoreForSpaces: Record<OptionName, boolean> = {
 export default function RandomCss({options, text}: Props): React.ReactNode {
 
   const className = useMemo(
-    () => [
-      "random-css-container",
-      !options.global?.unsafe
-        ? `random-css-container-${
-          String(options.global.size).replaceAll('.', '-')
-        }`
-        : null
-    ]
-      .filter(Boolean)
-      .join(' '),
+    () => {
+      const classNames = ["random-css-container"];
+      if (!options.global?.unsafe) {
+        const size = String(options.global.size).replaceAll('.', '-');
+        classNames.push(`random-css-container-${size}`);
+      }
+      return classNames.filter(Boolean).join(" ");
+    },
     [options.global?.size, options.global?.unsafe]
   );
 
