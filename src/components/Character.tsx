@@ -54,20 +54,6 @@ export default function Character({
     ) as Timeouts
   );
 
-  const reset = useCallback(
-    (key: OptionName) => {
-      const newState: State = { ...state };
-      if (key === "glyph") {
-        newState.glyph = character;
-      } else {
-        newState.style[key] = defaults.current[key];
-      }
-      setState(newState);
-      timeouts.current[key] = null;
-    },
-    [character, defaults.current, setState, state, timeouts.current]
-  );
-
   /**
    * When the component mounts, record the default CSS values.
    */
@@ -92,9 +78,6 @@ export default function Character({
 
   const timeoutFunction = useCallback(
     (randomizable: Randomizable, key: OptionName) => {
-      if (randomizable === undefined) {
-        return reset(key);
-      }
       if (randomizable == null || _randomizables.current[key] == null) {
         return;
       }
@@ -130,27 +113,6 @@ export default function Character({
       _randomizables.current ={ ...randomizables };
       const newState = { ...state };
       let update = false;
-
-      /**
-       * This condition is usually met when ignoreSpaces changes to true.
-       */
-      if (randomizables == null) {
-        for (const _ of [...Object.values(CssProperty), 'glyph']) {
-          const key = _ as OptionName;
-          if (timeouts.current[key]) {
-            update = true;
-            if (key === "glyph") {
-              newState.glyph = character;
-            } else {
-              newState.style[key] = defaults.current[key];
-            }
-          }
-        }
-        if (update) {
-          setState(newState);
-        }
-        return;
-      }
       Object.entries(_randomizables.current).forEach(([_, randomizable]) => {
         const key = _ as OptionName;
         if (randomizable == null) {
@@ -163,11 +125,19 @@ export default function Character({
           } else {
             newState.style[key] = defaults.current[key];
           }
+          timeouts.current[key] = null;
+        } else if (timeouts.current[key]) {
+          /**
+           * We don't need to add a new timeout for this one because it already
+           * has a timeout.
+           */
+          return;
         } else {
-          timeouts.current[key] = setTimeout(
-            () => timeoutFunction(randomizable, key),
-            randomizable == null ? 0 : randomizable.getRandomNumber(300, 3000)
-          );
+          /**
+           * This option was just enabled. There is no need to do setTimeout
+           * here because that will happen at the end of timeoutFunction.
+           */
+          timeoutFunction(randomizable, key);
         }
       });
       if (update) {

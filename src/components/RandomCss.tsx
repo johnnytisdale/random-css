@@ -22,12 +22,49 @@ import TextDecorationLine, { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../cla
 import TextDecorationStyle, { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
+
 interface Props {
   options: Options;
   text: string;
 }
 
+/**
+ * TODO: move ignoreSpaces check here, also filter out randomizables that don't
+ * affect spaces such as fontFamily.
+ */
+const accumulatorForSpaces: (
+  accumulated: Partial<Randomizables>,
+  key: keyof Randomizables
+) => Partial<Randomizables> = (acc, key) => ({ ...acc, [key]: null });
+
 export default class RandomCss extends React.Component<Props> {
+
+  // TODO: useCallback
+  private getAccumulator(character: string): (
+    accumulated: Partial<Randomizables>,
+    key: keyof Randomizables
+  ) => Partial<Randomizables> {
+    return (accumulated, key) => ({
+      ...accumulated,
+      [key]: key === 'glyph'
+        ? (
+          // TODO: useMemo for isLeetEnabled and isUnicodeEnabled?
+          (
+            this.props?.options.glyph?.leet?.enabled ||
+            this.props?.options.glyph?.unicode?.enabled
+          )
+            ? new Glyph(
+              character,
+              this.props?.options.glyph?.leet?.enabled === true,
+              this.props?.options.glyph?.unicode?.enabled === true
+            ) : null
+        ) : (
+          this.props?.options.css?.[key]?.enabled
+            ? this.getRandomizableForCssProperty(key)
+            : null
+        ),
+    });
+  }
 
   private getClassName(): string {
     return [
@@ -99,29 +136,10 @@ export default class RandomCss extends React.Component<Props> {
   }
 
   private getRandomizables(character: string): Randomizables {
-    // TODO: useMemo for isLeetEnabled and isUnicodeEnabled?
-    const isLeetEnabled = this.props?.options.glyph?.leet?.enabled === true;
-    const isUnicodeEnabled = (
-      this.props?.options.glyph?.unicode?.enabled === true
-    );
     return [ ...Object.values(CssProperty), 'glyph' ].reduce(
-      (accumulated: Partial<Randomizables>, key: keyof Randomizables) => {
-        return {
-            ...accumulated,
-            ...{
-              [key]: key === 'glyph'
-                ? (
-                  isLeetEnabled || isUnicodeEnabled
-                    ? new Glyph(character, isLeetEnabled, isUnicodeEnabled)
-                    : null
-                ) : (
-                  this.props?.options.css?.[key]?.enabled
-                    ? this.getRandomizableForCssProperty(key)
-                    : null
-                )
-            },
-          };
-      },
+      character === ' ' && this.props?.options.global?.ignoreSpaces
+        ? accumulatorForSpaces
+        : this.getAccumulator(character),
       {}  
     ) as Randomizables;
   }
@@ -139,36 +157,20 @@ export default class RandomCss extends React.Component<Props> {
       <div
         className={this.getClassName()}
         {
-          ...(
-            this.props?.options.global.unsafe === true &&
-            {
-              style: {
-                fontSize: size
-              }
-            }
-          )
+          ...this.props?.options.global.unsafe && { style: { fontSize: size } }
         }
       >
         {
-          this.props.text.split('').map((character, i) => {
-            const ignore = (
-              character === ' ' &&
-              this.props?.options.global.ignoreSpaces === true
-            );
-            const randomizables: Randomizables | null = ignore === true
-              ? null
-              : this.getRandomizables(character);
-            return (
-              <Character
-                key={`${i}-${character}`}
-                character={character}
-                index={i}
-                randomizables={randomizables}
-                size={this.props?.options.global.size}
-                unsafe={this.props?.options.global.unsafe}
-              />
-            );
-          })
+          this.props.text.split('').map((character, i) => (
+            <Character
+              key={`${i}-${character}`}
+              character={character}
+              index={i}
+              randomizables={this.getRandomizables(character)}
+              size={this.props?.options.global.size}
+              unsafe={this.props?.options.global.unsafe}
+            />
+          ))
         }
       </div>
     );
