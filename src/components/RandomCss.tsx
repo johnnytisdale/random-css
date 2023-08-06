@@ -22,6 +22,7 @@ import TextDecorationLine, { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../cla
 import TextDecorationStyle, { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
+import { useCallback } from "react";
 
 interface Props {
   options: Options;
@@ -37,10 +38,9 @@ const accumulatorForSpaces: (
   key: keyof Randomizables
 ) => Partial<Randomizables> = (acc, key) => ({ ...acc, [key]: null });
 
-export default class RandomCss extends React.Component<Props> {
-
-  // TODO: useCallback
-  private getAccumulator(character: string): (
+export default function RandomCss({options, text}: Props): React.ReactNode {
+  
+  function getAccumulator(character: string): (
     accumulated: Partial<Randomizables>,
     key: keyof Randomizables
   ) => Partial<Randomizables> {
@@ -50,28 +50,28 @@ export default class RandomCss extends React.Component<Props> {
         ? (
           // TODO: useMemo for isLeetEnabled and isUnicodeEnabled?
           (
-            this.props?.options.glyph?.leet?.enabled ||
-            this.props?.options.glyph?.unicode?.enabled
+            options.glyph?.leet?.enabled ||
+            options.glyph?.unicode?.enabled
           )
             ? new Glyph(
               character,
-              this.props?.options.glyph?.leet?.enabled === true,
-              this.props?.options.glyph?.unicode?.enabled === true
+              options.glyph?.leet?.enabled === true,
+              options.glyph?.unicode?.enabled === true
             ) : null
         ) : (
-          this.props?.options.css?.[key]?.enabled
-            ? this.getRandomizableForCssProperty(key)
+          options.css?.[key]?.enabled
+            ? getRandomizableForCssProperty(key)
             : null
         ),
     });
   }
 
-  private getClassName(): string {
+  function getClassName(): string {
     return [
       "random-css-container",
-      this.props?.options.global.unsafe === false
+      options.global.unsafe === false
         ? `random-css-container-${
-          String(this.props?.options.global.size).replaceAll('.', '-')
+          String(options.global.size).replaceAll('.', '-')
         }`
         : null
     ]
@@ -79,100 +79,97 @@ export default class RandomCss extends React.Component<Props> {
       .join(' ');
   }
 
-  private getRandomizableForCssProperty(option: CssProperty): Randomizable {
+  function getRandomizableForCssProperty(option: CssProperty): Randomizable {
     switch (option) {
       case CssProperty.ANIMATION:
         return new Animation(
-          this.props?.options.css?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          this.props?.options.global?.unsafe
+          options.css?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          options.global?.unsafe
         );
       case CssProperty.BACKGROUND_COLOR:
         return new BackgroundColor(
-          this.props?.options.css.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.BORDER_COLOR:
         return new BorderColor(
-          this.props?.options.css.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.BORDER_RADIUS:
-        return new BorderRadius(this.props?.options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS });
+        return new BorderRadius(options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS });
       case CssProperty.BORDER_STYLE:
         return new BorderStyle(
-          this.props?.options.css.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.BORDER_WIDTH:
-        return new BorderWidth(this.props?.options.css.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS });
+        return new BorderWidth(options.css.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS });
       case CssProperty.COLOR:
         return new Color(
-          this.props?.options.css.color ?? { ...DEFAULT_COLOR_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css.color ?? { ...DEFAULT_COLOR_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.FONT_FAMILY:
-        return new FontFamily(this.props?.options.css.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
+        return new FontFamily(options.css.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
       case CssProperty.FONT_STYLE:
         return new FontStyle(
-          this.props?.options.css?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.FONT_WEIGHT:
-        return new FontWeight(this.props?.options.css?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
+        return new FontWeight(options.css?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
       case CssProperty.TEXT_DECORATION_COLOR:
         return new TextDecorationColor(
-          this.props?.options.css.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          this.props?.options.global.unsafe
+          options.css.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          options.global.unsafe
         );
       case CssProperty.TEXT_DECORATION_LINE:
         return new TextDecorationLine(
-          this.props?.options.css.textDecorationLine ?? { ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS }
+          options.css.textDecorationLine ?? { ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS }
         );
       case CssProperty.TEXT_DECORATION_STYLE:
         return new TextDecorationStyle(
-          this.props?.options.css.textDecorationStyle ?? { ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS }
+          options.css.textDecorationStyle ?? { ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS }
         );
     }
   }
 
-  private getRandomizables(character: string): Randomizables {
+  function getRandomizables(character: string): Randomizables {
     return [ ...Object.values(CssProperty), 'glyph' ].reduce(
-      character === ' ' && this.props?.options.global?.ignoreSpaces
+      character === ' ' && options.global?.ignoreSpaces
         ? accumulatorForSpaces
-        : this.getAccumulator(character),
+        : getAccumulator(character),
       {}  
     ) as Randomizables;
   }
 
-  render(): React.ReactNode {
+  /**
+   * This value serves as both the font size and the width of the divs
+   * that contain the characters. The height of the divs will be equal to this
+   * value multiplied by 1.1875.
+   */
+  const size = `${options.global.size}rem`;
 
-    /**
-     * This value serves as both the font size and the width of the divs
-     * that contain the characters. The height of the divs will be equal to this
-     * value multiplied by 1.1875.
-     */
-    const size = `${this.props?.options.global.size}rem`;
-
-    return (
-      <div
-        className={this.getClassName()}
-        {
-          ...this.props?.options.global.unsafe && { style: { fontSize: size } }
-        }
-      >
-        {
-          this.props.text.split('').map((character, i) => (
-            <Character
-              key={`${i}-${character}`}
-              character={character}
-              index={i}
-              randomizables={this.getRandomizables(character)}
-              size={this.props?.options.global.size}
-              unsafe={this.props?.options.global.unsafe}
-            />
-          ))
-        }
-      </div>
-    );
-  }
+  return (
+    <div
+      className={getClassName()}
+      {
+        ...options.global.unsafe && { style: { fontSize: size } }
+      }
+    >
+      {
+        text.split('').map((character, i) => (
+          <Character
+            key={`${i}-${character}`}
+            character={character}
+            index={i}
+            randomizables={getRandomizables(character)}
+            size={options.global.size}
+            unsafe={options.global.unsafe}
+          />
+        ))
+      }
+    </div>
+  );
 }
