@@ -40,6 +40,86 @@ const accumulatorForSpaces: (
 
 export default function RandomCss({options, text}: Props): React.ReactNode {
 
+  const className = useMemo(
+    () => [
+      "random-css-container",
+      options.global.unsafe === false
+        ? `random-css-container-${
+          String(options.global.size).replaceAll('.', '-')
+        }`
+        : null
+    ]
+      .filter(Boolean)
+      .join(' '),
+    [options.global?.size, options.global?.unsafe]
+  );
+
+  const getRandomizableForCssProperty = useCallback(
+    (option: CssProperty): Randomizable => {
+      switch (option) {
+        case CssProperty.ANIMATION:
+          return new Animation(
+            options.css?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
+            options.global?.unsafe
+          );
+        case CssProperty.BACKGROUND_COLOR:
+          return new BackgroundColor(
+            options.css.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.BORDER_COLOR:
+          return new BorderColor(
+            options.css.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.BORDER_RADIUS:
+          return new BorderRadius(
+            options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS }
+          );
+        case CssProperty.BORDER_STYLE:
+          return new BorderStyle(
+            options.css.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.BORDER_WIDTH:
+          return new BorderWidth(options.css.borderWidth
+            ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS });
+        case CssProperty.COLOR:
+          return new Color(
+            options.css.color ?? { ...DEFAULT_COLOR_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.FONT_FAMILY:
+          return new FontFamily(options.css.fontFamily
+            ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
+        case CssProperty.FONT_STYLE:
+          return new FontStyle(
+            options.css?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.FONT_WEIGHT:
+          return new FontWeight(options.css?.fontWeight
+            ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
+        case CssProperty.TEXT_DECORATION_COLOR:
+          return new TextDecorationColor(
+            options.css.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
+            options.global.unsafe
+          );
+        case CssProperty.TEXT_DECORATION_LINE:
+          return new TextDecorationLine(
+            options.css.textDecorationLine
+              ?? { ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS }
+          );
+        case CssProperty.TEXT_DECORATION_STYLE:
+          return new TextDecorationStyle(
+            options.css.textDecorationStyle
+              ?? { ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS }
+          );
+      }
+    },
+    [options]
+  );
+
   const getAccumulator = useCallback(
     (character: string) => (
       accumulated: Partial<Randomizables>,
@@ -72,91 +152,27 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
     ]
   );
 
-  const className = useMemo(
-    () => [
-      "random-css-container",
-      options.global.unsafe === false
-        ? `random-css-container-${
-          String(options.global.size).replaceAll('.', '-')
-        }`
-        : null
-    ]
-      .filter(Boolean)
-      .join(' '),
-    [options.global?.size, options.global?.unsafe]
+  const getRandomizables = useCallback(
+    (character: string): Randomizables => {
+      return [ ...Object.values(CssProperty), 'glyph' ].reduce(
+        character === ' ' && options.global?.ignoreSpaces
+          ? accumulatorForSpaces
+          : getAccumulator(character),
+        {}
+      ) as Randomizables;
+    },
+    [getAccumulator, options.global?.ignoreSpaces]
   );
-
-  function getRandomizableForCssProperty(option: CssProperty): Randomizable {
-    switch (option) {
-      case CssProperty.ANIMATION:
-        return new Animation(
-          options.css?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          options.global?.unsafe
-        );
-      case CssProperty.BACKGROUND_COLOR:
-        return new BackgroundColor(
-          options.css.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.BORDER_COLOR:
-        return new BorderColor(
-          options.css.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.BORDER_RADIUS:
-        return new BorderRadius(options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS });
-      case CssProperty.BORDER_STYLE:
-        return new BorderStyle(
-          options.css.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.BORDER_WIDTH:
-        return new BorderWidth(options.css.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS });
-      case CssProperty.COLOR:
-        return new Color(
-          options.css.color ?? { ...DEFAULT_COLOR_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.FONT_FAMILY:
-        return new FontFamily(options.css.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
-      case CssProperty.FONT_STYLE:
-        return new FontStyle(
-          options.css?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.FONT_WEIGHT:
-        return new FontWeight(options.css?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS });
-      case CssProperty.TEXT_DECORATION_COLOR:
-        return new TextDecorationColor(
-          options.css.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          options.global.unsafe
-        );
-      case CssProperty.TEXT_DECORATION_LINE:
-        return new TextDecorationLine(
-          options.css.textDecorationLine ?? { ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS }
-        );
-      case CssProperty.TEXT_DECORATION_STYLE:
-        return new TextDecorationStyle(
-          options.css.textDecorationStyle ?? { ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS }
-        );
-    }
-  }
-
-  function getRandomizables(character: string): Randomizables {
-    return [ ...Object.values(CssProperty), 'glyph' ].reduce(
-      character === ' ' && options.global?.ignoreSpaces
-        ? accumulatorForSpaces
-        : getAccumulator(character),
-      {}  
-    ) as Randomizables;
-  }
 
   /**
    * This value serves as both the font size and the width of the divs
    * that contain the characters. The height of the divs will be equal to this
    * value multiplied by 1.1875.
    */
-  const size = `${options.global.size}rem`;
+  const size = useMemo(
+    () => `${options.global.size}rem`,
+    [options.global.size]
+  );
 
   return (
     <div
