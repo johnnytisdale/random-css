@@ -1,7 +1,7 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = env => {
 
@@ -13,31 +13,37 @@ module.exports = env => {
 
   return {
     entry,
+    externals: env.environment === "production" || env.environment == "test"
+      ? {
+        react: "react",
+        reactDOM: "react-dom"
+      }
+      : {},
     module: {
       rules: [
         {
           test: /\.(ts|js)x?$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: "babel-loader"
         },
         {
           test: /\.s[ac]ss$/i,
           use: [
             // Creates `style` nodes from JS strings
-            'style-loader',
+            "style-loader",
             // Translates CSS into CommonJS
-            'css-loader',
+            "css-loader",
             // Compiles Sass to CSS
-            'sass-loader',
+            "sass-loader",
           ]
         }
       ]
     },
     output: {
-      filename: `${env.environment === "test" ? '[name]' : "index"}.js`,
-      path: path.resolve(__dirname, 'dist'),
-      library: 'random-css',
-      libraryTarget: 'umd',
+      filename: `${env.environment === "test" ? "[name]" : "index"}.js`,
+      path: path.resolve(__dirname, "dist"),
+      library: "random-css",
+      libraryTarget: "umd",
       umdNamedDefine: true
     },
     plugins: [
@@ -46,7 +52,7 @@ module.exports = env => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: 'src/styles/random.css' },
+          { from: "src/styles/random.css" },
         ]
       }),
       ...(
@@ -54,30 +60,30 @@ module.exports = env => {
           ? [
             new HtmlWebpackPlugin({
               filename: "form.html",
-              template: 'src/html/index.html',
-              title: 'Random CSS'
+              template: "src/html/form.html",
+              title: "Random CSS"
             })
           ]
           : env.environment === "test"
           ? [
             new HtmlWebpackPlugin({
-              filename: 'test.html',
+              filename: "test.html",
               inject: false,
-              template: 'src/html/test.html',
-              title: 'Random CSS'
+              template: "src/html/test.html",
+              title: "Random CSS"
             })
           ]
           : []
-      )
+      ),
     ],
     resolve: {
-      extensions: ['.js', '.json', '.ts', '.tsx'],
+      extensions: [".js", ".json", ".ts", ".tsx"],
     },
     ...(
       env.environment !== "production"
         ? {
-          devtool: 'source-map',
-          mode: 'development',
+          devtool: "source-map",
+          mode: "development",
           optimization: {
             minimize: false
           }
