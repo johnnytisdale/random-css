@@ -99,24 +99,27 @@ export default class RandomCss extends React.Component<Props> {
   }
 
   private getRandomizables(character: string): Randomizables {
+    // TODO: useMemo for isLeetEnabled and isUnicodeEnabled?
     const isLeetEnabled = this.props?.options.glyph?.leet?.enabled === true;
     const isUnicodeEnabled = (
       this.props?.options.glyph?.unicode?.enabled === true
     );
     return [ ...Object.values(CssProperty), 'glyph' ].reduce(
       (accumulated: Partial<Randomizables>, key: keyof Randomizables) => {
-        return key === 'glyph'
-          ? {
+        return {
             ...accumulated,
-            glyph: isLeetEnabled || isUnicodeEnabled
-              ? new Glyph(character, isLeetEnabled, isUnicodeEnabled)
-              : null,
-          }
-          : {
-            ...accumulated,
-            [key]: this.props?.options.css?.[key]?.enabled
-              ? this.getRandomizableForCssProperty(key)
-              : null
+            ...{
+              [key]: key === 'glyph'
+                ? (
+                  isLeetEnabled || isUnicodeEnabled
+                    ? new Glyph(character, isLeetEnabled, isUnicodeEnabled)
+                    : null
+                ) : (
+                  this.props?.options.css?.[key]?.enabled
+                    ? this.getRandomizableForCssProperty(key)
+                    : null
+                )
+            },
           };
       },
       {}  
