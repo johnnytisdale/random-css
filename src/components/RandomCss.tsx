@@ -22,7 +22,7 @@ import TextDecorationLine, { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../cla
 import TextDecorationStyle, { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../classes/CSS/TextDecorationStyle";
 
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 interface Props {
   options: Options;
@@ -72,8 +72,8 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
     ]
   );
 
-  function getClassName(): string {
-    return [
+  const className = useMemo(
+    () => [
       "random-css-container",
       options.global.unsafe === false
         ? `random-css-container-${
@@ -82,8 +82,9 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
         : null
     ]
       .filter(Boolean)
-      .join(' ');
-  }
+      .join(' '),
+    [options.global?.size, options.global?.unsafe]
+  );
 
   function getRandomizableForCssProperty(option: CssProperty): Randomizable {
     switch (option) {
@@ -159,7 +160,7 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
 
   return (
     <div
-      className={getClassName()}
+      className={className}
       {
         ...options.global.unsafe && { style: { fontSize: size } }
       }
