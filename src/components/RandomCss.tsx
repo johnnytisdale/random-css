@@ -1,7 +1,6 @@
 import "../styles/RandomCss.scss";
 
 import Animation, { DEFAULT_ANIMATION_OPTIONS } from "../classes/CSS/Animation";
-import AppliedOptions from "../interfaces/AppliedOptions";
 import BackgroundColor from "../classes/CSS/BackgroundColor";
 import BorderColor from "../classes/CSS/BorderColor";
 import BorderRadius, { DEFAULT_BORDER_RADIUS_OPTIONS } from "../classes/CSS/BorderRadius";
@@ -15,8 +14,6 @@ import FontFamily, { DEFAULT_FONT_FAMILY_OPTIONS } from "../classes/CSS/FontFami
 import FontStyle from "../classes/CSS/FontStyle";
 import FontWeight from "../classes/CSS/FontWeight";
 import Glyph from "../classes/Glyph";
-import GlyphOption from "../enums/GlyphOption";
-import Option from "../interfaces/Option";
 import Options from "../interfaces/Options";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
@@ -30,39 +27,7 @@ interface Props {
   text: string;
 }
 
-interface State {
-  reset: AppliedOptions,
-  resetForSpaces: AppliedOptions,
-}
-
-export default class RandomCss extends React.Component<Props, State> {
-
-  private spacesHaveStyle = false;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      reset: { css: [], glyph: [] },
-      resetForSpaces: { css: [], glyph: [] }
-    };
-  }
-
-  private getAppliedOptions(): AppliedOptions {
-    return {
-      css: Object.entries(this.props?.options.css)
-        .map(([cssProperty, cssOption]: [CssProperty, Option]) => (
-          cssOption.enabled === true
-            ? cssProperty
-            : null
-        )).filter(Boolean),
-      glyph: Object.entries(this.props?.options.glyph)
-      .map(([glyphOption, option]: [GlyphOption, Option]) => (
-        option.enabled === true
-          ? glyphOption
-          : null
-      )).filter(Boolean)
-    };
-  }
+export default class RandomCss extends React.Component<Props> {
 
   private getClassName(): string {
     return [
@@ -203,96 +168,6 @@ export default class RandomCss extends React.Component<Props, State> {
           })
         }
       </div>
-    );
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-
-    /**
-     * We just reset one or more CSS properties (or glyph) back to its default
-     * value, which caused componentDidUpdate to be called again. Clear the
-     * arrays in this.state.reset and return to avoid infinite re-renders.
-     */
-    if (this.state.reset.css.length > 0 || this.state.reset.glyph.length > 0) {
-      this.setState({ reset: { css: [], glyph: [] } });
-      return;
-    }
-
-    /**
-     * We just cleared the arrays in this.state.reset, which caused
-     * componentDidUpdate to be called again. Return to avoid infinite
-     * re-renders.
-     */
-    if (
-      (this.state.reset.css.length === 0 && prevState.reset.css.length !== 0) ||
-      (
-        this.state.reset.glyph.length === 0 &&
-        prevState.reset.glyph.length !== 0
-      )
-    ) {
-      return;
-    }
-
-    /**
-     * We just enabled ignoreSpaces and then reset one or more CSS properties
-     * for spaces in the text, which caused componentDidUpdate to be called
-     * again. Clear the arrays in this.state.reset and return to avoid infinite
-     * re-renders.
-     * TODO: No point in this.state.resetForSpaces.glyph?
-     */
-    if (
-      this.state.resetForSpaces.css.length > 0 ||
-      this.state.resetForSpaces.glyph.length > 0
-    ) {
-      this.setState({ resetForSpaces: { css: [], glyph: [] } });
-      return;
-    }
-
-    /**
-     * Just cleared the arrays in this.state.resetForSpaces, which caused
-     * componentDidUpdate to be called again. Return to avoid infinite
-     * re-renders.
-     */
-    if (
-      (
-        this.state.resetForSpaces.css.length === 0 &&
-        prevState.resetForSpaces.css.length !== 0
-      ) ||
-      (
-        this.state.resetForSpaces.glyph.length === 0 &&
-        prevState.resetForSpaces.glyph.length !== 0
-      )
-    ) {
-      return;
-    }
-
-    // Determine whether there any spaces in the text.
-    const hasSpace = this.props.text.indexOf(' ') >= 0;
-
-    /**
-     * There are spaces in the text and ignoreSpaces has just been enabled.
-     * Update state to reflect the CSS properties that need to be reset to their
-     * default values for any spaces in the text.
-     */
-    if (
-      hasSpace === true &&
-      this.props?.options.global.ignoreSpaces === true &&
-      this.spacesHaveStyle === true
-    ) {
-      this.spacesHaveStyle = false;
-      this.setState({ resetForSpaces: this.getAppliedOptions() });
-      return;
-    }
-
-    /**
-     * Determine whether any CSS properties are being randomized for spaces in
-     * the text.
-     */
-    const appliedOptions = this.getAppliedOptions();
-    this.spacesHaveStyle = (
-      hasSpace === true &&
-      (appliedOptions.css.length > 0 || appliedOptions.glyph.length > 0) &&
-      this.props?.options.global.ignoreSpaces === false
     );
   }
 }
