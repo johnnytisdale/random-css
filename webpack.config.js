@@ -13,7 +13,7 @@ module.exports = env => {
 
   return {
     entry,
-    externals: env.environment === "production" || env.environment == "test"
+    externals: env.environment === "production"
       ? {
         react: "react",
         reactDOM: "react-dom"
