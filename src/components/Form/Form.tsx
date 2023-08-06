@@ -6,7 +6,7 @@ import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
-import { DEFAULT_GLOBAL_OPTIONS } from "../../interfaces/GlobalOptions";
+import { DEFAULT_GLOBAL_OPTIONS, DEFAULT_GLOBAL_OPTIONS_TEXT } from "../../interfaces/GlobalOptions";
 import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
 import { FontStyleOptions } from "../../classes/CSS/FontStyle";
 import FontWeightValue from "../../enums/FontWeightValue";
@@ -29,7 +29,7 @@ import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
 import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 
 import * as React from "react";
-import { useCallback, useMemo, useReducer } from "react";
+import { useCallback, useMemo, useReducer, useState } from "react";
 import { createRoot } from 'react-dom/client';
 
 interface State {
@@ -63,6 +63,8 @@ export default function Form(): React.ReactNode {
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
     initialState
   );
+
+  const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
 
   const setAnimationOption = useCallback(
     (option: AnimationOptions) => {
@@ -259,7 +261,7 @@ export default function Form(): React.ReactNode {
       <div id="top" data-testid="top">
         <RandomCss
           options={optionsToExport}
-          text={state.options.global.text}
+          text={text}
         />
       </div>
 
@@ -272,12 +274,8 @@ export default function Form(): React.ReactNode {
             input={{
               'data-testid': "randomcss-form-text",
               type: "text",
-              value: state.options.global.text,
-              onChange: e => {
-                const options = state.options;
-                options.global.text = e.target.value;
-                setState({ options: options });
-              }
+              value: text,
+              onChange: e => setText(e.target.value)
             }}
             label="text"
           />

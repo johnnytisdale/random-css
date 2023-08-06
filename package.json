@@ -54,7 +54,7 @@
 		"prod": "webpack --mode production --env environment=production",
 		"test": "jest --verbose",
 		"test-build": "webpack --mode development --env environment=test",
-		"watch": "webpack --mode development --env environment=development --watch"
+		"watch": "webpack --mode development --env environment=form --watch"
 	},
 	"version": "2.0.7",
 	"dependencies": {

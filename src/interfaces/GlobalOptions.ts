@@ -6,7 +6,6 @@ export const DEFAULT_GLOBAL_OPTIONS_UNSAFE = true;
 export const DEFAULT_GLOBAL_OPTIONS: GlobalOptions = {
     ignoreSpaces: DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
     size: DEFAULT_GLOBAL_OPTIONS_SIZE,
-    text: DEFAULT_GLOBAL_OPTIONS_TEXT,
     unsafe: DEFAULT_GLOBAL_OPTIONS_UNSAFE,
 }
 
@@ -21,11 +20,6 @@ export default interface GlobalOptions {
      * Font size, measured in rem.
      */
     size?: number;
-
-    /**
-     * The text to which randomized styles will be applied.
-     */
-    text: string;
 
     /**
      * If true, use inline CSS, which is considered unsafe because it is
