@@ -30,12 +30,6 @@ interface Props {
   text: string;
 }
 
-/**
- * TODO: move ignoreSpaces check here, also filter out randomizables that don't
- * affect spaces such as fontFamily.
- */
-
-
 const ignoreForSpaces: Record<OptionName, boolean> = {
   animation: false,
   backgroundColor: false,
