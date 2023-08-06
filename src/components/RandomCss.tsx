@@ -39,12 +39,12 @@ const accumulatorForSpaces: (
 ) => Partial<Randomizables> = (acc, key) => ({ ...acc, [key]: null });
 
 export default function RandomCss({options, text}: Props): React.ReactNode {
-  
-  function getAccumulator(character: string): (
-    accumulated: Partial<Randomizables>,
-    key: keyof Randomizables
-  ) => Partial<Randomizables> {
-    return (accumulated, key) => ({
+
+  const getAccumulator = useCallback(
+    (character: string) => (
+      accumulated: Partial<Randomizables>,
+      key: keyof Randomizables
+    ): Partial<Randomizables> => ({
       ...accumulated,
       [key]: key === 'glyph'
         ? (
@@ -63,8 +63,14 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
             ? getRandomizableForCssProperty(key)
             : null
         ),
-    });
-  }
+    }),
+    [
+      getRandomizableForCssProperty,
+      options.css,
+      options.glyph?.leet?.enabled,
+      options.glyph?.unicode?.enabled
+    ]
+  );
 
   function getClassName(): string {
     return [
