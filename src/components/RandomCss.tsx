@@ -14,6 +14,7 @@ import FontFamily, { DEFAULT_FONT_FAMILY_OPTIONS } from "../classes/CSS/FontFami
 import FontStyle from "../classes/CSS/FontStyle";
 import FontWeight from "../classes/CSS/FontWeight";
 import Glyph from "../classes/Glyph";
+import OptionName from "../types/OptionName";
 import Options from "../interfaces/Options";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
@@ -33,17 +34,31 @@ interface Props {
  * TODO: move ignoreSpaces check here, also filter out randomizables that don't
  * affect spaces such as fontFamily.
  */
-const accumulatorForSpaces: (
-  accumulated: Partial<Randomizables>,
-  key: keyof Randomizables
-) => Partial<Randomizables> = (acc, key) => ({ ...acc, [key]: null });
+
+
+const ignoreForSpaces: Record<OptionName, boolean> = {
+  animation: false,
+  backgroundColor: false,
+  borderColor: false,
+  borderRadius: false,
+  borderStyle: false,
+  borderWidth: false,
+  color: true,
+  fontFamily: true,
+  fontStyle: true,
+  fontWeight: true,
+  glyph: true,
+  textDecorationColor: true,
+  textDecorationLine: true,
+  textDecorationStyle: true
+};
 
 export default function RandomCss({options, text}: Props): React.ReactNode {
 
   const className = useMemo(
     () => [
       "random-css-container",
-      options.global.unsafe === false
+      !options.global?.unsafe
         ? `random-css-container-${
           String(options.global.size).replaceAll('.', '-')
         }`
@@ -120,48 +135,44 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
     [options]
   );
 
-  const getAccumulator = useCallback(
-    (character: string) => (
-      accumulated: Partial<Randomizables>,
-      key: keyof Randomizables
-    ): Partial<Randomizables> => ({
-      ...accumulated,
-      [key]: key === 'glyph'
-        ? (
-          // TODO: useMemo for isLeetEnabled and isUnicodeEnabled?
-          (
-            options.glyph?.leet?.enabled ||
-            options.glyph?.unicode?.enabled
-          )
-            ? new Glyph(
-              character,
-              options.glyph?.leet?.enabled === true,
-              options.glyph?.unicode?.enabled === true
-            ) : null
-        ) : (
-          options.css?.[key]?.enabled
-            ? getRandomizableForCssProperty(key)
-            : null
-        ),
-    }),
-    [
-      getRandomizableForCssProperty,
-      options.css,
-      options.glyph?.leet?.enabled,
-      options.glyph?.unicode?.enabled
-    ]
+  const isLeetEnabled = useMemo(
+    () => options.glyph?.leet?.enabled === true,
+    [options.glyph?.leet?.enabled]
+  );
+  const isUnicodeEnabled = useMemo(
+    () => options.glyph?.unicode?.enabled === true,
+    [options.glyph?.unicode?.enabled]
   );
 
   const getRandomizables = useCallback(
-    (character: string): Randomizables => {
-      return [ ...Object.values(CssProperty), 'glyph' ].reduce(
-        character === ' ' && options.global?.ignoreSpaces
-          ? accumulatorForSpaces
-          : getAccumulator(character),
+    (character: string): Randomizables => (
+      [ ...Object.values(CssProperty), 'glyph' ].reduce(
+        (accumulated: Partial<Randomizables>, key: OptionName) => {
+          const acc: Partial<Randomizables> = { ...accumulated, [key]: null };
+          if (
+            character == " " &&
+            (options.global?.ignoreSpaces || ignoreForSpaces[key])
+          ) {
+            return acc;
+          }
+          if (key === 'glyph') {
+            if (isLeetEnabled || isUnicodeEnabled) {
+              acc[key] = new Glyph(character, isLeetEnabled, isUnicodeEnabled);
+            }
+          } else if (options.css?.[key]?.enabled) {
+            acc[key] = getRandomizableForCssProperty(key);
+          }
+          return acc;
+        },
         {}
-      ) as Randomizables;
-    },
-    [getAccumulator, options.global?.ignoreSpaces]
+      ) as Randomizables
+    ),
+    [
+      getRandomizableForCssProperty,
+      isLeetEnabled,
+      isUnicodeEnabled,
+      options.global?.ignoreSpaces
+    ]
   );
 
   /**
@@ -177,9 +188,7 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
   return (
     <div
       className={className}
-      {
-        ...options.global.unsafe && { style: { fontSize: size } }
-      }
+      {...options.global.unsafe && { style: { fontSize: size } }}
     >
       {
         text.split('').map((character, i) => (
