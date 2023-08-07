@@ -9,7 +9,7 @@ import {
 import {
   BorderStyleOptions,
   DEFAULT_BORDER_STYLE_OPTIONS,
-} from "../classes/CSS/BorderStyle";
+} from "./BorderStyleOptions";
 import ColorOptions from "./ColorOptions";
 import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../classes/CSS/BorderWidth";
 import { DEFAULT_COLOR_OPTIONS } from "../classes/CSS/ColorProperty";

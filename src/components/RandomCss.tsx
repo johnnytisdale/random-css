@@ -4,9 +4,7 @@ import Animation from "../classes/CSS/Animation";
 import BackgroundColor from "../classes/CSS/BackgroundColor";
 import BorderColor from "../classes/CSS/BorderColor";
 import BorderRadius from "../classes/CSS/BorderRadius";
-import BorderStyle, {
-  DEFAULT_BORDER_STYLE_OPTIONS,
-} from "../classes/CSS/BorderStyle";
+import BorderStyle from "../classes/CSS/BorderStyle";
 import BorderWidth, {
   DEFAULT_BORDER_WIDTH_OPTIONS,
 } from "../classes/CSS/BorderWidth";
@@ -15,6 +13,7 @@ import Color from "../classes/CSS/Color";
 import CssProperty from "../enums/CssProperty";
 import { DEFAULT_ANIMATION_OPTIONS } from "../interfaces/AnimationOptions";
 import { DEFAULT_BORDER_RADIUS_OPTIONS } from "../interfaces/BorderRadiusOptions";
+import { DEFAULT_BORDER_STYLE_OPTIONS } from "../interfaces/BorderStyleOptions";
 import { DEFAULT_COLOR_OPTIONS } from "../classes/CSS/ColorProperty";
 import FontFamily, {
   DEFAULT_FONT_FAMILY_OPTIONS,
@@ -94,78 +93,78 @@ export default function RandomCss({
         case CssProperty.ANIMATION:
           return new Animation(
             options.css?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
-            options.global?.unsafe,
+            options.global?.unsafe
           );
         case CssProperty.BACKGROUND_COLOR:
           return new BackgroundColor(
             options.css.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.BORDER_COLOR:
           return new BorderColor(
             options.css.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.BORDER_RADIUS:
           return new BorderRadius(
-            options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS },
+            options.css.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS }
           );
         case CssProperty.BORDER_STYLE:
           return new BorderStyle(
             options.css.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.BORDER_WIDTH:
           return new BorderWidth(
-            options.css.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS },
+            options.css.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS }
           );
         case CssProperty.COLOR:
           return new Color(
             options.css.color ?? { ...DEFAULT_COLOR_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.FONT_FAMILY:
           return new FontFamily(
-            options.css.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS },
+            options.css.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
           );
         case CssProperty.FONT_STYLE:
           return new FontStyle(
             options.css?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.FONT_WEIGHT:
           return new FontWeight(
-            options.css?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS },
+            options.css?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
           );
         case CssProperty.TEXT_DECORATION_COLOR:
           return new TextDecorationColor(
             options.css.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
-            options.global.unsafe,
+            options.global.unsafe
           );
         case CssProperty.TEXT_DECORATION_LINE:
           return new TextDecorationLine(
             options.css.textDecorationLine ?? {
               ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS,
-            },
+            }
           );
         case CssProperty.TEXT_DECORATION_STYLE:
           return new TextDecorationStyle(
             options.css.textDecorationStyle ?? {
               ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS,
-            },
+            }
           );
       }
     },
-    [options],
+    [options]
   );
 
   const isLeetEnabled = useMemo(
     () => options.glyph?.leet?.enabled === true,
-    [options.glyph?.leet?.enabled],
+    [options.glyph?.leet?.enabled]
   );
   const isUnicodeEnabled = useMemo(
     () => options.glyph?.unicode?.enabled === true,
-    [options.glyph?.unicode?.enabled],
+    [options.glyph?.unicode?.enabled]
   );
 
   const getRandomizables = useCallback(
@@ -188,14 +187,14 @@ export default function RandomCss({
           }
           return acc;
         },
-        {},
+        {}
       ) as Randomizables,
     [
       getRandomizableForCssProperty,
       isLeetEnabled,
       isUnicodeEnabled,
       options.global?.ignoreSpaces,
-    ],
+    ]
   );
 
   /**
@@ -205,7 +204,7 @@ export default function RandomCss({
    */
   const size = useMemo(
     () => `${options.global.size}rem`,
-    [options.global.size],
+    [options.global.size]
   );
 
   const style = useMemo(
@@ -217,7 +216,7 @@ export default function RandomCss({
         },
       }),
     }),
-    [center, options.global.unsafe, size],
+    [center, options.global.unsafe, size]
   );
 
   return (
