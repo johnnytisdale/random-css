@@ -73,6 +73,18 @@ export default class Animation extends CssProperty {
     this.durationUnit = unsafe ? "ms" : "s";
   }
 
+  // 831ms linear(0.51 94%, 0.61, 0.65, 0.69, 0.82, 0.93, 0.98, 0.99) 0s infinite alternate-reverse backwards running rotate
+  private getEasingFunction(): string {
+    if (!this.unsafe) {
+      return this.getRandomArrayElement(this.easingFunctions);
+    }
+    const easingFunction = this.getRandomArrayElement(this.easingFunctions);
+    if (easingFunction === AnimationEasingFunction.LINEAR) {
+      return this.getLinearEasingFunction();
+    }
+    return easingFunction;
+  }
+
   private getIterationCount(): string {
     if (
       this.iterationCount.infinite === true &&
@@ -95,12 +107,35 @@ export default class Animation extends CssProperty {
       : String(iterationCount);
   }
 
+  private getLinearEasingFunction() {
+    const numberOfPoints = this.getRandomNumber(1, 10);
+    const points: string[] = [];
+    let lastPoint = 0;
+    let hasPercent = false;
+    for (let i = 0; i < numberOfPoints; i++) {
+      const point = this.getRandomDecimal(lastPoint + 0.01, 1, 2);
+      lastPoint = point;
+      const usePercent = !hasPercent && Math.random() <= numberOfPoints / 10;
+      points.push(
+        `${point}` + (usePercent ? ` ${this.getRandomNumber(1, 100)}%` : "")
+      );
+      if (point === 1) {
+        break;
+      }
+      if (usePercent) {
+        hasPercent = true;
+      }
+    }
+    return `${AnimationEasingFunction.LINEAR}(${points.join(", ")})`;
+  }
+
   public getRandomValue(): string {
     const iterationCount = this.getIterationCount();
     return [
       String(this.getRandomNumber(this.durationMin, this.durationMax)) +
         this.durationUnit,
-      this.getRandomArrayElement(this.easingFunctions),
+      // this.getRandomArrayElement(this.easingFunctions),
+      this.getEasingFunction(),
       "0s", // delay
       iterationCount,
       this.getRandomArrayElement(this.directions),

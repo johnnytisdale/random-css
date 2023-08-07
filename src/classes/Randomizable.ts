@@ -10,6 +10,15 @@ export default abstract class Randomizable {
     return this.getRandomNumber(0, 1) === 1;
   }
 
+  protected getRandomDecimal(min: number, max: number, places = 2): number {
+    if (min < 0) {
+      throw Error("getRandomDecimal: min cannot be less than 0.");
+    } else if (min > 1) {
+      throw Error("getRandomDecimal: max cannot be greater than 1.");
+    }
+    return parseFloat((Math.random() * (min - max) + max).toFixed(places));
+  }
+
   public getRandomNumber(min: number, max: number, integerOnly = true) {
     const random = Math.random() * (max - min + 1) + min;
     return integerOnly === true
