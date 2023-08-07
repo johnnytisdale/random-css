@@ -1,11 +1,10 @@
-import Color from "../enums/ColorKeyword";
+import ColorKeyword from "../enums/ColorKeyword";
 import Options from "./Option";
 
-// TODO: Move this to Color.ts
 export default interface ColorOptions extends Options {
   bMax?: number;
   bMin?: number;
-  colorKeywords?: Color[];
+  colorKeywords?: ColorKeyword[];
   gMax?: number;
   gMin?: number;
   rMax?: number;
