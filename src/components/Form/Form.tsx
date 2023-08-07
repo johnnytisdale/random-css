@@ -1,7 +1,7 @@
 import "../../styles/Form.scss";
 
-import { AnimationOptions } from "../../interfaces/AnimationOptions";
-import { BorderRadiusOptions } from "../../interfaces/BorderRadiusOptions";
+import AnimationOptions from "../../interfaces/AnimationOptions";
+import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
@@ -65,7 +65,7 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState(true);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
-    initialState,
+    initialState
   );
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
 
@@ -78,7 +78,7 @@ export default function Form(): React.ReactNode {
       };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const setBorderRadiusOption = useCallback(
@@ -90,7 +90,7 @@ export default function Form(): React.ReactNode {
       };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const setLengthOption = useCallback(
@@ -99,7 +99,7 @@ export default function Form(): React.ReactNode {
       options.css[key] = { ...options.css[key], ...option };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const setColorOption = useCallback(
@@ -108,7 +108,7 @@ export default function Form(): React.ReactNode {
         keyof CssOptions,
         "backgroundColor" | "borderColor" | "color" | "textDecorationColor"
       >,
-      option: ColorOption,
+      option: ColorOption
     ) => {
       const options = state.options;
       options.css[key] = {
@@ -117,7 +117,7 @@ export default function Form(): React.ReactNode {
       };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const setFontFamilyOption = useCallback(
@@ -129,7 +129,7 @@ export default function Form(): React.ReactNode {
       };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const setFontStyleOption = useCallback(
@@ -141,7 +141,7 @@ export default function Form(): React.ReactNode {
       };
       setState({ options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const toggleCssProperty = useCallback(
@@ -173,7 +173,7 @@ export default function Form(): React.ReactNode {
         options: options,
       });
     },
-    [setState, state.form, state.options],
+    [setState, state.form, state.options]
   );
 
   const toggleAll = useCallback(
@@ -199,7 +199,7 @@ export default function Form(): React.ReactNode {
         });
       }
     },
-    [setState, state.form, state.options, toggleCssProperty],
+    [setState, state.form, state.options, toggleCssProperty]
   );
 
   const toggleGlyphOption = useCallback(
@@ -214,14 +214,14 @@ export default function Form(): React.ReactNode {
       };
       setState({ options: options });
     },
-    [setState, state.options],
+    [setState, state.options]
   );
 
   const popupClassName = useMemo(
     () =>
       "popup-text" +
       (state.copied === true ? " show" : state.copied === false ? " hide" : ""),
-    [state.copied],
+    [state.copied]
   );
 
   const optionsToExport: Options = useMemo(
@@ -232,8 +232,8 @@ export default function Form(): React.ReactNode {
           (cssProperty) =>
             state.options.css?.[cssProperty]?.enabled === true && {
               [cssProperty]: state.options.css[cssProperty],
-            },
-        ),
+            }
+        )
       ),
       global: state.options.global,
       glyph: Object.assign(
@@ -242,15 +242,15 @@ export default function Form(): React.ReactNode {
           (glyphOption) =>
             state.options.glyph?.[glyphOption]?.enabled === true && {
               [glyphOption]: state.options.glyph[glyphOption],
-            },
-        ),
+            }
+        )
       ),
     }),
     /**
      * TODO: Why doesn't it work when I use dependencies:
      * [state.options.css, state.options.global, state.options.glyph]
      */
-    [state],
+    [state]
   );
 
   return (
@@ -532,7 +532,7 @@ export default function Form(): React.ReactNode {
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    JSON.stringify(optionsToExport),
+                    JSON.stringify(optionsToExport)
                   );
                   setState({ copied: true });
                   setTimeout(() => setState({ copied: false }), 1500);
