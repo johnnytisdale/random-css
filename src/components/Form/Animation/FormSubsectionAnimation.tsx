@@ -144,12 +144,10 @@ export default function FormSubsectionAnimation ({
         />
       </FormSubsection>
       <FormSubsectionAnimationIterationCount
-        // TODO: Change prop name to disabled.
-        enabled={!disabled}
+        {...{ disabled, unsafe }}
         minLimit={iterationCountMinLimit}
         option={option?.iterationCount}
         setOption={setIterationCountOption}
-        unsafe={unsafe}
       />
       <FormSubsection label='transformations'>
         <FormOptionArray
