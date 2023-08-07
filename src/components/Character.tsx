@@ -192,8 +192,7 @@ export default function Character({
           }
         }
     >
-      { /* TODO: figure out why state.glyph is sometimes undefined! */ }
-      {glyph ?? character}
+      {glyph}
     </div>
   );
 }
