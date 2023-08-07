@@ -1,6 +1,6 @@
 import "../../styles/Form.scss";
 
-import { AnimationOptions } from "../../classes/CSS/Animation";
+import { AnimationOptions } from "../../interfaces/AnimationOptions";
 import { BorderRadiusOptions } from "../../classes/CSS/BorderRadius";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
