@@ -5,7 +5,7 @@ enum TextDecorationLineKeyword {
   NONE = "none",
   OVERLINE = "overline",
   OVERLINE_UNDERLINE = "overline underline",
-  UNDERLINE = "underline"
+  UNDERLINE = "underline",
 }
 
 export default TextDecorationLineKeyword;

@@ -1,8 +1,8 @@
-import Form from '../src/components/Form/Form';
+import Form from "../src/components/Form/Form";
 
-import * as React from 'react';
-import '@testing-library/jest-dom';
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import * as React from "react";
+import "@testing-library/jest-dom";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 
 const defaultText = "random css";
 describe(`renders default text: "${defaultText}"`, () => {
@@ -16,11 +16,11 @@ describe(`renders default text: "${defaultText}"`, () => {
 });
 cleanup();
 
-const testText = 'foobar';
+const testText = "foobar";
 describe(`changes <Character /> components when input text changes to "${testText}"`, () => {
   const { getAllByTestId, getByTestId } = render(<Form />);
   fireEvent.change(getByTestId("randomcss-form-text"), {
-    target: { value: testText }
+    target: { value: testText },
   });
   const characters = getAllByTestId("character");
   characters.forEach((character, i) => {

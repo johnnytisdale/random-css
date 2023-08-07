@@ -5,12 +5,12 @@ import AnimationTransformation from "../enums/AnimationTransformation";
 import Option from "./Option";
 
 export interface AnimationIterationCountOptions {
-  infinite?: boolean,
-  infiniteProbability?: number,
-  integersOnly?: boolean,
-  max?: number,
-  min?: number,
-  zero?: boolean
+  infinite?: boolean;
+  infiniteProbability?: number;
+  integersOnly?: boolean;
+  max?: number;
+  min?: number;
+  zero?: boolean;
 }
 
 export interface AnimationOptions extends Option {
@@ -29,16 +29,16 @@ export const DEFAULT_ANIMATION_DURATION_MIN = 1;
 export const DEFAULT_ANIMATION_DURATION_MAX_UNSAFE = 3000;
 export const DEFAULT_ANIMATION_DURATION_MIN_UNSAFE = 300;
 export const DEFAULT_ANIMATION_EASING_FUNCTIONS = Object.values(
-  AnimationEasingFunction
+  AnimationEasingFunction,
 );
 export const DEFAULT_ANIMATION_ENABLED = false;
 export const DEFAULT_ANIMATION_FILL_MODES = Object.values(AnimationFillMode);
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE = true;
-export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE_PROBABILITY = .5;
+export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE_PROBABILITY = 0.5;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INTEGERS_ONLY = false;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_MAX = 3;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_MIN = 1;
-export const DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE = .25;
+export const DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE = 0.25;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_ZERO = false;
 export const DEFAULT_ANIMATION_ITERATION_COUNT = {
   infinite: DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE,
@@ -47,9 +47,9 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
   max: DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
   min: DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
   zero: DEFAULT_ANIMATION_ITERATION_COUNT_ZERO,
-}
+};
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
-  AnimationTransformation
+  AnimationTransformation,
 );
 export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   directions: DEFAULT_ANIMATION_DIRECTIONS,
@@ -59,5 +59,5 @@ export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   enabled: DEFAULT_ANIMATION_ENABLED,
   fillModes: DEFAULT_ANIMATION_FILL_MODES,
   iterationCount: DEFAULT_ANIMATION_ITERATION_COUNT,
-  transformations: DEFAULT_ANIMATION_TRANSFORMATIONS
-}
+  transformations: DEFAULT_ANIMATION_TRANSFORMATIONS,
+};

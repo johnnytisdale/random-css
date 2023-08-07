@@ -12,17 +12,17 @@ export const DEFAULT_FONT_WEIGHT_FONT_WEIGHTS = Object.values(FontWeightValue);
 
 export const DEFAULT_FONT_WEIGHT_OPTIONS: FontWeightOptions = {
   enabled: DEFAULT_FONT_WEIGHT_ENABLED,
-  fontWeights: DEFAULT_FONT_WEIGHT_FONT_WEIGHTS
+  fontWeights: DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
 };
 
 export default class FontWeight extends KeywordProperty {
-
   protected keywords: FontWeightValue[];
   public name = CssProperty.FONT_WEIGHT;
 
   constructor(options: FontWeightOptions) {
     super();
-    this.keywords = options.fontWeights ??
-      [ ...DEFAULT_FONT_WEIGHT_FONT_WEIGHTS ];
+    this.keywords = options.fontWeights ?? [
+      ...DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
+    ];
   }
 }

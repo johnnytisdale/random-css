@@ -15,11 +15,10 @@ export const DEFAULT_COLOR_OPTIONS: ColorOptions = {
   gMax: DEFAULT_COLOR_MAX,
   gMin: DEFAULT_COLOR_MIN,
   rMax: DEFAULT_COLOR_MAX,
-  rMin: DEFAULT_COLOR_MIN
-}
+  rMin: DEFAULT_COLOR_MIN,
+};
 
 export default abstract class ColorProperty extends CssProperty {
-
   private bMax: number;
   private bMin: number;
   private gMax: number;
@@ -28,7 +27,10 @@ export default abstract class ColorProperty extends CssProperty {
   private rMin: number;
   private colorKeywords: ColorKeyword[];
 
-  constructor(options: ColorOptions, protected unsafe: boolean) {
+  constructor(
+    options: ColorOptions,
+    protected unsafe: boolean,
+  ) {
     super(unsafe);
     this.bMax = options.bMax ?? DEFAULT_COLOR_MAX;
     this.bMin = options.bMin ?? DEFAULT_COLOR_MIN;
@@ -36,11 +38,10 @@ export default abstract class ColorProperty extends CssProperty {
     this.gMin = options.gMin ?? DEFAULT_COLOR_MIN;
     this.rMax = options.rMax ?? DEFAULT_COLOR_MAX;
     this.rMin = options.rMin ?? DEFAULT_COLOR_MIN;
-    this.colorKeywords = options.colorKeywords ?? [ ...DEFAULT_COLOR_KEYWORDS ];
+    this.colorKeywords = options.colorKeywords ?? [...DEFAULT_COLOR_KEYWORDS];
   }
 
   public getRandomValue(): string {
-
     if (this.unsafe) {
       const red = this.getRandomNumber(this.rMin, this.rMax);
       const green = this.getRandomNumber(this.gMin, this.gMax);
@@ -49,5 +50,4 @@ export default abstract class ColorProperty extends CssProperty {
     }
     return this.getRandomArrayElement(this.colorKeywords);
   }
-
 }

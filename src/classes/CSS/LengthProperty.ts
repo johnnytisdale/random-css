@@ -15,11 +15,10 @@ export const DEFAULT_LENGTH_UNITS = Object.values(LengthUnit);
 export const DEFAULT_LENGTH_OPTIONS: LengthOptions = {
   max: DEFAULT_LENGTH_MAX,
   min: DEFAULT_LENGTH_MIN,
-  units: DEFAULT_LENGTH_UNITS
+  units: DEFAULT_LENGTH_UNITS,
 };
 
 export default abstract class LengthProperty extends CssProperty {
-
   protected abstract units: LengthUnit[];
   protected abstract min: number;
   protected abstract max: number;

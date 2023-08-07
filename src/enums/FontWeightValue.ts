@@ -11,7 +11,7 @@ enum FontWeightValue {
   BOLD = "bold",
   BOLDER = "bolder",
   LIGHTER = "lighter",
-  NORMAL = "normal"
+  NORMAL = "normal",
 }
 
 export default FontWeightValue;

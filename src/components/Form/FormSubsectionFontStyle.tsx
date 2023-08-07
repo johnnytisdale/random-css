@@ -4,36 +4,39 @@ import FormOptionProbability from "./FormOptionProbability";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
-import { DEFAULT_FONT_STYLE_MAX_DEGREES, DEFAULT_FONT_STYLE_MIN_DEGREES, FontStyleOptions } from "../../classes/CSS/FontStyle";
+import {
+  DEFAULT_FONT_STYLE_MAX_DEGREES,
+  DEFAULT_FONT_STYLE_MIN_DEGREES,
+  FontStyleOptions,
+} from "../../classes/CSS/FontStyle";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
 import FormOptionRange from "./FormOptionRange";
 
 interface Props {
   option: FontStyleOptions;
-  setOption: (option: FontStyleOptions) => void,
-  unsafe: boolean
+  setOption: (option: FontStyleOptions) => void;
+  unsafe: boolean;
 }
 
-export default function FormSubsectionFontStyle ({
+export default function FormSubsectionFontStyle({
   option,
   setOption,
-  unsafe
+  unsafe,
 }: Props): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={option?.enabled === true}
       label="fontStyle"
-      setChecked={enabled => setOption({ enabled })}
+      setChecked={(enabled) => setOption({ enabled })}
     >
       <FormSubsection label="styles">
         <FormOptionArray
           {...{ disabled }}
           possibleValues={Object.values(FontStyleKeyword)}
-          setValues={fontStyles => (
-            fontStyles.length &&
-            setOption({ fontStyles })
-          )}
+          setValues={(fontStyles) =>
+            fontStyles.length && setOption({ fontStyles })
+          }
           values={option.fontStyles}
         />
       </FormSubsection>
@@ -46,7 +49,7 @@ export default function FormSubsectionFontStyle ({
             !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }
           label="degrees"
-          setChecked={degrees => setOption({ degrees })}
+          setChecked={(degrees) => setOption({ degrees })}
         />
         <FormOptionProbability
           label="degreesProbability"
@@ -57,8 +60,8 @@ export default function FormSubsectionFontStyle ({
             !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }
           value={option?.degreesProbability}
-          setProbability={
-            degreesProbability => setOption({ degreesProbability })
+          setProbability={(degreesProbability) =>
+            setOption({ degreesProbability })
           }
         />
         <FormOptionRange
@@ -72,8 +75,8 @@ export default function FormSubsectionFontStyle ({
           min={DEFAULT_FONT_STYLE_MIN_DEGREES}
           maxValue={option?.maxDegrees}
           minValue={option?.minDegrees}
-          setValues={
-            (minDegrees, maxDegrees) => setOption({ maxDegrees, minDegrees })
+          setValues={(minDegrees, maxDegrees) =>
+            setOption({ maxDegrees, minDegrees })
           }
         />
       </FormSubsection>

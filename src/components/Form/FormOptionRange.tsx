@@ -2,18 +2,18 @@ import * as React from "react";
 import FormOption from "./FormOption";
 
 interface Props {
-  disabled?: boolean,
-  max: number,
-  min: number,
-  maxLabel?: string,
-  minLabel?: string,
-  maxValue: number,
-  minValue: number,
-  setValues: (min: number, max: number) => void,
-  step?: string,
+  disabled?: boolean;
+  max: number;
+  min: number;
+  maxLabel?: string;
+  minLabel?: string;
+  maxValue: number;
+  minValue: number;
+  setValues: (min: number, max: number) => void;
+  step?: string;
 }
 
-export default function FormOptionRange ({
+export default function FormOptionRange({
   disabled = false,
   max,
   min,
@@ -22,16 +22,17 @@ export default function FormOptionRange ({
   maxValue,
   minValue,
   setValues,
-  step = "1"
+  step = "1",
 }: Props): React.ReactNode {
-  const sharedProps = React.useMemo(() => ({
+  const sharedProps = React.useMemo(
+    () => ({
       disabled,
       max,
       min,
       step,
-      type: "range"
+      type: "range",
     }),
-    [disabled, max, min, step]
+    [disabled, max, min, step],
   );
   return (
     <>
@@ -40,10 +41,10 @@ export default function FormOptionRange ({
         input={{
           ...sharedProps,
           value: minValue,
-          onChange: e => {
+          onChange: (e) => {
             const value = parseFloat(e.target.value);
             setValues(value, value > maxValue ? value : maxValue);
-          }
+          },
         }}
       />
       <FormOption
@@ -51,10 +52,10 @@ export default function FormOptionRange ({
         input={{
           ...sharedProps,
           value: maxValue,
-          onChange: e => {
+          onChange: (e) => {
             const value = parseFloat(e.target.value);
             setValues(value < minValue ? value : minValue, value);
-          }
+          },
         }}
       />
     </>

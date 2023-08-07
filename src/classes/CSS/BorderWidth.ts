@@ -4,18 +4,17 @@ import LengthProperty, {
   DEFAULT_LENGTH_MIN,
   DEFAULT_LENGTH_OPTIONS,
   DEFAULT_LENGTH_UNITS,
-  LengthOptions
+  LengthOptions,
 } from "./LengthProperty";
 
 export const DEFAULT_BORDER_WIDTH_ENABLED = false;
 
 export const DEFAULT_BORDER_WIDTH_OPTIONS: LengthOptions = {
   ...DEFAULT_LENGTH_OPTIONS,
-  enabled: DEFAULT_BORDER_WIDTH_ENABLED
+  enabled: DEFAULT_BORDER_WIDTH_ENABLED,
 };
 
 export default class BorderWidth extends LengthProperty {
-
   protected max;
   protected min;
   protected units;
@@ -26,6 +25,6 @@ export default class BorderWidth extends LengthProperty {
     super();
     this.max = options.max ?? DEFAULT_LENGTH_MAX;
     this.min = options.min ?? DEFAULT_LENGTH_MIN;
-    this.units = options.units ?? [ ...DEFAULT_LENGTH_UNITS ];
+    this.units = options.units ?? [...DEFAULT_LENGTH_UNITS];
   }
 }

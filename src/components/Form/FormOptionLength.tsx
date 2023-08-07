@@ -2,7 +2,7 @@ import { CommonOptionProps } from "./FormOption";
 import {
   DEFAULT_LENGTH_MAX,
   DEFAULT_LENGTH_MIN,
-  LengthOptions
+  LengthOptions,
 } from "../../classes/CSS/LengthProperty";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
@@ -14,19 +14,19 @@ import * as React from "react";
 
 interface Props extends CommonOptionProps {
   option: LengthOptions;
-  setOption: (option: LengthOptions) => void
+  setOption: (option: LengthOptions) => void;
 }
 
-export default function FormOptionLength ({
+export default function FormOptionLength({
   label,
   option,
-  setOption
+  setOption,
 }: Props): React.ReactNode {
   return (
     <FormOptionBoolean
       checked={option?.enabled === true}
       label={label}
-      setChecked={enabled => setOption({ enabled })}
+      setChecked={(enabled) => setOption({ enabled })}
     >
       <FormSubsection>
         <FormOptionRange
@@ -38,11 +38,11 @@ export default function FormOptionLength ({
           setValues={(min, max) => setOption({ max, min })}
         />
       </FormSubsection>
-      <FormSubsection label='units'>
+      <FormSubsection label="units">
         <FormOptionArray
           disabled={option?.enabled !== true}
           possibleValues={Object.values(LengthUnit)}
-          setValues={units => setOption({ units })}
+          setValues={(units) => setOption({ units })}
           values={option?.units ?? []}
         />
       </FormSubsection>

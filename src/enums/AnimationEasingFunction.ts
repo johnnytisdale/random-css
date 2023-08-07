@@ -5,7 +5,7 @@ enum AnimationEasingFunction {
   EASE_IN_OUT = "ease-in-out",
   LINEAR = "linear",
   STEP_END = "step-end",
-  STEP_START = "step-start"
+  STEP_START = "step-start",
 }
 
 export default AnimationEasingFunction;

@@ -1,6 +1,6 @@
 enum GlyphOption {
-  LEET = 'leet',
-  UNICODE = 'unicode'
+  LEET = "leet",
+  UNICODE = "unicode",
 }
 
 export default GlyphOption;

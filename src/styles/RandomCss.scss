@@ -1,9 +1,9 @@
 .random-css-container {
   display: flex;
-  padding: .25rem;
+  padding: 0.25rem;
   position: relative;
 
-  >div {
+  > div {
     box-sizing: border-box;
     overflow: visible;
     text-align: center;
@@ -26,7 +26,7 @@
   }
 
   to {
-    transform: scale(.3);
+    transform: scale(0.3);
   }
 }
 

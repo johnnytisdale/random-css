@@ -2,7 +2,7 @@ enum AnimationDirection {
   ALTERNATE = "alternate",
   ALTERNATE_REVERSE = "alternate-reverse",
   NORMAL = "normal",
-  REVERSE = "reverse"
+  REVERSE = "reverse",
 }
 
 export default AnimationDirection;

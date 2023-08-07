@@ -19,7 +19,6 @@ import {
 } from "../../interfaces/AnimationOptions";
 
 export default class Animation extends CssProperty {
-
   private directions: AnimationDirection[];
   private durationMax: number;
   private durationMin: number;
@@ -33,16 +32,18 @@ export default class Animation extends CssProperty {
 
   constructor(options: AnimationOptions, unsafe: boolean) {
     super(unsafe);
-    this.directions = options.directions ?? [ ...DEFAULT_ANIMATION_DIRECTIONS ];
-    this.easingFunctions = options.easingFunctions ??
-      [ ...DEFAULT_ANIMATION_EASING_FUNCTIONS ];
-    this.fillModes = options.fillModes ?? [ ...DEFAULT_ANIMATION_FILL_MODES ];
+    this.directions = options.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
+    this.easingFunctions = options.easingFunctions ?? [
+      ...DEFAULT_ANIMATION_EASING_FUNCTIONS,
+    ];
+    this.fillModes = options.fillModes ?? [...DEFAULT_ANIMATION_FILL_MODES];
     this.iterationCount = {
       ...DEFAULT_ANIMATION_ITERATION_COUNT,
-      ...options.iterationCount ?? {}
+      ...(options.iterationCount ?? {}),
     };
-    this.transformations = options.transformations ??
-      [ ...DEFAULT_ANIMATION_TRANSFORMATIONS ];
+    this.transformations = options.transformations ?? [
+      ...DEFAULT_ANIMATION_TRANSFORMATIONS,
+    ];
 
     // duration
     /**
@@ -76,23 +77,23 @@ export default class Animation extends CssProperty {
   private getIterationCount(): string {
     if (
       this.iterationCount.infinite === true &&
-      Math.random() <= this.iterationCount.infiniteProbability)
-    {
+      Math.random() <= this.iterationCount.infiniteProbability
+    ) {
       return "infinite";
     }
     const iterationCount = this.getRandomNumber(
       this.iterationCount.min,
       this.iterationCount.max,
-      this.iterationCount.integersOnly
+      this.iterationCount.integersOnly,
     );
     /**
      * TODO: It can never be zero because the lowest iterationCount.min can be
      * is 1. Should probably just removed the zero option because having 0
      * iterations would be effectively equivalent to having no animation.
      */
-    return (iterationCount === 0 && this.iterationCount.zero === false)
-       ? "1"
-       : String(iterationCount);
+    return iterationCount === 0 && this.iterationCount.zero === false
+      ? "1"
+      : String(iterationCount);
   }
 
   public getRandomValue(): string {
@@ -109,5 +110,4 @@ export default class Animation extends CssProperty {
       this.getRandomArrayElement(this.transformations),
     ].join(" ");
   }
-
 }

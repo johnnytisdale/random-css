@@ -26,12 +26,12 @@ body {
   .options {
     .option {
       display: flex;
-      >.label {
+      > .label {
         display: flex;
         flex-wrap: nowrap;
         padding-right: 1rem;
         user-select: none;
-          -webkit-user-select: none;
+        -webkit-user-select: none;
         width: 100%;
       }
     }
@@ -50,45 +50,43 @@ body {
     }
 
     &#export-options {
-      >.options {
-
-        >#export-unsafe-css {
-          font-size: .8rem;
+      > .options {
+        > #export-unsafe-css {
+          font-size: 0.8rem;
           margin-bottom: 1rem;
         }
 
-        >.option {
+        > .option {
           &#export-textarea {
-            >.input {
+            > .input {
               width: 100%;
 
-              >textarea {
+              > textarea {
                 margin-right: 1rem;
                 resize: none;
                 width: 95%;
               }
             }
 
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
           }
 
           &#export-button {
-            >.input {
+            > .input {
               text-align: center;
               width: 100%;
             }
           }
-
         }
       }
     }
 
     &#global-options {
-      >.options>.option>.input>input {
-        &[type=number] {
+      > .options > .option > .input > input {
+        &[type="number"] {
           width: 5rem;
         }
-        &[type=text] {
+        &[type="text"] {
           width: 5rem;
         }
       }
@@ -99,21 +97,20 @@ body {
       margin-bottom: 1rem;
     }
 
-    >.options {
-      >.option {
-
+    > .options {
+      > .option {
         &.expandable {
           &.expanded {
             border-top: 1px solid black;
           }
 
           &:not(.expanded) {
-            >.label {
+            > .label {
               border-top: 1px dotted black;
             }
           }
 
-          >.label {
+          > .label {
             border-bottom: 1px dotted black;
             &:not(:hover) {
               border-color: transparent;
@@ -121,33 +118,30 @@ body {
             &:hover {
               cursor: pointer;
             }
-            >.chevron {
-              margin-right: .25rem;
+            > .chevron {
+              margin-right: 0.25rem;
             }
           }
-
         }
       }
 
-      >.expanded-content {
+      > .expanded-content {
         border-bottom: 1px solid black;
-        padding-bottom: .5rem;
-        >.option {
+        padding-bottom: 0.5rem;
+        > .option {
           &:first-child {
             margin-top: 1rem;
           }
         }
-        >.subsection {
+        > .subsection {
           margin-left: 1rem;
-          margin-top: .5rem;
-          >.label {
+          margin-top: 0.5rem;
+          > .label {
             border-top: 1px solid black;
             text-decoration: underline;
             font-variant: small-caps;
-
           }
         }
-
       }
     }
   }

@@ -1,7 +1,6 @@
 import CssProperty from "./CssProperty";
 
 export default abstract class KeywordProperty extends CssProperty {
-
   protected abstract keywords: string[];
   protected keywordLimit = 1;
 
@@ -10,6 +9,6 @@ export default abstract class KeywordProperty extends CssProperty {
     for (let i = 0; i < this.getRandomNumber(1, this.keywordLimit); i++) {
       keywords.push(this.getRandomArrayElement(this.keywords));
     }
-    return keywords.join(' ');
+    return keywords.join(" ");
   }
 }

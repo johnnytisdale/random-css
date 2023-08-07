@@ -4,26 +4,25 @@ export const DEFAULT_GLOBAL_OPTIONS_TEXT = "random css";
 export const DEFAULT_GLOBAL_OPTIONS_UNSAFE = true;
 
 export const DEFAULT_GLOBAL_OPTIONS: GlobalOptions = {
-    ignoreSpaces: DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
-    size: DEFAULT_GLOBAL_OPTIONS_SIZE,
-    unsafe: DEFAULT_GLOBAL_OPTIONS_UNSAFE,
-}
+  ignoreSpaces: DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
+  size: DEFAULT_GLOBAL_OPTIONS_SIZE,
+  unsafe: DEFAULT_GLOBAL_OPTIONS_UNSAFE,
+};
 
 export default interface GlobalOptions {
+  /**
+   * If true, random styles will not be applied to spaces.
+   */
+  ignoreSpaces?: boolean;
 
-    /**
-     * If true, random styles will not be applied to spaces.
-     */
-    ignoreSpaces?: boolean;
+  /**
+   * Font size, measured in rem.
+   */
+  size?: number;
 
-    /**
-     * Font size, measured in rem.
-     */
-    size?: number;
-
-    /**
-     * If true, use inline CSS, which is considered unsafe because it is
-     * forbidden by a strict Content Security Policy.
-     */
-    unsafe?: boolean;
+  /**
+   * If true, use inline CSS, which is considered unsafe because it is
+   * forbidden by a strict Content Security Policy.
+   */
+  unsafe?: boolean;
 }

@@ -4,15 +4,14 @@ import unicodeJSON from "../json/unicode.json";
 import Randomizable from "./Randomizable";
 
 export default class Glyph extends Randomizable {
-
-  public name = 'glyph';
+  public name = "glyph";
 
   private glyphs: Array<string> = [this.character];
 
   constructor(
     private character: string,
     private leet: boolean,
-    private unicode: boolean
+    private unicode: boolean,
   ) {
     super();
     const lower = this.character.toLowerCase();
@@ -31,57 +30,57 @@ export default class Glyph extends Randomizable {
 
 function getLeetValues(character: string): Array<string> {
   switch (character) {
-    case 'a':
+    case "a":
       return leetJSON.a;
-    case 'b':
+    case "b":
       return leetJSON.b;
-    case 'c':
+    case "c":
       return leetJSON.c;
-    case 'd':
+    case "d":
       return leetJSON.d;
-    case 'e':
+    case "e":
       return leetJSON.e;
-    case 'f':
+    case "f":
       return leetJSON.f;
-    case 'g':
+    case "g":
       return leetJSON.g;
-    case 'h':
+    case "h":
       return leetJSON.h;
-    case 'i':
+    case "i":
       return leetJSON.i;
-    case 'j':
+    case "j":
       return leetJSON.j;
-    case 'k':
+    case "k":
       return leetJSON.k;
-    case 'l':
+    case "l":
       return leetJSON.l;
-    case 'm':
+    case "m":
       return leetJSON.m;
-    case 'n':
+    case "n":
       return leetJSON.n;
-    case 'o':
+    case "o":
       return leetJSON.o;
-    case 'p':
+    case "p":
       return leetJSON.p;
-    case 'q':
+    case "q":
       return leetJSON.q;
-    case 'r':
+    case "r":
       return leetJSON.r;
-    case 's':
+    case "s":
       return leetJSON.s;
-    case 't':
+    case "t":
       return leetJSON.t;
-    case 'u':
+    case "u":
       return leetJSON.u;
-    case 'v':
+    case "v":
       return leetJSON.v;
-    case 'w':
+    case "w":
       return leetJSON.w;
-    case 'x':
+    case "x":
       return leetJSON.x;
-    case 'y':
+    case "y":
       return leetJSON.y;
-    case 'z':
+    case "z":
       return leetJSON.z;
     default:
       return [];
@@ -93,57 +92,57 @@ function getUnicodeValues(character: string): Array<string> {
     return String.fromCodePoint(parseInt(unicode, 16));
   };
   switch (character) {
-    case 'a':
+    case "a":
       return unicodeJSON.a.map(mapFunction);
-    case 'b':
+    case "b":
       return unicodeJSON.b.map(mapFunction);
-    case 'c':
+    case "c":
       return unicodeJSON.c.map(mapFunction);
-    case 'd':
+    case "d":
       return unicodeJSON.d.map(mapFunction);
-    case 'e':
+    case "e":
       return unicodeJSON.e.map(mapFunction);
-    case 'f':
+    case "f":
       return unicodeJSON.f.map(mapFunction);
-    case 'g':
+    case "g":
       return unicodeJSON.g.map(mapFunction);
-    case 'h':
+    case "h":
       return unicodeJSON.h.map(mapFunction);
-    case 'i':
+    case "i":
       return unicodeJSON.i.map(mapFunction);
-    case 'j':
+    case "j":
       return unicodeJSON.j.map(mapFunction);
-    case 'k':
+    case "k":
       return unicodeJSON.k.map(mapFunction);
-    case 'l':
+    case "l":
       return unicodeJSON.l.map(mapFunction);
-    case 'm':
+    case "m":
       return unicodeJSON.m.map(mapFunction);
-    case 'n':
+    case "n":
       return unicodeJSON.n.map(mapFunction);
-    case 'o':
+    case "o":
       return unicodeJSON.o.map(mapFunction);
-    case 'p':
+    case "p":
       return unicodeJSON.p.map(mapFunction);
-    case 'q':
+    case "q":
       return unicodeJSON.q.map(mapFunction);
-    case 'r':
+    case "r":
       return unicodeJSON.r.map(mapFunction);
-    case 's':
+    case "s":
       return unicodeJSON.s.map(mapFunction);
-    case 't':
+    case "t":
       return unicodeJSON.t.map(mapFunction);
-    case 'u':
+    case "u":
       return unicodeJSON.u.map(mapFunction);
-    case 'v':
+    case "v":
       return unicodeJSON.v.map(mapFunction);
-    case 'w':
+    case "w":
       return unicodeJSON.w.map(mapFunction);
-    case 'x':
+    case "x":
       return unicodeJSON.x.map(mapFunction);
-    case 'y':
+    case "y":
       return unicodeJSON.y.map(mapFunction);
-    case 'z':
+    case "z":
       return unicodeJSON.z.map(mapFunction);
     default:
       return [];

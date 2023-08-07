@@ -6,7 +6,10 @@ import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
-import { DEFAULT_GLOBAL_OPTIONS, DEFAULT_GLOBAL_OPTIONS_TEXT } from "../../interfaces/GlobalOptions";
+import {
+  DEFAULT_GLOBAL_OPTIONS,
+  DEFAULT_GLOBAL_OPTIONS_TEXT,
+} from "../../interfaces/GlobalOptions";
 import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
 import { FontStyleOptions } from "../../classes/CSS/FontStyle";
 import FontWeightValue from "../../enums/FontWeightValue";
@@ -30,15 +33,15 @@ import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 
 import * as React from "react";
 import { useCallback, useMemo, useReducer, useState } from "react";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 interface State {
-  copied: boolean | null,
+  copied: boolean | null;
   form: {
     css: {
-      selectAll: boolean,
-      selectNone: boolean
-    }
+      selectAll: boolean;
+      selectNone: boolean;
+    };
   };
   options: Options;
 }
@@ -48,13 +51,13 @@ const initialState: State = {
   form: {
     css: {
       selectAll: false,
-      selectNone: false
-    }
+      selectNone: false,
+    },
   },
   options: {
     css: { ...DEFAULT_CSS_OPTIONS },
     global: { ...DEFAULT_GLOBAL_OPTIONS },
-    glyph: {}
+    glyph: {},
   },
 };
 
@@ -62,7 +65,7 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState(true);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
-    initialState
+    initialState,
   );
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
 
@@ -71,11 +74,11 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.animation = {
         ...options.css.animation,
-        ...option
+        ...option,
       };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const setBorderRadiusOption = useCallback(
@@ -83,44 +86,38 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.borderRadius = {
         ...options.css.borderRadius,
-        ...option
+        ...option,
       };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const setLengthOption = useCallback(
-    (
-      key: Extract<keyof CssOptions, "borderWidth">,
-      option: LengthOptions
-    ) => {
+    (key: Extract<keyof CssOptions, "borderWidth">, option: LengthOptions) => {
       const options = state.options;
       options.css[key] = { ...options.css[key], ...option };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const setColorOption = useCallback(
     (
       key: Extract<
         keyof CssOptions,
-        | 'backgroundColor'
-        | 'borderColor'
-        | 'color'
-        | 'textDecorationColor'
+        "backgroundColor" | "borderColor" | "color" | "textDecorationColor"
       >,
-      option: ColorOption
+      option: ColorOption,
     ) => {
       const options = state.options;
       options.css[key] = {
         ...options.css[key],
-        ...option
+        ...option,
       };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const setFontFamilyOption = useCallback(
@@ -128,11 +125,11 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.fontFamily = {
         ...options.css.fontFamily,
-        ...option
+        ...option,
       };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const setFontStyleOption = useCallback(
@@ -140,11 +137,11 @@ export default function Form(): React.ReactNode {
       const options = state.options;
       options.css.fontStyle = {
         ...options.css.fontStyle,
-        ...option
+        ...option,
       };
       setState({ options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const toggleCssProperty = useCallback(
@@ -164,7 +161,7 @@ export default function Form(): React.ReactNode {
        */
       options.css[cssProperty] = {
         ...options.css[cssProperty],
-        ...{ enabled: checked }
+        ...{ enabled: checked },
       };
       if (!checked) {
         form.css.selectAll = false;
@@ -176,7 +173,7 @@ export default function Form(): React.ReactNode {
         options: options,
       });
     },
-    [setState, state.form, state.options]
+    [setState, state.form, state.options],
   );
 
   const toggleAll = useCallback(
@@ -193,7 +190,7 @@ export default function Form(): React.ReactNode {
         formOptions.css.selectAll = select;
         formOptions.css.selectNone = !select;
         const options = state.options;
-        Object.values(CssProperty).forEach(cssProperty => {
+        Object.values(CssProperty).forEach((cssProperty) => {
           toggleCssProperty(cssProperty, select);
         });
         setState({
@@ -202,7 +199,7 @@ export default function Form(): React.ReactNode {
         });
       }
     },
-    [setState, state.form, state.options, toggleCssProperty]
+    [setState, state.form, state.options, toggleCssProperty],
   );
 
   const toggleGlyphOption = useCallback(
@@ -213,99 +210,92 @@ export default function Form(): React.ReactNode {
       }
       options.glyph[glyphOption] = {
         ...options.glyph[glyphOption],
-        ...{ enabled: checked }
+        ...{ enabled: checked },
       };
       setState({ options: options });
     },
-    [setState, state.options]
+    [setState, state.options],
   );
 
   const popupClassName = useMemo(
-    () => 'popup-text' + (
-      state.copied === true
-        ? ' show'
-        : state.copied === false
-        ? ' hide'
-        : ''
-    ),
-    [state.copied]
+    () =>
+      "popup-text" +
+      (state.copied === true ? " show" : state.copied === false ? " hide" : ""),
+    [state.copied],
   );
 
   const optionsToExport: Options = useMemo(
     () => ({
       css: Object.assign(
         {},
-        ...Object.values(CssProperty).map(cssProperty => (
-          state.options.css?.[cssProperty]?.enabled === true &&
-            { [cssProperty]: state.options.css[cssProperty] }
-        ))
+        ...Object.values(CssProperty).map(
+          (cssProperty) =>
+            state.options.css?.[cssProperty]?.enabled === true && {
+              [cssProperty]: state.options.css[cssProperty],
+            },
+        ),
       ),
       global: state.options.global,
       glyph: Object.assign(
         {},
-        ...Object.values(GlyphOption).map(glyphOption => (
-          state.options.glyph?.[glyphOption]?.enabled === true &&
-            { [glyphOption]: state.options.glyph[glyphOption] }
-        ))
-      )
+        ...Object.values(GlyphOption).map(
+          (glyphOption) =>
+            state.options.glyph?.[glyphOption]?.enabled === true && {
+              [glyphOption]: state.options.glyph[glyphOption],
+            },
+        ),
+      ),
     }),
     /**
      * TODO: Why doesn't it work when I use dependencies:
      * [state.options.css, state.options.global, state.options.glyph]
      */
-    [state]
+    [state],
   );
 
   return (
     <>
       <div id="top" data-testid="top">
-        <RandomCss
-          center={center}
-          options={optionsToExport}
-          text={text}
-        />
+        <RandomCss center={center} options={optionsToExport} text={text} />
       </div>
 
       {/* dev form */}
-      <div id='dev-form'>
-
+      <div id="dev-form">
         {/* Global options */}
         <FormSection id="global-options" title="global options">
           <FormOption
             input={{
-              'data-testid': "randomcss-form-text",
+              "data-testid": "randomcss-form-text",
               type: "text",
               value: text,
-              onChange: e => setText(e.target.value)
+              onChange: (e) => setText(e.target.value),
             }}
             label="text"
           />
           <FormOption
             input={{
-              ...(
-                state.options.global.unsafe === false &&
-                {
-                  max: "10",
-                  min: ".25",
-                  step: "0.25"
-                }
-              ),
-              type: 'number',
+              ...(state.options.global.unsafe === false && {
+                max: "10",
+                min: ".25",
+                step: "0.25",
+              }),
+              type: "number",
               value: state.options.global.size,
-              onChange: e => {
+              onChange: (e) => {
                 const options = state.options;
-                options.global.size = options.global.unsafe === true
-                  ? parseFloat(e.target.value)
-                  : getValidSize(parseFloat(e.target.value));
+                options.global.size =
+                  options.global.unsafe === true
+                    ? parseFloat(e.target.value)
+                    : getValidSize(parseFloat(e.target.value));
                 setState({ options: options });
-              }
+              },
             }}
             label="size"
           />
           <FormOptionBoolean
             checked={state.options.global.unsafe}
             label="unsafe"
-            setChecked={unsafe => {
+            setChecked={(unsafe) => {
               const options = state.options;
               options.global.unsafe = unsafe;
               if (unsafe === false) {
@@ -317,7 +307,7 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={state.options.global.ignoreSpaces === true}
             label="ignore spaces"
-            setChecked={ignoreSpaces => {
+            setChecked={(ignoreSpaces) => {
               const options = state.options;
               options.global.ignoreSpaces = ignoreSpaces;
               setState({ options });
@@ -326,23 +316,23 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={center === true}
             label="center"
-            setChecked={newCenter => setCenter(newCenter)}
+            setChecked={(newCenter) => setCenter(newCenter)}
           />
         </FormSection>
 
         {/* css */}
-        <FormSection id='css-options' title="css options">
+        <FormSection id="css-options" title="css options">
           <FormOptionBoolean
             checked={state.form.css.selectAll === true}
-            id='select-all-css'
+            id="select-all-css"
             label="select all"
-            setChecked={checked => toggleAll(checked, true)}
+            setChecked={(checked) => toggleAll(checked, true)}
           />
           <FormOptionBoolean
             checked={state.form.css.selectNone}
-            id='select-none-css'
+            id="select-none-css"
             label="select none"
-            setChecked={checked => toggleAll(checked, false)}
+            setChecked={(checked) => toggleAll(checked, false)}
           />
           <FormSubsectionAnimation
             option={state.options.css?.animation}
@@ -352,13 +342,13 @@ export default function Form(): React.ReactNode {
           <FormSubsectionColor
             label="backgroundColor"
             option={state.options.css?.backgroundColor}
-            setOption={option => setColorOption("backgroundColor", option)}
+            setOption={(option) => setColorOption("backgroundColor", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionColor
             label="borderColor"
             option={state.options.css?.borderColor}
-            setOption={option => setColorOption("borderColor", option)}
+            setOption={(option) => setColorOption("borderColor", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionBorderRadius
@@ -368,16 +358,15 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={state.options.css?.borderStyle?.enabled === true}
             label="borderStyle"
-            setChecked={checked => toggleCssProperty(
-              CssProperty.BORDER_STYLE,
-              checked
-            )}
+            setChecked={(checked) =>
+              toggleCssProperty(CssProperty.BORDER_STYLE, checked)
+            }
           >
             <FormSubsection>
               <FormOptionArray
                 disabled={state.options.css?.borderStyle?.enabled !== true}
                 possibleValues={Object.values(BorderStyleKeyword)}
-                setValues={keywords => {
+                setValues={(keywords) => {
                   const options = state.options;
                   options.css.borderStyle.borderStyles = keywords;
                   setState({ options });
@@ -389,19 +378,19 @@ export default function Form(): React.ReactNode {
           <FormOptionLength
             label="borderWidth"
             option={state.options.css?.borderWidth}
-            setOption={
-              option => setLengthOption(CssProperty.BORDER_WIDTH, option)
+            setOption={(option) =>
+              setLengthOption(CssProperty.BORDER_WIDTH, option)
             }
           />
           <FormSubsectionColor
             label="color"
             option={state.options.css?.color}
-            setOption={option => setColorOption("color", option)}
+            setOption={(option) => setColorOption("color", option)}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionFontFamily
             option={state.options.css?.fontFamily}
-            setOption={option => setFontFamilyOption(option)}
+            setOption={(option) => setFontFamilyOption(option)}
           />
           <FormSubsectionFontStyle
             option={state.options.css?.fontStyle}
@@ -411,16 +400,15 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={state.options.css?.fontWeight?.enabled === true}
             label="fontWeight"
-            setChecked={checked => toggleCssProperty(
-              CssProperty.FONT_WEIGHT,
-              checked
-            )}
+            setChecked={(checked) =>
+              toggleCssProperty(CssProperty.FONT_WEIGHT, checked)
+            }
           >
             <FormSubsection>
               <FormOptionArray
                 disabled={state.options.css?.fontWeight?.enabled !== true}
                 possibleValues={Object.values(FontWeightValue)}
-                setValues={keywords => {
+                setValues={(keywords) => {
                   const options = state.options;
                   options.css.fontWeight.fontWeights = keywords;
                   setState({ options });
@@ -432,16 +420,17 @@ export default function Form(): React.ReactNode {
           <FormSubsectionColor
             label="textDecorationColor"
             option={state.options.css?.textDecorationColor}
-            setOption={option => setColorOption("textDecorationColor", option)}
+            setOption={(option) =>
+              setColorOption("textDecorationColor", option)
+            }
             unsafe={state.options.global.unsafe}
           />
           <FormOptionBoolean
             checked={state.options.css?.textDecorationLine?.enabled === true}
             label="textDecorationLine"
-            setChecked={checked => toggleCssProperty(
-              CssProperty.TEXT_DECORATION_LINE,
-              checked
-            )}
+            setChecked={(checked) =>
+              toggleCssProperty(CssProperty.TEXT_DECORATION_LINE, checked)
+            }
           >
             <FormSubsection>
               <FormOptionArray
@@ -449,7 +438,7 @@ export default function Form(): React.ReactNode {
                   state.options.css?.textDecorationLine?.enabled !== true
                 }
                 possibleValues={Object.values(TextDecorationLineKeyword)}
-                setValues={keywords => {
+                setValues={(keywords) => {
                   const options = state.options;
                   options.css.textDecorationLine.lines = keywords;
                   setState({ options });
@@ -461,10 +450,9 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={state.options.css?.textDecorationStyle?.enabled === true}
             label="textDecorationStyle"
-            setChecked={checked => toggleCssProperty(
-              CssProperty.TEXT_DECORATION_STYLE,
-              checked
-            )}
+            setChecked={(checked) =>
+              toggleCssProperty(CssProperty.TEXT_DECORATION_STYLE, checked)
+            }
           >
             <FormSubsection>
               <FormOptionArray
@@ -472,7 +460,7 @@ export default function Form(): React.ReactNode {
                   state.options.css?.textDecorationStyle?.enabled !== true
                 }
                 possibleValues={Object.values(TextDecorationStyleKeyword)}
-                setValues={keywords => {
+                setValues={(keywords) => {
                   const options = state.options;
                   options.css.textDecorationStyle.styles = keywords;
                   setState({ options });
@@ -483,85 +471,76 @@ export default function Form(): React.ReactNode {
           </FormOptionBoolean>
         </FormSection>
 
-        { /* glyph */}
-        <FormSection id='glyph-options' title="glyph options">
+        {/* glyph */}
+        <FormSection id="glyph-options" title="glyph options">
           <FormOptionBoolean
             checked={state.options.glyph?.leet?.enabled === true}
-            id='1337'
+            id="1337"
             label="1337"
-            setChecked={x => toggleGlyphOption(GlyphOption.LEET, x)}
+            setChecked={(x) => toggleGlyphOption(GlyphOption.LEET, x)}
           />
           <FormOptionBoolean
             checked={state.options.glyph?.unicode?.enabled === true}
-            id='unicode'
+            id="unicode"
             label="unicode"
-            setChecked={x => toggleGlyphOption(GlyphOption.UNICODE, x)}
+            setChecked={(x) => toggleGlyphOption(GlyphOption.UNICODE, x)}
           />
         </FormSection>
 
-        { /* export */}
-        <FormSection id='export-options' title="export">
-          {
-            state.options.global.unsafe === false && (
-              <div id='export-unsafe-css'>
-                You didn't select the unsafe option. Thanks for being security
-                minded! Don't forget to use the
-                {' '}
-                <a href="random.css" target="_blank">external CSS file</a>
-                {' '}
-                and ensure that it is specified in the
-                {' '}
-                <a
-                  href={
-                    "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
-                      "Headers/Content-Security-Policy/style-src"
-                  }
-                  target="_blank"
-                >
-                  style-src
-                </a>
-                {' '}
-                directive of your
-                {' '}
-                <a
-                  href={
-                    "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
-                      "Headers/Content-Security-Policy"
-                  }
-                  target="_blank"
-                >
-                  Content Security Policy
-                </a>.
-              </div>
-            )
-          }
-          <div id='export-textarea' className='option'>
-            <div className='input'>
+        {/* export */}
+        <FormSection id="export-options" title="export">
+          {state.options.global.unsafe === false && (
+            <div id="export-unsafe-css">
+              You didn't select the unsafe option. Thanks for being security
+              minded! Don't forget to use the{" "}
+              <a href="random.css" target="_blank">
+                external CSS file
+              </a>{" "}
+              and ensure that it is specified in the{" "}
+              <a
+                href={
+                  "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
+                  "Headers/Content-Security-Policy/style-src"
+                }
+                target="_blank"
+              >
+                style-src
+              </a>{" "}
+              directive of your{" "}
+              <a
+                href={
+                  "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
+                  "Headers/Content-Security-Policy"
+                }
+                target="_blank"
+              >
+                Content Security Policy
+              </a>
+              .
+            </div>
+          )}
+          <div id="export-textarea" className="option">
+            <div className="input">
               <textarea
                 disabled={true}
                 value={JSON.stringify(optionsToExport)}
               />
             </div>
           </div>
-          <div id='export-button' className='option'>
-            <div className='input popup-container'>
+          <div id="export-button" className="option">
+            <div className="input popup-container">
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    JSON.stringify(optionsToExport)
+                    JSON.stringify(optionsToExport),
                   );
                   setState({ copied: true });
-                  setTimeout(
-                    () => setState({ copied: false }),
-                    1500
-                  );
+                  setTimeout(() => setState({ copied: false }), 1500);
                 }}
               >
                 copy
               </button>
-              <div className={popupClassName}>
-                copied!
-              </div>
+              <div className={popupClassName}>copied!</div>
             </div>
           </div>
         </FormSection>
@@ -573,14 +552,14 @@ export default function Form(): React.ReactNode {
 function getValidSize(size: number): number {
   if (size > 10) {
     return 10;
-  } else if (size < .25) {
-    return .25;
-  } else if (size % .25 !== 0) {
+  } else if (size < 0.25) {
+    return 0.25;
+  } else if (size % 0.25 !== 0) {
     return parseFloat((Math.round(size * 4) / 4).toFixed(2));
   }
   return size;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  createRoot(document.getElementById('app')).render(<Form />);
+  createRoot(document.getElementById("app")).render(<Form />);
 });

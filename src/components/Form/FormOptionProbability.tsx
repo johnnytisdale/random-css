@@ -3,15 +3,15 @@ import FormOption, { CommonOptionProps } from "./FormOption";
 import * as React from "react";
 
 interface Props extends CommonOptionProps {
-  setProbability: (probability: number) => void,
-  value: number
+  setProbability: (probability: number) => void;
+  value: number;
 }
 
-export default function FormOptionProbability ({
+export default function FormOptionProbability({
   disabled,
   label,
   setProbability,
-  value
+  value,
 }: Props): React.ReactNode {
   return (
     <FormOption
@@ -23,7 +23,7 @@ export default function FormOptionProbability ({
         step: ".01",
         type: "range",
         value,
-        onChange: e => setProbability(parseFloat(e.target.value))
+        onChange: (e) => setProbability(parseFloat(e.target.value)),
       }}
     />
   );

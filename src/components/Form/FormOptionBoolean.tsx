@@ -7,13 +7,13 @@ interface Props extends CommonOptionProps {
   setChecked: (checked: boolean) => void;
 }
 
-export default function FormOptionBoolean ({
+export default function FormOptionBoolean({
   checked,
   children,
   disabled = false,
   id,
   label,
-  setChecked
+  setChecked,
 }: Props): React.ReactNode {
   return (
     <FormOption
@@ -24,7 +24,7 @@ export default function FormOptionBoolean ({
         checked,
         disabled,
         type: "checkbox",
-        onChange: e => setChecked(e.target.checked)
+        onChange: (e) => setChecked(e.target.checked),
       }}
     />
   );

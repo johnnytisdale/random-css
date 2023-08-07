@@ -1,7 +1,7 @@
 enum AnimationFillMode {
   BACKWARDS = "backwards",
   BOTH = "both",
-  FORWARDS = "forwards"
+  FORWARDS = "forwards",
 }
 
 export default AnimationFillMode;
