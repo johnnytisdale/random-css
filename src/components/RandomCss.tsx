@@ -26,7 +26,20 @@ import * as React from "react";
 import { useCallback, useMemo } from "react";
 
 interface Props {
+
+  /**
+   * If true, the text will be centered.
+   */
+  center?: boolean;
+
+  /**
+   * Various options, including CSS and glyph.
+   */
   options: Options;
+
+  /**
+   * The text to be randomized.
+   */
   text: string;
 }
 
@@ -47,7 +60,11 @@ const ignoreForSpaces: Record<OptionName, boolean> = {
   textDecorationStyle: true
 };
 
-export default function RandomCss({options, text}: Props): React.ReactNode {
+export default function RandomCss({
+  center = true,
+  options,
+  text
+}: Props): React.ReactNode {
 
   const className = useMemo(
     () => {
@@ -55,10 +72,13 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
       if (!options.global?.unsafe) {
         const size = String(options.global.size).replaceAll('.', '-');
         classNames.push(`random-css-container-${size}`);
+        if (center) {
+          classNames.push("random-css-container-center");
+        }
       }
       return classNames.filter(Boolean).join(" ");
     },
-    [options.global?.size, options.global?.unsafe]
+    [center, options.global?.size, options.global?.unsafe]
   );
 
   const getRandomizableForCssProperty = useCallback(
@@ -177,10 +197,22 @@ export default function RandomCss({options, text}: Props): React.ReactNode {
     [options.global.size]
   );
 
+  const style = useMemo(
+    () => ({
+      ...options.global.unsafe && {
+        style: {
+          ...center && { margin: "auto", width: "min-content" },
+          fontSize: size
+        }
+      }
+    }),
+    [center, options.global.unsafe, size]
+  );
+
   return (
     <div
       className={className}
-      {...options.global.unsafe && { style: { fontSize: size } }}
+      {...style}
     >
       {
         text.split('').map((character, i) => (

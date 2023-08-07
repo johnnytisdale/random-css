@@ -59,11 +59,11 @@ const initialState: State = {
 };
 
 export default function Form(): React.ReactNode {
+  const [center, setCenter] = useState(true);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
     initialState
   );
-
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
 
   const setAnimationOption = useCallback(
@@ -260,6 +260,7 @@ export default function Form(): React.ReactNode {
     <>
       <div id="top" data-testid="top">
         <RandomCss
+          center={center}
           options={optionsToExport}
           text={text}
         />
@@ -310,18 +311,6 @@ export default function Form(): React.ReactNode {
               if (unsafe === false) {
                 options.global.size = getValidSize(options.global.size);
               }
-              // if (options.css?.animation?.durationMax > durationMaxLimit) {
-              //   newState.durationMax = durationMaxLimit;
-              //   update = true;
-              // }
-              // if (options.css?.animation?.durationMin < durationMinLimit) {
-              //   newState.durationMin = durationMinLimit;
-              //   update = true;
-              // }
-              // if (update) {
-              //   console.log('setting state: ', newState);
-              //   setOption(newState);
-              // }
               setState({ options });
             }}
           />
@@ -333,6 +322,11 @@ export default function Form(): React.ReactNode {
               options.global.ignoreSpaces = ignoreSpaces;
               setState({ options });
             }}
+          />
+          <FormOptionBoolean
+            checked={center === true}
+            label="center"
+            setChecked={newCenter => setCenter(newCenter)}
           />
         </FormSection>
 

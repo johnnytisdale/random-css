@@ -7,7 +7,6 @@ cssFile = open(targetFile, "w")
 
 # base container style
 cssFile.write(".random-css-container {\n")
-cssFile.write("\tbackground-color: white;\n")
 cssFile.write("\tdisplay:          flex;\n")
 cssFile.write("\tpadding:          .25rem;\n")
 cssFile.write("\tposition:         relative;\n")
