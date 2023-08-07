@@ -27,13 +27,11 @@ type Style = {
   [value in CssProperty]?: string;
 }
 
-interface State {
-  style: Style;
-}
-
 const DEFAULTS: Style = {
   borderWidth: '1px'
 }
+
+const reducer = (style: Style, newStyle: Style) => ({ ...style, ...newStyle });
 
 export default function Character({
   character,
@@ -46,10 +44,7 @@ export default function Character({
   const defaults = useRef<Style>({});
   const [glyph, setGlyph] = useState(character);
   const id = useMemo(() => `character-${index}`, [index]);
-  const [state, setState] = useReducer(
-    (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
-    { style: {} }
-  );
+  const [style, setStyle] = useReducer(reducer, {});
   const _randomizables = useRef<Randomizables>(randomizables);
   const timeouts = useRef(
     [ ...Object.values(CssProperty), 'glyph' ].reduce(
@@ -67,14 +62,14 @@ export default function Character({
       if (element === null) {
         return;
       }
-      const style = getComputedStyle(element);
+      const computedStyle = getComputedStyle(element);
       Object.values(CssProperty).forEach((cssProperty: CssProperty) => {
         defaults.current[cssProperty] = Object.prototype.hasOwnProperty.call(
           DEFAULTS,
           cssProperty
         )
           ? DEFAULTS[cssProperty]
-          : style[cssProperty];
+          : computedStyle[cssProperty];
       });
     },
     []
@@ -86,18 +81,16 @@ export default function Character({
         return;
       }
       const name = randomizable.name as OptionName;
-      const newState = { ...state };
       const newValue = randomizable.getRandomValue();
       if (newValue !== undefined) {
         const comparator = name === 'glyph'
           ? glyph
-          : state.style[name];
+          : style[name];
         if (newValue !== comparator) {
           if (name === 'glyph') {
             setGlyph(newValue);
           } else {
-            newState.style[name] = newValue;
-            setState(newState);
+            setStyle({[name]: newValue});
           }
         }
       }
@@ -108,14 +101,14 @@ export default function Character({
           : _randomizables.current[name].getRandomNumber(300, 3000)
       );
     },
-    [_randomizables.current, state, timeouts.current]
+    [_randomizables.current, style, timeouts.current]
   );
 
   // randomizables changed
   useEffect(
     () => {
       _randomizables.current ={ ...randomizables };
-      const newState = { ...state };
+      const newStyle: Style = {};
       let update = false;
       Object.entries(_randomizables.current).forEach(([_, randomizable]) => {
         const key = _ as OptionName;
@@ -127,7 +120,7 @@ export default function Character({
             setGlyph(character);
           } else {
             update = true;
-            newState.style[key] = defaults.current[key];
+            newStyle[key] = defaults.current[key];
           }
           timeouts.current[key] = null;
         } else if (timeouts.current[key]) {
@@ -145,7 +138,7 @@ export default function Character({
         }
       });
       if (update) {
-        setState(newState);
+        setStyle(newStyle);
       }
     },
     [randomizables]
@@ -156,15 +149,15 @@ export default function Character({
       unsafe === false
         ? `random-css-character-${String(size).replaceAll('.', '-')}`
         : null,
-      ...Object.keys(state.style).map((cssProperty: CssProperty) => (
-        `random-css-${cssProperty}-${state.style[cssProperty]
+      ...Object.keys(style).map((cssProperty: CssProperty) => (
+        `random-css-${cssProperty}-${style[cssProperty]
           .replaceAll('"', '')
           .replaceAll(' ', '-')
           .replaceAll('%', '')
         }`
       ))
     ].filter(Boolean).join(' '),
-    [size, state.style, unsafe]
+    [size, style, unsafe]
   );
 
   // TODO: Figure out why unchecking border color sets classname to
@@ -182,17 +175,17 @@ export default function Character({
           : {
             height: `${size * 1.1875}rem`,
             width: `${size}rem`,
-            ...state.style,
+            ...style,
             ...(
-              state.style.fontWeight !== undefined && {
+              style.fontWeight !== undefined && {
                 fontWeight:
-                  state.style.fontWeight as CssPropertyType.FontWeight
+                  style.fontWeight as CssPropertyType.FontWeight
               }
             ),
             ...(
-              state.style.textDecorationStyle !== undefined && {
+              style.textDecorationStyle !== undefined && {
                 textDecorationStyle:
-                  state.style.textDecorationStyle as
+                  style.textDecorationStyle as
                     CssPropertyType.TextDecorationStyle
               }
             ),
