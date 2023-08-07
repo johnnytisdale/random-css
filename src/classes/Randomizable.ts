@@ -3,8 +3,7 @@ export default abstract class Randomizable {
     abstract getRandomValue(): string;
     abstract name: string;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    protected getRandomArrayElement(array: Array<any>) {
+    protected getRandomArrayElement<T>(array: Array<T>) {
         return array[this.getRandomNumber(0, array.length - 1)];
     }
 
