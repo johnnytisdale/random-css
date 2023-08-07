@@ -1,6 +1,6 @@
 import CssProperty from "./CssProperty";
 import ECssProperty from "../../enums/CssProperty";
-import { BorderRadiusOptions } from "../../interfaces/BorderRadiusOptions";
+import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 
 export default class BorderRadius extends CssProperty {
   public name = ECssProperty.BORDER_RADIUS;
@@ -20,12 +20,12 @@ export default class BorderRadius extends CssProperty {
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
       const valueCount = this.getRandomNumber(
         this.options.minCorners,
-        this.options.maxCorners,
+        this.options.maxCorners
       );
       const values: string[] = [];
       for (let x = 0; x < valueCount; x++) {
         values.push(
-          this.getRandomRadius(this.options.minRadius, this.options.maxRadius),
+          this.getRandomRadius(this.options.minRadius, this.options.maxRadius)
         );
       }
       valueSets.push(values.join(" "));

@@ -4,9 +4,8 @@ import AnimationFillMode from "../../enums/AnimationFillMode";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
 import ECssProperty from "../../enums/CssProperty";
-import {
+import AnimationOptions, {
   AnimationIterationCountOptions,
-  AnimationOptions,
   DEFAULT_ANIMATION_DIRECTIONS,
   DEFAULT_ANIMATION_EASING_FUNCTIONS,
   DEFAULT_ANIMATION_FILL_MODES,
@@ -84,7 +83,7 @@ export default class Animation extends CssProperty {
     const iterationCount = this.getRandomNumber(
       this.iterationCount.min,
       this.iterationCount.max,
-      this.iterationCount.integersOnly,
+      this.iterationCount.integersOnly
     );
     /**
      * TODO: It can never be zero because the lowest iterationCount.min can be

@@ -1,5 +1,4 @@
-import {
-  BorderRadiusOptions,
+import BorderRadiusOptions, {
   DEFAULT_BORDER_RADIUS_MAX_CORNERS,
   DEFAULT_BORDER_RADIUS_MAX_RADIUS,
   DEFAULT_BORDER_RADIUS_MIN_CORNERS,

@@ -1,13 +1,10 @@
-import {
-  AnimationOptions,
+import AnimationOptions, {
   DEFAULT_ANIMATION_OPTIONS,
 } from "./AnimationOptions";
-import {
-  BorderRadiusOptions,
+import BorderRadiusOptions, {
   DEFAULT_BORDER_RADIUS_OPTIONS,
 } from "./BorderRadiusOptions";
-import {
-  BorderStyleOptions,
+import BorderStyleOptions, {
   DEFAULT_BORDER_STYLE_OPTIONS,
 } from "./BorderStyleOptions";
 import ColorOptions from "./ColorOptions";

@@ -1,6 +1,5 @@
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import {
-  BorderStyleOptions,
+import BorderStyleOptions, {
   DEFAULT_BORDER_STYLE_KEYWORDS,
 } from "../../interfaces/BorderStyleOptions";
 import CssProperty from "../../enums/CssProperty";

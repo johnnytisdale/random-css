@@ -1,9 +1,8 @@
 import AnimationDirection from "../../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
-import {
+import AnimationOptions, {
   AnimationIterationCountOptions,
-  AnimationOptions,
   DEFAULT_ANIMATION_DURATION_MAX,
   DEFAULT_ANIMATION_DURATION_MAX_UNSAFE,
   DEFAULT_ANIMATION_DURATION_MIN,
@@ -42,28 +41,28 @@ export default function FormSubsectionAnimation({
         },
       });
     },
-    [option?.iterationCount, setOption],
+    [option?.iterationCount, setOption]
   );
   const durationMaxLimit = useMemo(
     () =>
       unsafe
         ? DEFAULT_ANIMATION_DURATION_MAX_UNSAFE
         : DEFAULT_ANIMATION_DURATION_MAX,
-    [unsafe],
+    [unsafe]
   );
   const durationMinLimit = useMemo(
     () =>
       unsafe
         ? DEFAULT_ANIMATION_DURATION_MIN_UNSAFE
         : DEFAULT_ANIMATION_DURATION_MIN,
-    [unsafe],
+    [unsafe]
   );
   const iterationCountMinLimit = useMemo(
     () =>
       unsafe
         ? DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE
         : DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
-    [unsafe],
+    [unsafe]
   );
   const mounted = useRef(false);
   useEffect(() => {

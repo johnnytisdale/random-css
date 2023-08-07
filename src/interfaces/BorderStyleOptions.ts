@@ -1,7 +1,7 @@
 import BorderStyleKeyword from "../enums/BorderStyleKeyword";
 import Option from "./Option";
 
-export interface BorderStyleOptions extends Option {
+export default interface BorderStyleOptions extends Option {
   borderStyles?: BorderStyleKeyword[];
 }
 

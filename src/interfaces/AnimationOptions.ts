@@ -13,7 +13,7 @@ export interface AnimationIterationCountOptions {
   zero?: boolean;
 }
 
-export interface AnimationOptions extends Option {
+export default interface AnimationOptions extends Option {
   directions?: AnimationDirection[];
   durationMax?: number;
   durationMin?: number;
@@ -29,7 +29,7 @@ export const DEFAULT_ANIMATION_DURATION_MIN = 1;
 export const DEFAULT_ANIMATION_DURATION_MAX_UNSAFE = 3000;
 export const DEFAULT_ANIMATION_DURATION_MIN_UNSAFE = 300;
 export const DEFAULT_ANIMATION_EASING_FUNCTIONS = Object.values(
-  AnimationEasingFunction,
+  AnimationEasingFunction
 );
 export const DEFAULT_ANIMATION_ENABLED = false;
 export const DEFAULT_ANIMATION_FILL_MODES = Object.values(AnimationFillMode);
@@ -49,7 +49,7 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
   zero: DEFAULT_ANIMATION_ITERATION_COUNT_ZERO,
 };
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
-  AnimationTransformation,
+  AnimationTransformation
 );
 export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   directions: DEFAULT_ANIMATION_DIRECTIONS,
