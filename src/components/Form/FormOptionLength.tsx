@@ -1,13 +1,12 @@
 import { CommonOptionProps } from "./FormOption";
-import {
-  DEFAULT_LENGTH_MAX,
-  DEFAULT_LENGTH_MIN,
-  LengthOptions,
-} from "../../classes/CSS/LengthProperty";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
+import LengthOptions, {
+  DEFAULT_LENGTH_MAX,
+  DEFAULT_LENGTH_MIN,
+} from "../../interfaces/LengthOptions";
 import LengthUnit from "../../enums/LengthUnit";
 
 import * as React from "react";

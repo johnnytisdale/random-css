@@ -5,6 +5,7 @@ import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 export default class BorderRadius extends CssProperty {
   public name = ECssProperty.BORDER_RADIUS;
 
+  // TODO: use class properties, validate
   constructor(private options: BorderRadiusOptions) {
     super();
   }

@@ -1,22 +1,10 @@
 import ColorKeyword from "../../enums/ColorKeyword";
-import ColorOptions from "../../interfaces/ColorOptions";
+import ColorOptions, {
+  DEFAULT_COLOR_KEYWORDS,
+  DEFAULT_COLOR_MAX,
+  DEFAULT_COLOR_MIN,
+} from "../../interfaces/ColorOptions";
 import CssProperty from "./CssProperty";
-
-const DEFAULT_COLOR_ENABLED = false;
-const DEFAULT_COLOR_KEYWORDS = Object.values(ColorKeyword);
-const DEFAULT_COLOR_MAX = 255;
-const DEFAULT_COLOR_MIN = 0;
-
-export const DEFAULT_COLOR_OPTIONS: ColorOptions = {
-  bMax: DEFAULT_COLOR_MAX,
-  bMin: DEFAULT_COLOR_MIN,
-  colorKeywords: DEFAULT_COLOR_KEYWORDS,
-  enabled: DEFAULT_COLOR_ENABLED,
-  gMax: DEFAULT_COLOR_MAX,
-  gMin: DEFAULT_COLOR_MIN,
-  rMax: DEFAULT_COLOR_MAX,
-  rMin: DEFAULT_COLOR_MIN,
-};
 
 export default abstract class ColorProperty extends CssProperty {
   private bMax: number;
@@ -29,7 +17,7 @@ export default abstract class ColorProperty extends CssProperty {
 
   constructor(
     options: ColorOptions,
-    protected unsafe: boolean,
+    protected unsafe: boolean
   ) {
     super(unsafe);
     this.bMax = options.bMax ?? DEFAULT_COLOR_MAX;

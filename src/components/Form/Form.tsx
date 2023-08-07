@@ -10,8 +10,8 @@ import {
   DEFAULT_GLOBAL_OPTIONS,
   DEFAULT_GLOBAL_OPTIONS_TEXT,
 } from "../../interfaces/GlobalOptions";
-import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
-import { FontStyleOptions } from "../../classes/CSS/FontStyle";
+import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
+import FontStyleOptions from "../../interfaces/FontStyleOptions";
 import FontWeightValue from "../../enums/FontWeightValue";
 import FormOption from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
@@ -25,7 +25,7 @@ import FormSubsectionColor from "./FormSubsectionColor";
 import FormSubsectionFontFamily from "./FormSubsectionFontFamily";
 import FormSubsectionFontStyle from "./FormSubsectionFontStyle";
 import GlyphOption from "../../enums/GlyphOption";
-import { LengthOptions } from "../../classes/CSS/LengthProperty";
+import LengthOptions from "../../interfaces/LengthOptions";
 import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
 import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";

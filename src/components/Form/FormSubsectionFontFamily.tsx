@@ -1,6 +1,6 @@
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
-import { FontFamilyOptions } from "../../classes/CSS/FontFamily";
+import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";

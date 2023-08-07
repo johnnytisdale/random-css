@@ -1,18 +1,10 @@
 import CssProperty from "../../enums/CssProperty";
-import LengthProperty, {
+import LengthOptions, {
   DEFAULT_LENGTH_MAX,
   DEFAULT_LENGTH_MIN,
-  DEFAULT_LENGTH_OPTIONS,
   DEFAULT_LENGTH_UNITS,
-  LengthOptions,
-} from "./LengthProperty";
-
-export const DEFAULT_BORDER_WIDTH_ENABLED = false;
-
-export const DEFAULT_BORDER_WIDTH_OPTIONS: LengthOptions = {
-  ...DEFAULT_LENGTH_OPTIONS,
-  enabled: DEFAULT_BORDER_WIDTH_ENABLED,
-};
+} from "../../interfaces/LengthOptions";
+import LengthProperty from "./LengthProperty";
 
 export default class BorderWidth extends LengthProperty {
   protected max;

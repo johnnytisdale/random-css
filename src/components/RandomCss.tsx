@@ -5,19 +5,18 @@ import BackgroundColor from "../classes/CSS/BackgroundColor";
 import BorderColor from "../classes/CSS/BorderColor";
 import BorderRadius from "../classes/CSS/BorderRadius";
 import BorderStyle from "../classes/CSS/BorderStyle";
-import BorderWidth, {
-  DEFAULT_BORDER_WIDTH_OPTIONS,
-} from "../classes/CSS/BorderWidth";
+import BorderWidth from "../classes/CSS/BorderWidth";
 import Character from "./Character";
 import Color from "../classes/CSS/Color";
 import CssProperty from "../enums/CssProperty";
 import { DEFAULT_ANIMATION_OPTIONS } from "../interfaces/AnimationOptions";
 import { DEFAULT_BORDER_RADIUS_OPTIONS } from "../interfaces/BorderRadiusOptions";
 import { DEFAULT_BORDER_STYLE_OPTIONS } from "../interfaces/BorderStyleOptions";
-import { DEFAULT_COLOR_OPTIONS } from "../classes/CSS/ColorProperty";
-import FontFamily, {
-  DEFAULT_FONT_FAMILY_OPTIONS,
-} from "../classes/CSS/FontFamily";
+import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../interfaces/LengthOptions";
+import { DEFAULT_COLOR_OPTIONS } from "../interfaces/ColorOptions";
+import { DEFAULT_FONT_FAMILY_OPTIONS } from "../interfaces/FontFamilyOptions";
+import { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../interfaces/TextDecorationLineOptions";
+import FontFamily from "../classes/CSS/FontFamily";
 import FontStyle from "../classes/CSS/FontStyle";
 import FontWeight from "../classes/CSS/FontWeight";
 import Glyph from "../classes/Glyph";
@@ -26,9 +25,7 @@ import Options from "../interfaces/Options";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
 import TextDecorationColor from "../classes/CSS/TextDecorationColor";
-import TextDecorationLine, {
-  DEFAULT_TEXT_DECORATION_LINE_OPTIONS,
-} from "../classes/CSS/TextDecorationLine";
+import TextDecorationLine from "../classes/CSS/TextDecorationLine";
 import TextDecorationStyle, {
   DEFAULT_TEXT_DECORATION_STYLE_OPTIONS,
 } from "../classes/CSS/TextDecorationStyle";

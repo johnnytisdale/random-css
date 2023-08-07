@@ -1,37 +1,15 @@
+import CssProperty from "./CssProperty";
 import ECssProperty from "../../enums/CssProperty";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
-import Option from "../../interfaces/Option";
-import CssProperty from "./CssProperty";
-
-export interface FontFamilyOptions extends Option {
-  fallbackProbability?: number;
-  fontFamilyNames?: FontFamilyName[];
-  fontGenericNames?: FontGenericName[];
-  includeFallbacks?: boolean;
-  includeFamilyNames?: boolean;
-  includeGenericNames?: boolean;
-}
-
-export const DEFAULT_FONT_FAMILY_ENABLED = false;
-export const DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY = 0.5;
-export const DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES =
-  Object.values(FontFamilyName);
-export const DEFAULT_FONT_FAMILY_FONT_GENERIC_NAMES =
-  Object.values(FontGenericName);
-export const DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS = true;
-export const DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES = true;
-export const DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES = true;
-
-export const DEFAULT_FONT_FAMILY_OPTIONS: FontFamilyOptions = {
-  enabled: DEFAULT_FONT_FAMILY_ENABLED,
-  fallbackProbability: DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY,
-  fontFamilyNames: DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES,
-  fontGenericNames: DEFAULT_FONT_FAMILY_FONT_GENERIC_NAMES,
-  includeFallbacks: DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS,
-  includeFamilyNames: DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES,
-  includeGenericNames: DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES,
-};
+import FontFamilyOptions, {
+  DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY,
+  DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES,
+  DEFAULT_FONT_FAMILY_FONT_GENERIC_NAMES,
+  DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS,
+  DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES,
+  DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES,
+} from "../../interfaces/FontFamilyOptions";
 
 export default class FontFamily extends CssProperty {
   private fallbackProbability: number;
@@ -64,6 +42,7 @@ export default class FontFamily extends CssProperty {
       !this.includeFamilyNames &&
       !this.includeGenericNames
     ) {
+      // TODO: Fail more gracefully?
       throw new Error("You must include at least one type of font value.");
     }
     // TODO: Handle other errors, e.g. empty arrays.

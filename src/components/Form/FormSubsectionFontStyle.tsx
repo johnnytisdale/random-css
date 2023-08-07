@@ -1,16 +1,15 @@
+import FontStyleKeyword from "../../enums/FontStyleKeyword";
+import FontStyleOptions, {
+  DEFAULT_FONT_STYLE_MAX_DEGREES,
+  DEFAULT_FONT_STYLE_MIN_DEGREES,
+} from "../../interfaces/FontStyleOptions";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";
+import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
 
 import * as React from "react";
-import {
-  DEFAULT_FONT_STYLE_MAX_DEGREES,
-  DEFAULT_FONT_STYLE_MIN_DEGREES,
-  FontStyleOptions,
-} from "../../classes/CSS/FontStyle";
-import FontStyleKeyword from "../../enums/FontStyleKeyword";
-import FormOptionRange from "./FormOptionRange";
 
 interface Props {
   option: FontStyleOptions;

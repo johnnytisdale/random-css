@@ -1,16 +1,10 @@
 import CssProperty from "../../enums/CssProperty";
-import Option from "../../interfaces/Option";
-import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 import KeywordProperty from "./KeywordProperty";
-
-export interface TextDecorationStyleOptions extends Option {
-  styles?: TextDecorationStyleKeyword[];
-}
-
-export const DEFAULT_TEXT_DECORATION_STYLE_ENABLED = false;
-export const DEFAULT_TEXT_DECORATION_STYLE_STYLES = Object.values(
-  TextDecorationStyleKeyword,
-);
+import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
+import TextDecorationStyleOptions, {
+  DEFAULT_TEXT_DECORATION_STYLE_ENABLED,
+  DEFAULT_TEXT_DECORATION_STYLE_STYLES,
+} from "../../interfaces/TextDecorationStyleOptions";
 
 export const DEFAULT_TEXT_DECORATION_STYLE_OPTIONS: TextDecorationStyleOptions =
   {

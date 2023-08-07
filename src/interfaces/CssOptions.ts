@@ -7,30 +7,22 @@ import BorderRadiusOptions, {
 import BorderStyleOptions, {
   DEFAULT_BORDER_STYLE_OPTIONS,
 } from "./BorderStyleOptions";
-import ColorOptions from "./ColorOptions";
-import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../classes/CSS/BorderWidth";
-import { DEFAULT_COLOR_OPTIONS } from "../classes/CSS/ColorProperty";
-import {
+import ColorOptions, { DEFAULT_COLOR_OPTIONS } from "./ColorOptions";
+import { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../classes/CSS/TextDecorationStyle";
+import FontFamilyOptions, {
   DEFAULT_FONT_FAMILY_OPTIONS,
-  FontFamilyOptions,
-} from "../classes/CSS/FontFamily";
-import {
+} from "./FontFamilyOptions";
+import FontStyleOptions, {
   DEFAULT_FONT_STYLE_OPTIONS,
-  FontStyleOptions,
-} from "../classes/CSS/FontStyle";
-import {
+} from "./FontStyleOptions";
+import FontWeightOptions, {
   DEFAULT_FONT_WEIGHT_OPTIONS,
-  FontWeightOptions,
-} from "../classes/CSS/FontWeight";
-import {
+} from "./FontWeightOptions";
+import LengthOptions, { DEFAULT_BORDER_WIDTH_OPTIONS } from "./LengthOptions";
+import TextDecorationLineOptions, {
   DEFAULT_TEXT_DECORATION_LINE_OPTIONS,
-  TextDecorationLineOptions,
-} from "../classes/CSS/TextDecorationLine";
-import {
-  DEFAULT_TEXT_DECORATION_STYLE_OPTIONS,
-  TextDecorationStyleOptions,
-} from "../classes/CSS/TextDecorationStyle";
-import { LengthOptions } from "../classes/CSS/LengthProperty";
+} from "./TextDecorationLineOptions";
+import TextDecorationStyleOptions from "./TextDecorationStyleOptions";
 
 export default interface CssOptions {
   animation?: AnimationOptions;

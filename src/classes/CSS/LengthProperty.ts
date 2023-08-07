@@ -1,22 +1,5 @@
 import CssProperty from "./CssProperty";
 import LengthUnit from "../../enums/LengthUnit";
-import Option from "../../interfaces/Option";
-
-export interface LengthOptions extends Option {
-  max?: number;
-  min?: number;
-  units?: LengthUnit[];
-}
-
-export const DEFAULT_LENGTH_MAX = 3;
-export const DEFAULT_LENGTH_MIN = 1;
-export const DEFAULT_LENGTH_UNITS = Object.values(LengthUnit);
-
-export const DEFAULT_LENGTH_OPTIONS: LengthOptions = {
-  max: DEFAULT_LENGTH_MAX,
-  min: DEFAULT_LENGTH_MIN,
-  units: DEFAULT_LENGTH_UNITS,
-};
 
 export default abstract class LengthProperty extends CssProperty {
   protected abstract units: LengthUnit[];
