@@ -11,7 +11,7 @@ export default class Glyph extends Randomizable {
   constructor(
     private character: string,
     private leet: boolean,
-    private unicode: boolean,
+    private unicode: boolean
   ) {
     super();
     const lower = this.character.toLowerCase();
@@ -87,6 +87,7 @@ function getLeetValues(character: string): Array<string> {
   }
 }
 
+// TODO: support "Force case" (only lowercase or only uppercase)
 function getUnicodeValues(character: string): Array<string> {
   const mapFunction = ({ unicode }: { unicode: string }) => {
     return String.fromCodePoint(parseInt(unicode, 16));
