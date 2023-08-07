@@ -131,6 +131,11 @@ export default class Animation extends CssProperty {
       this.iterationCount.max,
       this.iterationCount.integersOnly
     );
+    /**
+     * TODO: It can never be zero because the lowest iterationCount.min can be
+     * is 1. Should probably just removed the zero option because having 0
+     * iterations would be effectively equivalent to having no animation.
+     */
     return (iterationCount === 0 && this.iterationCount.zero === false)
        ? "1"
        : String(iterationCount);
