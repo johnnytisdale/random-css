@@ -6,7 +6,14 @@ import Timeouts from "../interfaces/Timeouts";
 
 import { Property as CssPropertyType } from 'csstype';
 import * as React from "react";
-import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState
+} from "react";
 
 interface Props {
   character: string;
@@ -22,7 +29,6 @@ type Style = {
 
 interface State {
   style: Style;
-  glyph?: string;
 }
 
 const DEFAULTS: Style = {
@@ -38,17 +44,18 @@ export default function Character({
 }: Props): React.ReactNode {
 
   const defaults = useRef<Style>({});
+  const [glyph, setGlyph] = useState(character);
   const id = useMemo(() => `character-${index}`, [index]);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
-    { glyph: character, style: {} }
+    { style: {} }
   );
   const _randomizables = useRef<Randomizables>(randomizables);
   const timeouts = useRef(
     [ ...Object.values(CssProperty), 'glyph' ].reduce(
       (accumulated, key) => ({
         ...accumulated,
-        [key]: null, 
+        [key]: null,
       }),
       {}
     ) as Timeouts
@@ -81,21 +88,21 @@ export default function Character({
       if (randomizable == null || _randomizables.current[key] == null) {
         return;
       }
-      const name = randomizable.name as OptionName; 
+      const name = randomizable.name as OptionName;
       const newState = { ...state };
       const newValue = randomizable.getRandomValue();
       if (newValue !== undefined) {
         const comparator = name === 'glyph'
-          ? state.glyph
+          ? glyph
           : state.style[name];
         if (newValue !== comparator) {
           if (name === 'glyph') {
-            newState.glyph = newValue;
+            setGlyph(newValue);
           } else {
             newState.style[name] = newValue;
+            setState(newState);
           }
         }
-        setState(newState);
       }
       timeouts.current[name] = setTimeout(
         () => timeoutFunction(_randomizables.current[name], name),
@@ -119,10 +126,10 @@ export default function Character({
           if (timeouts.current[key] == null) {
             return;
           }
-          update = true;
           if (key === "glyph") {
-            newState.glyph = character;
+            setGlyph(character);
           } else {
+            update = true;
             newState.style[key] = defaults.current[key];
           }
           timeouts.current[key] = null;
@@ -196,7 +203,7 @@ export default function Character({
         }
     >
       { /* TODO: figure out why state.glyph is sometimes undefined! */ }
-      {state.glyph ?? character}
+      {glyph ?? character}
     </div>
   );
 }
