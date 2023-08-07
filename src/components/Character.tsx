@@ -53,10 +53,7 @@ export default function Character({
   const _randomizables = useRef<Randomizables>(randomizables);
   const timeouts = useRef(
     [ ...Object.values(CssProperty), 'glyph' ].reduce(
-      (accumulated, key) => ({
-        ...accumulated,
-        [key]: null,
-      }),
+      (accumulated, key) => ({ ...accumulated, [key]: null, }),
       {}
     ) as Timeouts
   );
