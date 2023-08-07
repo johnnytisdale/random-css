@@ -16,13 +16,15 @@ export const DEFAULT_BORDER_STYLE_OPTIONS: BorderStyleOptions = {
 
 export default class BorderStyle extends KeywordProperty {
 
-  protected keywordLimit = this.unsafe ? 4 : 1;
-  protected keywords;
+  protected keywords: BorderStyleKeyword[];
   public name = CssProperty.BORDER_STYLE;
 
   constructor(options: BorderStyleOptions, unsafe: boolean) {
     super(unsafe);
-    this.keywords = options.borderStyles
-      ?? [ ...DEFAULT_BORDER_STYLE_KEYWORDS ];
+    // TODO: Support 4 border styles when !unsafe
+    if (unsafe) {
+      this.keywordLimit = 4;
+    }
+    this.keywords = options.borderStyles ?? [...DEFAULT_BORDER_STYLE_KEYWORDS];
   }
 }

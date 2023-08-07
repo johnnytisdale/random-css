@@ -1,8 +1,6 @@
-import ECssProperty from "../../enums/CssProperty";
 import ColorProperty from "./ColorProperty";
+import CssProperty from "../../enums/CssProperty";
 
 export default class BackgroundColor extends ColorProperty {
-
-  public name = ECssProperty.BACKGROUND_COLOR;
-
+  public name = CssProperty.BACKGROUND_COLOR;
 }

@@ -1,6 +1,6 @@
 import CssProperty from "../../enums/CssProperty";
-import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 import Option from "../../interfaces/Option";
+import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 import KeywordProperty from "./KeywordProperty";
 
 export interface TextDecorationStyleOptions extends Option {
@@ -19,9 +19,8 @@ export const DEFAULT_TEXT_DECORATION_STYLE_OPTIONS: TextDecorationStyleOptions =
 
 export default class TextDecorationStyle extends KeywordProperty {
 
-  protected keywords;
+  protected keywords: TextDecorationStyleKeyword[];
   public name = CssProperty.TEXT_DECORATION_STYLE;
-
 
   constructor(options: TextDecorationStyleOptions) {
     super();

@@ -19,7 +19,7 @@ export const DEFAULT_TEXT_DECORATION_LINE_OPTIONS: TextDecorationLineOptions = {
 
 export default class TextDecorationLine extends KeywordProperty {
 
-  protected keywords: string[];
+  protected keywords: TextDecorationLineKeyword[];
   public name = CssProperty.TEXT_DECORATION_LINE;
 
   constructor(options: TextDecorationLineOptions) {
