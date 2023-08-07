@@ -1,5 +1,5 @@
 import { AnimationOptions, DEFAULT_ANIMATION_OPTIONS } from "./AnimationOptions";
-import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS_OPTIONS } from "../classes/CSS/BorderRadius";
+import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS_OPTIONS } from "./BorderRadiusOptions";
 import { BorderStyleOptions, DEFAULT_BORDER_STYLE_OPTIONS } from "../classes/CSS/BorderStyle";
 import ColorOptions from "./ColorOptions";
 import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../classes/CSS/BorderWidth";

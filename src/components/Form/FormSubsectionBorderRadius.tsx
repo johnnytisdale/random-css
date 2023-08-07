@@ -1,4 +1,4 @@
-import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS_MAX_CORNERS, DEFAULT_BORDER_RADIUS_MAX_RADIUS, DEFAULT_BORDER_RADIUS_MIN_CORNERS, DEFAULT_BORDER_RADIUS_MIN_RADIUS } from "../../classes/CSS/BorderRadius";
+import { BorderRadiusOptions, DEFAULT_BORDER_RADIUS_MAX_CORNERS, DEFAULT_BORDER_RADIUS_MAX_RADIUS, DEFAULT_BORDER_RADIUS_MIN_CORNERS, DEFAULT_BORDER_RADIUS_MIN_RADIUS } from "../../interfaces/BorderRadiusOptions";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 
