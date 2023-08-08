@@ -3,4 +3,5 @@ export default interface OptionProps {
   disabled?: boolean;
   id?: string;
   label?: string;
+  unsafe?: boolean;
 }

@@ -1,3 +1,4 @@
+import CssProperty from "../../enums/CssProperty";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
 import FontStyleOptions, {
   DEFAULT_FONT_STYLE_MAX_DEGREES,
@@ -8,30 +9,26 @@ import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";
 import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
+import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
-
-interface Props {
-  option: FontStyleOptions;
-  setOption: (option: FontStyleOptions) => void;
-  unsafe: boolean;
-}
 
 export default function FormSubsectionFontStyle({
   option,
   setOption,
+  toggle,
   unsafe,
-}: Props): React.ReactNode {
+}: FormSubsectionCssProps<FontStyleOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={option?.enabled === true}
       label="fontStyle"
-      setChecked={(enabled) => setOption({ enabled })}
+      setChecked={(checked) => toggle(CssProperty.FONT_STYLE, checked)}
     >
       <FormSubsection label="styles">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           possibleValues={Object.values(FontStyleKeyword)}
           setValues={(fontStyles) =>
             fontStyles.length && setOption({ fontStyles })

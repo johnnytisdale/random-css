@@ -11,26 +11,23 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
 } from "../../../interfaces/AnimationOptions";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
+import CssProperty from "../../../enums/CssProperty";
 import FormOptionArray from "../FormOptionArray";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionRange from "../FormOptionRange";
-import FormSubsectionAnimationIterationCount from "./FormSubsectionAnimationIterationCount";
 import FormSubsection from "../FormSubsection";
+import FormSubsectionAnimationIterationCount from "./FormSubsectionAnimationIterationCount";
+import FormSubsectionCssProps from "../../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
-interface Props {
-  option: AnimationOptions;
-  setOption: (option: AnimationOptions) => void;
-  unsafe: boolean;
-}
-
 export default function FormSubsectionAnimation({
   option,
   setOption,
+  toggle,
   unsafe,
-}: Props): React.ReactNode {
+}: FormSubsectionCssProps<AnimationOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   const setIterationCountOption = useCallback(
     (options: AnimationIterationCountOptions) => {
@@ -110,7 +107,7 @@ export default function FormSubsectionAnimation({
     <FormOptionBoolean
       checked={!disabled}
       label="animation"
-      setChecked={(enabled) => setOption({ enabled })}
+      setChecked={(checked) => toggle(CssProperty.ANIMATION, checked)}
     >
       <FormSubsection label="directions">
         <FormOptionArray

@@ -1,31 +1,31 @@
 import Color from "../../enums/ColorKeyword";
-import ColorOption from "../../interfaces/ColorOptions";
-import OptionProps from "../../interfaces/OptionProps";
+import ColorOptions from "../../interfaces/ColorOptions";
+import CssProperty from "../../enums/CssProperty";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
+import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
 
-interface Props extends OptionProps {
-  option: ColorOption;
-  setOption: (option: ColorOption) => void;
-  unsafe: boolean;
+interface Props extends FormSubsectionCssProps<ColorOptions> {
+  cssPropertyName: CssProperty;
 }
 
 export default function FormSubsectionColor({
-  label,
+  cssPropertyName,
   option,
   setOption,
+  toggle,
   unsafe,
 }: Props): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={!disabled}
-      label={label}
-      setChecked={(enabled) => setOption({ enabled })}
+      label={cssPropertyName}
+      setChecked={(checked) => toggle(cssPropertyName, checked)}
     >
       {unsafe ? (
         <>

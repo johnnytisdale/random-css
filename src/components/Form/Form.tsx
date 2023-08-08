@@ -3,7 +3,7 @@ import "../../styles/Form.scss";
 import AnimationOptions from "../../interfaces/AnimationOptions";
 import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import ColorOption from "../../interfaces/ColorOptions";
+import ColorOptions from "../../interfaces/ColorOptions";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
 import {
@@ -35,23 +35,16 @@ import * as React from "react";
 import { useCallback, useMemo, useReducer, useState } from "react";
 import { createRoot } from "react-dom/client";
 
+interface ToggleCSS {
+  all: boolean;
+  none: boolean;
+}
+
 interface State {
-  form: {
-    css: {
-      selectAll: boolean;
-      selectNone: boolean;
-    };
-  };
   options: Options;
 }
 
 const initialState: State = {
-  form: {
-    css: {
-      selectAll: false,
-      selectNone: false,
-    },
-  },
   options: {
     css: { ...DEFAULT_CSS_OPTIONS },
     global: { ...DEFAULT_GLOBAL_OPTIONS },
@@ -67,6 +60,10 @@ export default function Form(): React.ReactNode {
     initialState
   );
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
+  const [toggleCss, setToggleCss] = useState<ToggleCSS>({
+    all: false,
+    none: false,
+  });
 
   const setAnimationOption = useCallback(
     (option: AnimationOptions) => {
@@ -107,7 +104,7 @@ export default function Form(): React.ReactNode {
         keyof CssOptions,
         "backgroundColor" | "borderColor" | "color" | "textDecorationColor"
       >,
-      option: ColorOption
+      option: ColorOptions
     ) => {
       const options = state.options;
       options.css[key] = {
@@ -145,7 +142,6 @@ export default function Form(): React.ReactNode {
 
   const toggleCssProperty = useCallback(
     (cssProperty: CssProperty, checked: boolean) => {
-      const form = state.form;
       const options = state.options;
       if (options.css[cssProperty] === undefined) {
         options.css[cssProperty] = { enabled: false };
@@ -162,43 +158,41 @@ export default function Form(): React.ReactNode {
         ...options.css[cssProperty],
         ...{ enabled: checked },
       };
+      const newToggleCss = { ...toggleCss };
       if (!checked) {
-        form.css.selectAll = false;
+        newToggleCss.all = false;
       } else {
-        form.css.selectNone = false;
+        newToggleCss.none = false;
       }
-      setState({
-        form: form,
-        options: options,
-      });
+      setState({ options });
+      setToggleCss(newToggleCss);
     },
-    [setState, state.form, state.options]
+    [setState, setToggleCss, state.options, toggleCss]
   );
 
   const toggleAll = useCallback(
     (checked: boolean, select: boolean) => {
-      const formOptions = state.form;
+      const newToggleCss = { ...toggleCss };
       if (!checked) {
         if (select) {
-          formOptions.css.selectAll = false;
+          newToggleCss.all = false;
         } else {
-          formOptions.css.selectNone = false;
+          newToggleCss.none = false;
         }
-        setState({ form: formOptions });
       } else {
-        formOptions.css.selectAll = select;
-        formOptions.css.selectNone = !select;
+        newToggleCss.all = select;
+        newToggleCss.none = !select;
         const options = state.options;
         Object.values(CssProperty).forEach((cssProperty) => {
           toggleCssProperty(cssProperty, select);
         });
         setState({
-          form: formOptions,
           options: options,
         });
       }
+      setToggleCss(newToggleCss);
     },
-    [setState, state.form, state.options, toggleCssProperty]
+    [setState, setToggleCss, toggleCss, toggleCssProperty]
   );
 
   const toggleGlyphOption = useCallback(
@@ -284,13 +278,13 @@ export default function Form(): React.ReactNode {
         {/* css */}
         <FormSection id="css-options" title="css options">
           <FormOptionBoolean
-            checked={state.form.css.selectAll === true}
+            checked={toggleCss.all}
             id="select-all-css"
             label="select all"
             setChecked={(checked) => toggleAll(checked, true)}
           />
           <FormOptionBoolean
-            checked={state.form.css.selectNone}
+            checked={toggleCss.none}
             id="select-none-css"
             label="select none"
             setChecked={(checked) => toggleAll(checked, false)}
@@ -298,23 +292,31 @@ export default function Form(): React.ReactNode {
           <FormSubsectionAnimation
             option={state.options.css?.animation}
             setOption={setAnimationOption}
+            toggle={toggleCssProperty}
             unsafe={state.options.global?.unsafe === true}
           />
           <FormSubsectionColor
-            label="backgroundColor"
+            cssPropertyName={CssProperty.BACKGROUND_COLOR}
             option={state.options.css?.backgroundColor}
-            setOption={(option) => setColorOption("backgroundColor", option)}
+            setOption={(option) =>
+              setColorOption(CssProperty.BACKGROUND_COLOR, option)
+            }
+            toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionColor
-            label="borderColor"
+            cssPropertyName={CssProperty.BORDER_COLOR}
             option={state.options.css?.borderColor}
-            setOption={(option) => setColorOption("borderColor", option)}
+            setOption={(option) =>
+              setColorOption(CssProperty.BORDER_COLOR, option)
+            }
+            toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionBorderRadius
             option={state.options.css?.borderRadius}
             setOption={setBorderRadiusOption}
+            toggle={toggleCssProperty}
           />
           <FormOptionBoolean
             checked={state.options.css?.borderStyle?.enabled === true}
@@ -346,18 +348,21 @@ export default function Form(): React.ReactNode {
             }
           />
           <FormSubsectionColor
-            label="color"
+            cssPropertyName={CssProperty.COLOR}
             option={state.options.css?.color}
-            setOption={(option) => setColorOption("color", option)}
+            setOption={(option) => setColorOption(CssProperty.COLOR, option)}
+            toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionFontFamily
             option={state.options.css?.fontFamily}
             setOption={(option) => setFontFamilyOption(option)}
+            toggle={toggleCssProperty}
           />
           <FormSubsectionFontStyle
             option={state.options.css?.fontStyle}
             setOption={setFontStyleOption}
+            toggle={toggleCssProperty}
             unsafe={state.options.global?.unsafe}
           />
           <FormOptionBoolean
@@ -381,11 +386,12 @@ export default function Form(): React.ReactNode {
             </FormSubsection>
           </FormOptionBoolean>
           <FormSubsectionColor
-            label="textDecorationColor"
+            cssPropertyName={CssProperty.TEXT_DECORATION_COLOR}
             option={state.options.css?.textDecorationColor}
             setOption={(option) =>
-              setColorOption("textDecorationColor", option)
+              setColorOption(CssProperty.TEXT_DECORATION_COLOR, option)
             }
+            toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
           <FormOptionBoolean
@@ -445,7 +451,7 @@ export default function Form(): React.ReactNode {
           <FormOptionBoolean
             checked={state.options.glyph?.unicode?.enabled === true}
             id="unicode"
-            label="unicode"
+            label={GlyphOption.UNICODE}
             setChecked={(x) => toggleGlyphOption(GlyphOption.UNICODE, x)}
           />
         </FormSection>

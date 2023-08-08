@@ -1,3 +1,4 @@
+import CssProperty from "../../enums/CssProperty";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
@@ -5,24 +6,21 @@ import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";
 import FormSubsection from "./FormSubsection";
+import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
-
-interface Props {
-  option: FontFamilyOptions;
-  setOption: (option: FontFamilyOptions) => void;
-}
 
 export default function FormSubsectionFontFamily({
   option,
   setOption,
-}: Props): React.ReactNode {
+  toggle,
+}: FormSubsectionCssProps<FontFamilyOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={!disabled}
       label="fontFamily"
-      setChecked={(enabled) => setOption({ enabled })}
+      setChecked={(checked) => toggle(CssProperty.FONT_FAMILY, checked)}
     >
       <FormSubsection label="value types">
         <FormOptionBoolean
@@ -69,7 +67,7 @@ export default function FormSubsectionFontFamily({
       </FormSubsection>
       <FormSubsection label="family names">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           displayValue={(family) => String(family).replaceAll('"', "")}
           possibleValues={Object.values(FontFamilyName)}
           setValues={(fontFamilyNames) =>
@@ -80,7 +78,7 @@ export default function FormSubsectionFontFamily({
       </FormSubsection>
       <FormSubsection label="generic names">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           possibleValues={Object.values(FontGenericName)}
           setValues={(fontGenericNames) =>
             fontGenericNames.length && setOption({ fontGenericNames })

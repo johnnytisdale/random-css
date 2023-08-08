@@ -4,28 +4,26 @@ import BorderRadiusOptions, {
   DEFAULT_BORDER_RADIUS_MIN_CORNERS,
   DEFAULT_BORDER_RADIUS_MIN_RADIUS,
 } from "../../interfaces/BorderRadiusOptions";
+import CssProperty from "../../enums/CssProperty";
 import FormOptionBoolean from "./FormOptionBoolean";
+import FormOptionProbability from "./FormOptionProbability";
 import FormOptionRange from "./FormOptionRange";
+import FormSubsection from "./FormSubsection";
+import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
-import FormOptionProbability from "./FormOptionProbability";
-import FormSubsection from "./FormSubsection";
-
-interface Props {
-  option: BorderRadiusOptions;
-  setOption: (option: BorderRadiusOptions) => void;
-}
 
 export default function FormSubsectionBorderRadius({
   option,
   setOption,
-}: Props): React.ReactNode {
+  toggle,
+}: FormSubsectionCssProps<BorderRadiusOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean
       checked={!disabled}
       label="borderRadius"
-      setChecked={(enabled) => setOption({ enabled })}
+      setChecked={(checked) => toggle(CssProperty.BORDER_RADIUS, checked)}
     >
       <FormSubsection>
         <FormOptionBoolean
