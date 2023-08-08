@@ -1,6 +1,6 @@
 import Color from "../../enums/ColorKeyword";
 import ColorOptions from "../../interfaces/ColorOptions";
-import CssProperty from "../../enums/CssProperty";
+import CssColorProperty from "../../types/CssColorProperty";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
@@ -8,18 +8,24 @@ import FormSubsection from "./FormSubsection";
 import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 
 import * as React from "react";
+import { useCallback } from "react";
 
 interface Props extends FormSubsectionCssProps<ColorOptions> {
-  cssPropertyName: CssProperty;
+  cssPropertyName: CssColorProperty;
+  setColorOption: (cssProperty: CssColorProperty, option: ColorOptions) => void;
 }
 
 export default function FormSubsectionColor({
   cssPropertyName,
   option,
-  setOption,
+  setColorOption: _setColorOption,
   toggle,
   unsafe,
 }: Props): React.ReactNode {
+  const setOption = useCallback(
+    (options: ColorOptions) => _setColorOption(cssPropertyName, options),
+    [cssPropertyName, _setColorOption]
+  );
   const disabled = option?.enabled !== true;
   return (
     <FormOptionBoolean

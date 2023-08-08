@@ -4,6 +4,7 @@ import AnimationOptions from "../../interfaces/AnimationOptions";
 import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOptions from "../../interfaces/ColorOptions";
+import CssColorProperty from "../../types/CssColorProperty";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
 import {
@@ -99,13 +100,7 @@ export default function Form(): React.ReactNode {
   );
 
   const setColorOption = useCallback(
-    (
-      key: Extract<
-        keyof CssOptions,
-        "backgroundColor" | "borderColor" | "color" | "textDecorationColor"
-      >,
-      option: ColorOptions
-    ) => {
+    (key: CssColorProperty, option: ColorOptions) => {
       const options = state.options;
       options.css[key] = {
         ...options.css[key],
@@ -298,18 +293,14 @@ export default function Form(): React.ReactNode {
           <FormSubsectionColor
             cssPropertyName={CssProperty.BACKGROUND_COLOR}
             option={state.options.css?.backgroundColor}
-            setOption={(option) =>
-              setColorOption(CssProperty.BACKGROUND_COLOR, option)
-            }
+            setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.BORDER_COLOR}
             option={state.options.css?.borderColor}
-            setOption={(option) =>
-              setColorOption(CssProperty.BORDER_COLOR, option)
-            }
+            setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
@@ -350,7 +341,7 @@ export default function Form(): React.ReactNode {
           <FormSubsectionColor
             cssPropertyName={CssProperty.COLOR}
             option={state.options.css?.color}
-            setOption={(option) => setColorOption(CssProperty.COLOR, option)}
+            setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
@@ -388,9 +379,7 @@ export default function Form(): React.ReactNode {
           <FormSubsectionColor
             cssPropertyName={CssProperty.TEXT_DECORATION_COLOR}
             option={state.options.css?.textDecorationColor}
-            setOption={(option) =>
-              setColorOption(CssProperty.TEXT_DECORATION_COLOR, option)
-            }
+            setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={state.options.global.unsafe}
           />
