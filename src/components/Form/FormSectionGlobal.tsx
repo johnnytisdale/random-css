@@ -1,4 +1,3 @@
-import GlobalOptions from "../../interfaces/GlobalOptions";
 import FormOption from "./FormOption";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormSection from "./FormSection";
@@ -7,22 +6,29 @@ import * as React from "react";
 
 interface Props {
   center: boolean;
-  options: GlobalOptions;
+  ignoreSpaces: boolean;
   setCenter: (center: boolean) => void;
-  setOptions: (options: Partial<GlobalOptions>) => void;
+  setIgnoreSpaces: (ignoreSpaces: boolean) => void;
+  setSize: (size: number) => void;
   setText: (text: string) => void;
+  setUnsafe: (unsafe: boolean) => void;
+  size: number;
   text: string;
+  unsafe: boolean;
 }
 
-export default function Form({
+export default function FormSectionGlobal({
   center,
-  options,
+  ignoreSpaces,
   setCenter,
-  setOptions,
+  setIgnoreSpaces,
+  setSize,
   setText,
+  setUnsafe,
+  size,
   text,
+  unsafe,
 }: Props): React.ReactNode {
-  const { ignoreSpaces, size, unsafe } = options;
   return (
     <FormSection id="global-options" title="global options">
       <FormOption
@@ -44,32 +50,31 @@ export default function Form({
           type: "number",
           value: size,
           onChange: (e) =>
-            setOptions({
-              size:
-                unsafe === true
-                  ? parseFloat(e.target.value)
-                  : getValidSize(parseFloat(e.target.value)),
-            }),
+            setSize(
+              unsafe === true
+                ? parseFloat(e.target.value)
+                : getValidSize(parseFloat(e.target.value))
+            ),
         }}
         label="size"
       />
       <FormOptionBoolean
         checked={unsafe}
         label="unsafe"
-        setChecked={(unsafe) =>
-          setOptions({
-            ...(!unsafe && { size: getValidSize(size) }),
-            unsafe,
-          })
-        }
+        setChecked={(unsafe) => {
+          setUnsafe(unsafe);
+          if (!unsafe) {
+            setSize(getValidSize(size));
+          }
+        }}
       />
       <FormOptionBoolean
-        checked={ignoreSpaces === true}
+        checked={ignoreSpaces}
         label="ignore spaces"
-        setChecked={(ignoreSpaces) => setOptions({ ignoreSpaces })}
+        setChecked={(ignoreSpaces) => setIgnoreSpaces(ignoreSpaces)}
       />
       <FormOptionBoolean
-        checked={center === true}
+        checked={center}
         label="center"
         setChecked={(center) => setCenter(center)}
       />

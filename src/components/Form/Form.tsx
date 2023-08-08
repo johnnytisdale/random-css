@@ -9,7 +9,10 @@ import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
 import {
   DEFAULT_GLOBAL_OPTIONS,
+  DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
+  DEFAULT_GLOBAL_OPTIONS_SIZE,
   DEFAULT_GLOBAL_OPTIONS_TEXT,
+  DEFAULT_GLOBAL_OPTIONS_UNSAFE,
 } from "../../interfaces/GlobalOptions";
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import FontStyleOptions from "../../interfaces/FontStyleOptions";
@@ -54,8 +57,12 @@ const initialState: State = {
 };
 
 export default function Form(): React.ReactNode {
-  const [center, setCenter] = useState(true);
+  const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
+  const [ignoreSpaces, setIgnoreSpaces] = useState<boolean>(
+    DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
+  );
+  const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
     initialState
@@ -65,6 +72,7 @@ export default function Form(): React.ReactNode {
     all: false,
     none: false,
   });
+  const [unsafe, setUnsafe] = useState<boolean>(DEFAULT_GLOBAL_OPTIONS_UNSAFE);
 
   const setAnimationOption = useCallback(
     (option: AnimationOptions) => {
@@ -223,7 +231,7 @@ export default function Form(): React.ReactNode {
             }
         )
       ),
-      global: state.options.global,
+      global: { ignoreSpaces, size, unsafe },
       glyph: Object.assign(
         {},
         ...Object.values(GlyphOption).map(
@@ -234,11 +242,7 @@ export default function Form(): React.ReactNode {
         )
       ),
     }),
-    /**
-     * TODO: Why doesn't it work when I use dependencies:
-     * [state.options.css, state.options.global, state.options.glyph]
-     */
-    [state]
+    [ignoreSpaces, size, state, unsafe]
   );
 
   return (
@@ -251,23 +255,15 @@ export default function Form(): React.ReactNode {
       <div id="dev-form">
         <FormSectionGlobal
           center={center}
-          options={state.options.global}
+          ignoreSpaces={ignoreSpaces}
           setCenter={setCenter}
-          setOptions={(newOptions) =>
-            setState({
-              options: {
-                ...state.options,
-                ...{
-                  global: {
-                    ...state.options.global,
-                    ...newOptions,
-                  },
-                },
-              },
-            })
-          }
+          setIgnoreSpaces={setIgnoreSpaces}
+          setSize={setSize}
           setText={setText}
+          setUnsafe={setUnsafe}
+          size={size}
           text={text}
+          unsafe={unsafe}
         />
 
         {/* css */}
@@ -288,21 +284,21 @@ export default function Form(): React.ReactNode {
             option={state.options.css?.animation}
             setOption={setAnimationOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global?.unsafe === true}
+            unsafe={unsafe}
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.BACKGROUND_COLOR}
             option={state.options.css?.backgroundColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global.unsafe}
+            unsafe={unsafe}
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.BORDER_COLOR}
             option={state.options.css?.borderColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global.unsafe}
+            unsafe={unsafe}
           />
           <FormSubsectionBorderRadius
             option={state.options.css?.borderRadius}
@@ -343,7 +339,7 @@ export default function Form(): React.ReactNode {
             option={state.options.css?.color}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global.unsafe}
+            unsafe={unsafe}
           />
           <FormSubsectionFontFamily
             option={state.options.css?.fontFamily}
@@ -354,7 +350,7 @@ export default function Form(): React.ReactNode {
             option={state.options.css?.fontStyle}
             setOption={setFontStyleOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global?.unsafe}
+            unsafe={unsafe}
           />
           <FormOptionBoolean
             checked={state.options.css?.fontWeight?.enabled === true}
@@ -381,7 +377,7 @@ export default function Form(): React.ReactNode {
             option={state.options.css?.textDecorationColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
-            unsafe={state.options.global.unsafe}
+            unsafe={unsafe}
           />
           <FormOptionBoolean
             checked={state.options.css?.textDecorationLine?.enabled === true}
@@ -447,7 +443,7 @@ export default function Form(): React.ReactNode {
 
         {/* export */}
         <FormSection id="export-options" title="export">
-          {state.options.global.unsafe === false && (
+          {!unsafe && (
             <div id="export-unsafe-css">
               You didn't select the unsafe option. Thanks for being security
               minded! Don't forget to use the{" "}
