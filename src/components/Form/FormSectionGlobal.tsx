@@ -45,8 +45,8 @@ export default function FormSectionGlobal({
           ...(unsafe === false && {
             max: "10",
             min: ".25",
-            step: "0.25",
           }),
+          step: "0.25",
           type: "number",
           value: size,
           onChange: (e) =>
