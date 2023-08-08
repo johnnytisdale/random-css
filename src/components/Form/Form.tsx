@@ -13,11 +13,11 @@ import {
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import FontStyleOptions from "../../interfaces/FontStyleOptions";
 import FontWeightValue from "../../enums/FontWeightValue";
-import FormOption from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionLength from "./FormOptionLength";
 import FormSection from "./FormSection";
+import FormSectionGlobal from "./FormSectionGlobal";
 import FormSubsection from "./FormSubsection";
 import FormSubsectionAnimation from "./Animation/FormSubsectionAnimation";
 import FormSubsectionBorderRadius from "./FormSubsectionBorderRadius";
@@ -261,65 +261,26 @@ export default function Form(): React.ReactNode {
 
       {/* dev form */}
       <div id="dev-form">
-        {/* Global options */}
-        <FormSection id="global-options" title="global options">
-          <FormOption
-            input={{
-              "data-testid": "randomcss-form-text",
-              type: "text",
-              value: text,
-              onChange: (e) => setText(e.target.value),
-            }}
-            label="text"
-          />
-          <FormOption
-            input={{
-              ...(state.options.global.unsafe === false && {
-                max: "10",
-                min: ".25",
-                step: "0.25",
-              }),
-              type: "number",
-              value: state.options.global.size,
-              onChange: (e) => {
-                const options = state.options;
-                options.global.size =
-                  options.global.unsafe === true
-                    ? parseFloat(e.target.value)
-                    : getValidSize(parseFloat(e.target.value));
-
-                setState({ options: options });
+        <FormSectionGlobal
+          center={center}
+          options={state.options.global}
+          setCenter={setCenter}
+          setOptions={(newOptions) =>
+            setState({
+              options: {
+                ...state.options,
+                ...{
+                  global: {
+                    ...state.options.global,
+                    ...newOptions,
+                  },
+                },
               },
-            }}
-            label="size"
-          />
-          <FormOptionBoolean
-            checked={state.options.global.unsafe}
-            label="unsafe"
-            setChecked={(unsafe) => {
-              const options = state.options;
-              options.global.unsafe = unsafe;
-              if (unsafe === false) {
-                options.global.size = getValidSize(options.global.size);
-              }
-              setState({ options });
-            }}
-          />
-          <FormOptionBoolean
-            checked={state.options.global.ignoreSpaces === true}
-            label="ignore spaces"
-            setChecked={(ignoreSpaces) => {
-              const options = state.options;
-              options.global.ignoreSpaces = ignoreSpaces;
-              setState({ options });
-            }}
-          />
-          <FormOptionBoolean
-            checked={center === true}
-            label="center"
-            setChecked={(newCenter) => setCenter(newCenter)}
-          />
-        </FormSection>
+            })
+          }
+          setText={setText}
+          text={text}
+        />
 
         {/* css */}
         <FormSection id="css-options" title="css options">
@@ -550,17 +511,6 @@ export default function Form(): React.ReactNode {
       </div>
     </>
   );
-}
-
-function getValidSize(size: number): number {
-  if (size > 10) {
-    return 10;
-  } else if (size < 0.25) {
-    return 0.25;
-  } else if (size % 0.25 !== 0) {
-    return parseFloat((Math.round(size * 4) / 4).toFixed(2));
-  }
-  return size;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
