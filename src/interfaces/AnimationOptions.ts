@@ -1,6 +1,7 @@
 import AnimationDirection from "../enums/AnimationDirection";
 import AnimationEasingFunction from "../enums/AnimationEasingFunction";
 import AnimationFillMode from "../enums/AnimationFillMode";
+import AnimationStepPosition from "../enums/AnimationStepPosition";
 import AnimationTransformation from "../enums/AnimationTransformation";
 import Option from "./Option";
 
@@ -20,6 +21,7 @@ export default interface AnimationOptions extends Option {
   easingFunctions?: AnimationEasingFunction[];
   fillModes?: AnimationFillMode[];
   iterationCount?: AnimationIterationCountOptions;
+  stepPositions?: AnimationStepPosition[];
   transformations?: AnimationTransformation[];
 }
 
@@ -48,6 +50,9 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
   min: DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
   zero: DEFAULT_ANIMATION_ITERATION_COUNT_ZERO,
 };
+export const DEFAULT_ANIMATION_STEP_POSITIONS = Object.values(
+  AnimationStepPosition
+);
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
   AnimationTransformation
 );
@@ -59,5 +64,6 @@ export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   enabled: DEFAULT_ANIMATION_ENABLED,
   fillModes: DEFAULT_ANIMATION_FILL_MODES,
   iterationCount: DEFAULT_ANIMATION_ITERATION_COUNT,
+  stepPositions: DEFAULT_ANIMATION_STEP_POSITIONS,
   transformations: DEFAULT_ANIMATION_TRANSFORMATIONS,
 };

@@ -10,7 +10,7 @@ export default abstract class Randomizable {
     return this.getRandomNumber(0, 1) === 1;
   }
 
-  protected getRandomDecimal(min: number, max: number, places = 2): number {
+  protected getRandomDecimal(min = 0, max = 1, places = 2): number {
     if (min < 0) {
       throw Error("getRandomDecimal: min cannot be less than 0.");
     } else if (min > 1) {

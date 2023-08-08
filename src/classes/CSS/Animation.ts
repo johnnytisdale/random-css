@@ -15,7 +15,9 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_DURATION_MIN,
   DEFAULT_ANIMATION_DURATION_MIN_UNSAFE,
   DEFAULT_ANIMATION_TRANSFORMATIONS,
+  DEFAULT_ANIMATION_STEP_POSITIONS,
 } from "../../interfaces/AnimationOptions";
+import AnimationStepPosition from "../../enums/AnimationStepPosition";
 
 export default class Animation extends CssProperty {
   private directions: AnimationDirection[];
@@ -26,6 +28,7 @@ export default class Animation extends CssProperty {
   private easingFunctions: AnimationEasingFunction[];
   private fillModes: AnimationFillMode[];
   private iterationCount: AnimationIterationCountOptions;
+  private stepPositions: AnimationStepPosition[];
   private transformations: AnimationTransformation[];
   public name = ECssProperty.ANIMATION;
 
@@ -35,11 +38,20 @@ export default class Animation extends CssProperty {
     this.easingFunctions = options.easingFunctions ?? [
       ...DEFAULT_ANIMATION_EASING_FUNCTIONS,
     ];
+    if (!unsafe) {
+      this.easingFunctions = this.easingFunctions.filter(
+        (easingFunction) =>
+          easingFunction !== AnimationEasingFunction.CUBIC_BEZIER &&
+          easingFunction !== AnimationEasingFunction.STEPS
+      );
+    }
     this.fillModes = options.fillModes ?? [...DEFAULT_ANIMATION_FILL_MODES];
     this.iterationCount = {
       ...DEFAULT_ANIMATION_ITERATION_COUNT,
       ...(options.iterationCount ?? {}),
     };
+    this.stepPositions =
+      options.stepPositions ?? DEFAULT_ANIMATION_STEP_POSITIONS;
     this.transformations = options.transformations ?? [
       ...DEFAULT_ANIMATION_TRANSFORMATIONS,
     ];
@@ -73,16 +85,32 @@ export default class Animation extends CssProperty {
     this.durationUnit = unsafe ? "ms" : "s";
   }
 
+  private getCubicBezierEasingFunction() {
+    const points = [
+      this.getRandomDecimal(),
+      this.getRandomNumber(-5, 5),
+      this.getRandomDecimal(),
+      this.getRandomNumber(-10, 10),
+    ];
+    return `${AnimationEasingFunction.CUBIC_BEZIER}(${points.join(", ")})`;
+  }
+
   // 831ms linear(0.51 94%, 0.61, 0.65, 0.69, 0.82, 0.93, 0.98, 0.99) 0s infinite alternate-reverse backwards running rotate
   private getEasingFunction(): string {
     if (!this.unsafe) {
       return this.getRandomArrayElement(this.easingFunctions);
     }
     const easingFunction = this.getRandomArrayElement(this.easingFunctions);
-    if (easingFunction === AnimationEasingFunction.LINEAR) {
-      return this.getLinearEasingFunction();
+    switch (easingFunction) {
+      case AnimationEasingFunction.CUBIC_BEZIER:
+        return this.getCubicBezierEasingFunction();
+      case AnimationEasingFunction.LINEAR:
+        return this.getLinearEasingFunction();
+      case AnimationEasingFunction.STEPS:
+        return this.getStepsEasingFunction();
+      default:
+        return easingFunction;
     }
-    return easingFunction;
   }
 
   private getIterationCount(): string {
@@ -127,6 +155,12 @@ export default class Animation extends CssProperty {
       }
     }
     return `${AnimationEasingFunction.LINEAR}(${points.join(", ")})`;
+  }
+
+  private getStepsEasingFunction() {
+    const integer = this.getRandomNumber(1, 5);
+    const stepPosition = this.getRandomArrayElement(this.stepPositions);
+    return `steps(${integer}, ${stepPosition})`;
   }
 
   public getRandomValue(): string {
