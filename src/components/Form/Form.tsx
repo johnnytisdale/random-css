@@ -59,6 +59,7 @@ const initialState: State = {
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
+  const [css, setCss] = useState<CssOptions>(DEFAULT_CSS_OPTIONS);
   const [ignoreSpaces, setIgnoreSpaces] = useState<boolean>(
     DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
   );
@@ -76,78 +77,78 @@ export default function Form(): React.ReactNode {
 
   const setAnimationOption = useCallback(
     (option: AnimationOptions) => {
-      const options = state.options;
-      options.css.animation = {
-        ...options.css.animation,
+      const newCss = { ...css };
+      newCss.animation = {
+        ...newCss.animation,
         ...option,
       };
-      setState({ options });
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const setBorderRadiusOption = useCallback(
     (option: BorderRadiusOptions) => {
-      const options = state.options;
-      options.css.borderRadius = {
-        ...options.css.borderRadius,
+      const newCss = { ...css };
+      newCss.borderRadius = {
+        ...newCss.borderRadius,
         ...option,
       };
-      setState({ options });
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const setLengthOption = useCallback(
     (key: Extract<keyof CssOptions, "borderWidth">, option: LengthOptions) => {
-      const options = state.options;
-      options.css[key] = { ...options.css[key], ...option };
-      setState({ options });
+      const newCss = { ...css };
+      newCss[key] = { ...newCss[key], ...option };
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const setColorOption = useCallback(
     (key: CssColorProperty, option: ColorOptions) => {
-      const options = state.options;
-      options.css[key] = {
-        ...options.css[key],
+      const newCss = { ...css };
+      newCss[key] = {
+        ...newCss[key],
         ...option,
       };
-      setState({ options });
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const setFontFamilyOption = useCallback(
     (option: FontFamilyOptions) => {
-      const options = state.options;
-      options.css.fontFamily = {
-        ...options.css.fontFamily,
+      const newCss = { ...css };
+      newCss.fontFamily = {
+        ...newCss.fontFamily,
         ...option,
       };
-      setState({ options });
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const setFontStyleOption = useCallback(
     (option: FontStyleOptions) => {
-      const options = state.options;
-      options.css.fontStyle = {
-        ...options.css.fontStyle,
+      const newCss = { ...css };
+      newCss.fontStyle = {
+        ...newCss.fontStyle,
         ...option,
       };
-      setState({ options });
+      setCss(newCss);
     },
-    [setState, state.options]
+    [css, setCss]
   );
 
   const toggleCssProperty = useCallback(
     (cssProperty: CssProperty, checked: boolean) => {
-      const options = state.options;
-      if (options.css[cssProperty] === undefined) {
-        options.css[cssProperty] = { enabled: false };
+      const newCss = { ...css };
+      if (newCss[cssProperty] === undefined) {
+        newCss[cssProperty] = { enabled: false };
       }
 
       /**
@@ -157,8 +158,8 @@ export default function Form(): React.ReactNode {
        * the new props so the values in prevProps will reflect the updated values
        * instead of the previous values.
        */
-      options.css[cssProperty] = {
-        ...options.css[cssProperty],
+      newCss[cssProperty] = {
+        ...newCss[cssProperty],
         ...{ enabled: checked },
       };
       const newToggleCss = { ...toggleCss };
@@ -167,10 +168,10 @@ export default function Form(): React.ReactNode {
       } else {
         newToggleCss.none = false;
       }
-      setState({ options });
+      setCss(newCss);
       setToggleCss(newToggleCss);
     },
-    [setState, setToggleCss, state.options, toggleCss]
+    [css, setCss, setToggleCss, toggleCss]
   );
 
   const toggleAll = useCallback(
@@ -185,13 +186,14 @@ export default function Form(): React.ReactNode {
       } else {
         newToggleCss.all = select;
         newToggleCss.none = !select;
-        const options = state.options;
+        const newCss = { ...css };
         Object.values(CssProperty).forEach((cssProperty) => {
-          toggleCssProperty(cssProperty, select);
+          newCss[cssProperty] = {
+            ...(newCss[cssProperty] ?? {}),
+            ...{ enabled: select },
+          };
         });
-        setState({
-          options: options,
-        });
+        setCss(newCss);
       }
       setToggleCss(newToggleCss);
     },
@@ -226,8 +228,8 @@ export default function Form(): React.ReactNode {
         {},
         ...Object.values(CssProperty).map(
           (cssProperty) =>
-            state.options.css?.[cssProperty]?.enabled === true && {
-              [cssProperty]: state.options.css[cssProperty],
+            css?.[cssProperty]?.enabled === true && {
+              [cssProperty]: css[cssProperty],
             }
         )
       ),
@@ -242,7 +244,7 @@ export default function Form(): React.ReactNode {
         )
       ),
     }),
-    [ignoreSpaces, size, state, unsafe]
+    [css, ignoreSpaces, size, setCss, state, unsafe]
   );
 
   return (
@@ -281,32 +283,32 @@ export default function Form(): React.ReactNode {
             setChecked={(checked) => toggleAll(checked, false)}
           />
           <FormSubsectionAnimation
-            option={state.options.css?.animation}
+            option={css?.animation}
             setOption={setAnimationOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.BACKGROUND_COLOR}
-            option={state.options.css?.backgroundColor}
+            option={css?.backgroundColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.BORDER_COLOR}
-            option={state.options.css?.borderColor}
+            option={css?.borderColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormSubsectionBorderRadius
-            option={state.options.css?.borderRadius}
+            option={css?.borderRadius}
             setOption={setBorderRadiusOption}
             toggle={toggleCssProperty}
           />
           <FormOptionBoolean
-            checked={state.options.css?.borderStyle?.enabled === true}
+            checked={css?.borderStyle?.enabled === true}
             label="borderStyle"
             setChecked={(checked) =>
               toggleCssProperty(CssProperty.BORDER_STYLE, checked)
@@ -314,46 +316,44 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={() =>
-                  state.options.css?.borderStyle?.enabled !== true
-                }
+                disabled={() => css?.borderStyle?.enabled !== true}
                 possibleValues={Object.values(BorderStyleKeyword)}
                 setValues={(keywords) => {
-                  const options = state.options;
-                  options.css.borderStyle.borderStyles = keywords;
-                  setState({ options });
+                  const newCss = { ...css };
+                  newCss.borderStyle.borderStyles = keywords;
+                  setCss(newCss);
                 }}
-                values={state.options.css?.borderStyle.borderStyles}
+                values={css?.borderStyle.borderStyles}
               />
             </FormSubsection>
           </FormOptionBoolean>
           <FormOptionLength
             label="borderWidth"
-            option={state.options.css?.borderWidth}
+            option={css?.borderWidth}
             setOption={(option) =>
               setLengthOption(CssProperty.BORDER_WIDTH, option)
             }
           />
           <FormSubsectionColor
             cssPropertyName={CssProperty.COLOR}
-            option={state.options.css?.color}
+            option={css?.color}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormSubsectionFontFamily
-            option={state.options.css?.fontFamily}
+            option={css?.fontFamily}
             setOption={(option) => setFontFamilyOption(option)}
             toggle={toggleCssProperty}
           />
           <FormSubsectionFontStyle
-            option={state.options.css?.fontStyle}
+            option={css?.fontStyle}
             setOption={setFontStyleOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormOptionBoolean
-            checked={state.options.css?.fontWeight?.enabled === true}
+            checked={css?.fontWeight?.enabled === true}
             label="fontWeight"
             setChecked={(checked) =>
               toggleCssProperty(CssProperty.FONT_WEIGHT, checked)
@@ -361,26 +361,26 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={() => state.options.css?.fontWeight?.enabled !== true}
+                disabled={() => css?.fontWeight?.enabled !== true}
                 possibleValues={Object.values(FontWeightValue)}
                 setValues={(keywords) => {
-                  const options = state.options;
-                  options.css.fontWeight.fontWeights = keywords;
-                  setState({ options });
+                  const newCss = { ...css };
+                  newCss.fontWeight.fontWeights = keywords;
+                  setCss(newCss);
                 }}
-                values={state.options.css?.fontWeight?.fontWeights}
+                values={css?.fontWeight?.fontWeights}
               />
             </FormSubsection>
           </FormOptionBoolean>
           <FormSubsectionColor
             cssPropertyName={CssProperty.TEXT_DECORATION_COLOR}
-            option={state.options.css?.textDecorationColor}
+            option={css?.textDecorationColor}
             setColorOption={setColorOption}
             toggle={toggleCssProperty}
             unsafe={unsafe}
           />
           <FormOptionBoolean
-            checked={state.options.css?.textDecorationLine?.enabled === true}
+            checked={css?.textDecorationLine?.enabled === true}
             label="textDecorationLine"
             setChecked={(checked) =>
               toggleCssProperty(CssProperty.TEXT_DECORATION_LINE, checked)
@@ -388,21 +388,19 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={() =>
-                  state.options.css?.textDecorationLine?.enabled !== true
-                }
+                disabled={() => css?.textDecorationLine?.enabled !== true}
                 possibleValues={Object.values(TextDecorationLineKeyword)}
                 setValues={(keywords) => {
-                  const options = state.options;
-                  options.css.textDecorationLine.lines = keywords;
-                  setState({ options });
+                  const newCss = { ...css };
+                  newCss.textDecorationLine.lines = keywords;
+                  setCss(newCss);
                 }}
-                values={state.options.css?.textDecorationLine.lines}
+                values={css?.textDecorationLine.lines}
               />
             </FormSubsection>
           </FormOptionBoolean>
           <FormOptionBoolean
-            checked={state.options.css?.textDecorationStyle?.enabled === true}
+            checked={css?.textDecorationStyle?.enabled === true}
             label="textDecorationStyle"
             setChecked={(checked) =>
               toggleCssProperty(CssProperty.TEXT_DECORATION_STYLE, checked)
@@ -410,16 +408,14 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={() =>
-                  state.options.css?.textDecorationStyle?.enabled !== true
-                }
+                disabled={() => css?.textDecorationStyle?.enabled !== true}
                 possibleValues={Object.values(TextDecorationStyleKeyword)}
                 setValues={(keywords) => {
-                  const options = state.options;
-                  options.css.textDecorationStyle.styles = keywords;
-                  setState({ options });
+                  const newCss = { ...css };
+                  newCss.textDecorationStyle.styles = keywords;
+                  setCss(newCss);
                 }}
-                values={state.options.css?.textDecorationStyle.styles}
+                values={css?.textDecorationStyle.styles}
               />
             </FormSubsection>
           </FormOptionBoolean>
