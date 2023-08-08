@@ -36,7 +36,6 @@ import { useCallback, useMemo, useReducer, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 interface State {
-  copied: boolean | null;
   form: {
     css: {
       selectAll: boolean;
@@ -47,7 +46,6 @@ interface State {
 }
 
 const initialState: State = {
-  copied: null,
   form: {
     css: {
       selectAll: false,
@@ -63,6 +61,7 @@ const initialState: State = {
 
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState(true);
+  const [copied, setCopied] = useState<boolean>(null);
   const [state, setState] = useReducer(
     (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
     initialState
@@ -220,8 +219,8 @@ export default function Form(): React.ReactNode {
   const popupClassName = useMemo(
     () =>
       "popup-text" +
-      (state.copied === true ? " show" : state.copied === false ? " hide" : ""),
-    [state.copied]
+      (copied === true ? " show" : copied === false ? " hide" : ""),
+    [copied]
   );
 
   const optionsToExport: Options = useMemo(
@@ -498,8 +497,8 @@ export default function Form(): React.ReactNode {
                   navigator.clipboard.writeText(
                     JSON.stringify(optionsToExport)
                   );
-                  setState({ copied: true });
-                  setTimeout(() => setState({ copied: false }), 1500);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1500);
                 }}
               >
                 copy
