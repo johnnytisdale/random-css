@@ -1,4 +1,3 @@
-import { CommonOptionProps } from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
@@ -8,10 +7,11 @@ import LengthOptions, {
   DEFAULT_LENGTH_MIN,
 } from "../../interfaces/LengthOptions";
 import LengthUnit from "../../enums/LengthUnit";
+import OptionProps from "../../interfaces/OptionProps";
 
 import * as React from "react";
 
-interface Props extends CommonOptionProps {
+interface Props extends OptionProps {
   option: LengthOptions;
   setOption: (option: LengthOptions) => void;
 }
@@ -39,7 +39,7 @@ export default function FormOptionLength({
       </FormSubsection>
       <FormSubsection label="units">
         <FormOptionArray
-          disabled={option?.enabled !== true}
+          disabled={() => option?.enabled !== true}
           possibleValues={Object.values(LengthUnit)}
           setValues={(units) => setOption({ units })}
           values={option?.units ?? []}

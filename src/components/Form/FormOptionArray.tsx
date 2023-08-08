@@ -1,9 +1,9 @@
-import FormOption, { CommonOptionProps } from "./FormOption";
+import FormOption from "./FormOption";
 
 import * as React from "react";
 
-interface Props<T> extends CommonOptionProps {
-  disabled?: boolean;
+interface Props<T> {
+  disabled?: (value: T) => boolean;
   displayValue?: (value: T) => string;
   possibleValues: T[];
   setValues: (values: T[]) => void;
@@ -11,7 +11,7 @@ interface Props<T> extends CommonOptionProps {
 }
 
 export default function FormOptionArray<T>({
-  disabled = false,
+  disabled,
   displayValue,
   possibleValues,
   setValues,
@@ -22,13 +22,13 @@ export default function FormOptionArray<T>({
       label={displayValue === undefined ? String(value) : displayValue(value)}
       input={{
         checked: values.includes(value),
-        disabled,
+        disabled: disabled == null ? false : disabled(value),
         type: "checkbox",
         onChange: (e) =>
           setValues(
             e.target.checked === true
               ? [value, ...values]
-              : values.filter((v) => v !== value),
+              : values.filter((v) => v !== value)
           ),
       }}
       key={String(value)}

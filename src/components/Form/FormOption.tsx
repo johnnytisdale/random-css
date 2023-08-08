@@ -3,6 +3,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { useMemo } from "react";
+import OptionProps from "../../interfaces/OptionProps";
 
 interface InputProps
   extends React.DetailedHTMLProps<
@@ -12,14 +13,7 @@ interface InputProps
   "data-testid"?: string;
 }
 
-export interface CommonOptionProps {
-  children?: React.ReactNode;
-  disabled?: boolean;
-  id?: string;
-  label?: string;
-}
-
-interface Props extends CommonOptionProps {
+interface Props extends OptionProps {
   input: InputProps;
 }
 
@@ -39,7 +33,7 @@ export default function FormOption({
       ]
         .filter(Boolean)
         .join(" "),
-    [children, expanded],
+    [children, expanded]
   );
   return (
     <>

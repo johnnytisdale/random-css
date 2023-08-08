@@ -1,14 +1,14 @@
 import Color from "../../enums/ColorKeyword";
 import ColorOption from "../../interfaces/ColorOptions";
-import { CommonOptionProps } from "./FormOption";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
+import OptionProps from "../../interfaces/OptionProps";
 
 import * as React from "react";
 
-interface Props extends CommonOptionProps {
+interface Props extends OptionProps {
   option: ColorOption;
   setOption: (option: ColorOption) => void;
   unsafe: boolean;
@@ -63,7 +63,7 @@ export default function FormOptionColor({
       ) : (
         <FormSubsection label="keywords">
           <FormOptionArray
-            {...{ disabled }}
+            disabled={() => disabled}
             possibleValues={Object.values(Color)}
             setValues={(colorKeywords) => setOption({ colorKeywords })}
             values={option?.colorKeywords ?? []}

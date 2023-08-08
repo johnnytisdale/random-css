@@ -114,7 +114,7 @@ export default function FormSubsectionAnimation({
     >
       <FormSubsection label="directions">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           possibleValues={Object.values(AnimationDirection)}
           setValues={(directions) => setOption({ directions })}
           values={option?.directions ?? []}
@@ -137,7 +137,12 @@ export default function FormSubsectionAnimation({
       </FormSubsection>
       <FormSubsection label="easing functions">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={(value) =>
+            disabled ||
+            (!unsafe &&
+              (value === AnimationEasingFunction.CUBIC_BEZIER ||
+                value === AnimationEasingFunction.STEPS))
+          }
           possibleValues={Object.values(AnimationEasingFunction)}
           setValues={(easingFunctions) =>
             setOption({ ...option, ...{ easingFunctions } })
@@ -147,7 +152,7 @@ export default function FormSubsectionAnimation({
       </FormSubsection>
       <FormSubsection label="fill modes">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           possibleValues={Object.values(AnimationFillMode)}
           setValues={(fillModes) => setOption({ ...option, ...{ fillModes } })}
           values={option?.fillModes ?? []}
@@ -161,7 +166,7 @@ export default function FormSubsectionAnimation({
       />
       <FormSubsection label="transformations">
         <FormOptionArray
-          {...{ disabled }}
+          disabled={() => disabled}
           possibleValues={Object.values(AnimationTransformation)}
           setValues={(transformations) =>
             setOption({ ...option, ...{ transformations } })

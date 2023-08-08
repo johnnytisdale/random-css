@@ -287,6 +287,7 @@ export default function Form(): React.ReactNode {
                   options.global.unsafe === true
                     ? parseFloat(e.target.value)
                     : getValidSize(parseFloat(e.target.value));
+
                 setState({ options: options });
               },
             }}
@@ -364,7 +365,9 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={state.options.css?.borderStyle?.enabled !== true}
+                disabled={() =>
+                  state.options.css?.borderStyle?.enabled !== true
+                }
                 possibleValues={Object.values(BorderStyleKeyword)}
                 setValues={(keywords) => {
                   const options = state.options;
@@ -406,7 +409,7 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={state.options.css?.fontWeight?.enabled !== true}
+                disabled={() => state.options.css?.fontWeight?.enabled !== true}
                 possibleValues={Object.values(FontWeightValue)}
                 setValues={(keywords) => {
                   const options = state.options;
@@ -434,7 +437,7 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={
+                disabled={() =>
                   state.options.css?.textDecorationLine?.enabled !== true
                 }
                 possibleValues={Object.values(TextDecorationLineKeyword)}
@@ -456,7 +459,7 @@ export default function Form(): React.ReactNode {
           >
             <FormSubsection>
               <FormOptionArray
-                disabled={
+                disabled={() =>
                   state.options.css?.textDecorationStyle?.enabled !== true
                 }
                 possibleValues={Object.values(TextDecorationStyleKeyword)}
