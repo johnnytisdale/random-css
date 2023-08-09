@@ -2,6 +2,7 @@ import CssProperty from "../enums/CssProperty";
 import OptionName from "../types/OptionName";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
+import Style from "../types/Style";
 import Timeouts from "../interfaces/Timeouts";
 
 import { Property as CssPropertyType } from "csstype";
@@ -22,10 +23,6 @@ interface Props {
   size: number;
   unsafe: boolean;
 }
-
-type Style = {
-  [value in CssProperty]?: string;
-};
 
 const DEFAULTS: Style = {
   borderWidth: "1px",
