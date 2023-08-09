@@ -31,7 +31,6 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
   const [css, setCss] = useReducer(reducer<CssOptions>, DEFAULT_CSS_OPTIONS);
-  console.log(css);
   const [glyph, setGlyph] = useReducer(
     reducer<GlyphOptions>,
     DEFAULT_GLYPH_OPTIONS
