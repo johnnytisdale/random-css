@@ -20,7 +20,7 @@ import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
 
 import * as React from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 export default function Form(): React.ReactNode {
@@ -36,21 +36,6 @@ export default function Form(): React.ReactNode {
   const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
   const [unsafe, setUnsafe] = useState<boolean>(DEFAULT_GLOBAL_OPTIONS_UNSAFE);
-
-  const toggleGlyphOption = useCallback(
-    (glyphOption: GlyphOption, enabled: boolean) => {
-      setGlyphOptions({
-        ...glyphOptions,
-        ...{
-          [glyphOption]: {
-            ...glyphOptions[glyphOption],
-            ...{ enabled },
-          },
-        },
-      });
-    },
-    [glyphOptions, setGlyphOptions]
-  );
 
   const popupClassName = useMemo(
     () =>
@@ -108,12 +93,7 @@ export default function Form(): React.ReactNode {
         <FormSectionCss css={css} setCss={setCss} unsafe={unsafe} />
 
         {/* glyph */}
-        <FormSectionGlyph
-          options={glyphOptions}
-          toggle={(glyphOptionName, checked) =>
-            toggleGlyphOption(glyphOptionName, checked)
-          }
-        />
+        <FormSectionGlyph options={glyphOptions} setOptions={setGlyphOptions} />
 
         {/* export */}
         <FormSection id="export-options" title="export">

@@ -4,16 +4,31 @@ import FormOptionBoolean from "./FormOptionBoolean";
 import FormSection from "./FormSection";
 
 import * as React from "react";
+import { useCallback } from "react";
 
 interface Props {
   options: GlyphOptions;
-  toggle: (optionName: GlyphOption, enabled: boolean) => void;
+  setOptions: (options: GlyphOptions) => void;
 }
 
 export default function FormSectionGlyph({
   options,
-  toggle,
+  setOptions,
 }: Props): React.ReactNode {
+  const toggle = useCallback(
+    (glyphOption: GlyphOption, enabled: boolean) => {
+      setOptions({
+        ...options,
+        ...{
+          [glyphOption]: {
+            ...options[glyphOption],
+            ...{ enabled },
+          },
+        },
+      });
+    },
+    [options, setOptions]
+  );
   return (
     <FormSection id="glyph-options" title="glyph options">
       <FormOptionBoolean
