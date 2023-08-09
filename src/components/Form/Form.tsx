@@ -3,7 +3,6 @@ import "../../styles/Form.scss";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
 import CssProperty from "../../enums/CssProperty";
 import {
-  DEFAULT_GLOBAL_OPTIONS,
   DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   DEFAULT_GLOBAL_OPTIONS_SIZE,
   DEFAULT_GLOBAL_OPTIONS_TEXT,
@@ -18,49 +17,39 @@ import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
 
 import * as React from "react";
-import { useCallback, useMemo, useReducer, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-
-interface State {
-  options: Options;
-}
-
-const initialState: State = {
-  options: {
-    css: { ...DEFAULT_CSS_OPTIONS },
-    global: { ...DEFAULT_GLOBAL_OPTIONS },
-    glyph: {},
-  },
-};
+import GlyphOptions, {
+  DEFAULT_GLYPH_OPTIONS,
+} from "../../interfaces/GlyphOptions";
 
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
   const [css, setCss] = useState<CssOptions>(DEFAULT_CSS_OPTIONS);
+  const [glyphOptions, setGlyphOptions] = useState<GlyphOptions>(
+    DEFAULT_GLYPH_OPTIONS
+  );
   const [ignoreSpaces, setIgnoreSpaces] = useState<boolean>(
     DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
   );
   const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
-  const [state, setState] = useReducer(
-    (state: State, newState: Partial<State>) => ({ ...state, ...newState }),
-    initialState
-  );
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
   const [unsafe, setUnsafe] = useState<boolean>(DEFAULT_GLOBAL_OPTIONS_UNSAFE);
 
   const toggleGlyphOption = useCallback(
-    (glyphOption: GlyphOption, checked: boolean) => {
-      const options = state.options;
-      if (options.glyph[glyphOption] === undefined) {
-        options.glyph[glyphOption] = { enabled: false };
-      }
-      options.glyph[glyphOption] = {
-        ...options.glyph[glyphOption],
-        ...{ enabled: checked },
-      };
-      setState({ options: options });
+    (glyphOption: GlyphOption, enabled: boolean) => {
+      setGlyphOptions({
+        ...glyphOptions,
+        ...{
+          [glyphOption]: {
+            ...glyphOptions[glyphOption],
+            ...{ enabled },
+          },
+        },
+      });
     },
-    [setState, state.options]
+    [glyphOptions, setGlyphOptions]
   );
 
   const popupClassName = useMemo(
@@ -86,13 +75,13 @@ export default function Form(): React.ReactNode {
         {},
         ...Object.values(GlyphOption).map(
           (glyphOption) =>
-            state.options.glyph?.[glyphOption]?.enabled === true && {
-              [glyphOption]: state.options.glyph[glyphOption],
+            glyphOptions?.[glyphOption]?.enabled && {
+              [glyphOption]: glyphOptions[glyphOption],
             }
         )
       ),
     }),
-    [css, ignoreSpaces, size, setCss, state, unsafe]
+    [css, glyphOptions, ignoreSpaces, setCss, setGlyphOptions, size, unsafe]
   );
 
   return (
@@ -121,13 +110,13 @@ export default function Form(): React.ReactNode {
         {/* glyph */}
         <FormSection id="glyph-options" title="glyph options">
           <FormOptionBoolean
-            checked={state.options.glyph?.leet?.enabled === true}
+            checked={glyphOptions?.leet?.enabled}
             id="1337"
             label="1337"
             setChecked={(x) => toggleGlyphOption(GlyphOption.LEET, x)}
           />
           <FormOptionBoolean
-            checked={state.options.glyph?.unicode?.enabled === true}
+            checked={glyphOptions?.unicode?.enabled}
             id="unicode"
             label={GlyphOption.UNICODE}
             setChecked={(x) => toggleGlyphOption(GlyphOption.UNICODE, x)}
