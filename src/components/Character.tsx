@@ -1,11 +1,11 @@
 import CssProperty from "../enums/CssProperty";
 import OptionName from "../types/OptionName";
+import { Property as CssPropertyType } from "csstype";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
 import Style from "../types/Style";
 import Timeouts from "../interfaces/Timeouts";
 
-import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import {
   useCallback,
