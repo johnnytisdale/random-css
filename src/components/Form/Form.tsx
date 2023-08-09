@@ -8,10 +8,10 @@ import {
   DEFAULT_GLOBAL_OPTIONS_TEXT,
   DEFAULT_GLOBAL_OPTIONS_UNSAFE,
 } from "../../interfaces/GlobalOptions";
-import FormOptionBoolean from "./FormOptionBoolean";
 import FormSection from "./FormSection";
 import FormSectionCss from "./FormSectionCss";
 import FormSectionGlobal from "./FormSectionGlobal";
+import FormSectionGlyph from "./FormSectionGlyph";
 import GlyphOption from "../../enums/GlyphOption";
 import GlyphOptions, {
   DEFAULT_GLYPH_OPTIONS,
@@ -108,20 +108,12 @@ export default function Form(): React.ReactNode {
         <FormSectionCss css={css} setCss={setCss} unsafe={unsafe} />
 
         {/* glyph */}
-        <FormSection id="glyph-options" title="glyph options">
-          <FormOptionBoolean
-            checked={glyphOptions?.leet?.enabled}
-            id="1337"
-            label="1337"
-            setChecked={(x) => toggleGlyphOption(GlyphOption.LEET, x)}
-          />
-          <FormOptionBoolean
-            checked={glyphOptions?.unicode?.enabled}
-            id="unicode"
-            label={GlyphOption.UNICODE}
-            setChecked={(x) => toggleGlyphOption(GlyphOption.UNICODE, x)}
-          />
-        </FormSection>
+        <FormSectionGlyph
+          options={glyphOptions}
+          toggle={(glyphOptionName, checked) =>
+            toggleGlyphOption(glyphOptionName, checked)
+          }
+        />
 
         {/* export */}
         <FormSection id="export-options" title="export">
