@@ -56,7 +56,7 @@ export default function FormSubsectionAnimationIterationCount({
         step={unsafe ? "0.01" : "1"}
       />
       <FormOptionBoolean
-        checked={option.zero === true}
+        checked={option?.zero}
         disabled={disabled}
         label="zero"
         setChecked={(zero) => setOption({ zero })}

@@ -31,7 +31,11 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
   const [css, setCss] = useReducer(reducer<CssOptions>, DEFAULT_CSS_OPTIONS);
-  const [glyph, setGlyph] = useState<GlyphOptions>(DEFAULT_GLYPH_OPTIONS);
+  console.log(css);
+  const [glyph, setGlyph] = useReducer(
+    reducer<GlyphOptions>,
+    DEFAULT_GLYPH_OPTIONS
+  );
   const [ignoreSpaces, setIgnoreSpaces] = useState(
     DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
   );
@@ -61,7 +65,7 @@ export default function Form(): React.ReactNode {
         )
       ),
     }),
-    [css, glyph, ignoreSpaces, setGlyph, size, unsafe]
+    [css, glyph, ignoreSpaces, size, unsafe]
   );
 
   return (
