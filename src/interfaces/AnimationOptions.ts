@@ -30,14 +30,10 @@ export const DEFAULT_ANIMATION_DURATION_MAX = 3;
 export const DEFAULT_ANIMATION_DURATION_MIN = 1;
 export const DEFAULT_ANIMATION_DURATION_MAX_UNSAFE = 3000;
 export const DEFAULT_ANIMATION_DURATION_MIN_UNSAFE = 300;
-export const DEFAULT_ANIMATION_EASING_FUNCTIONS =
-  /* Object.values(AnimationEasingFunction); */
-  [
-    AnimationEasingFunction.CUBIC_BEZIER,
-    AnimationEasingFunction.LINEAR,
-    AnimationEasingFunction.STEPS,
-  ];
-export const DEFAULT_ANIMATION_ENABLED = true;
+export const DEFAULT_ANIMATION_EASING_FUNCTIONS = Object.values(
+  AnimationEasingFunction
+);
+export const DEFAULT_ANIMATION_ENABLED = false;
 export const DEFAULT_ANIMATION_FILL_MODES = Object.values(AnimationFillMode);
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE = true;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE_PROBABILITY = 0.5;
@@ -57,9 +53,9 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT = {
 export const DEFAULT_ANIMATION_STEP_POSITIONS = Object.values(
   AnimationStepPosition
 );
-export const DEFAULT_ANIMATION_TRANSFORMATIONS =
-  /* Object.values(AnimationTransformation); */
-  [AnimationTransformation.ROTATE];
+export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
+  AnimationTransformation
+);
 export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
   directions: DEFAULT_ANIMATION_DIRECTIONS,
   durationMax: DEFAULT_ANIMATION_DURATION_MAX_UNSAFE,
