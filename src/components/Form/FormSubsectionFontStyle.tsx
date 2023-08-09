@@ -42,7 +42,7 @@ export default function FormSubsectionFontStyle({
           disabled={
             disabled ||
             !unsafe ||
-            !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
+            !(option?.fontStyles ?? []).includes(FontStyleKeyword.OBLIQUE)
           }
           label="degrees"
           setChecked={(degrees) => setOption({ degrees })}
@@ -53,7 +53,7 @@ export default function FormSubsectionFontStyle({
             disabled ||
             !unsafe ||
             !option?.degrees ||
-            !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
+            !(option?.fontStyles ?? []).includes(FontStyleKeyword.OBLIQUE)
           }
           value={option?.degreesProbability}
           setProbability={(degreesProbability) =>
