@@ -13,15 +13,15 @@ import FormSection from "./FormSection";
 import FormSectionCss from "./FormSectionCss";
 import FormSectionGlobal from "./FormSectionGlobal";
 import GlyphOption from "../../enums/GlyphOption";
+import GlyphOptions, {
+  DEFAULT_GLYPH_OPTIONS,
+} from "../../interfaces/GlyphOptions";
 import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
 
 import * as React from "react";
 import { useCallback, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import GlyphOptions, {
-  DEFAULT_GLYPH_OPTIONS,
-} from "../../interfaces/GlyphOptions";
 
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
