@@ -12,7 +12,7 @@ export default class BorderRadius extends CssProperty {
   }
 
   private getRandomRadius(min = 0, max = 100): string {
-    return `${Randomizable.getRandomNumber(min, max)}%`;
+    return `${Randomizable.number(min, max)}%`;
   }
 
   public getRandomValue(): string {
@@ -20,7 +20,7 @@ export default class BorderRadius extends CssProperty {
       this.options.slash && Math.random() <= this.options.slashProbability;
     const valueSets: string[] = [];
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
-      const valueCount = Randomizable.getRandomNumber(
+      const valueCount = Randomizable.number(
         this.options.minCorners,
         this.options.maxCorners
       );

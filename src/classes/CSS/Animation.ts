@@ -88,10 +88,10 @@ export default class Animation extends CssProperty {
 
   private getCubicBezierEasingFunction() {
     const points = [
-      Randomizable.getRandomDecimal(),
-      Randomizable.getRandomNumber(-5, 5),
-      Randomizable.getRandomDecimal(),
-      Randomizable.getRandomNumber(-10, 10),
+      Randomizable.decimal(),
+      Randomizable.number(-5, 5),
+      Randomizable.decimal(),
+      Randomizable.number(-10, 10),
     ];
     return `${AnimationEasingFunction.CUBIC_BEZIER}(${points.join(", ")})`;
   }
@@ -99,11 +99,9 @@ export default class Animation extends CssProperty {
   // 831ms linear(0.51 94%, 0.61, 0.65, 0.69, 0.82, 0.93, 0.98, 0.99) 0s infinite alternate-reverse backwards running rotate
   private getEasingFunction(): string {
     if (!this.unsafe) {
-      return Randomizable.getRandomArrayElement(this.easingFunctions);
+      return Randomizable.array(this.easingFunctions);
     }
-    const easingFunction = Randomizable.getRandomArrayElement(
-      this.easingFunctions
-    );
+    const easingFunction = Randomizable.array(this.easingFunctions);
     switch (easingFunction) {
       case AnimationEasingFunction.CUBIC_BEZIER:
         return this.getCubicBezierEasingFunction();
@@ -123,7 +121,7 @@ export default class Animation extends CssProperty {
     ) {
       return "infinite";
     }
-    const iterationCount = Randomizable.getRandomNumber(
+    const iterationCount = Randomizable.number(
       this.iterationCount.min,
       this.iterationCount.max,
       this.iterationCount.integersOnly
@@ -139,17 +137,16 @@ export default class Animation extends CssProperty {
   }
 
   private getLinearEasingFunction() {
-    const numberOfPoints = Randomizable.getRandomNumber(1, 10);
+    const numberOfPoints = Randomizable.number(1, 10);
     const points: string[] = [];
     let lastPoint = 0;
     let hasPercent = false;
     for (let i = 0; i < numberOfPoints; i++) {
-      const point = Randomizable.getRandomDecimal(lastPoint + 0.01, 1, 2);
+      const point = Randomizable.decimal(lastPoint + 0.01, 1, 2);
       lastPoint = point;
       const usePercent = !hasPercent && Math.random() <= numberOfPoints / 10;
       points.push(
-        `${point}` +
-          (usePercent ? ` ${Randomizable.getRandomNumber(1, 100)}%` : "")
+        `${point}` + (usePercent ? ` ${Randomizable.number(1, 100)}%` : "")
       );
       if (point === 1) {
         break;
@@ -162,22 +159,22 @@ export default class Animation extends CssProperty {
   }
 
   private getStepsEasingFunction() {
-    const integer = Randomizable.getRandomNumber(1, 5);
-    const stepPosition = Randomizable.getRandomArrayElement(this.stepPositions);
+    const integer = Randomizable.number(1, 5);
+    const stepPosition = Randomizable.array(this.stepPositions);
     return `steps(${integer}, ${stepPosition})`;
   }
 
   public getRandomValue(): string {
     return [
-      String(Randomizable.getRandomNumber(this.durationMin, this.durationMax)) +
+      String(Randomizable.number(this.durationMin, this.durationMax)) +
         this.durationUnit,
       this.getEasingFunction(),
       "0s", // delay
       this.getIterationCount(),
-      Randomizable.getRandomArrayElement(this.directions),
-      Randomizable.getRandomArrayElement(this.fillModes),
+      Randomizable.array(this.directions),
+      Randomizable.array(this.fillModes),
       "running", // play state
-      Randomizable.getRandomArrayElement(this.transformations),
+      Randomizable.array(this.transformations),
     ].join(" ");
   }
 }

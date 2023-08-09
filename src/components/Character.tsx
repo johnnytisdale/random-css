@@ -90,7 +90,7 @@ export default function Character({
       }
       timeouts.current[name] = setTimeout(
         () => timeoutFunction(_randomizables.current[name], name),
-        Randomizable.getRandomNumber(300, 3000)
+        Randomizable.number(300, 3000)
       );
     },
     [_randomizables.current, style, timeouts.current]

@@ -29,7 +29,7 @@ export default class FontStyle extends CssProperty {
   }
 
   public getRandomValue(): string {
-    const keyword = Randomizable.getRandomArrayElement(this.fontStyles);
+    const keyword = Randomizable.array(this.fontStyles);
     // TODO: Support oblique deg when unsafe === false
     return this.unsafe &&
       keyword === FontStyleKeyword.OBLIQUE &&
@@ -37,9 +37,7 @@ export default class FontStyle extends CssProperty {
       Math.random() <= this.degreesProbability
       ? keyword +
           " " +
-          String(
-            Randomizable.getRandomNumber(this.minDegrees, this.maxDegrees)
-          ) +
+          String(Randomizable.number(this.minDegrees, this.maxDegrees)) +
           "deg"
       : keyword;
   }

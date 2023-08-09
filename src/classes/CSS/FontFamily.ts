@@ -52,10 +52,10 @@ export default class FontFamily extends CssProperty {
   public getRandomValue(): string {
     return this.includeFallbacks && Math.random() <= this.fallbackProbability
       ? [
-          Randomizable.getRandomArrayElement(this.fontFamilyNames),
-          Randomizable.getRandomArrayElement(this.fontGenericNames),
+          Randomizable.array(this.fontFamilyNames),
+          Randomizable.array(this.fontGenericNames),
         ].join(", ")
-      : Randomizable.getRandomArrayElement([
+      : Randomizable.array([
           ...(this.includeFamilyNames ? this.fontFamilyNames : []),
           ...(this.includeGenericNames ? this.fontGenericNames : []),
         ]);
