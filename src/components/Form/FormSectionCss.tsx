@@ -46,14 +46,13 @@ export default function FormSectionCss({
     none: false,
   });
   const setAnimationOption = useCallback(
-    (option: AnimationOptions) => {
-      const newCss = { ...css };
-      newCss.animation = {
-        ...newCss.animation,
-        ...option,
-      };
-      setCss(newCss);
-    },
+    (option: AnimationOptions) =>
+      setCss({
+        animation: {
+          ...css.animation,
+          ...option,
+        },
+      }),
     [css, setCss]
   );
 

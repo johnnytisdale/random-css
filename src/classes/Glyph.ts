@@ -24,7 +24,7 @@ export default class Glyph extends Randomizable {
   }
 
   public getRandomValue(): string {
-    return this.getRandomArrayElement(this.glyphs);
+    return Randomizable.getRandomArrayElement(this.glyphs);
   }
 }
 

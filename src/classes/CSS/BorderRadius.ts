@@ -1,6 +1,7 @@
 import CssProperty from "./CssProperty";
 import ECssProperty from "../../enums/CssProperty";
 import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
+import Randomizable from "../Randomizable";
 
 export default class BorderRadius extends CssProperty {
   public name = ECssProperty.BORDER_RADIUS;
@@ -11,7 +12,7 @@ export default class BorderRadius extends CssProperty {
   }
 
   private getRandomRadius(min = 0, max = 100): string {
-    return `${this.getRandomNumber(min, max)}%`;
+    return `${Randomizable.getRandomNumber(min, max)}%`;
   }
 
   public getRandomValue(): string {
@@ -19,7 +20,7 @@ export default class BorderRadius extends CssProperty {
       this.options.slash && Math.random() <= this.options.slashProbability;
     const valueSets: string[] = [];
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
-      const valueCount = this.getRandomNumber(
+      const valueCount = Randomizable.getRandomNumber(
         this.options.minCorners,
         this.options.maxCorners
       );

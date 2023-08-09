@@ -18,6 +18,7 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_STEP_POSITIONS,
 } from "../../interfaces/AnimationOptions";
 import AnimationStepPosition from "../../enums/AnimationStepPosition";
+import Randomizable from "../Randomizable";
 
 export default class Animation extends CssProperty {
   private directions: AnimationDirection[];
@@ -87,10 +88,10 @@ export default class Animation extends CssProperty {
 
   private getCubicBezierEasingFunction() {
     const points = [
-      this.getRandomDecimal(),
-      this.getRandomNumber(-5, 5),
-      this.getRandomDecimal(),
-      this.getRandomNumber(-10, 10),
+      Randomizable.getRandomDecimal(),
+      Randomizable.getRandomNumber(-5, 5),
+      Randomizable.getRandomDecimal(),
+      Randomizable.getRandomNumber(-10, 10),
     ];
     return `${AnimationEasingFunction.CUBIC_BEZIER}(${points.join(", ")})`;
   }
@@ -98,9 +99,11 @@ export default class Animation extends CssProperty {
   // 831ms linear(0.51 94%, 0.61, 0.65, 0.69, 0.82, 0.93, 0.98, 0.99) 0s infinite alternate-reverse backwards running rotate
   private getEasingFunction(): string {
     if (!this.unsafe) {
-      return this.getRandomArrayElement(this.easingFunctions);
+      return Randomizable.getRandomArrayElement(this.easingFunctions);
     }
-    const easingFunction = this.getRandomArrayElement(this.easingFunctions);
+    const easingFunction = Randomizable.getRandomArrayElement(
+      this.easingFunctions
+    );
     switch (easingFunction) {
       case AnimationEasingFunction.CUBIC_BEZIER:
         return this.getCubicBezierEasingFunction();
@@ -120,7 +123,7 @@ export default class Animation extends CssProperty {
     ) {
       return "infinite";
     }
-    const iterationCount = this.getRandomNumber(
+    const iterationCount = Randomizable.getRandomNumber(
       this.iterationCount.min,
       this.iterationCount.max,
       this.iterationCount.integersOnly
@@ -136,16 +139,17 @@ export default class Animation extends CssProperty {
   }
 
   private getLinearEasingFunction() {
-    const numberOfPoints = this.getRandomNumber(1, 10);
+    const numberOfPoints = Randomizable.getRandomNumber(1, 10);
     const points: string[] = [];
     let lastPoint = 0;
     let hasPercent = false;
     for (let i = 0; i < numberOfPoints; i++) {
-      const point = this.getRandomDecimal(lastPoint + 0.01, 1, 2);
+      const point = Randomizable.getRandomDecimal(lastPoint + 0.01, 1, 2);
       lastPoint = point;
       const usePercent = !hasPercent && Math.random() <= numberOfPoints / 10;
       points.push(
-        `${point}` + (usePercent ? ` ${this.getRandomNumber(1, 100)}%` : "")
+        `${point}` +
+          (usePercent ? ` ${Randomizable.getRandomNumber(1, 100)}%` : "")
       );
       if (point === 1) {
         break;
@@ -158,24 +162,22 @@ export default class Animation extends CssProperty {
   }
 
   private getStepsEasingFunction() {
-    const integer = this.getRandomNumber(1, 5);
-    const stepPosition = this.getRandomArrayElement(this.stepPositions);
+    const integer = Randomizable.getRandomNumber(1, 5);
+    const stepPosition = Randomizable.getRandomArrayElement(this.stepPositions);
     return `steps(${integer}, ${stepPosition})`;
   }
 
   public getRandomValue(): string {
-    const iterationCount = this.getIterationCount();
     return [
-      String(this.getRandomNumber(this.durationMin, this.durationMax)) +
+      String(Randomizable.getRandomNumber(this.durationMin, this.durationMax)) +
         this.durationUnit,
-      // this.getRandomArrayElement(this.easingFunctions),
       this.getEasingFunction(),
       "0s", // delay
-      iterationCount,
-      this.getRandomArrayElement(this.directions),
-      this.getRandomArrayElement(this.fillModes),
+      this.getIterationCount(),
+      Randomizable.getRandomArrayElement(this.directions),
+      Randomizable.getRandomArrayElement(this.fillModes),
       "running", // play state
-      this.getRandomArrayElement(this.transformations),
+      Randomizable.getRandomArrayElement(this.transformations),
     ].join(" ");
   }
 }

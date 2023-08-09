@@ -5,6 +5,7 @@ import ColorOptions, {
   DEFAULT_COLOR_MIN,
 } from "../../interfaces/ColorOptions";
 import CssProperty from "./CssProperty";
+import Randomizable from "../Randomizable";
 
 export default abstract class ColorProperty extends CssProperty {
   private bMax: number;
@@ -31,11 +32,11 @@ export default abstract class ColorProperty extends CssProperty {
 
   public getRandomValue(): string {
     if (this.unsafe) {
-      const red = this.getRandomNumber(this.rMin, this.rMax);
-      const green = this.getRandomNumber(this.gMin, this.gMax);
-      const blue = this.getRandomNumber(this.bMin, this.bMax);
+      const red = Randomizable.getRandomNumber(this.rMin, this.rMax);
+      const green = Randomizable.getRandomNumber(this.gMin, this.gMax);
+      const blue = Randomizable.getRandomNumber(this.bMin, this.bMax);
       return `rgb(${red}, ${green}, ${blue})`;
     }
-    return this.getRandomArrayElement(this.colorKeywords);
+    return Randomizable.getRandomArrayElement(this.colorKeywords);
   }
 }

@@ -48,8 +48,8 @@ export default function Character({
   const timeouts = useRef(
     [...Object.values(CssProperty), "glyph"].reduce(
       (accumulated, key) => ({ ...accumulated, [key]: null }),
-      {},
-    ) as Timeouts,
+      {}
+    ) as Timeouts
   );
 
   /**
@@ -64,7 +64,7 @@ export default function Character({
     Object.values(CssProperty).forEach((cssProperty: CssProperty) => {
       defaults.current[cssProperty] = Object.prototype.hasOwnProperty.call(
         DEFAULTS,
-        cssProperty,
+        cssProperty
       )
         ? DEFAULTS[cssProperty]
         : computedStyle[cssProperty];
@@ -90,12 +90,10 @@ export default function Character({
       }
       timeouts.current[name] = setTimeout(
         () => timeoutFunction(_randomizables.current[name], name),
-        _randomizables.current[name] == null
-          ? 0
-          : _randomizables.current[name].getRandomNumber(300, 3000),
+        Randomizable.getRandomNumber(300, 3000)
       );
     },
-    [_randomizables.current, style, timeouts.current],
+    [_randomizables.current, style, timeouts.current]
   );
 
   // randomizables changed
@@ -146,12 +144,12 @@ export default function Character({
             `random-css-${cssProperty}-${style[cssProperty]
               .replaceAll('"', "")
               .replaceAll(" ", "-")
-              .replaceAll("%", "")}`,
+              .replaceAll("%", "")}`
         ),
       ]
         .filter(Boolean)
         .join(" "),
-    [size, style, unsafe],
+    [size, style, unsafe]
   );
 
   // TODO: Figure out why unchecking border color sets classname to

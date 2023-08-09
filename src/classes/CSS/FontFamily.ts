@@ -10,6 +10,7 @@ import FontFamilyOptions, {
   DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES,
   DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES,
 } from "../../interfaces/FontFamilyOptions";
+import Randomizable from "../Randomizable";
 
 export default class FontFamily extends CssProperty {
   private fallbackProbability: number;
@@ -51,10 +52,10 @@ export default class FontFamily extends CssProperty {
   public getRandomValue(): string {
     return this.includeFallbacks && Math.random() <= this.fallbackProbability
       ? [
-          this.getRandomArrayElement(this.fontFamilyNames),
-          this.getRandomArrayElement(this.fontGenericNames),
+          Randomizable.getRandomArrayElement(this.fontFamilyNames),
+          Randomizable.getRandomArrayElement(this.fontGenericNames),
         ].join(", ")
-      : this.getRandomArrayElement([
+      : Randomizable.getRandomArrayElement([
           ...(this.includeFamilyNames ? this.fontFamilyNames : []),
           ...(this.includeGenericNames ? this.fontGenericNames : []),
         ]);
