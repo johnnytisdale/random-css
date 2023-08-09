@@ -92,9 +92,6 @@ export default function FormSectionCss({
   const toggleCssProperty = useCallback(
     (cssProperty: CssProperty, checked: boolean) => {
       const newCss: CssOptions = {};
-      if (newCss[cssProperty] === undefined) {
-        newCss[cssProperty] = { enabled: false };
-      }
 
       /**
        * Defining using the spread operator is necessary to avoid problems with
@@ -104,7 +101,7 @@ export default function FormSectionCss({
        * instead of the previous values.
        */
       newCss[cssProperty] = {
-        ...newCss[cssProperty],
+        ...css[cssProperty],
         ...{ enabled: checked },
       };
       const newToggleCss = { ...toggleCss };
@@ -134,7 +131,7 @@ export default function FormSectionCss({
         const newCss: CssOptions = {};
         Object.values(CssProperty).forEach((cssProperty) => {
           newCss[cssProperty] = {
-            ...newCss[cssProperty],
+            ...css[cssProperty],
             ...{ enabled: select },
           };
         });
@@ -242,7 +239,7 @@ export default function FormSectionCss({
             setValues={(fontWeights) =>
               setCss({
                 fontWeight: {
-                  ...css.fontWeight.fontWeights,
+                  ...css.fontWeight,
                   ...{ fontWeights },
                 },
               })
