@@ -8,8 +8,8 @@ import {
   DEFAULT_GLOBAL_OPTIONS_TEXT,
   DEFAULT_GLOBAL_OPTIONS_UNSAFE,
 } from "../../interfaces/GlobalOptions";
-import FormSection from "./FormSection";
 import FormSectionCss from "./FormSectionCss";
+import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
 import GlyphOption from "../../enums/GlyphOption";
@@ -27,22 +27,13 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
   const [css, setCss] = useState<CssOptions>(DEFAULT_CSS_OPTIONS);
-  const [glyphOptions, setGlyphOptions] = useState<GlyphOptions>(
-    DEFAULT_GLYPH_OPTIONS
-  );
+  const [glyph, setGlyph] = useState<GlyphOptions>(DEFAULT_GLYPH_OPTIONS);
   const [ignoreSpaces, setIgnoreSpaces] = useState<boolean>(
     DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
   );
   const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
   const [unsafe, setUnsafe] = useState<boolean>(DEFAULT_GLOBAL_OPTIONS_UNSAFE);
-
-  const popupClassName = useMemo(
-    () =>
-      "popup-text" +
-      (copied === true ? " show" : copied === false ? " hide" : ""),
-    [copied]
-  );
 
   const optionsToExport: Options = useMemo(
     () => ({
@@ -60,13 +51,13 @@ export default function Form(): React.ReactNode {
         {},
         ...Object.values(GlyphOption).map(
           (glyphOption) =>
-            glyphOptions?.[glyphOption]?.enabled && {
-              [glyphOption]: glyphOptions[glyphOption],
+            glyph?.[glyphOption]?.enabled && {
+              [glyphOption]: glyph[glyphOption],
             }
         )
       ),
     }),
-    [css, glyphOptions, ignoreSpaces, setCss, setGlyphOptions, size, unsafe]
+    [css, glyph, ignoreSpaces, setGlyph, size, unsafe]
   );
 
   return (
@@ -75,7 +66,6 @@ export default function Form(): React.ReactNode {
         <RandomCss center={center} options={optionsToExport} text={text} />
       </div>
 
-      {/* dev form */}
       <div id="dev-form">
         <FormSectionGlobal
           center={center}
@@ -92,66 +82,14 @@ export default function Form(): React.ReactNode {
 
         <FormSectionCss css={css} setCss={setCss} unsafe={unsafe} />
 
-        {/* glyph */}
-        <FormSectionGlyph options={glyphOptions} setOptions={setGlyphOptions} />
+        <FormSectionGlyph options={glyph} setOptions={setGlyph} />
 
-        {/* export */}
-        <FormSection id="export-options" title="export">
-          {!unsafe && (
-            <div id="export-unsafe-css">
-              You didn't select the unsafe option. Thanks for being security
-              minded! Don't forget to use the{" "}
-              <a href="random.css" target="_blank">
-                external CSS file
-              </a>{" "}
-              and ensure that it is specified in the{" "}
-              <a
-                href={
-                  "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
-                  "Headers/Content-Security-Policy/style-src"
-                }
-                target="_blank"
-              >
-                style-src
-              </a>{" "}
-              directive of your{" "}
-              <a
-                href={
-                  "https://developer.mozilla.org/en-US/docs/Web/HTTP/" +
-                  "Headers/Content-Security-Policy"
-                }
-                target="_blank"
-              >
-                Content Security Policy
-              </a>
-              .
-            </div>
-          )}
-          <div id="export-textarea" className="option">
-            <div className="input">
-              <textarea
-                disabled={true}
-                value={JSON.stringify(optionsToExport)}
-              />
-            </div>
-          </div>
-          <div id="export-button" className="option">
-            <div className="input popup-container">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    JSON.stringify(optionsToExport)
-                  );
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 1500);
-                }}
-              >
-                copy
-              </button>
-              <div className={popupClassName}>copied!</div>
-            </div>
-          </div>
-        </FormSection>
+        <FormSectionExport
+          copied={copied}
+          optionsToExport={optionsToExport}
+          setCopied={setCopied}
+          unsafe={unsafe}
+        />
       </div>
     </>
   );
