@@ -18,21 +18,21 @@ import GlyphOptions, {
 } from "../../interfaces/GlyphOptions";
 import Options from "../../interfaces/Options";
 import RandomCss from "../RandomCss";
+import RandomCssUtils from "../../classes/RandomCssUtils";
 
 import * as React from "react";
 import { useMemo, useReducer, useState } from "react";
 import { createRoot } from "react-dom/client";
 
-function reducer<T>(state: T, newState: Partial<T>): T {
-  return { ...state, ...newState };
-}
-
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
-  const [css, setCss] = useReducer(reducer<CssOptions>, DEFAULT_CSS_OPTIONS);
+  const [css, setCss] = useReducer(
+    RandomCssUtils.reducer<CssOptions>,
+    DEFAULT_CSS_OPTIONS
+  );
   const [glyph, setGlyph] = useReducer(
-    reducer<GlyphOptions>,
+    RandomCssUtils.reducer<GlyphOptions>,
     DEFAULT_GLYPH_OPTIONS
   );
   const [ignoreSpaces, setIgnoreSpaces] = useState(
