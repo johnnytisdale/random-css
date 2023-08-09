@@ -41,17 +41,12 @@ export default class BorderRadius extends CssProperty {
     const valueSets: string[] = [];
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
       const valueCount = Randomizable.number(this.minCorners, this.maxCorners);
-      console.log({ valueCount });
       const values: string[] = [];
       for (let x = 0; x < valueCount; x++) {
         values.push(this.getRandomRadius(this.minRadius, this.maxRadius));
       }
-      console.log({ values });
       valueSets.push(values.join(" "));
     }
-    const ret = valueSets.join(" / ");
-    console.log(ret);
-    return ret;
     return valueSets.join(" / ");
   }
 }
