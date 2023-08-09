@@ -25,7 +25,6 @@ export default class Animation extends CssProperty {
   private durationMax: number;
   private durationMin: number;
   private durationUnit: "ms" | "s";
-  // TODO: support the "steps" easing function (requires 2 arguments)
   private easingFunctions: AnimationEasingFunction[];
   private fillModes: AnimationFillMode[];
   private iterationCount: AnimationIterationCountOptions;
@@ -49,7 +48,7 @@ export default class Animation extends CssProperty {
     this.fillModes = options.fillModes ?? [...DEFAULT_ANIMATION_FILL_MODES];
     this.iterationCount = {
       ...DEFAULT_ANIMATION_ITERATION_COUNT,
-      ...(options.iterationCount ?? {}),
+      ...options.iterationCount,
     };
     this.stepPositions =
       options.stepPositions ?? DEFAULT_ANIMATION_STEP_POSITIONS;

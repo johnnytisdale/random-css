@@ -57,65 +57,41 @@ export default function FormSectionCss({
   );
 
   const setBorderRadiusOption = useCallback(
-    (option: BorderRadiusOptions) => {
-      const newCss = { ...css };
-      newCss.borderRadius = {
-        ...newCss.borderRadius,
-        ...option,
-      };
-      setCss(newCss);
-    },
+    (option: BorderRadiusOptions) =>
+      setCss({ borderRadius: { ...css.borderRadius, ...option } }),
     [css, setCss]
   );
 
   const setLengthOption = useCallback(
-    (key: Extract<keyof CssOptions, "borderWidth">, option: LengthOptions) => {
-      const newCss = { ...css };
-      newCss[key] = { ...newCss[key], ...option };
-      setCss(newCss);
-    },
+    (
+      key: Extract<CssProperty, CssProperty.BORDER_WIDTH>,
+      option: LengthOptions
+    ) => setCss({ [key]: { ...css[key], ...option } }),
+
     [css, setCss]
   );
 
   const setColorOption = useCallback(
-    (key: CssColorProperty, option: ColorOptions) => {
-      const newCss = { ...css };
-      newCss[key] = {
-        ...newCss[key],
-        ...option,
-      };
-      setCss(newCss);
-    },
+    (key: CssColorProperty, option: ColorOptions) =>
+      setCss({ [key]: { ...css[key], ...option } }),
     [css, setCss]
   );
 
   const setFontFamilyOption = useCallback(
-    (option: FontFamilyOptions) => {
-      const newCss = { ...css };
-      newCss.fontFamily = {
-        ...newCss.fontFamily,
-        ...option,
-      };
-      setCss(newCss);
-    },
+    (option: FontFamilyOptions) =>
+      setCss({ fontFamily: { ...css.fontFamily, ...option } }),
     [css, setCss]
   );
 
   const setFontStyleOption = useCallback(
-    (option: FontStyleOptions) => {
-      const newCss = { ...css };
-      newCss.fontStyle = {
-        ...newCss.fontStyle,
-        ...option,
-      };
-      setCss(newCss);
-    },
+    (option: FontStyleOptions) =>
+      setCss({ fontStyle: { ...css.fontStyle, ...option } }),
     [css, setCss]
   );
 
   const toggleCssProperty = useCallback(
     (cssProperty: CssProperty, checked: boolean) => {
-      const newCss = { ...css };
+      const newCss: CssOptions = {};
       if (newCss[cssProperty] === undefined) {
         newCss[cssProperty] = { enabled: false };
       }
@@ -155,10 +131,10 @@ export default function FormSectionCss({
       } else {
         newToggleCss.all = select;
         newToggleCss.none = !select;
-        const newCss = { ...css };
+        const newCss: CssOptions = {};
         Object.values(CssProperty).forEach((cssProperty) => {
           newCss[cssProperty] = {
-            ...(newCss[cssProperty] ?? {}),
+            ...newCss[cssProperty],
             ...{ enabled: select },
           };
         });
@@ -218,11 +194,11 @@ export default function FormSectionCss({
           <FormOptionArray
             disabled={() => css?.borderStyle?.enabled !== true}
             possibleValues={Object.values(BorderStyleKeyword)}
-            setValues={(keywords) => {
-              const newCss = { ...css };
-              newCss.borderStyle.borderStyles = keywords;
-              setCss(newCss);
-            }}
+            setValues={(borderStyles) =>
+              setCss({
+                borderStyle: { ...css.borderStyle, ...{ borderStyles } },
+              })
+            }
             values={css?.borderStyle.borderStyles}
           />
         </FormSubsection>
@@ -263,11 +239,14 @@ export default function FormSectionCss({
           <FormOptionArray
             disabled={() => css?.fontWeight?.enabled !== true}
             possibleValues={Object.values(FontWeightValue)}
-            setValues={(keywords) => {
-              const newCss = { ...css };
-              newCss.fontWeight.fontWeights = keywords;
-              setCss(newCss);
-            }}
+            setValues={(fontWeights) =>
+              setCss({
+                fontWeight: {
+                  ...css.fontWeight.fontWeights,
+                  ...{ fontWeights },
+                },
+              })
+            }
             values={css?.fontWeight?.fontWeights}
           />
         </FormSubsection>
@@ -290,10 +269,10 @@ export default function FormSectionCss({
           <FormOptionArray
             disabled={() => css?.textDecorationLine?.enabled !== true}
             possibleValues={Object.values(TextDecorationLineKeyword)}
-            setValues={(keywords) => {
-              const newCss = { ...css };
-              newCss.textDecorationLine.lines = keywords;
-              setCss(newCss);
+            setValues={(lines) => {
+              setCss({
+                textDecorationLine: { ...css.textDecorationLine, ...{ lines } },
+              });
             }}
             values={css?.textDecorationLine.lines}
           />
@@ -310,11 +289,14 @@ export default function FormSectionCss({
           <FormOptionArray
             disabled={() => css?.textDecorationStyle?.enabled !== true}
             possibleValues={Object.values(TextDecorationStyleKeyword)}
-            setValues={(keywords) => {
-              const newCss = { ...css };
-              newCss.textDecorationStyle.styles = keywords;
-              setCss(newCss);
-            }}
+            setValues={(styles) =>
+              setCss({
+                textDecorationStyle: {
+                  ...css.textDecorationStyle,
+                  ...{ styles },
+                },
+              })
+            }
             values={css?.textDecorationStyle.styles}
           />
         </FormSubsection>

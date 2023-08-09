@@ -33,7 +33,7 @@ export default function FormSubsectionAnimation({
     (options: AnimationIterationCountOptions) => {
       setOption({
         iterationCount: {
-          ...(option.iterationCount ?? {}),
+          ...option.iterationCount,
           ...options,
         },
       });
@@ -96,7 +96,7 @@ export default function FormSubsectionAnimation({
     if (Object.keys(newState).length > 0 || updateIterationCount) {
       if (updateIterationCount) {
         newState.iterationCount = {
-          ...(option?.iterationCount ?? {}),
+          ...option?.iterationCount,
           ...newIterationCount,
         };
       }
