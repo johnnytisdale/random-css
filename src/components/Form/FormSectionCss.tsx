@@ -33,13 +33,13 @@ interface ToggleCSS {
 interface Props {
   css: CssOptions;
   setCss: (css: CssOptions) => void;
-  unsafe: boolean;
+  external: boolean;
 }
 
 export default function FormSectionCss({
   css,
   setCss,
-  unsafe,
+  external,
 }: Props): React.ReactNode {
   const [toggleCss, setToggleCss] = useState<ToggleCSS>({
     all: false,
@@ -156,24 +156,24 @@ export default function FormSectionCss({
         setChecked={(checked) => toggleAll(checked, false)}
       />
       <FormSubsectionAnimation
+        external={external}
         option={css?.animation}
         setOption={setAnimationOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormSubsectionColor
         cssPropertyName={CssProperty.BACKGROUND_COLOR}
+        external={external}
         option={css?.backgroundColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormSubsectionColor
         cssPropertyName={CssProperty.BORDER_COLOR}
+        external={external}
         option={css?.borderColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormSubsectionBorderRadius
         option={css?.borderRadius}
@@ -209,10 +209,10 @@ export default function FormSectionCss({
       />
       <FormSubsectionColor
         cssPropertyName={CssProperty.COLOR}
+        external={external}
         option={css?.color}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormSubsectionFontFamily
         option={css?.fontFamily}
@@ -220,10 +220,10 @@ export default function FormSectionCss({
         toggle={toggleCssProperty}
       />
       <FormSubsectionFontStyle
+        external={external}
         option={css?.fontStyle}
         setOption={setFontStyleOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormOptionBoolean
         checked={css?.fontWeight?.enabled === true}
@@ -250,10 +250,10 @@ export default function FormSectionCss({
       </FormOptionBoolean>
       <FormSubsectionColor
         cssPropertyName={CssProperty.TEXT_DECORATION_COLOR}
+        external={external}
         option={css?.textDecorationColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
-        unsafe={unsafe}
       />
       <FormOptionBoolean
         checked={css?.textDecorationLine?.enabled === true}

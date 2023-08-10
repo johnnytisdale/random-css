@@ -766,11 +766,11 @@ document.addEventListener("DOMContentLoaded", () => {
           ignoreSpaces: true,
           size: 3,
           text: "random css",
-          unsafe: true,
+          external: false,
         },
         glyph: {},
       }}
       text="random css"
-    />,
+    />
   );
 });

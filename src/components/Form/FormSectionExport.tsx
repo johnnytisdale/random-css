@@ -6,16 +6,16 @@ import { useMemo } from "react";
 
 interface Props {
   copied: boolean;
+  external: boolean;
   optionsToExport: Options;
   setCopied: (copied: boolean) => void;
-  unsafe: boolean;
 }
 
 export default function FormSectionExport({
   copied,
+  external,
   optionsToExport,
   setCopied,
-  unsafe,
 }: Props): React.ReactNode {
   const popupClassName = useMemo(
     () =>
@@ -25,10 +25,9 @@ export default function FormSectionExport({
   );
   return (
     <FormSection id="export-options" title="export">
-      {!unsafe && (
-        <div id="export-unsafe-css">
-          You didn't select the unsafe option. Thanks for being security minded!
-          Don't forget to use the{" "}
+      {external && (
+        <div id="export-external-css">
+          You selected the "external" option. Don't forget to use the{" "}
           <a href="random.css" target="_blank">
             external CSS file
           </a>{" "}

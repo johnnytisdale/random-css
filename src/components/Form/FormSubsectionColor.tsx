@@ -17,10 +17,10 @@ interface Props extends FormSubsectionCssProps<ColorOptions> {
 
 export default function FormSubsectionColor({
   cssPropertyName,
+  external,
   option,
   setColorOption: _setColorOption,
   toggle,
-  unsafe,
 }: Props): React.ReactNode {
   const setOption = useCallback(
     (options: ColorOptions) => _setColorOption(cssPropertyName, options),
@@ -33,7 +33,16 @@ export default function FormSubsectionColor({
       label={cssPropertyName}
       setChecked={(checked) => toggle(cssPropertyName, checked)}
     >
-      {unsafe ? (
+      {external ? (
+        <FormSubsection label="keywords">
+          <FormOptionArray
+            disabled={() => disabled}
+            possibleValues={Object.values(Color)}
+            setValues={(colorKeywords) => setOption({ colorKeywords })}
+            values={option?.colorKeywords ?? []}
+          />
+        </FormSubsection>
+      ) : (
         <>
           <FormSubsection label="red">
             <FormOptionRange
@@ -66,15 +75,6 @@ export default function FormSubsectionColor({
             />
           </FormSubsection>
         </>
-      ) : (
-        <FormSubsection label="keywords">
-          <FormOptionArray
-            disabled={() => disabled}
-            possibleValues={Object.values(Color)}
-            setValues={(colorKeywords) => setOption({ colorKeywords })}
-            values={option?.colorKeywords ?? []}
-          />
-        </FormSubsection>
       )}
     </FormOptionBoolean>
   );

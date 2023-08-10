@@ -14,10 +14,10 @@ import FormSubsectionCssProps from "../../interfaces/FormSubsectionCssProps";
 import * as React from "react";
 
 export default function FormSubsectionFontStyle({
+  external,
   option,
   setOption,
   toggle,
-  unsafe,
 }: FormSubsectionCssProps<FontStyleOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
@@ -41,7 +41,7 @@ export default function FormSubsectionFontStyle({
           checked={option?.degrees === true}
           disabled={
             disabled ||
-            !unsafe ||
+            external ||
             !(option?.fontStyles ?? []).includes(FontStyleKeyword.OBLIQUE)
           }
           label="degrees"
@@ -51,7 +51,7 @@ export default function FormSubsectionFontStyle({
           label="degreesProbability"
           disabled={
             disabled ||
-            !unsafe ||
+            external ||
             !option?.degrees ||
             !(option?.fontStyles ?? []).includes(FontStyleKeyword.OBLIQUE)
           }
@@ -63,7 +63,7 @@ export default function FormSubsectionFontStyle({
         <FormOptionRange
           disabled={
             disabled ||
-            !unsafe ||
+            external ||
             !option?.degrees ||
             !option?.fontStyles.includes(FontStyleKeyword.OBLIQUE)
           }

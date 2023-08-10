@@ -9,16 +9,16 @@ import OptionProps from "../../interfaces/OptionProps";
 import * as React from "react";
 
 interface Props extends OptionProps {
+  external: boolean;
   option: ColorOption;
   setOption: (option: ColorOption) => void;
-  unsafe: boolean;
 }
 
 export default function FormOptionColor({
+  external,
   label,
   option,
   setOption,
-  unsafe,
 }: Props): React.ReactNode {
   const disabled = option?.enabled !== true;
   return (
@@ -27,7 +27,16 @@ export default function FormOptionColor({
       label={label}
       setChecked={(enabled) => setOption({ enabled })}
     >
-      {unsafe ? (
+      {external ? (
+        <FormSubsection label="keywords">
+          <FormOptionArray
+            disabled={() => disabled}
+            possibleValues={Object.values(Color)}
+            setValues={(colorKeywords) => setOption({ colorKeywords })}
+            values={option?.colorKeywords ?? []}
+          />
+        </FormSubsection>
+      ) : (
         <>
           <FormSubsection label="red">
             <FormOptionRange
@@ -60,15 +69,6 @@ export default function FormOptionColor({
             />
           </FormSubsection>
         </>
-      ) : (
-        <FormSubsection label="keywords">
-          <FormOptionArray
-            disabled={() => disabled}
-            possibleValues={Object.values(Color)}
-            setValues={(colorKeywords) => setOption({ colorKeywords })}
-            values={option?.colorKeywords ?? []}
-          />
-        </FormSubsection>
       )}
     </FormOptionBoolean>
   );

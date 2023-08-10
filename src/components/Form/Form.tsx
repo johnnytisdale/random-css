@@ -116,7 +116,7 @@ export default function Form(): React.ReactNode {
           text={text}
         />
 
-        <FormSectionCss css={css} setCss={setCss} unsafe={!external} />
+        <FormSectionCss css={css} setCss={setCss} external={external} />
 
         <FormSectionGlyph options={glyph} setOptions={setGlyph} />
 
@@ -124,7 +124,7 @@ export default function Form(): React.ReactNode {
           copied={copied}
           optionsToExport={optionsToExport}
           setCopied={setCopied}
-          unsafe={!external}
+          external={external}
         />
       </div>
     </>

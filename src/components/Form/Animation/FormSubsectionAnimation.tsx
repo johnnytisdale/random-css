@@ -8,7 +8,7 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_DURATION_MIN,
   DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
-  DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
+  DEFAULT_ANIMATION_ITERATION_COUNT_MIN_EXTERNAL,
 } from "../../../interfaces/AnimationOptions";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
 import CssProperty from "../../../enums/CssPropertyName";
@@ -23,10 +23,10 @@ import * as React from "react";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 
 export default function FormSubsectionAnimation({
+  external,
   option,
   setOption,
   toggle,
-  unsafe,
 }: FormSubsectionCssProps<AnimationOptions>): React.ReactNode {
   const disabled = option?.enabled !== true;
   const setIterationCountOption = useCallback(
@@ -42,24 +42,24 @@ export default function FormSubsectionAnimation({
   );
   const durationMaxLimit = useMemo(
     () =>
-      unsafe
-        ? DEFAULT_ANIMATION_DURATION_MAX
-        : DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
-    [unsafe]
+      external
+        ? DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL
+        : DEFAULT_ANIMATION_DURATION_MAX,
+    [external]
   );
   const durationMinLimit = useMemo(
     () =>
-      unsafe
-        ? DEFAULT_ANIMATION_DURATION_MIN
-        : DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
-    [unsafe]
+      external
+        ? DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL
+        : DEFAULT_ANIMATION_DURATION_MIN,
+    [external]
   );
   const iterationCountMinLimit = useMemo(
     () =>
-      unsafe
-        ? DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE
+      external
+        ? DEFAULT_ANIMATION_ITERATION_COUNT_MIN_EXTERNAL
         : DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
-    [unsafe]
+    [external]
   );
   const mounted = useRef(false);
   useEffect(() => {
@@ -81,7 +81,7 @@ export default function FormSubsectionAnimation({
       newState.durationMin = durationMinLimit;
     }
     const newIterationCount: AnimationIterationCountOptions = {};
-    if (!unsafe && option?.iterationCount?.integersOnly !== true) {
+    if (external && option?.iterationCount?.integersOnly !== true) {
       newIterationCount.integersOnly = true;
     }
     if (option?.iterationCount?.min < iterationCountMinLimit) {
@@ -102,7 +102,7 @@ export default function FormSubsectionAnimation({
       }
       setOption(newState);
     }
-  }, [unsafe]);
+  }, [external]);
   return (
     <FormOptionBoolean
       checked={!disabled}
@@ -136,7 +136,7 @@ export default function FormSubsectionAnimation({
         <FormOptionArray
           disabled={(value) =>
             disabled ||
-            (!unsafe &&
+            (external &&
               (value === AnimationEasingFunction.CUBIC_BEZIER ||
                 value === AnimationEasingFunction.STEPS))
           }
@@ -156,7 +156,7 @@ export default function FormSubsectionAnimation({
         />
       </FormSubsection>
       <FormSubsectionAnimationIterationCount
-        {...{ disabled, unsafe }}
+        {...{ disabled, external }}
         minLimit={iterationCountMinLimit}
         option={option?.iterationCount}
         setOption={setIterationCountOption}

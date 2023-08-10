@@ -11,18 +11,18 @@ import * as React from "react";
 
 interface Props {
   disabled: boolean;
+  external: boolean;
   minLimit: number;
   option: AnimationIterationCountOptions;
   setOption: (option: AnimationIterationCountOptions) => void;
-  unsafe: boolean;
 }
 
 export default function FormSubsectionAnimationIterationCount({
   disabled,
+  external,
   minLimit,
   option,
   setOption,
-  unsafe,
 }: Props): React.ReactNode {
   return (
     <FormSubsection label="iteration count">
@@ -42,7 +42,7 @@ export default function FormSubsectionAnimationIterationCount({
       />
       <FormOptionBoolean
         checked={option?.integersOnly === true}
-        disabled={disabled || !unsafe}
+        disabled={disabled || external}
         label="integers only"
         setChecked={(integersOnly) => setOption({ integersOnly })}
       />
@@ -53,7 +53,7 @@ export default function FormSubsectionAnimationIterationCount({
         maxValue={option?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
         minValue={option?.min ?? minLimit}
         setValues={(min, max) => setOption({ max, min })}
-        step={unsafe ? "0.01" : "1"}
+        step={external ? "1" : "0.01"}
       />
       <FormOptionBoolean
         checked={option?.zero}
