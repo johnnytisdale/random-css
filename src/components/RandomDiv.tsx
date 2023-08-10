@@ -46,13 +46,7 @@ export default function Div({
 
   const timeoutFunction = useCallback(
     (key: CssPropertyName) => {
-      if (_randomizables.current[key] == null) {
-        return;
-      }
-      const newValue = _randomizables.current[key].getRandomValue();
-      if (newValue !== undefined && newValue !== style[key]) {
-        setStyle({ [key]: newValue });
-      }
+      setStyle({ [key]: _randomizables.current[key].getRandomValue() });
       timeouts.current[key] = setTimeout(
         () => timeoutFunction(key),
         Randomizable.number(300, 3000)
