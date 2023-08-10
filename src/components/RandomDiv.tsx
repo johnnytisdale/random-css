@@ -20,13 +20,13 @@ export default function Div({
   id,
   external,
   fixedStyle,
-  style: _style,
+  style: cssOptions,
   testID,
 }: RandomElementProps): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const _randomizables = useRef<Randomizables>(
-    RandomCssUtils.getCssRandomizables(_style, external)
+    RandomCssUtils.getCssRandomizables(cssOptions, external)
   );
   const timeouts = useRef(
     Object.values(CssPropertyName).reduce(
@@ -74,7 +74,7 @@ export default function Div({
   // style/external changed
   useEffect(() => {
     _randomizables.current = RandomCssUtils.getCssRandomizables(
-      _style,
+      cssOptions,
       external
     );
     const newStyle: Style = {};
@@ -105,7 +105,7 @@ export default function Div({
     if (update) {
       setStyle(newStyle);
     }
-  }, [_style, external]);
+  }, [cssOptions, external]);
 
   const className = useMemo(() => {
     const classes = [];
