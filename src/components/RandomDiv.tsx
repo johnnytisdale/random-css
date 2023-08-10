@@ -10,10 +10,6 @@ import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
-const DEFAULTS: Style = {
-  borderWidth: "1px",
-};
-
 export default function Div({
   children,
   className: _className,
@@ -40,18 +36,12 @@ export default function Div({
    */
   useEffect(() => {
     const element = document.getElementById(id);
-    if (element === null) {
-      return;
+    if (element) {
+      const computedStyle = getComputedStyle(element);
+      Object.values(CssPropertyName).forEach((cssProperty) => {
+        defaults.current[cssProperty] = computedStyle[cssProperty];
+      });
     }
-    const computedStyle = getComputedStyle(element);
-    Object.values(CssPropertyName).forEach((cssProperty: CssPropertyName) => {
-      defaults.current[cssProperty] = Object.prototype.hasOwnProperty.call(
-        DEFAULTS,
-        cssProperty
-      )
-        ? DEFAULTS[cssProperty]
-        : computedStyle[cssProperty];
-    });
   }, []);
 
   const timeoutFunction = useCallback(
