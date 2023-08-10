@@ -6,5 +6,5 @@ export default interface FormSubsectionCssProps<T extends Option>
   extends OptionProps {
   option: T;
   setOption?: (option: T) => void;
-  toggle: (cssProperty: CssProperty, checked: boolean) => void;
+  toggle: (cssProperty: CssPropertyName, checked: boolean) => void;
 }

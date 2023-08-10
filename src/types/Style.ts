@@ -1,7 +1,7 @@
 import CssPropertyName from "../enums/CssPropertyName";
 
 type Style = {
-  [value in CssProperty]?: string;
+  [value in CssPropertyName]?: string;
 };
 
 export default Style;
