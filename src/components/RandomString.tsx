@@ -99,6 +99,7 @@ export default function RandomString({
                     )
                   )
             }
+            testID="character"
           >
             <RandomCharacter character={character} options={glyphOptions} />
           </RandomDiv>
