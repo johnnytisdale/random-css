@@ -112,7 +112,7 @@ export default function Div({
     if (_className) {
       classes.push(_className);
     }
-    if (external === true) {
+    if (external) {
       classes.push(
         ...Object.keys(style).map(
           (cssProperty: CssPropertyName) =>
@@ -129,7 +129,7 @@ export default function Div({
   const memoizedStyle = useMemo(
     () => ({
       ...fixedStyle,
-      ...(external === true
+      ...(external
         ? null
         : {
             ...style,
