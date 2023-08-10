@@ -10,7 +10,7 @@ import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
-export default function Div({
+export default function RandomDiv({
   children,
   className: _className,
   id,
