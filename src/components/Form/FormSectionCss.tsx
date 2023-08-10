@@ -4,7 +4,7 @@ import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOptions from "../../interfaces/ColorOptions";
 import CssColorProperty from "../../types/CssColorProperty";
 import CssOptions from "../../interfaces/CssOptions";
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import FontStyleOptions from "../../interfaces/FontStyleOptions";
 import FontWeightValue from "../../enums/FontWeightValue";

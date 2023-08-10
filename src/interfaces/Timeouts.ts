@@ -1,7 +1,7 @@
-import OptionName from "../types/OptionName";
+import RandomizableName from "../types/RandomizableName";
 
 type Timeouts = {
-  [key in OptionName]: NodeJS.Timeout | null;
+  [key in RandomizableName]: NodeJS.Timeout | null;
 };
 
 export default Timeouts;

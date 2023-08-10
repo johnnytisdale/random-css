@@ -11,7 +11,7 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
 } from "../../../interfaces/AnimationOptions";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
-import CssProperty from "../../../enums/CssProperty";
+import CssProperty from "../../../enums/CssPropertyName";
 import FormOptionArray from "../FormOptionArray";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionRange from "../FormOptionRange";

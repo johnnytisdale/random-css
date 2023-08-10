@@ -6,20 +6,20 @@ targetFile = "src/styles/random.css"
 cssFile = open(targetFile, "w")
 
 # base container style
-cssFile.write(".random-css-container {\n")
+cssFile.write(".random-css-string {\n")
 cssFile.write("\tdisplay:          flex;\n")
 cssFile.write("\tpadding:          .25rem;\n")
 cssFile.write("\tposition:         relative;\n")
 cssFile.write("}\n")
 
 # center container
-cssFile.write(".random-css-container-center {\n")
+cssFile.write(".random-css-string-center {\n")
 cssFile.write("\tmargin: auto;\n")
 cssFile.write("\twidth:  min-content;\n")
 cssFile.write("}\n")
 
 # base character style
-cssFile.write(".random-css-container div {\n")
+cssFile.write(".random-css-string div {\n")
 cssFile.write("\tbox-sizing: border-box;\n")
 cssFile.write("\toverflow:   min-content;\n")
 cssFile.write("\ttext-align: center;\n")
@@ -33,7 +33,7 @@ while rem < 10:
         remString = remString[:-2]
     else:
         remString = remString.replace(".", "-")
-    cssFile.write(".random-css-container-" +
+    cssFile.write(".random-css-string-" +
                   remString + " {\n")
     cssFile.write("\tfont-size: " + str(rem) + "rem;\n")
     cssFile.write("}\n")

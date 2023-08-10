@@ -3,7 +3,7 @@ import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../enums/AnimationFillMode";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
-import ECssProperty from "../../enums/CssProperty";
+import CssPropertyName from "../../enums/CssPropertyName";
 import AnimationOptions, {
   AnimationIterationCountOptions,
   DEFAULT_ANIMATION_DIRECTIONS,
@@ -30,7 +30,7 @@ export default class Animation extends CssProperty {
   private iterationCount: AnimationIterationCountOptions;
   private stepPositions: AnimationStepPosition[];
   private transformations: AnimationTransformation[];
-  public name = ECssProperty.ANIMATION;
+  public name = CssPropertyName.ANIMATION;
 
   constructor(options: AnimationOptions, unsafe: boolean) {
     super(unsafe);

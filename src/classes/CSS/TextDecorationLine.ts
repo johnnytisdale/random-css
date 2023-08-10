@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
 import TextDecorationLineOptions, {
   DEFAULT_TEXT_DECORATION_LINE_LINES,

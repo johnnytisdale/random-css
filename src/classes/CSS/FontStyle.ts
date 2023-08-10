@@ -1,5 +1,5 @@
 import CssProperty from "./CssProperty";
-import ECssProperty from "../../enums/CssProperty";
+import CssPropertyName from "../../enums/CssPropertyName";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
 import FontStyleOptions, {
   DEFAULT_FONT_STYLE_DEGREES,
@@ -16,7 +16,7 @@ export default class FontStyle extends CssProperty {
   private fontStyles: FontStyleKeyword[];
   private maxDegrees: number;
   private minDegrees: number;
-  public name = ECssProperty.FONT_STYLE;
+  public name = CssPropertyName.FONT_STYLE;
 
   constructor(options: FontStyleOptions, unsafe: boolean) {
     super(unsafe);

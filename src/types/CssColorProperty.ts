@@ -1,4 +1,4 @@
-import CssProperty from "../enums/CssProperty";
+import CssPropertyName from "../enums/CssPropertyName";
 
 type CssColorProperty = Extract<
   CssProperty,

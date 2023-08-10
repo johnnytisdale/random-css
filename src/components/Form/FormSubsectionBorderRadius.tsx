@@ -4,7 +4,7 @@ import BorderRadiusOptions, {
   DEFAULT_BORDER_RADIUS_MIN_CORNERS,
   DEFAULT_BORDER_RADIUS_MIN_RADIUS,
 } from "../../interfaces/BorderRadiusOptions";
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";
 import FormOptionRange from "./FormOptionRange";

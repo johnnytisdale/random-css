@@ -1,5 +1,5 @@
 import CssProperty from "./CssProperty";
-import ECssProperty from "../../enums/CssProperty";
+import CssPropertyName from "../../enums/CssPropertyName";
 import BorderRadiusOptions, {
   DEFAULT_BORDER_RADIUS_MAX_CORNERS,
   DEFAULT_BORDER_RADIUS_MAX_RADIUS,
@@ -17,7 +17,7 @@ export default class BorderRadius extends CssProperty {
   private minRadius: number;
   private slash: boolean;
   private slashProbability: number;
-  public name = ECssProperty.BORDER_RADIUS;
+  public name = CssPropertyName.BORDER_RADIUS;
 
   // TODO: use class properties, validate
   constructor(options: BorderRadiusOptions) {

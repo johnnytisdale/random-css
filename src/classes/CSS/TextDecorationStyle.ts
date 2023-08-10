@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import KeywordProperty from "./KeywordProperty";
 import TextDecorationStyleKeyword from "../../enums/TextDecorationStyleKeyword";
 import TextDecorationStyleOptions, {

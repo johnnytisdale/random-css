@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import FontWeightOptions, {
   DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
 } from "../../interfaces/FontWeightOptions";

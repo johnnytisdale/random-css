@@ -1,7 +1,8 @@
 import "../../styles/Form.scss";
 
+import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import {
   DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   DEFAULT_GLOBAL_OPTIONS_SIZE,
@@ -17,8 +18,9 @@ import GlyphOptions, {
   DEFAULT_GLYPH_OPTIONS,
 } from "../../interfaces/GlyphOptions";
 import Options from "../../interfaces/Options";
-import RandomCss from "../RandomCss";
 import RandomCssUtils from "../../classes/RandomCssUtils";
+import RandomDiv from "../RandomDiv";
+import RandomString from "../RandomString";
 
 import * as React from "react";
 import { useMemo, useReducer, useState } from "react";
@@ -69,9 +71,33 @@ export default function Form(): React.ReactNode {
 
   return (
     <>
-      <div id="top" data-testid="top">
-        <RandomCss center={center} options={optionsToExport} text={text} />
-      </div>
+      <RandomDiv
+        fixedStyle={{ borderWidth: "1rem", boxSizing: "border-box" }}
+        id="top"
+        style={{
+          borderColor: { enabled: true },
+          borderStyle: {
+            enabled: true,
+            borderStyles: [
+              BorderStyleKeyword.DASHED,
+              BorderStyleKeyword.DOTTED,
+              BorderStyleKeyword.DOUBLE,
+              BorderStyleKeyword.GROOVE,
+              BorderStyleKeyword.SOLID,
+            ],
+          },
+        }}
+        testID="top"
+      >
+        <RandomString
+          center={center}
+          external={!optionsToExport.global.unsafe}
+          glyphOptions={optionsToExport.glyph}
+          size={optionsToExport.global.size}
+          style={optionsToExport.css}
+          text={text}
+        />
+      </RandomDiv>
 
       <div id="dev-form">
         <FormSectionGlobal

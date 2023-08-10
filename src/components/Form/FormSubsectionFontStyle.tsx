@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
 import FontStyleOptions, {
   DEFAULT_FONT_STYLE_MAX_DEGREES,

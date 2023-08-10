@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import ColorProperty from "./ColorProperty";
 
 export default class Color extends ColorProperty {

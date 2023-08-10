@@ -1,3 +1,3 @@
-import RandomCss from "../components/RandomCss";
+import RandomCss from "../components/RandomString";
 
 export default RandomCss;

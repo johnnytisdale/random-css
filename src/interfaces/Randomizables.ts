@@ -1,8 +1,8 @@
-import OptionName from "../types/OptionName";
+import RandomizableName from "../types/RandomizableName";
 import Randomizable from "../classes/Randomizable";
 
 type Randomizables = {
-  [key in OptionName]: Randomizable | null;
+  [key in RandomizableName]: Randomizable | null;
 };
 
 export default Randomizables;

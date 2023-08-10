@@ -1,5 +1,5 @@
 import CssProperty from "./CssProperty";
-import ECssProperty from "../../enums/CssProperty";
+import CssPropertyName from "../../enums/CssPropertyName";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
 import FontFamilyOptions, {
@@ -20,7 +20,7 @@ export default class FontFamily extends CssProperty {
   private includeFamilyNames: boolean;
   private includeGenericNames: boolean;
   protected separator = ", ";
-  public name = ECssProperty.FONT_FAMILY;
+  public name = CssPropertyName.FONT_FAMILY;
 
   constructor(options: FontFamilyOptions) {
     super();

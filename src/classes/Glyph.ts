@@ -1,30 +1,35 @@
+import GlyphOptions from "../interfaces/GlyphOptions";
 import leetJSON from "../json/leet.json";
 import unicodeJSON from "../json/unicode.json";
 
 import Randomizable from "./Randomizable";
 
 export default class Glyph extends Randomizable {
-  public name = "glyph";
-
   private glyphs: Array<string> = [this.character];
+  public name = "glyph";
 
   constructor(
     private character: string,
-    private leet: boolean,
-    private unicode: boolean
+    options: GlyphOptions
   ) {
     super();
     const lower = this.character.toLowerCase();
-    if (this.leet) {
+    if (options?.leet?.enabled) {
       this.glyphs.push(...getLeetValues(lower));
     }
-    if (this.unicode) {
+    if (options?.unicode?.enabled) {
       this.glyphs.push(...getUnicodeValues(lower));
     }
   }
 
   public getRandomValue(): string {
     return Randomizable.array(this.glyphs);
+  }
+
+  public static enabled(options: GlyphOptions) {
+    return (
+      options?.leet?.enabled === true || options?.unicode?.enabled === true
+    );
   }
 }
 

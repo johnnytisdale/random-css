@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";

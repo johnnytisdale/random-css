@@ -1,3 +1,5 @@
+import RandomizableName from "../types/RandomizableName";
+
 export default abstract class Randomizable {
   abstract getRandomValue(): string;
   abstract name: string;
@@ -25,4 +27,21 @@ export default abstract class Randomizable {
       ? Math.floor(random)
       : parseFloat(random.toFixed(2));
   }
+
+  public static ignoreForSpaces: Record<RandomizableName, boolean> = {
+    animation: false,
+    backgroundColor: false,
+    borderColor: false,
+    borderRadius: false,
+    borderStyle: false,
+    borderWidth: false,
+    color: true,
+    fontFamily: true,
+    fontStyle: true,
+    fontWeight: true,
+    glyph: true,
+    textDecorationColor: true,
+    textDecorationLine: true,
+    textDecorationStyle: true,
+  };
 }

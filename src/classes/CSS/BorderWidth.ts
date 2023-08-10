@@ -1,4 +1,4 @@
-import CssProperty from "../../enums/CssProperty";
+import CssProperty from "../../enums/CssPropertyName";
 import LengthOptions, {
   DEFAULT_LENGTH_MAX,
   DEFAULT_LENGTH_MIN,
