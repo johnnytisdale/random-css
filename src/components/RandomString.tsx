@@ -1,9 +1,11 @@
-import "../styles/RandomCss.scss";
+import "../styles/RandomString.scss";
 
+import CssPropertyName from "../enums/CssPropertyName";
 import GlyphOptions from "../interfaces/GlyphOptions";
 import RandomCharacter from "./RandomCharacter";
 import RandomDiv from "./RandomDiv";
 import RandomElementProps from "../interfaces/RandomElementProps";
+import Randomizable from "../classes/Randomizable";
 
 import * as React from "react";
 import { useMemo } from "react";
@@ -19,6 +21,8 @@ interface Props extends RandomElementProps {
    */
   glyphOptions: GlyphOptions;
 
+  ignoreSpaces: boolean;
+
   size: number;
 
   /**
@@ -32,6 +36,7 @@ export default function RandomString({
   className,
   external,
   glyphOptions,
+  ignoreSpaces,
   size,
   style,
   text,
@@ -71,21 +76,34 @@ export default function RandomString({
 
   return (
     <div className={memoizedClassName} {...containerStyle}>
-      {text.split("").map((character, i) => (
-        <RandomDiv
-          className="random-css-character"
-          id={`character-${i}`}
-          external={external}
-          fixedStyle={{
-            height: `${size * 1.1875}rem`,
-            width: `${size}rem`,
-          }}
-          key={`${i}-${character}`}
-          style={style}
-        >
-          <RandomCharacter character={character} options={glyphOptions} />
-        </RandomDiv>
-      ))}
+      {text.split("").map((character, i) => {
+        return (
+          <RandomDiv
+            className="random-css-character"
+            id={`character-${i}`}
+            external={external}
+            fixedStyle={{
+              height: `${size * 1.1875}rem`,
+              width: `${size}rem`,
+            }}
+            key={`${i}-${character}`}
+            style={
+              character != " "
+                ? style
+                : Object.assign(
+                    {},
+                    ...Object.keys(style).map((cssProperty: CssPropertyName) =>
+                      ignoreSpaces || Randomizable.ignoreForSpaces[cssProperty]
+                        ? {}
+                        : { [cssProperty]: style[cssProperty] }
+                    )
+                  )
+            }
+          >
+            <RandomCharacter character={character} options={glyphOptions} />
+          </RandomDiv>
+        );
+      })}
     </div>
   );
 }

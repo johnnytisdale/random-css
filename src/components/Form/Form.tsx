@@ -93,6 +93,7 @@ export default function Form(): React.ReactNode {
           center={center}
           external={!optionsToExport.global.unsafe}
           glyphOptions={optionsToExport.glyph}
+          ignoreSpaces={ignoreSpaces}
           size={optionsToExport.global.size}
           style={optionsToExport.css}
           text={text}
