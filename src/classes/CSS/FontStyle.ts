@@ -18,8 +18,8 @@ export default class FontStyle extends CssProperty {
   private minDegrees: number;
   public name = CssPropertyName.FONT_STYLE;
 
-  constructor(options: FontStyleOptions, unsafe: boolean) {
-    super(unsafe);
+  constructor(options: FontStyleOptions, external: boolean) {
+    super(external);
     this.degrees = options?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
     this.degreesProbability =
       options?.degreesProbability ?? DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;
@@ -30,8 +30,8 @@ export default class FontStyle extends CssProperty {
 
   public getRandomValue(): string {
     const keyword = Randomizable.array(this.fontStyles);
-    // TODO: Support oblique deg when unsafe === false
-    return this.unsafe &&
+    // TODO: Support oblique deg when external === true
+    return !this.external &&
       keyword === FontStyleKeyword.OBLIQUE &&
       this.degrees &&
       Math.random() <= this.degreesProbability

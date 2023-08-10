@@ -4,9 +4,9 @@ import AnimationFillMode from "../../../enums/AnimationFillMode";
 import AnimationOptions, {
   AnimationIterationCountOptions,
   DEFAULT_ANIMATION_DURATION_MAX,
-  DEFAULT_ANIMATION_DURATION_MAX_UNSAFE,
+  DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
   DEFAULT_ANIMATION_DURATION_MIN,
-  DEFAULT_ANIMATION_DURATION_MIN_UNSAFE,
+  DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN_UNSAFE,
 } from "../../../interfaces/AnimationOptions";
@@ -43,15 +43,15 @@ export default function FormSubsectionAnimation({
   const durationMaxLimit = useMemo(
     () =>
       unsafe
-        ? DEFAULT_ANIMATION_DURATION_MAX_UNSAFE
-        : DEFAULT_ANIMATION_DURATION_MAX,
+        ? DEFAULT_ANIMATION_DURATION_MAX
+        : DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
     [unsafe]
   );
   const durationMinLimit = useMemo(
     () =>
       unsafe
-        ? DEFAULT_ANIMATION_DURATION_MIN_UNSAFE
-        : DEFAULT_ANIMATION_DURATION_MIN,
+        ? DEFAULT_ANIMATION_DURATION_MIN
+        : DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
     [unsafe]
   );
   const iterationCountMinLimit = useMemo(

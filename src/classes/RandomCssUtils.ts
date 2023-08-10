@@ -41,7 +41,7 @@ export default class RandomCssUtils {
           acc[key] = RandomCssUtils.getRandomizableForCssProperty(
             key,
             cssOptions,
-            !external
+            external
           );
         }
         return acc;
@@ -53,23 +53,23 @@ export default class RandomCssUtils {
   public static getRandomizableForCssProperty(
     cssProperty: CssPropertyName,
     cssOptions: CssOptions,
-    unsafe: boolean
+    external: boolean
   ): Randomizable {
     switch (cssProperty) {
       case CssPropertyName.ANIMATION:
         return new Animation(
           cssOptions?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.BACKGROUND_COLOR:
         return new BackgroundColor(
           cssOptions.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.BORDER_COLOR:
         return new BorderColor(
           cssOptions.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.BORDER_RADIUS:
         return new BorderRadius(
@@ -78,7 +78,7 @@ export default class RandomCssUtils {
       case CssPropertyName.BORDER_STYLE:
         return new BorderStyle(
           cssOptions.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.BORDER_WIDTH:
         return new BorderWidth(
@@ -87,7 +87,7 @@ export default class RandomCssUtils {
       case CssPropertyName.COLOR:
         return new Color(
           cssOptions.color ?? { ...DEFAULT_COLOR_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.FONT_FAMILY:
         return new FontFamily(
@@ -96,7 +96,7 @@ export default class RandomCssUtils {
       case CssPropertyName.FONT_STYLE:
         return new FontStyle(
           cssOptions?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.FONT_WEIGHT:
         return new FontWeight(
@@ -105,7 +105,7 @@ export default class RandomCssUtils {
       case CssPropertyName.TEXT_DECORATION_COLOR:
         return new TextDecorationColor(
           cssOptions.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
-          unsafe
+          external
         );
       case CssPropertyName.TEXT_DECORATION_LINE:
         return new TextDecorationLine(

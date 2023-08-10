@@ -18,9 +18,9 @@ export default abstract class ColorProperty extends CssProperty {
 
   constructor(
     options: ColorOptions,
-    protected unsafe: boolean
+    protected external: boolean
   ) {
-    super(unsafe);
+    super(external);
     this.bMax = options.bMax ?? DEFAULT_COLOR_MAX;
     this.bMin = options.bMin ?? DEFAULT_COLOR_MIN;
     this.gMax = options.gMax ?? DEFAULT_COLOR_MAX;
@@ -31,7 +31,7 @@ export default abstract class ColorProperty extends CssProperty {
   }
 
   public getRandomValue(): string {
-    if (this.unsafe) {
+    if (!this.external) {
       const red = Randomizable.number(this.rMin, this.rMax);
       const green = Randomizable.number(this.gMin, this.gMax);
       const blue = Randomizable.number(this.bMin, this.bMax);

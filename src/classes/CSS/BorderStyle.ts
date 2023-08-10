@@ -9,10 +9,10 @@ export default class BorderStyle extends KeywordProperty {
   protected keywords: BorderStyleKeyword[];
   public name = CssProperty.BORDER_STYLE;
 
-  constructor(options: BorderStyleOptions, unsafe: boolean) {
-    super(unsafe);
-    // TODO: Support 4 border styles when !unsafe
-    if (unsafe) {
+  constructor(options: BorderStyleOptions, external: boolean) {
+    super(external);
+    // TODO: Support 4 border styles when external === true
+    if (!external) {
       this.keywordLimit = 4;
     }
     this.keywords = options.borderStyles ?? [...DEFAULT_BORDER_STYLE_KEYWORDS];

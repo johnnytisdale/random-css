@@ -6,28 +6,28 @@ import * as React from "react";
 
 interface Props {
   center: boolean;
+  external: boolean;
   ignoreSpaces: boolean;
   setCenter: (center: boolean) => void;
+  setExternal: (external: boolean) => void;
   setIgnoreSpaces: (ignoreSpaces: boolean) => void;
   setSize: (size: number) => void;
   setText: (text: string) => void;
-  setUnsafe: (unsafe: boolean) => void;
   size: number;
   text: string;
-  unsafe: boolean;
 }
 
 export default function FormSectionGlobal({
   center,
+  external,
   ignoreSpaces,
   setCenter,
+  setExternal,
   setIgnoreSpaces,
   setSize,
   setText,
-  setUnsafe,
   size,
   text,
-  unsafe,
 }: Props): React.ReactNode {
   return (
     <FormSection id="global-options" title="global options">
@@ -42,7 +42,7 @@ export default function FormSectionGlobal({
       />
       <FormOption
         input={{
-          ...(unsafe === false && {
+          ...(external && {
             max: "10",
             min: ".25",
           }),
@@ -51,19 +51,19 @@ export default function FormSectionGlobal({
           value: size,
           onChange: (e) =>
             setSize(
-              unsafe === true
-                ? parseFloat(e.target.value)
-                : getValidSize(parseFloat(e.target.value))
+              external
+                ? getValidSize(parseFloat(e.target.value))
+                : parseFloat(e.target.value)
             ),
         }}
         label="size"
       />
       <FormOptionBoolean
-        checked={unsafe}
-        label="unsafe"
-        setChecked={(unsafe) => {
-          setUnsafe(unsafe);
-          if (!unsafe) {
+        checked={external}
+        label="external"
+        setChecked={(external) => {
+          setExternal(external);
+          if (external) {
             setSize(getValidSize(size));
           }
         }}

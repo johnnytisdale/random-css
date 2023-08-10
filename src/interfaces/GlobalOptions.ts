@@ -1,12 +1,12 @@
 export const DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES = true;
 export const DEFAULT_GLOBAL_OPTIONS_SIZE = 3;
 export const DEFAULT_GLOBAL_OPTIONS_TEXT = "random css";
-export const DEFAULT_GLOBAL_OPTIONS_UNSAFE = true;
+export const DEFAULT_GLOBAL_OPTIONS_EXTERNAL = false;
 
 export const DEFAULT_GLOBAL_OPTIONS: GlobalOptions = {
   ignoreSpaces: DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   size: DEFAULT_GLOBAL_OPTIONS_SIZE,
-  unsafe: DEFAULT_GLOBAL_OPTIONS_UNSAFE,
+  external: DEFAULT_GLOBAL_OPTIONS_EXTERNAL,
 };
 
 export default interface GlobalOptions {
@@ -21,8 +21,8 @@ export default interface GlobalOptions {
   size?: number;
 
   /**
-   * If true, use inline CSS, which is considered unsafe because it is
-   * forbidden by a strict Content Security Policy.
+   * If true, use an external stylesheet instead of using JavaScript to change
+   * styles.
    */
-  unsafe?: boolean;
+  external?: boolean;
 }

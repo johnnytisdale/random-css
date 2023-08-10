@@ -11,9 +11,9 @@ import AnimationOptions, {
   DEFAULT_ANIMATION_FILL_MODES,
   DEFAULT_ANIMATION_ITERATION_COUNT,
   DEFAULT_ANIMATION_DURATION_MAX,
-  DEFAULT_ANIMATION_DURATION_MAX_UNSAFE,
+  DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
   DEFAULT_ANIMATION_DURATION_MIN,
-  DEFAULT_ANIMATION_DURATION_MIN_UNSAFE,
+  DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
   DEFAULT_ANIMATION_TRANSFORMATIONS,
   DEFAULT_ANIMATION_STEP_POSITIONS,
 } from "../../interfaces/AnimationOptions";
@@ -32,13 +32,13 @@ export default class Animation extends CssProperty {
   private transformations: AnimationTransformation[];
   public name = CssPropertyName.ANIMATION;
 
-  constructor(options: AnimationOptions, unsafe: boolean) {
-    super(unsafe);
+  constructor(options: AnimationOptions, external: boolean) {
+    super(external);
     this.directions = options.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
     this.easingFunctions = options.easingFunctions ?? [
       ...DEFAULT_ANIMATION_EASING_FUNCTIONS,
     ];
-    if (!unsafe) {
+    if (external) {
       this.easingFunctions = this.easingFunctions.filter(
         (easingFunction) =>
           easingFunction !== AnimationEasingFunction.CUBIC_BEZIER &&
@@ -62,11 +62,11 @@ export default class Animation extends CssProperty {
      * component so it doesn't have to be done every time a Randomizable is
      * instantiated.
      */
-    const maxLimit = unsafe
-      ? DEFAULT_ANIMATION_DURATION_MAX_UNSAFE
+    const maxLimit = external
+      ? DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL
       : DEFAULT_ANIMATION_DURATION_MAX;
-    const minLimit = unsafe
-      ? DEFAULT_ANIMATION_DURATION_MIN_UNSAFE
+    const minLimit = external
+      ? DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL
       : DEFAULT_ANIMATION_DURATION_MIN;
     this.durationMax = options?.durationMax ?? maxLimit;
     this.durationMin = options?.durationMin ?? minLimit;
@@ -82,7 +82,7 @@ export default class Animation extends CssProperty {
     if (this.durationMin > this.durationMax) {
       this.durationMin = minLimit;
     }
-    this.durationUnit = unsafe ? "ms" : "s";
+    this.durationUnit = external ? "s" : "ms";
   }
 
   private getCubicBezierEasingFunction() {
@@ -97,7 +97,7 @@ export default class Animation extends CssProperty {
 
   // 831ms linear(0.51 94%, 0.61, 0.65, 0.69, 0.82, 0.93, 0.98, 0.99) 0s infinite alternate-reverse backwards running rotate
   private getEasingFunction(): string {
-    if (!this.unsafe) {
+    if (this.external) {
       return Randomizable.array(this.easingFunctions);
     }
     const easingFunction = Randomizable.array(this.easingFunctions);

@@ -7,7 +7,7 @@ import {
   DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   DEFAULT_GLOBAL_OPTIONS_SIZE,
   DEFAULT_GLOBAL_OPTIONS_TEXT,
-  DEFAULT_GLOBAL_OPTIONS_UNSAFE,
+  DEFAULT_GLOBAL_OPTIONS_EXTERNAL,
 } from "../../interfaces/GlobalOptions";
 import FormSectionCss from "./FormSectionCss";
 import FormSectionExport from "./FormSectionExport";
@@ -42,7 +42,9 @@ export default function Form(): React.ReactNode {
   );
   const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
   const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
-  const [unsafe, setUnsafe] = useState<boolean>(DEFAULT_GLOBAL_OPTIONS_UNSAFE);
+  const [external, setExternal] = useState<boolean>(
+    DEFAULT_GLOBAL_OPTIONS_EXTERNAL
+  );
 
   const optionsToExport: Options = useMemo(
     () => ({
@@ -55,7 +57,7 @@ export default function Form(): React.ReactNode {
             }
         )
       ),
-      global: { ignoreSpaces, size, unsafe },
+      global: { ignoreSpaces, size, external },
       glyph: Object.assign(
         {},
         ...Object.values(GlyphOption).map(
@@ -66,7 +68,7 @@ export default function Form(): React.ReactNode {
         )
       ),
     }),
-    [css, glyph, ignoreSpaces, size, unsafe]
+    [css, external, glyph, ignoreSpaces, size]
   );
 
   return (
@@ -91,7 +93,7 @@ export default function Form(): React.ReactNode {
       >
         <RandomString
           center={center}
-          external={!optionsToExport.global.unsafe}
+          external={optionsToExport.global.external}
           glyphOptions={optionsToExport.glyph}
           ignoreSpaces={ignoreSpaces}
           size={optionsToExport.global.size}
@@ -103,18 +105,18 @@ export default function Form(): React.ReactNode {
       <div id="dev-form">
         <FormSectionGlobal
           center={center}
+          external={external}
           ignoreSpaces={ignoreSpaces}
           setCenter={setCenter}
           setIgnoreSpaces={setIgnoreSpaces}
           setSize={setSize}
           setText={setText}
-          setUnsafe={setUnsafe}
+          setExternal={setExternal}
           size={size}
           text={text}
-          unsafe={unsafe}
         />
 
-        <FormSectionCss css={css} setCss={setCss} unsafe={unsafe} />
+        <FormSectionCss css={css} setCss={setCss} unsafe={!external} />
 
         <FormSectionGlyph options={glyph} setOptions={setGlyph} />
 
@@ -122,7 +124,7 @@ export default function Form(): React.ReactNode {
           copied={copied}
           optionsToExport={optionsToExport}
           setCopied={setCopied}
-          unsafe={unsafe}
+          unsafe={!external}
         />
       </div>
     </>
