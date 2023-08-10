@@ -23,16 +23,16 @@ export default function Character({
       return;
     }
     const newValue = randomizable.current.getRandomValue();
-    if (newValue !== undefined && newValue !== glyph) {
+    if (newValue !== undefined) {
       setGlyph(newValue);
     }
     timeout.current = setTimeout(
       () => timeoutFunction(),
       Randomizable.number(300, 3000)
     );
-  }, [randomizable.current, timeout.current]);
+  }, []);
 
-  // randomizables changed
+  // character/options changed
   useEffect(() => {
     randomizable.current = Glyph.enabled(options)
       ? new Glyph(character, options)

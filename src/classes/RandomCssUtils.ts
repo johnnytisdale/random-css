@@ -17,11 +17,8 @@ import { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../interfaces/TextDecorati
 import FontFamily from "./CSS/FontFamily";
 import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
-import Glyph from "./Glyph";
-import GlyphOptions from "../interfaces/GlyphOptions";
 import Randomizable from "./Randomizable";
 import Randomizables from "../interfaces/Randomizables";
-import RandomizableName from "../types/RandomizableName";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";
 import TextDecorationStyle, {
@@ -33,33 +30,18 @@ export default class RandomCssUtils {
     return { ...state, ...newState };
   }
 
-  public static getRandomizables(
+  public static getCssRandomizables(
     cssOptions: CssOptions,
-    unsafe: boolean,
-    character?: string,
-    glyphOptions?: GlyphOptions,
-    ignoreSpaces?: boolean
+    external: boolean
   ): Randomizables {
-    return [...Object.values(CssPropertyName), "glyph"].reduce(
-      (accumulated: Partial<Randomizables>, key: RandomizableName) => {
+    return Object.values(CssPropertyName).reduce(
+      (accumulated: Partial<Randomizables>, key: CssPropertyName) => {
         const acc: Partial<Randomizables> = { ...accumulated, [key]: null };
-        if (
-          character == " " &&
-          (ignoreSpaces || Randomizable.ignoreForSpaces[key])
-        ) {
-          return acc;
-        }
-        if (key === "glyph") {
-          const isLeetEnabled = glyphOptions?.leet?.enabled === true;
-          const isUnicodeEnabled = glyphOptions?.unicode?.enabled === true;
-          if (isLeetEnabled || isUnicodeEnabled) {
-            acc[key] = new Glyph(character, glyphOptions);
-          }
-        } else if (cssOptions?.[key]?.enabled) {
+        if (cssOptions?.[key]?.enabled) {
           acc[key] = RandomCssUtils.getRandomizableForCssProperty(
             key,
             cssOptions,
-            unsafe
+            !external
           );
         }
         return acc;

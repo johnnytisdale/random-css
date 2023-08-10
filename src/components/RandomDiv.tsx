@@ -26,7 +26,7 @@ export default function Div({
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const _randomizables = useRef<Randomizables>(
-    RandomCssUtils.getRandomizables(_style, external !== true)
+    RandomCssUtils.getCssRandomizables(_style, external)
   );
   const timeouts = useRef(
     Object.values(CssPropertyName).reduce(
@@ -55,28 +55,27 @@ export default function Div({
   }, []);
 
   const timeoutFunction = useCallback(
-    (randomizable: Randomizable, key: CssPropertyName) => {
-      if (randomizable == null || _randomizables.current[key] == null) {
+    (key: CssPropertyName) => {
+      if (_randomizables.current[key] == null) {
         return;
       }
-      const name = randomizable.name as CssPropertyName;
-      const newValue = randomizable.getRandomValue();
-      if (newValue !== undefined && newValue !== style[name]) {
-        setStyle({ [name]: newValue });
+      const newValue = _randomizables.current[key].getRandomValue();
+      if (newValue !== undefined && newValue !== style[key]) {
+        setStyle({ [key]: newValue });
       }
-      timeouts.current[name] = setTimeout(
-        () => timeoutFunction(_randomizables.current[name], name),
+      timeouts.current[key] = setTimeout(
+        () => timeoutFunction(key),
         Randomizable.number(300, 3000)
       );
     },
-    [_randomizables.current, style, timeouts.current]
+    [style]
   );
 
   // style/external changed
   useEffect(() => {
-    _randomizables.current = RandomCssUtils.getRandomizables(
+    _randomizables.current = RandomCssUtils.getCssRandomizables(
       _style,
-      external !== true
+      external
     );
     const newStyle: Style = {};
     let update = false;
@@ -100,7 +99,7 @@ export default function Div({
          * This option was just enabled. There is no need to do setTimeout
          * here because that will happen at the end of timeoutFunction.
          */
-        timeoutFunction(randomizable, key);
+        timeoutFunction(key);
       }
     });
     if (update) {

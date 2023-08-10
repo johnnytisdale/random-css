@@ -1,7 +1,7 @@
-import RandomizableName from "../types/RandomizableName";
+import CssPropertyName from "../enums/CssPropertyName";
 
 type Timeouts = {
-  [key in RandomizableName]: NodeJS.Timeout | null;
+  [key in CssPropertyName]: NodeJS.Timeout | null;
 };
 
 export default Timeouts;
