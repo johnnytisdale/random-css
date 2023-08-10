@@ -1,12 +1,13 @@
-import GlyphOptions from "../interfaces/GlyphOptions";
 import leetJSON from "../json/leet.json";
 import unicodeJSON from "../json/unicode.json";
 
+import GlyphOptions from "../interfaces/GlyphOptions";
+import MiscellaneousRandomizableName from "../enums/MiscellaneousRandomizableName";
 import Randomizable from "./Randomizable";
 
 export default class Glyph extends Randomizable {
   private glyphs: Array<string> = [this.character];
-  public name = "glyph";
+  public name = MiscellaneousRandomizableName.GLYPH;
 
   constructor(
     private character: string,
