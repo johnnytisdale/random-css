@@ -19,13 +19,7 @@ export default function Character({
   const timeout = useRef<NodeJS.Timeout | null>(null);
 
   const timeoutFunction = useCallback(() => {
-    if (randomizable.current == null) {
-      return;
-    }
-    const newValue = randomizable.current.getRandomValue();
-    if (newValue !== undefined) {
-      setGlyph(newValue);
-    }
+    setGlyph(randomizable.current.getRandomValue() ?? character);
     timeout.current = setTimeout(
       () => timeoutFunction(),
       Randomizable.number(300, 3000)
