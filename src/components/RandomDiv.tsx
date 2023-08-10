@@ -1,5 +1,4 @@
 import CssPropertyName from "../enums/CssPropertyName";
-import { Property as CssPropertyNameType } from "csstype";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import RandomElementProps from "../interfaces/RandomElementProps";
 import Randomizable from "../classes/Randomizable";
@@ -7,6 +6,7 @@ import Randomizables from "../interfaces/Randomizables";
 import Style from "../types/Style";
 import Timeouts from "../interfaces/Timeouts";
 
+import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
@@ -134,11 +134,11 @@ export default function Div({
         : {
             ...style,
             ...(style.fontWeight !== undefined && {
-              fontWeight: style.fontWeight as CssPropertyNameType.FontWeight,
+              fontWeight: style.fontWeight as CssPropertyType.FontWeight,
             }),
             ...(style.textDecorationStyle !== undefined && {
               textDecorationStyle:
-                style.textDecorationStyle as CssPropertyNameType.TextDecorationStyle,
+                style.textDecorationStyle as CssPropertyType.TextDecorationStyle,
             }),
           }),
     }),
