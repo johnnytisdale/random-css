@@ -8,9 +8,13 @@ import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
 
 import * as React from "react";
-import { useMemo } from "react";
+import { HTMLAttributes, useMemo } from "react";
 
-interface Props extends RandomElementGenericProps {
+interface Props
+  extends RandomElementGenericProps<
+    HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
   /**
    * If true, the text will be centered.
    */
@@ -40,6 +44,7 @@ export default function RandomString({
   size,
   style,
   text,
+  ...nativeProps
 }: Props): React.ReactNode {
   const memoizedClassName = useMemo(() => {
     const classNames = ["random-css-string"];
@@ -100,6 +105,7 @@ export default function RandomString({
                   )
             }
             testID="character"
+            {...nativeProps}
           >
             <RandomCharacter character={character} options={glyphOptions} />
           </RandomDiv>

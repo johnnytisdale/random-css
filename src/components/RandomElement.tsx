@@ -10,7 +10,7 @@ import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
-export default function RandomElement({
+export default function RandomElement<Attributes, Element>({
   children,
   className: _className,
   element,
@@ -19,7 +19,8 @@ export default function RandomElement({
   id,
   style: cssOptions,
   testID,
-}: RandomElementProps): React.ReactNode {
+  ...nativeProps
+}: RandomElementProps<Attributes, Element>): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const _randomizables = useRef<Randomizables>(
@@ -136,7 +137,13 @@ export default function RandomElement({
   // random-css-borderColor-rgb(0,-0,-0)
   return React.createElement(
     element,
-    { className, "data-testid": testID, id, style: memoizedStyle },
+    {
+      className,
+      "data-testid": testID,
+      id,
+      style: memoizedStyle,
+      ...nativeProps,
+    },
     children
   );
 }
