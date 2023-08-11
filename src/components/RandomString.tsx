@@ -4,13 +4,13 @@ import CssPropertyName from "../enums/CssPropertyName";
 import GlyphOptions from "../interfaces/GlyphOptions";
 import RandomCharacter from "./RandomCharacter";
 import RandomDiv from "./RandomDiv";
-import RandomElementProps from "../interfaces/RandomElementProps";
+import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
 
 import * as React from "react";
 import { useMemo } from "react";
 
-interface Props extends RandomElementProps {
+interface Props extends RandomElementGenericProps {
   /**
    * If true, the text will be centered.
    */

@@ -1,11 +1,5 @@
-import CssOptions from "./CssOptions";
+import RandomElementGenericProps from "./RandomElementGenericProps";
 
-export default interface RandomElementProps {
-  children?: React.ReactNode;
-  className?: string;
-  id?: string;
-  external?: boolean;
-  fixedStyle?: React.CSSProperties;
-  style: CssOptions;
-  testID?: string;
+export default interface RandomElementProps extends RandomElementGenericProps {
+  element: keyof HTMLElementTagNameMap;
 }
