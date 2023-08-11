@@ -74,7 +74,7 @@ export default function Form(): React.ReactNode {
   return (
     <>
       <RandomDiv
-        fixedStyle={{ borderWidth: "1rem", boxSizing: "border-box" }}
+        fixedStyle={{ borderWidth: "1px" }}
         id="top"
         style={{
           borderColor: { enabled: true },
@@ -102,7 +102,7 @@ export default function Form(): React.ReactNode {
         />
       </RandomDiv>
 
-      <div id="dev-form">
+      <RandomDiv id="dev-form" style={{ borderColor: { enabled: true } }}>
         <FormSectionGlobal
           center={center}
           external={external}
@@ -126,7 +126,7 @@ export default function Form(): React.ReactNode {
           setCopied={setCopied}
           external={external}
         />
-      </div>
+      </RandomDiv>
     </>
   );
 }
