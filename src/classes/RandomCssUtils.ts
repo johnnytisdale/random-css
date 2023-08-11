@@ -31,16 +31,16 @@ export default class RandomCssUtils {
   }
 
   public static getCssRandomizables(
-    cssOptions: CssOptions,
+    styleConfig: CssOptions,
     external: boolean
   ): Randomizables {
     return Object.values(CssPropertyName).reduce(
       (accumulated: Partial<Randomizables>, key: CssPropertyName) => {
         const acc: Partial<Randomizables> = { ...accumulated, [key]: null };
-        if (cssOptions?.[key]?.enabled) {
+        if (styleConfig?.[key]?.enabled) {
           acc[key] = RandomCssUtils.getRandomizableForCssProperty(
             key,
-            cssOptions,
+            styleConfig,
             external
           );
         }
@@ -52,70 +52,70 @@ export default class RandomCssUtils {
 
   public static getRandomizableForCssProperty(
     cssProperty: CssPropertyName,
-    cssOptions: CssOptions,
+    styleConfig: CssOptions,
     external: boolean
   ): Randomizable {
     switch (cssProperty) {
       case CssPropertyName.ANIMATION:
         return new Animation(
-          cssOptions?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          styleConfig?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS },
           external
         );
       case CssPropertyName.BACKGROUND_COLOR:
         return new BackgroundColor(
-          cssOptions.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
+          styleConfig?.backgroundColor ?? { ...DEFAULT_COLOR_OPTIONS },
           external
         );
       case CssPropertyName.BORDER_COLOR:
         return new BorderColor(
-          cssOptions.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
+          styleConfig?.borderColor ?? { ...DEFAULT_COLOR_OPTIONS },
           external
         );
       case CssPropertyName.BORDER_RADIUS:
         return new BorderRadius(
-          cssOptions.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS }
+          styleConfig?.borderRadius ?? { ...DEFAULT_BORDER_RADIUS_OPTIONS }
         );
       case CssPropertyName.BORDER_STYLE:
         return new BorderStyle(
-          cssOptions.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
+          styleConfig?.borderStyle ?? { ...DEFAULT_BORDER_STYLE_OPTIONS },
           external
         );
       case CssPropertyName.BORDER_WIDTH:
         return new BorderWidth(
-          cssOptions.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS }
+          styleConfig?.borderWidth ?? { ...DEFAULT_BORDER_WIDTH_OPTIONS }
         );
       case CssPropertyName.COLOR:
         return new Color(
-          cssOptions.color ?? { ...DEFAULT_COLOR_OPTIONS },
+          styleConfig?.color ?? { ...DEFAULT_COLOR_OPTIONS },
           external
         );
       case CssPropertyName.FONT_FAMILY:
         return new FontFamily(
-          cssOptions.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
+          styleConfig?.fontFamily ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
         );
       case CssPropertyName.FONT_STYLE:
         return new FontStyle(
-          cssOptions?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          styleConfig?.fontStyle ?? { ...DEFAULT_ANIMATION_OPTIONS },
           external
         );
       case CssPropertyName.FONT_WEIGHT:
         return new FontWeight(
-          cssOptions?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
+          styleConfig?.fontWeight ?? { ...DEFAULT_FONT_FAMILY_OPTIONS }
         );
       case CssPropertyName.TEXT_DECORATION_COLOR:
         return new TextDecorationColor(
-          cssOptions.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
+          styleConfig?.textDecorationColor ?? { ...DEFAULT_ANIMATION_OPTIONS },
           external
         );
       case CssPropertyName.TEXT_DECORATION_LINE:
         return new TextDecorationLine(
-          cssOptions.textDecorationLine ?? {
+          styleConfig?.textDecorationLine ?? {
             ...DEFAULT_TEXT_DECORATION_LINE_OPTIONS,
           }
         );
       case CssPropertyName.TEXT_DECORATION_STYLE:
         return new TextDecorationStyle(
-          cssOptions.textDecorationStyle ?? {
+          styleConfig?.textDecorationStyle ?? {
             ...DEFAULT_TEXT_DECORATION_STYLE_OPTIONS,
           }
         );

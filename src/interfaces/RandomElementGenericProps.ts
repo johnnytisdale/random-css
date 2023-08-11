@@ -8,7 +8,7 @@ interface Props {
   external?: boolean;
   fixedStyle?: React.CSSProperties;
   id?: string;
-  style: CssOptions;
+  style?: CssOptions;
   testID?: string;
 }
 

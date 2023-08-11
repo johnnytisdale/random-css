@@ -17,14 +17,14 @@ export default function RandomElement<Attributes, Element>({
   external,
   fixedStyle,
   id,
-  style: cssOptions,
+  style: styleConfig,
   testID,
   ...nativeProps
 }: RandomElementProps<Attributes, Element>): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const _randomizables = useRef<Randomizables>(
-    RandomCssUtils.getCssRandomizables(cssOptions, external)
+    RandomCssUtils.getCssRandomizables(styleConfig ?? {}, external)
   );
   const timeouts = useRef(
     Object.values(CssPropertyName).reduce(
@@ -62,7 +62,7 @@ export default function RandomElement<Attributes, Element>({
   // style/external changed
   useEffect(() => {
     _randomizables.current = RandomCssUtils.getCssRandomizables(
-      cssOptions,
+      styleConfig,
       external
     );
     const newStyle: Style = {};
@@ -93,7 +93,7 @@ export default function RandomElement<Attributes, Element>({
     if (update) {
       setStyle(newStyle);
     }
-  }, [cssOptions, external]);
+  }, [styleConfig, external]);
 
   const className = useMemo(() => {
     const classes = [];
