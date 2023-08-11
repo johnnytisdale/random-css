@@ -5,7 +5,7 @@ import BorderRadius from "./CSS/BorderRadius";
 import BorderStyle from "./CSS/BorderStyle";
 import BorderWidth from "./CSS/BorderWidth";
 import Color from "./CSS/Color";
-import CssOptions from "../interfaces/CssOptions";
+import StyleConfig from "../interfaces/StyleConfig";
 import CssPropertyName from "../enums/CssPropertyName";
 import { DEFAULT_ANIMATION_OPTIONS } from "../interfaces/AnimationOptions";
 import { DEFAULT_BORDER_RADIUS_OPTIONS } from "../interfaces/BorderRadiusOptions";
@@ -31,7 +31,7 @@ export default class RandomCssUtils {
   }
 
   public static getCssRandomizables(
-    styleConfig: CssOptions,
+    styleConfig: StyleConfig,
     external: boolean
   ): Randomizables {
     return Object.values(CssPropertyName).reduce(
@@ -52,7 +52,7 @@ export default class RandomCssUtils {
 
   public static getRandomizableForCssProperty(
     cssProperty: CssPropertyName,
-    styleConfig: CssOptions,
+    styleConfig: StyleConfig,
     external: boolean
   ): Randomizable {
     switch (cssProperty) {

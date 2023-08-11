@@ -3,7 +3,7 @@ import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import ColorOptions from "../../interfaces/ColorOptions";
 import CssColorProperty from "../../types/CssColorProperty";
-import CssOptions from "../../interfaces/CssOptions";
+import StyleConfig from "../../interfaces/StyleConfig";
 import CssProperty from "../../enums/CssPropertyName";
 import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import FontStyleOptions from "../../interfaces/FontStyleOptions";
@@ -31,8 +31,8 @@ interface ToggleCSS {
 }
 
 interface Props {
-  css: CssOptions;
-  setCss: (css: CssOptions) => void;
+  css: StyleConfig;
+  setCss: (css: StyleConfig) => void;
   external: boolean;
 }
 
@@ -91,7 +91,7 @@ export default function FormSectionCss({
 
   const toggleCssProperty = useCallback(
     (cssProperty: CssProperty, checked: boolean) => {
-      const newCss: CssOptions = {};
+      const newCss: StyleConfig = {};
 
       /**
        * Defining using the spread operator is necessary to avoid problems with
@@ -128,7 +128,7 @@ export default function FormSectionCss({
       } else {
         newToggleCss.all = select;
         newToggleCss.none = !select;
-        const newCss: CssOptions = {};
+        const newCss: StyleConfig = {};
         Object.values(CssProperty).forEach((cssProperty) => {
           newCss[cssProperty] = {
             ...css[cssProperty],

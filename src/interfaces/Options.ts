@@ -1,9 +1,9 @@
-import CssOptions from "./CssOptions";
+import StyleConfig from "./StyleConfig";
 import GlobalOptions from "./GlobalOptions";
 import GlyphOptions from "./GlyphOptions";
 
 export default interface Options {
-  css: CssOptions;
+  css: StyleConfig;
   global: GlobalOptions;
   glyph: GlyphOptions;
 }

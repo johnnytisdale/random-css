@@ -1,4 +1,4 @@
-import CssOptions from "./CssOptions";
+import StyleConfig from "./StyleConfig";
 
 import * as React from "react";
 
@@ -8,7 +8,7 @@ interface Props {
   external?: boolean;
   fixedStyle?: React.CSSProperties;
   id?: string;
-  style?: CssOptions;
+  style?: StyleConfig;
   testID?: string;
 }
 

@@ -24,7 +24,7 @@ import TextDecorationLineOptions, {
 } from "./TextDecorationLineOptions";
 import TextDecorationStyleOptions from "./TextDecorationStyleOptions";
 
-export default interface CssOptions {
+export default interface StyleConfig {
   animation?: AnimationOptions;
   backgroundColor?: ColorOptions;
   borderColor?: ColorOptions;
@@ -40,7 +40,7 @@ export default interface CssOptions {
   textDecorationStyle?: TextDecorationStyleOptions;
 }
 
-export const DEFAULT_CSS_OPTIONS: CssOptions = {
+export const DEFAULT_STYLE_CONFIG: StyleConfig = {
   animation: DEFAULT_ANIMATION_OPTIONS,
   backgroundColor: DEFAULT_COLOR_OPTIONS,
   borderColor: DEFAULT_COLOR_OPTIONS,

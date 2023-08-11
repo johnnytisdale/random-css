@@ -1,7 +1,9 @@
 import "../../styles/Form.scss";
 
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import CssOptions, { DEFAULT_CSS_OPTIONS } from "../../interfaces/CssOptions";
+import StyleConfig, {
+  DEFAULT_STYLE_CONFIG,
+} from "../../interfaces/StyleConfig";
 import CssProperty from "../../enums/CssPropertyName";
 import {
   DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
@@ -30,8 +32,8 @@ export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
   const [css, setCss] = useReducer(
-    RandomCssUtils.reducer<CssOptions>,
-    DEFAULT_CSS_OPTIONS
+    RandomCssUtils.reducer<StyleConfig>,
+    DEFAULT_STYLE_CONFIG
   );
   const [glyph, setGlyph] = useReducer(
     RandomCssUtils.reducer<GlyphOptions>,
