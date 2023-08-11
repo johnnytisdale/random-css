@@ -19,7 +19,7 @@ import GlyphOptions, {
 } from "../../interfaces/GlyphOptions";
 import Options from "../../interfaces/Options";
 import RandomCssUtils from "../../classes/RandomCssUtils";
-import RandomDiv from "../RandomDiv";
+import { RandomDiv } from "../RandomDiv";
 import RandomString from "../RandomString";
 
 import * as React from "react";
