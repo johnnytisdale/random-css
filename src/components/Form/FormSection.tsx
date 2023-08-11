@@ -1,3 +1,6 @@
+import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
+import { RandomDiv } from "../RandomElements";
+
 import * as React from "react";
 
 interface Props {
@@ -13,10 +16,26 @@ export default class Form extends React.Component<Props> {
 
   render(): React.ReactNode {
     return (
-      <div className="section" id={this.props.id}>
+      <RandomDiv
+        className="section"
+        id={this.props.id}
+        style={{
+          borderColor: { enabled: true },
+          borderStyle: {
+            enabled: true,
+            borderStyles: [
+              BorderStyleKeyword.DASHED,
+              BorderStyleKeyword.DOTTED,
+              BorderStyleKeyword.DOUBLE,
+              BorderStyleKeyword.GROOVE,
+              BorderStyleKeyword.SOLID,
+            ],
+          },
+        }}
+      >
         <div className="title">{this.props.title}</div>
         <div className="options">{this.props.children}</div>
-      </div>
+      </RandomDiv>
     );
   }
 }
