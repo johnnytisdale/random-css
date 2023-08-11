@@ -3,7 +3,7 @@ import "../styles/RandomString.scss";
 import CssPropertyName from "../enums/CssPropertyName";
 import GlyphOptions from "../interfaces/GlyphOptions";
 import RandomCharacter from "./RandomCharacter";
-import { RandomDiv } from "./RandomDiv";
+import { RandomDiv } from "./RandomElements";
 import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
 
