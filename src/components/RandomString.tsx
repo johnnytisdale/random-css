@@ -1,6 +1,7 @@
 import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
+import { DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES } from "../interfaces/GlobalOptions";
 import GlyphOptions from "../interfaces/GlyphOptions";
 import RandomCharacter from "./RandomCharacter";
 import { RandomDiv } from "./RandomElements";
@@ -40,7 +41,7 @@ export default function RandomString({
   className,
   external,
   glyphOptions,
-  ignoreSpaces,
+  ignoreSpaces = DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   size,
   style,
   text,
