@@ -1,7 +1,7 @@
 import leetJSON from "../json/leet.json";
 import unicodeJSON from "../json/unicode.json";
 
-import GlyphOptions from "../interfaces/GlyphOptions";
+import GlyphConfig from "../interfaces/GlyphConfig";
 import MiscellaneousRandomizableName from "../enums/MiscellaneousRandomizableName";
 import Randomizable from "./Randomizable";
 
@@ -11,7 +11,7 @@ export default class Glyph extends Randomizable {
 
   constructor(
     private character: string,
-    options: GlyphOptions
+    options: GlyphConfig
   ) {
     super();
     const lower = this.character.toLowerCase();
@@ -27,7 +27,7 @@ export default class Glyph extends Randomizable {
     return Randomizable.array(this.glyphs);
   }
 
-  public static enabled(options: GlyphOptions) {
+  public static enabled(options: GlyphConfig) {
     return (
       options?.leet?.enabled === true || options?.unicode?.enabled === true
     );

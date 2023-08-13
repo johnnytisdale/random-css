@@ -16,9 +16,9 @@ import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
 import GlyphOption from "../../enums/GlyphOption";
-import GlyphOptions, {
+import GlyphConfig, {
   DEFAULT_GLYPH_OPTIONS,
-} from "../../interfaces/GlyphOptions";
+} from "../../interfaces/GlyphConfig";
 import Options from "../../interfaces/Options";
 import RandomCssUtils from "../../classes/RandomCssUtils";
 import { RandomDiv } from "../RandomElements";
@@ -36,7 +36,7 @@ export default function Form(): React.ReactNode {
     DEFAULT_STYLE_CONFIG
   );
   const [glyph, setGlyph] = useReducer(
-    RandomCssUtils.reducer<GlyphOptions>,
+    RandomCssUtils.reducer<GlyphConfig>,
     DEFAULT_GLYPH_OPTIONS
   );
   const [ignoreSpaces, setIgnoreSpaces] = useState(

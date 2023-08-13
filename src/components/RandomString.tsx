@@ -2,7 +2,7 @@ import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
 import { DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES } from "../interfaces/GlobalOptions";
-import GlyphOptions from "../interfaces/GlyphOptions";
+import GlyphConfig from "../interfaces/GlyphConfig";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
@@ -25,7 +25,7 @@ interface Props
   /**
    * Various options, including CSS and glyph.
    */
-  glyphOptions: GlyphOptions;
+  glyphOptions: GlyphConfig;
 
   ignoreSpaces: boolean;
 

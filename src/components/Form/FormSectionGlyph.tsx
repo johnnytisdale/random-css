@@ -1,13 +1,13 @@
 import GlyphOption from "../../enums/GlyphOption";
-import GlyphOptions from "../../interfaces/GlyphOptions";
+import GlyphConfig from "../../interfaces/GlyphConfig";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormSection from "./FormSection";
 
 import * as React from "react";
 
 interface Props {
-  options: GlyphOptions;
-  setOptions: (options: GlyphOptions) => void;
+  options: GlyphConfig;
+  setOptions: (options: GlyphConfig) => void;
 }
 
 export default function FormSectionGlyph({

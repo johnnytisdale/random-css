@@ -1,5 +1,5 @@
 import Glyph from "../classes/Glyph";
-import GlyphOptions from "../interfaces/GlyphOptions";
+import GlyphConfig from "../interfaces/GlyphConfig";
 import Randomizable from "../classes/Randomizable";
 
 import * as React from "react";
@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
   character: string;
-  options: GlyphOptions;
+  options: GlyphConfig;
 }
 
 export default function RandomCharacter({

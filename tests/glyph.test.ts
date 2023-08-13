@@ -1,6 +1,6 @@
 import * as leetJSON from "../src/json/leet.json";
 import * as unicodeJSON from "../src/json/unicode.json";
-import { DEFAULT_GLYPH_OPTIONS } from "../src/interfaces/GlyphOptions";
+import { DEFAULT_GLYPH_OPTIONS } from "../src/interfaces/GlyphConfig";
 import Glyph from "../src/classes/Glyph";
 import Letter from "../src/enums/Letter";
 
