@@ -19,6 +19,7 @@ import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
 import Randomizable from "./Randomizable";
 import Randomizables from "../interfaces/Randomizables";
+import StyleInput from "../interfaces/StyleInput";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";
 import TextDecorationStyle, {
@@ -122,5 +123,27 @@ export default class RandomCssUtils {
       default:
         return null;
     }
+  }
+
+  public static getStyleConfigFromStyleInput(
+    styleInput: StyleInput
+  ): StyleConfig {
+    const styleConfig: StyleConfig = {};
+    for (const item of Array.isArray(styleInput) ? styleInput : [styleInput]) {
+      if (typeof item === "string") {
+        styleConfig[item] = {
+          ...styleConfig[item],
+          ...{ enabled: true },
+        };
+      } else if (typeof item === "object") {
+        Object.keys(styleInput).forEach((cssPropertyName: CssPropertyName) => {
+          styleConfig[cssPropertyName] = {
+            ...styleConfig[cssPropertyName],
+            ...(item as StyleConfig)[cssPropertyName],
+          };
+        });
+      }
+    }
+    return styleConfig;
   }
 }
