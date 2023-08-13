@@ -1,4 +1,4 @@
-import StyleConfig from "./StyleConfig";
+import StyleInput from "./StyleInput";
 
 import * as React from "react";
 
@@ -8,7 +8,7 @@ interface Props {
   external?: boolean;
   fixedStyle?: React.CSSProperties;
   id?: string;
-  style?: StyleConfig;
+  style?: StyleInput;
   testID?: string;
 }
 

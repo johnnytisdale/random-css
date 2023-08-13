@@ -4,6 +4,7 @@ import CssPropertyName from "../enums/CssPropertyName";
 import { DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES } from "../interfaces/GlobalOptions";
 import GlyphOptions from "../interfaces/GlyphOptions";
 import RandomCharacter from "./RandomCharacter";
+import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
 import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
@@ -43,7 +44,7 @@ export default function RandomString({
   glyphOptions,
   ignoreSpaces = DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   size,
-  style,
+  style: styleInput,
   text,
   ...nativeProps
 }: Props): React.ReactNode {
@@ -60,6 +61,11 @@ export default function RandomString({
     }
     return classNames.filter(Boolean).join(" ");
   }, [center, external, size]);
+
+  const styleConfig = useMemo(
+    () => RandomCssUtils.getStyleConfigFromStyleInput(styleInput),
+    [styleInput]
+  );
 
   /**
    * This value serves as both the font size and the width of the divs
@@ -95,13 +101,15 @@ export default function RandomString({
             key={`${i}-${character}`}
             style={
               character != " "
-                ? style
+                ? styleConfig
                 : Object.assign(
                     {},
-                    ...Object.keys(style).map((cssProperty: CssPropertyName) =>
-                      ignoreSpaces || Randomizable.ignoreForSpaces[cssProperty]
-                        ? {}
-                        : { [cssProperty]: style[cssProperty] }
+                    ...Object.keys(styleConfig).map(
+                      (cssProperty: CssPropertyName) =>
+                        ignoreSpaces ||
+                        Randomizable.ignoreForSpaces[cssProperty]
+                          ? {}
+                          : { [cssProperty]: styleConfig[cssProperty] }
                     )
                   )
             }

@@ -17,12 +17,16 @@ export default function RandomElement<Attributes, Element>({
   external,
   fixedStyle,
   id,
-  style: styleConfig,
+  style: styleInput,
   testID,
   ...nativeProps
 }: RandomElementProps<Attributes, Element>): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
+  const styleConfig = useMemo(
+    () => RandomCssUtils.getStyleConfigFromStyleInput(styleInput),
+    [styleInput]
+  );
   const randomizables = useRef<Randomizables>(
     RandomCssUtils.getCssRandomizables(styleConfig ?? {}, external)
   );

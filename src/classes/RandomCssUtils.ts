@@ -136,10 +136,17 @@ export default class RandomCssUtils {
           ...{ enabled: true },
         };
       } else if (typeof item === "object") {
-        Object.keys(styleInput).forEach((cssPropertyName: CssPropertyName) => {
+        Object.keys(item).forEach((cssPropertyName: CssPropertyName) => {
           styleConfig[cssPropertyName] = {
             ...styleConfig[cssPropertyName],
             ...(item as StyleConfig)[cssPropertyName],
+
+            /**
+             * The user should not have to type "{ enabled : true }". If they
+             * want it to be disabled, they can just omit the CssPropertyName
+             * from their input.
+             */
+            ...{ enabled: true },
           };
         });
       }

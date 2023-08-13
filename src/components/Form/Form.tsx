@@ -4,7 +4,7 @@ import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
 import StyleConfig, {
   DEFAULT_STYLE_CONFIG,
 } from "../../interfaces/StyleConfig";
-import CssProperty from "../../enums/CssPropertyName";
+import CssPropertyName from "../../enums/CssPropertyName";
 import {
   DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   DEFAULT_GLOBAL_OPTIONS_SIZE,
@@ -52,7 +52,7 @@ export default function Form(): React.ReactNode {
     () => ({
       css: Object.assign(
         {},
-        ...Object.values(CssProperty).map(
+        ...Object.values(CssPropertyName).map(
           (cssProperty) =>
             css?.[cssProperty]?.enabled === true && {
               [cssProperty]: css[cssProperty],
@@ -76,21 +76,22 @@ export default function Form(): React.ReactNode {
   return (
     <>
       <RandomDiv
-        fixedStyle={{ borderWidth: "1px" }}
+        fixedStyle={{ borderWidth: ".5rem" }}
         id="top"
-        style={{
-          borderColor: { enabled: true },
-          borderStyle: {
-            enabled: true,
-            borderStyles: [
-              BorderStyleKeyword.DASHED,
-              BorderStyleKeyword.DOTTED,
-              BorderStyleKeyword.DOUBLE,
-              BorderStyleKeyword.GROOVE,
-              BorderStyleKeyword.SOLID,
-            ],
+        style={[
+          CssPropertyName.BORDER_COLOR,
+          {
+            borderStyle: {
+              borderStyles: [
+                BorderStyleKeyword.DASHED,
+                BorderStyleKeyword.DOTTED,
+                BorderStyleKeyword.DOUBLE,
+                BorderStyleKeyword.GROOVE,
+                BorderStyleKeyword.SOLID,
+              ],
+            },
           },
-        }}
+        ]}
         testID="top"
       >
         <RandomString
