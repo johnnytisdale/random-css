@@ -43,9 +43,9 @@ body {
     border-bottom: 1px solid black;
     padding: 1rem;
 
-    &#css-options {
+    &#style-config {
       .options {
-        #select-none-css {
+        #select-none-style {
           margin-bottom: 1rem;
         }
       }
@@ -53,32 +53,37 @@ body {
 
     &#export-options {
       > .options {
-        > #export-external-css {
-          font-size: 0.8rem;
-          margin-bottom: 1rem;
-        }
-
-        > .option {
-          &#export-textarea {
-            > .input {
-              width: 100%;
-
-              > textarea {
-                margin-right: 1rem;
-                resize: none;
-                width: 95%;
-              }
-            }
-
-            margin-bottom: 0.5rem;
+        > .export-subsection {
+          &:not(:last-child) {
+            border-bottom: 1px solid black;
+            padding-bottom: 1rem;
           }
+          > .label {
+            font-variant: small-caps;
+            text-decoration: underline;
+          }
+          > #external-notice {
+            font-size: 1.25rem;
+            margin: 0.5rem 0 1rem;
+          }
+          > .textarea {
+            width: 100%;
 
-          &#export-button {
+            > textarea {
+              font-size: 1.5rem;
+              margin-right: 1rem;
+              resize: none;
+              width: 95%;
+            }
+          }
+          > .export-button {
             > .input {
               text-align: center;
               width: 100%;
             }
           }
+
+          margin-bottom: 0.5rem;
         }
       }
     }

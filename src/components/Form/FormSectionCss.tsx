@@ -144,16 +144,16 @@ export default function FormSectionCss({
     [setToggleCss, toggleCss, toggleCssProperty]
   );
   return (
-    <FormSection id="styleConfig-options" title="styleConfig options">
+    <FormSection id="style-config" title="style">
       <FormOptionBoolean
         checked={toggleCss.all}
-        id="select-all-styleConfig"
+        id="select-all-style"
         label="select all"
         setChecked={(checked) => toggleAll(checked, true)}
       />
       <FormOptionBoolean
         checked={toggleCss.none}
-        id="select-none-styleConfig"
+        id="select-none-style"
         label="select none"
         setChecked={(checked) => toggleAll(checked, false)}
       />

@@ -15,14 +15,15 @@ import FormSectionCss from "./FormSectionCss";
 import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
-import GlyphType from "../../enums/GlyphType";
 import GlyphConfig, {
   DEFAULT_GLYPH_OPTIONS,
 } from "../../interfaces/GlyphConfig";
-import Options from "../../interfaces/Options";
+import GlyphInput from "../../interfaces/GlyphInput";
+import GlyphType from "../../enums/GlyphType";
 import RandomCssUtils from "../../classes/RandomCssUtils";
 import { RandomDiv } from "../RandomElements";
 import RandomString from "../RandomString";
+import StyleInput from "../../interfaces/StyleInput";
 
 import * as React from "react";
 import { useMemo, useReducer, useState } from "react";
@@ -30,7 +31,6 @@ import { createRoot } from "react-dom/client";
 
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
-  const [copied, setCopied] = useState<boolean>(null);
   const [styleConfig, setStyleConfig] = useReducer(
     RandomCssUtils.reducer<StyleConfig>,
     DEFAULT_STYLE_CONFIG
@@ -48,9 +48,9 @@ export default function Form(): React.ReactNode {
     DEFAULT_GLOBAL_OPTIONS_EXTERNAL
   );
 
-  const optionsToExport: Options = useMemo(
-    () => ({
-      css: Object.assign(
+  const styleExport: StyleInput = useMemo(
+    () =>
+      Object.assign(
         {},
         ...Object.values(CssPropertyName).map(
           (cssProperty) =>
@@ -59,8 +59,12 @@ export default function Form(): React.ReactNode {
             }
         )
       ),
-      global: { ignoreSpaces, size, external },
-      glyph: Object.assign(
+    [styleConfig]
+  );
+
+  const glyphExport: GlyphInput = useMemo(
+    () =>
+      Object.assign(
         {},
         ...Object.values(GlyphType).map(
           (glyphOption) =>
@@ -69,8 +73,7 @@ export default function Form(): React.ReactNode {
             }
         )
       ),
-    }),
-    [external, glyphConfig, ignoreSpaces, size, styleConfig]
+    [glyphConfig]
   );
 
   return (
@@ -128,10 +131,9 @@ export default function Form(): React.ReactNode {
         <FormSectionGlyph config={glyphConfig} setConfig={setGlyphConfig} />
 
         <FormSectionExport
-          copied={copied}
-          optionsToExport={optionsToExport}
-          setCopied={setCopied}
           external={external}
+          glyphConfig={glyphExport}
+          styleConfig={styleExport}
         />
       </RandomDiv>
     </>

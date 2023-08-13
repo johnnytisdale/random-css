@@ -15,7 +15,7 @@ export default function FormSectionGlyph({
   setConfig,
 }: Props): React.ReactNode {
   return (
-    <FormSection id="glyph-config" title="glyph config">
+    <FormSection id="glyph-config" title="glyphConfig">
       <FormOptionBoolean
         checked={config?.leet?.enabled}
         label={GlyphType.LEET}
