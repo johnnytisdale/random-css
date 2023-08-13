@@ -142,11 +142,14 @@ export default class RandomCssUtils {
             ...(item as StyleConfig)[cssPropertyName],
 
             /**
-             * The user should not have to type "{ enabled : true }". If they
-             * want it to be disabled, they can just omit the CssPropertyName
-             * from their input.
+             * The user should not have to type "{ enabled : true }" because it
+             * is too cumbersome. If they include a CSSPropertyName in their
+             * input, then unless they explicity set enabled to false for it,
+             * we will assume they want to enable it.
              */
-            ...{ enabled: true },
+            ...((item as StyleConfig)[cssPropertyName]?.enabled !== false && {
+              enabled: true,
+            }),
           };
         });
       }
