@@ -7,12 +7,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
   character: string;
-  options: GlyphConfig;
+  config: GlyphConfig;
 }
 
 export default function RandomCharacter({
   character,
-  options,
+  config,
 }: Props): React.ReactNode {
   const [glyph, setGlyph] = useState(character);
   const randomizable = useRef<Glyph>(null);
@@ -26,10 +26,10 @@ export default function RandomCharacter({
     );
   }, []);
 
-  // character/options changed
+  // character/config changed
   useEffect(() => {
-    randomizable.current = Glyph.enabled(options)
-      ? new Glyph(character, options)
+    randomizable.current = Glyph.enabled(config)
+      ? new Glyph(character, config)
       : null;
     if (randomizable.current == null) {
       if (timeout.current == null) {
@@ -50,7 +50,7 @@ export default function RandomCharacter({
        */
       timeoutFunction();
     }
-  }, [character, options]);
+  }, [character, config]);
 
   return glyph;
 }

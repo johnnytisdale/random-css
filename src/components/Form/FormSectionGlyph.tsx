@@ -6,25 +6,25 @@ import FormSection from "./FormSection";
 import * as React from "react";
 
 interface Props {
-  options: GlyphConfig;
-  setOptions: (options: GlyphConfig) => void;
+  config: GlyphConfig;
+  setConfig: (config: GlyphConfig) => void;
 }
 
 export default function FormSectionGlyph({
-  options,
-  setOptions,
+  config,
+  setConfig,
 }: Props): React.ReactNode {
   return (
-    <FormSection id="glyph-options" title="glyph options">
+    <FormSection id="glyph-config" title="glyph config">
       <FormOptionBoolean
-        checked={options?.leet?.enabled}
+        checked={config?.leet?.enabled}
         label={GlyphOption.LEET}
-        setChecked={(enabled) => setOptions({ leet: { enabled } })}
+        setChecked={(enabled) => setConfig({ leet: { enabled } })}
       />
       <FormOptionBoolean
-        checked={options?.unicode?.enabled}
+        checked={config?.unicode?.enabled}
         label={GlyphOption.UNICODE}
-        setChecked={(enabled) => setOptions({ unicode: { enabled } })}
+        setChecked={(enabled) => setConfig({ unicode: { enabled } })}
       />
     </FormSection>
   );

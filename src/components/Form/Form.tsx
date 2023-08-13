@@ -35,7 +35,7 @@ export default function Form(): React.ReactNode {
     RandomCssUtils.reducer<StyleConfig>,
     DEFAULT_STYLE_CONFIG
   );
-  const [glyph, setGlyph] = useReducer(
+  const [glyphConfig, setGlyphConfig] = useReducer(
     RandomCssUtils.reducer<GlyphConfig>,
     DEFAULT_GLYPH_OPTIONS
   );
@@ -64,13 +64,13 @@ export default function Form(): React.ReactNode {
         {},
         ...Object.values(GlyphOption).map(
           (glyphOption) =>
-            glyph?.[glyphOption]?.enabled && {
-              [glyphOption]: glyph[glyphOption],
+            glyphConfig?.[glyphOption]?.enabled && {
+              [glyphOption]: glyphConfig[glyphOption],
             }
         )
       ),
     }),
-    [external, glyph, ignoreSpaces, size, styleConfig]
+    [external, glyphConfig, ignoreSpaces, size, styleConfig]
   );
 
   return (
@@ -97,7 +97,7 @@ export default function Form(): React.ReactNode {
         <RandomString
           center={center}
           external={external}
-          glyphOptions={glyph}
+          glyphConfig={glyphConfig}
           ignoreSpaces={ignoreSpaces}
           size={size}
           style={styleConfig}
@@ -125,7 +125,7 @@ export default function Form(): React.ReactNode {
           external={external}
         />
 
-        <FormSectionGlyph options={glyph} setOptions={setGlyph} />
+        <FormSectionGlyph config={glyphConfig} setConfig={setGlyphConfig} />
 
         <FormSectionExport
           copied={copied}

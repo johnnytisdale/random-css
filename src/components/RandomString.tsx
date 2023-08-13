@@ -22,10 +22,7 @@ interface Props
    */
   center?: boolean;
 
-  /**
-   * Various options, including CSS and glyph.
-   */
-  glyphOptions: GlyphConfig;
+  glyphConfig: GlyphConfig;
 
   ignoreSpaces: boolean;
 
@@ -41,7 +38,7 @@ export default function RandomString({
   center = true,
   className,
   external,
-  glyphOptions,
+  glyphConfig,
   ignoreSpaces = DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
   size,
   style: styleInput,
@@ -116,7 +113,7 @@ export default function RandomString({
             testID="character"
             {...nativeProps}
           >
-            <RandomCharacter character={character} options={glyphOptions} />
+            <RandomCharacter character={character} config={glyphConfig} />
           </RandomDiv>
         );
       })}
