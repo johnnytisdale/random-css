@@ -1,7 +1,8 @@
 import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
-import { DEFAULT_GLYPH_CONFIG } from "../interfaces/GlyphConfig";
+import GlyphConfig, { DEFAULT_GLYPH_CONFIG } from "../interfaces/GlyphConfig";
+import GlyphInput from "../interfaces/GlyphInput";
 import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementGenericProps";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
@@ -13,6 +14,8 @@ import RandomStringProps, {
   DEFAULT_RANDOM_STRING_PROPS_SIZE,
   DEFAULT_RANDOM_STRING_PROPS_TEXT,
 } from "../interfaces/RandomStringProps";
+import StyleConfig from "../interfaces/StyleConfig";
+import StyleInput from "../interfaces/StyleInput";
 
 import * as React from "react";
 import { useMemo } from "react";
@@ -21,13 +24,18 @@ export default function RandomString({
   center = DEFAULT_RANDOM_STRING_PROPS_CENTER,
   className,
   external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL,
-  glyphConfig = DEFAULT_GLYPH_CONFIG,
+  glyphConfig: glyphInput = DEFAULT_GLYPH_CONFIG,
   ignoreSpaces = DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
   size = DEFAULT_RANDOM_STRING_PROPS_SIZE,
   style: styleInput,
   text = DEFAULT_RANDOM_STRING_PROPS_TEXT,
   ...nativeProps
 }: RandomStringProps): React.ReactNode {
+  const glyphConfig = useMemo(
+    () =>
+      RandomCssUtils.getConfigFromInput<GlyphInput, GlyphConfig>(glyphInput),
+    [glyphInput]
+  );
   const memoizedClassName = useMemo(() => {
     const classNames = ["random-css-string"];
     if (external) {
@@ -43,7 +51,8 @@ export default function RandomString({
   }, [center, external, size]);
 
   const styleConfig = useMemo(
-    () => RandomCssUtils.getStyleConfigFromStyleInput(styleInput),
+    () =>
+      RandomCssUtils.getConfigFromInput<StyleInput, StyleConfig>(styleInput),
     [styleInput]
   );
 

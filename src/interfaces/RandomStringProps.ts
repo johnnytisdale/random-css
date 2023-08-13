@@ -1,4 +1,4 @@
-import GlyphConfig from "./GlyphConfig";
+import GlyphInput from "./GlyphInput";
 import RandomElementGenericProps from "./RandomElementGenericProps";
 
 import { HTMLAttributes } from "react";
@@ -16,7 +16,7 @@ export default interface RandomStringProps
   /**
    * Randomly change characters to similar glyphs.
    */
-  glyphConfig?: GlyphConfig;
+  glyphConfig?: GlyphInput;
 
   /**
    * If true, random styles will not be applied to spaces.

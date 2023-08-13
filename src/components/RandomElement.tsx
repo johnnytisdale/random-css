@@ -5,6 +5,8 @@ import RandomElementProps from "../interfaces/RandomElementProps";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
 import Style from "../types/Style";
+import StyleConfig from "../interfaces/StyleConfig";
+import StyleInput from "../interfaces/StyleInput";
 import Timeouts from "../interfaces/Timeouts";
 
 import { Property as CssPropertyType } from "csstype";
@@ -25,7 +27,8 @@ export default function RandomElement<Attributes, Element>({
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const styleConfig = useMemo(
-    () => RandomCssUtils.getStyleConfigFromStyleInput(styleInput),
+    () =>
+      RandomCssUtils.getConfigFromInput<StyleInput, StyleConfig>(styleInput),
     [styleInput]
   );
   const randomizables = useRef<Randomizables>(

@@ -17,9 +17,9 @@ import { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../interfaces/TextDecorati
 import FontFamily from "./CSS/FontFamily";
 import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
+import Option from "../interfaces/Option";
 import Randomizable from "./Randomizable";
 import Randomizables from "../interfaces/Randomizables";
-import StyleInput from "../interfaces/StyleInput";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";
 import TextDecorationStyle, {
@@ -125,21 +125,22 @@ export default class RandomCssUtils {
     }
   }
 
-  public static getStyleConfigFromStyleInput(
-    styleInput: StyleInput
-  ): StyleConfig {
-    const styleConfig: StyleConfig = {};
-    for (const item of Array.isArray(styleInput) ? styleInput : [styleInput]) {
+  public static getConfigFromInput<
+    Input,
+    Config extends Partial<Record<keyof Config, Option>>,
+  >(input: Input): Config {
+    const config = {} as Config;
+    for (const item of Array.isArray(input) ? input : [input]) {
       if (typeof item === "string") {
-        styleConfig[item] = {
-          ...styleConfig[item],
+        config[item as keyof Config] = {
+          ...config[item as keyof Config],
           ...{ enabled: true },
         };
       } else if (typeof item === "object") {
-        Object.keys(item).forEach((cssPropertyName: CssPropertyName) => {
-          styleConfig[cssPropertyName] = {
-            ...styleConfig[cssPropertyName],
-            ...(item as StyleConfig)[cssPropertyName],
+        Object.keys(item).forEach((key) => {
+          config[key as keyof Config] = {
+            ...config[key as keyof Config],
+            ...(item as Config)[key as keyof Config],
 
             /**
              * The user should not have to type "{ enabled : true }" because it
@@ -147,13 +148,13 @@ export default class RandomCssUtils {
              * input, then unless they explicity set enabled to false for it,
              * we will assume they want to enable it.
              */
-            ...((item as StyleConfig)[cssPropertyName]?.enabled !== false && {
+            ...((item as Config)[key as keyof Config]?.enabled !== false && {
               enabled: true,
             }),
           };
         });
       }
     }
-    return styleConfig;
+    return config;
   }
 }
