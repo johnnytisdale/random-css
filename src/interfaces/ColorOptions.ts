@@ -1,7 +1,7 @@
 import ColorKeyword from "../enums/ColorKeyword";
-import Options from "./Option";
+import Option from "./Option";
 
-export default interface ColorOptions extends Options {
+export default interface ColorOptions extends Option {
   bMax?: number;
   bMin?: number;
   colorKeywords?: ColorKeyword[];
