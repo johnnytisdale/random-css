@@ -16,7 +16,7 @@ import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
 import GlyphConfig, {
-  DEFAULT_GLYPH_OPTIONS,
+  DEFAULT_GLYPH_CONFIG,
 } from "../../interfaces/GlyphConfig";
 import GlyphInput from "../../interfaces/GlyphInput";
 import GlyphType from "../../enums/GlyphType";
@@ -37,7 +37,7 @@ export default function Form(): React.ReactNode {
   );
   const [glyphConfig, setGlyphConfig] = useReducer(
     RandomCssUtils.reducer<GlyphConfig>,
-    DEFAULT_GLYPH_OPTIONS
+    DEFAULT_GLYPH_CONFIG
   );
   const [ignoreSpaces, setIgnoreSpaces] = useState(
     DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES

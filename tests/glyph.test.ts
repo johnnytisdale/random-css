@@ -1,11 +1,11 @@
 import * as leetJSON from "../src/json/leet.json";
 import * as unicodeJSON from "../src/json/unicode.json";
 
-import { DEFAULT_GLYPH_OPTIONS } from "../src/interfaces/GlyphConfig";
+import { DEFAULT_GLYPH_CONFIG } from "../src/interfaces/GlyphConfig";
 import Glyph from "../src/classes/Glyph";
 import Letter from "../src/enums/Letter";
 
-const glyph = new Glyph("a", DEFAULT_GLYPH_OPTIONS);
+const glyph = new Glyph("a", DEFAULT_GLYPH_CONFIG);
 
 test("Glyph.name == 'glyph'", () => {
   expect(glyph.name).toBe("glyph");

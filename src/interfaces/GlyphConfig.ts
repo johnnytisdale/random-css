@@ -5,7 +5,7 @@ export default interface GlyphConfig {
   unicode?: Option;
 }
 
-export const DEFAULT_GLYPH_OPTIONS: GlyphConfig = {
+export const DEFAULT_GLYPH_CONFIG: GlyphConfig = {
   leet: { enabled: false },
   unicode: { enabled: false },
 };

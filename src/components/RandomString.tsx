@@ -1,26 +1,31 @@
 import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
+import { DEFAULT_GLYPH_CONFIG } from "../interfaces/GlyphConfig";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementGenericProps";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
 import Randomizable from "../classes/Randomizable";
 import RandomStringProps, {
+  DEFAULT_RANDOM_STRING_PROPS_CENTER,
   DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
+  DEFAULT_RANDOM_STRING_PROPS_SIZE,
+  DEFAULT_RANDOM_STRING_PROPS_TEXT,
 } from "../interfaces/RandomStringProps";
 
 import * as React from "react";
 import { useMemo } from "react";
 
 export default function RandomString({
-  center = true,
+  center = DEFAULT_RANDOM_STRING_PROPS_CENTER,
   className,
-  external,
-  glyphConfig,
+  external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL,
+  glyphConfig = DEFAULT_GLYPH_CONFIG,
   ignoreSpaces = DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
-  size,
+  size = DEFAULT_RANDOM_STRING_PROPS_SIZE,
   style: styleInput,
-  text,
+  text = DEFAULT_RANDOM_STRING_PROPS_TEXT,
   ...nativeProps
 }: RandomStringProps): React.ReactNode {
   const memoizedClassName = useMemo(() => {

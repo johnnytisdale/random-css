@@ -1,4 +1,5 @@
 import CssPropertyName from "../enums/CssPropertyName";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementGenericProps";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import RandomElementProps from "../interfaces/RandomElementProps";
 import Randomizable from "../classes/Randomizable";
@@ -12,9 +13,9 @@ import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
 export default function RandomElement<Attributes, Element>({
   children,
-  className: _className,
+  className: classNameInput,
   element,
-  external,
+  external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL,
   fixedStyle,
   id,
   style: styleInput,
@@ -101,8 +102,8 @@ export default function RandomElement<Attributes, Element>({
 
   const className = useMemo(() => {
     const classes = [];
-    if (_className) {
-      classes.push(_className);
+    if (classNameInput) {
+      classes.push(classNameInput);
     }
     if (external) {
       classes.push(
@@ -115,7 +116,7 @@ export default function RandomElement<Attributes, Element>({
         )
       );
     }
-    return classes.filter(Boolean).join(" ");
+    return classes.length ? classes.filter(Boolean).join(" ") : null;
   }, [external, style]);
 
   const memoizedStyle = useMemo(
