@@ -1,4 +1,4 @@
-import GlyphOption from "../../enums/GlyphOption";
+import GlyphType from "../../enums/GlyphType";
 import GlyphConfig from "../../interfaces/GlyphConfig";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormSection from "./FormSection";
@@ -18,12 +18,12 @@ export default function FormSectionGlyph({
     <FormSection id="glyph-config" title="glyph config">
       <FormOptionBoolean
         checked={config?.leet?.enabled}
-        label={GlyphOption.LEET}
+        label={GlyphType.LEET}
         setChecked={(enabled) => setConfig({ leet: { enabled } })}
       />
       <FormOptionBoolean
         checked={config?.unicode?.enabled}
-        label={GlyphOption.UNICODE}
+        label={GlyphType.UNICODE}
         setChecked={(enabled) => setConfig({ unicode: { enabled } })}
       />
     </FormSection>

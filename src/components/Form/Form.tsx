@@ -15,7 +15,7 @@ import FormSectionCss from "./FormSectionCss";
 import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
-import GlyphOption from "../../enums/GlyphOption";
+import GlyphType from "../../enums/GlyphType";
 import GlyphConfig, {
   DEFAULT_GLYPH_OPTIONS,
 } from "../../interfaces/GlyphConfig";
@@ -62,7 +62,7 @@ export default function Form(): React.ReactNode {
       global: { ignoreSpaces, size, external },
       glyph: Object.assign(
         {},
-        ...Object.values(GlyphOption).map(
+        ...Object.values(GlyphType).map(
           (glyphOption) =>
             glyphConfig?.[glyphOption]?.enabled && {
               [glyphOption]: glyphConfig[glyphOption],
