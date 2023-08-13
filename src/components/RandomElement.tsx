@@ -23,7 +23,7 @@ export default function RandomElement<Attributes, Element>({
 }: RandomElementProps<Attributes, Element>): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
-  const _randomizables = useRef<Randomizables>(
+  const randomizables = useRef<Randomizables>(
     RandomCssUtils.getCssRandomizables(styleConfig ?? {}, external)
   );
   const timeouts = useRef(
@@ -48,8 +48,8 @@ export default function RandomElement<Attributes, Element>({
 
   const timeoutFunction = useCallback(
     (key: CssPropertyName) => {
-      if (_randomizables.current[key]) {
-        setStyle({ [key]: _randomizables.current[key].getRandomValue() });
+      if (randomizables.current[key]) {
+        setStyle({ [key]: randomizables.current[key].getRandomValue() });
         timeouts.current[key] = setTimeout(
           () => timeoutFunction(key),
           Randomizable.number(300, 3000)
@@ -61,13 +61,13 @@ export default function RandomElement<Attributes, Element>({
 
   // style/external changed
   useEffect(() => {
-    _randomizables.current = RandomCssUtils.getCssRandomizables(
+    randomizables.current = RandomCssUtils.getCssRandomizables(
       styleConfig,
       external
     );
     const newStyle: Style = {};
     let update = false;
-    Object.entries(_randomizables.current).forEach(([_, randomizable]) => {
+    Object.entries(randomizables.current).forEach(([_, randomizable]) => {
       const key = _ as CssPropertyName;
       if (randomizable == null) {
         if (timeouts.current[key] == null) {
