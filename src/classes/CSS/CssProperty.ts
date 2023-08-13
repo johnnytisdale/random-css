@@ -1,12 +1,12 @@
-import { DEFAULT_GLOBAL_OPTIONS_EXTERNAL } from "../../interfaces/GlobalOptions";
 import CssPropertyName from "../../enums/CssPropertyName";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementGenericProps";
 import Randomizable from "../Randomizable";
 
 export default abstract class CssProperty extends Randomizable {
   protected separator = " ";
   public name: CssPropertyName;
 
-  constructor(protected external = DEFAULT_GLOBAL_OPTIONS_EXTERNAL) {
+  constructor(protected external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL) {
     super();
   }
 

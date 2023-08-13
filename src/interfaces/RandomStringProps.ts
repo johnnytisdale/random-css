@@ -1,0 +1,39 @@
+import GlyphConfig from "./GlyphConfig";
+import RandomElementGenericProps from "./RandomElementGenericProps";
+
+import { HTMLAttributes } from "react";
+
+export default interface RandomStringProps
+  extends RandomElementGenericProps<
+    HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
+  /**
+   * If true, the text will be centered.
+   */
+  center?: boolean;
+
+  /**
+   * Randomly change characters to similar glyphs.
+   */
+  glyphConfig: GlyphConfig;
+
+  /**
+   * If true, random styles will not be applied to spaces.
+   */
+  ignoreSpaces: boolean;
+
+  /**
+   * Font size, measured in rem.
+   */
+  size: number;
+
+  /**
+   * The text to be randomized.
+   */
+  text: string;
+}
+
+export const DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES = true;
+export const DEFAULT_RANDOM_STRING_PROPS_SIZE = 3;
+export const DEFAULT_RANDOM_STRING_PROPS_TEXT = "random css";

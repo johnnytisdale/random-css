@@ -5,12 +5,12 @@ import StyleConfig, {
   DEFAULT_STYLE_CONFIG,
 } from "../../interfaces/StyleConfig";
 import CssPropertyName from "../../enums/CssPropertyName";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementGenericProps";
 import {
-  DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES,
-  DEFAULT_GLOBAL_OPTIONS_SIZE,
-  DEFAULT_GLOBAL_OPTIONS_TEXT,
-  DEFAULT_GLOBAL_OPTIONS_EXTERNAL,
-} from "../../interfaces/GlobalOptions";
+  DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
+  DEFAULT_RANDOM_STRING_PROPS_SIZE,
+  DEFAULT_RANDOM_STRING_PROPS_TEXT,
+} from "../../interfaces/RandomStringProps";
 import FormSectionCss from "./FormSectionCss";
 import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
@@ -40,12 +40,12 @@ export default function Form(): React.ReactNode {
     DEFAULT_GLYPH_OPTIONS
   );
   const [ignoreSpaces, setIgnoreSpaces] = useState(
-    DEFAULT_GLOBAL_OPTIONS_IGNORE_SPACES
+    DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES
   );
-  const [size, setSize] = useState<number>(DEFAULT_GLOBAL_OPTIONS_SIZE);
-  const [text, setText] = useState(DEFAULT_GLOBAL_OPTIONS_TEXT);
+  const [size, setSize] = useState<number>(DEFAULT_RANDOM_STRING_PROPS_SIZE);
+  const [text, setText] = useState(DEFAULT_RANDOM_STRING_PROPS_TEXT);
   const [external, setExternal] = useState<boolean>(
-    DEFAULT_GLOBAL_OPTIONS_EXTERNAL
+    DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL
   );
 
   const styleExport: StyleInput = useMemo(
