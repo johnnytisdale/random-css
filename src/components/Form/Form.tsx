@@ -26,7 +26,7 @@ import RandomString from "../RandomString";
 import StyleInput from "../../interfaces/StyleInput";
 
 import * as React from "react";
-import { useMemo, useReducer, useState } from "react";
+import { useLayoutEffect, useMemo, useReducer, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 export default function Form(): React.ReactNode {
@@ -75,6 +75,24 @@ export default function Form(): React.ReactNode {
       ),
     [glyphConfig]
   );
+
+  useLayoutEffect(() => {
+    if (window.matchMedia("(min-width: 1375px)").matches) {
+      setSize(8);
+    } else if (window.matchMedia("(min-width: 1200px)").matches) {
+      setSize(7);
+    } else if (window.matchMedia("(min-width: 1000px)").matches) {
+      setSize(6);
+    } else if (window.matchMedia("(min-width: 850px)").matches) {
+      setSize(5);
+    } else if (window.matchMedia("(min-width: 700px)").matches) {
+      setSize(4);
+    } else if (window.matchMedia("(min-width: 550px)").matches) {
+      setSize(3);
+    } else if (window.matchMedia("(min-width: 375px)").matches) {
+      setSize(2);
+    }
+  }, []);
 
   return (
     <>
