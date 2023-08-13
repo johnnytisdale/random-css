@@ -97,7 +97,7 @@ export default function RandomElement<Attributes, Element>({
     if (update) {
       setStyle(newStyle);
     }
-  }, [styleConfig, external]);
+  }, [external, styleConfig]);
 
   const className = useMemo(() => {
     const classes = [];

@@ -31,14 +31,14 @@ interface ToggleCSS {
 }
 
 interface Props {
-  css: StyleConfig;
-  setCss: (css: StyleConfig) => void;
+  styleConfig: StyleConfig;
+  setStyleConfig: (styleConfig: StyleConfig) => void;
   external: boolean;
 }
 
 export default function FormSectionCss({
-  css,
-  setCss,
+  styleConfig,
+  setStyleConfig,
   external,
 }: Props): React.ReactNode {
   const [toggleCss, setToggleCss] = useState<ToggleCSS>({
@@ -47,46 +47,48 @@ export default function FormSectionCss({
   });
   const setAnimationOption = useCallback(
     (option: AnimationOptions) =>
-      setCss({
+      setStyleConfig({
         animation: {
-          ...css.animation,
+          ...styleConfig.animation,
           ...option,
         },
       }),
-    [css, setCss]
+    [setStyleConfig, styleConfig]
   );
 
   const setBorderRadiusOption = useCallback(
     (option: BorderRadiusOptions) =>
-      setCss({ borderRadius: { ...css.borderRadius, ...option } }),
-    [css, setCss]
+      setStyleConfig({
+        borderRadius: { ...styleConfig.borderRadius, ...option },
+      }),
+    [setStyleConfig, styleConfig]
   );
 
   const setLengthOption = useCallback(
     (
       key: Extract<CssProperty, CssProperty.BORDER_WIDTH>,
       option: LengthOptions
-    ) => setCss({ [key]: { ...css[key], ...option } }),
+    ) => setStyleConfig({ [key]: { ...styleConfig[key], ...option } }),
 
-    [css, setCss]
+    [setStyleConfig, styleConfig]
   );
 
   const setColorOption = useCallback(
     (key: CssColorProperty, option: ColorOptions) =>
-      setCss({ [key]: { ...css[key], ...option } }),
-    [css, setCss]
+      setStyleConfig({ [key]: { ...styleConfig[key], ...option } }),
+    [setStyleConfig, styleConfig]
   );
 
   const setFontFamilyOption = useCallback(
     (option: FontFamilyOptions) =>
-      setCss({ fontFamily: { ...css.fontFamily, ...option } }),
-    [css, setCss]
+      setStyleConfig({ fontFamily: { ...styleConfig.fontFamily, ...option } }),
+    [setStyleConfig, styleConfig]
   );
 
   const setFontStyleOption = useCallback(
     (option: FontStyleOptions) =>
-      setCss({ fontStyle: { ...css.fontStyle, ...option } }),
-    [css, setCss]
+      setStyleConfig({ fontStyle: { ...styleConfig.fontStyle, ...option } }),
+    [setStyleConfig, styleConfig]
   );
 
   const toggleCssProperty = useCallback(
@@ -101,7 +103,7 @@ export default function FormSectionCss({
        * instead of the previous values.
        */
       newCss[cssProperty] = {
-        ...css[cssProperty],
+        ...styleConfig[cssProperty],
         ...{ enabled: checked },
       };
       const newToggleCss = { ...toggleCss };
@@ -110,10 +112,10 @@ export default function FormSectionCss({
       } else {
         newToggleCss.none = false;
       }
-      setCss(newCss);
+      setStyleConfig(newCss);
       setToggleCss(newToggleCss);
     },
-    [css, setCss, setToggleCss, toggleCss]
+    [setStyleConfig, setToggleCss, styleConfig, toggleCss]
   );
 
   const toggleAll = useCallback(
@@ -131,57 +133,57 @@ export default function FormSectionCss({
         const newCss: StyleConfig = {};
         Object.values(CssProperty).forEach((cssProperty) => {
           newCss[cssProperty] = {
-            ...css[cssProperty],
+            ...styleConfig[cssProperty],
             ...{ enabled: select },
           };
         });
-        setCss(newCss);
+        setStyleConfig(newCss);
       }
       setToggleCss(newToggleCss);
     },
     [setToggleCss, toggleCss, toggleCssProperty]
   );
   return (
-    <FormSection id="css-options" title="css options">
+    <FormSection id="styleConfig-options" title="styleConfig options">
       <FormOptionBoolean
         checked={toggleCss.all}
-        id="select-all-css"
+        id="select-all-styleConfig"
         label="select all"
         setChecked={(checked) => toggleAll(checked, true)}
       />
       <FormOptionBoolean
         checked={toggleCss.none}
-        id="select-none-css"
+        id="select-none-styleConfig"
         label="select none"
         setChecked={(checked) => toggleAll(checked, false)}
       />
       <FormSubsectionAnimation
         external={external}
-        option={css?.animation}
+        option={styleConfig?.animation}
         setOption={setAnimationOption}
         toggle={toggleCssProperty}
       />
       <FormSubsectionColor
         cssPropertyName={CssProperty.BACKGROUND_COLOR}
         external={external}
-        option={css?.backgroundColor}
+        option={styleConfig?.backgroundColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
       />
       <FormSubsectionColor
         cssPropertyName={CssProperty.BORDER_COLOR}
         external={external}
-        option={css?.borderColor}
+        option={styleConfig?.borderColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
       />
       <FormSubsectionBorderRadius
-        option={css?.borderRadius}
+        option={styleConfig?.borderRadius}
         setOption={setBorderRadiusOption}
         toggle={toggleCssProperty}
       />
       <FormOptionBoolean
-        checked={css?.borderStyle?.enabled === true}
+        checked={styleConfig?.borderStyle?.enabled === true}
         label="borderStyle"
         setChecked={(checked) =>
           toggleCssProperty(CssProperty.BORDER_STYLE, checked)
@@ -189,20 +191,23 @@ export default function FormSectionCss({
       >
         <FormSubsection>
           <FormOptionArray
-            disabled={() => css?.borderStyle?.enabled !== true}
+            disabled={() => styleConfig?.borderStyle?.enabled !== true}
             possibleValues={Object.values(BorderStyleKeyword)}
             setValues={(borderStyles) =>
-              setCss({
-                borderStyle: { ...css.borderStyle, ...{ borderStyles } },
+              setStyleConfig({
+                borderStyle: {
+                  ...styleConfig.borderStyle,
+                  ...{ borderStyles },
+                },
               })
             }
-            values={css?.borderStyle.borderStyles}
+            values={styleConfig?.borderStyle.borderStyles}
           />
         </FormSubsection>
       </FormOptionBoolean>
       <FormOptionLength
         label="borderWidth"
-        option={css?.borderWidth}
+        option={styleConfig?.borderWidth}
         setOption={(option) =>
           setLengthOption(CssProperty.BORDER_WIDTH, option)
         }
@@ -210,23 +215,23 @@ export default function FormSectionCss({
       <FormSubsectionColor
         cssPropertyName={CssProperty.COLOR}
         external={external}
-        option={css?.color}
+        option={styleConfig?.color}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
       />
       <FormSubsectionFontFamily
-        option={css?.fontFamily}
+        option={styleConfig?.fontFamily}
         setOption={(option) => setFontFamilyOption(option)}
         toggle={toggleCssProperty}
       />
       <FormSubsectionFontStyle
         external={external}
-        option={css?.fontStyle}
+        option={styleConfig?.fontStyle}
         setOption={setFontStyleOption}
         toggle={toggleCssProperty}
       />
       <FormOptionBoolean
-        checked={css?.fontWeight?.enabled === true}
+        checked={styleConfig?.fontWeight?.enabled === true}
         label="fontWeight"
         setChecked={(checked) =>
           toggleCssProperty(CssProperty.FONT_WEIGHT, checked)
@@ -234,29 +239,29 @@ export default function FormSectionCss({
       >
         <FormSubsection>
           <FormOptionArray
-            disabled={() => css?.fontWeight?.enabled !== true}
+            disabled={() => styleConfig?.fontWeight?.enabled !== true}
             possibleValues={Object.values(FontWeightValue)}
             setValues={(fontWeights) =>
-              setCss({
+              setStyleConfig({
                 fontWeight: {
-                  ...css.fontWeight,
+                  ...styleConfig.fontWeight,
                   ...{ fontWeights },
                 },
               })
             }
-            values={css?.fontWeight?.fontWeights}
+            values={styleConfig?.fontWeight?.fontWeights}
           />
         </FormSubsection>
       </FormOptionBoolean>
       <FormSubsectionColor
         cssPropertyName={CssProperty.TEXT_DECORATION_COLOR}
         external={external}
-        option={css?.textDecorationColor}
+        option={styleConfig?.textDecorationColor}
         setColorOption={setColorOption}
         toggle={toggleCssProperty}
       />
       <FormOptionBoolean
-        checked={css?.textDecorationLine?.enabled === true}
+        checked={styleConfig?.textDecorationLine?.enabled === true}
         label="textDecorationLine"
         setChecked={(checked) =>
           toggleCssProperty(CssProperty.TEXT_DECORATION_LINE, checked)
@@ -264,19 +269,22 @@ export default function FormSectionCss({
       >
         <FormSubsection>
           <FormOptionArray
-            disabled={() => css?.textDecorationLine?.enabled !== true}
+            disabled={() => styleConfig?.textDecorationLine?.enabled !== true}
             possibleValues={Object.values(TextDecorationLineKeyword)}
             setValues={(lines) => {
-              setCss({
-                textDecorationLine: { ...css.textDecorationLine, ...{ lines } },
+              setStyleConfig({
+                textDecorationLine: {
+                  ...styleConfig.textDecorationLine,
+                  ...{ lines },
+                },
               });
             }}
-            values={css?.textDecorationLine.lines}
+            values={styleConfig?.textDecorationLine.lines}
           />
         </FormSubsection>
       </FormOptionBoolean>
       <FormOptionBoolean
-        checked={css?.textDecorationStyle?.enabled === true}
+        checked={styleConfig?.textDecorationStyle?.enabled === true}
         label="textDecorationStyle"
         setChecked={(checked) =>
           toggleCssProperty(CssProperty.TEXT_DECORATION_STYLE, checked)
@@ -284,17 +292,17 @@ export default function FormSectionCss({
       >
         <FormSubsection>
           <FormOptionArray
-            disabled={() => css?.textDecorationStyle?.enabled !== true}
+            disabled={() => styleConfig?.textDecorationStyle?.enabled !== true}
             possibleValues={Object.values(TextDecorationStyleKeyword)}
             setValues={(styles) =>
-              setCss({
+              setStyleConfig({
                 textDecorationStyle: {
-                  ...css.textDecorationStyle,
+                  ...styleConfig.textDecorationStyle,
                   ...{ styles },
                 },
               })
             }
-            values={css?.textDecorationStyle.styles}
+            values={styleConfig?.textDecorationStyle.styles}
           />
         </FormSubsection>
       </FormOptionBoolean>

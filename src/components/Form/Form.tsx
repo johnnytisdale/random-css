@@ -31,7 +31,7 @@ import { createRoot } from "react-dom/client";
 export default function Form(): React.ReactNode {
   const [center, setCenter] = useState<boolean>(true);
   const [copied, setCopied] = useState<boolean>(null);
-  const [css, setCss] = useReducer(
+  const [styleConfig, setStyleConfig] = useReducer(
     RandomCssUtils.reducer<StyleConfig>,
     DEFAULT_STYLE_CONFIG
   );
@@ -54,8 +54,8 @@ export default function Form(): React.ReactNode {
         {},
         ...Object.values(CssPropertyName).map(
           (cssProperty) =>
-            css?.[cssProperty]?.enabled === true && {
-              [cssProperty]: css[cssProperty],
+            styleConfig?.[cssProperty]?.enabled === true && {
+              [cssProperty]: styleConfig[cssProperty],
             }
         )
       ),
@@ -70,7 +70,7 @@ export default function Form(): React.ReactNode {
         )
       ),
     }),
-    [css, external, glyph, ignoreSpaces, size]
+    [external, glyph, ignoreSpaces, size, styleConfig]
   );
 
   return (
@@ -96,11 +96,11 @@ export default function Form(): React.ReactNode {
       >
         <RandomString
           center={center}
-          external={optionsToExport.global.external}
-          glyphOptions={optionsToExport.glyph}
+          external={external}
+          glyphOptions={glyph}
           ignoreSpaces={ignoreSpaces}
-          size={optionsToExport.global.size}
-          style={optionsToExport.css}
+          size={size}
+          style={styleConfig}
           text={text}
         />
       </RandomDiv>
@@ -119,7 +119,11 @@ export default function Form(): React.ReactNode {
           text={text}
         />
 
-        <FormSectionCss css={css} setCss={setCss} external={external} />
+        <FormSectionCss
+          styleConfig={styleConfig}
+          setStyleConfig={setStyleConfig}
+          external={external}
+        />
 
         <FormSectionGlyph options={glyph} setOptions={setGlyph} />
 
