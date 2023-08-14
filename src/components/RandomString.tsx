@@ -24,7 +24,7 @@ export default function RandomString({
   center = DEFAULT_RANDOM_STRING_PROPS_CENTER,
   className,
   external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL,
-  glyphConfig: glyphInput = DEFAULT_GLYPH_CONFIG,
+  glyph: glyphInput = DEFAULT_GLYPH_CONFIG,
   ignoreSpaces = DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
   size = DEFAULT_RANDOM_STRING_PROPS_SIZE,
   style: styleInput,

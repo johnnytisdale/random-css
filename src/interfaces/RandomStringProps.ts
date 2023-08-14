@@ -13,7 +13,7 @@ export default interface RandomStringProps
   /**
    * Randomly change characters to similar glyphs.
    */
-  glyphConfig?: GlyphInput;
+  glyph?: GlyphInput;
 
   /**
    * If true, random styles will not be applied to spaces.

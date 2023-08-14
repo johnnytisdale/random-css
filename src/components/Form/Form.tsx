@@ -118,7 +118,7 @@ export default function Form(): React.ReactNode {
         <RandomString
           center={center}
           external={external}
-          glyphConfig={glyphConfig}
+          glyph={glyphConfig}
           ignoreSpaces={ignoreSpaces}
           size={size}
           style={styleConfig}
