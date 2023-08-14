@@ -12,7 +12,6 @@ import * as React from "react";
 interface Props {
   disabled: boolean;
   external: boolean;
-  minLimit: number;
   option: AnimationIterationCountOptions;
   setOption: (option: AnimationIterationCountOptions) => void;
 }
@@ -20,7 +19,6 @@ interface Props {
 export default function FormSubsectionAnimationIterationCount({
   disabled,
   external,
-  minLimit,
   option,
   setOption,
 }: Props): React.ReactNode {
@@ -49,17 +47,11 @@ export default function FormSubsectionAnimationIterationCount({
       <FormOptionRange
         disabled={disabled}
         max={DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
-        min={minLimit}
-        maxValue={option?.max ?? DEFAULT_ANIMATION_ITERATION_COUNT_MAX}
-        minValue={option?.min ?? minLimit}
+        min={0}
+        maxValue={option?.max}
+        minValue={option?.min}
         setValues={(min, max) => setOption({ max, min })}
         step={external ? "1" : "0.01"}
-      />
-      <FormOptionBoolean
-        checked={option?.zero}
-        disabled={disabled}
-        label="zero"
-        setChecked={(zero) => setOption({ zero })}
       />
     </FormSubsection>
   );

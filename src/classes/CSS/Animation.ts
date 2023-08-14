@@ -114,25 +114,16 @@ export default class Animation extends CssProperty {
   }
 
   private getIterationCount(): string {
-    if (
-      this.iterationCount.infinite === true &&
+    return this.iterationCount.infinite &&
       Math.random() <= this.iterationCount.infiniteProbability
-    ) {
-      return "infinite";
-    }
-    const iterationCount = Randomizable.number(
-      this.iterationCount.min,
-      this.iterationCount.max,
-      this.iterationCount.integersOnly
-    );
-    /**
-     * TODO: It can never be zero because the lowest iterationCount.min can be
-     * is 1. Should probably just removed the zero option because having 0
-     * iterations would be effectively equivalent to having no animation.
-     */
-    return iterationCount === 0 && this.iterationCount.zero === false
-      ? "1"
-      : String(iterationCount);
+      ? "infinite"
+      : String(
+          Randomizable.number(
+            this.iterationCount.min,
+            this.iterationCount.max,
+            this.iterationCount.integersOnly
+          )
+        );
   }
 
   private getLinearEasingFunction() {

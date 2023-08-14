@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
               integersOnly: false,
               max: 3,
               min: 0.25,
-              zero: false,
             },
             transformations: [
               "rotate",
