@@ -7,6 +7,9 @@
     "@babel/preset-env": "^7.22.6",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.22.5",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.2",
@@ -59,9 +62,5 @@
     "watch": "webpack --mode development --env environment=form --watch"
   },
   "version": "3.0.0",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0"
-  }
+  "dependencies": {}
 }
