@@ -11,7 +11,6 @@ export interface AnimationIterationCountOptions {
   integersOnly?: boolean;
   max?: number;
   min?: number;
-  zero?: boolean;
 }
 
 export default interface AnimationOptions extends Option {
@@ -41,14 +40,12 @@ export const DEFAULT_ANIMATION_ITERATION_COUNT_INTEGERS_ONLY = false;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_MAX = 3;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_MIN = 0.25;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_MIN_EXTERNAL = 1;
-export const DEFAULT_ANIMATION_ITERATION_COUNT_ZERO = false;
 export const DEFAULT_ANIMATION_ITERATION_COUNT = {
   infinite: DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE,
   infiniteProbability: DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE_PROBABILITY,
   integersOnly: DEFAULT_ANIMATION_ITERATION_COUNT_INTEGERS_ONLY,
   max: DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
   min: DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
-  zero: DEFAULT_ANIMATION_ITERATION_COUNT_ZERO,
 };
 export const DEFAULT_ANIMATION_STEP_POSITIONS = Object.values(
   AnimationStepPosition

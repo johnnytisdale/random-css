@@ -157,7 +157,6 @@ export default function FormSubsectionAnimation({
       </FormSubsection>
       <FormSubsectionAnimationIterationCount
         {...{ disabled, external }}
-        minLimit={iterationCountMinLimit}
         option={option?.iterationCount}
         setOption={setIterationCountOption}
       />
