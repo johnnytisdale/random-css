@@ -40,15 +40,13 @@ export default abstract class ColorProperty extends CssProperty {
   }
 
   public getRandomValue(): string {
-    if (!this.external) {
-      const red = Randomizable.number(this.rMin, this.rMax);
-      const green = Randomizable.number(this.gMin, this.gMax);
-      const blue = Randomizable.number(this.bMin, this.bMax);
-      const alpha = this.alpha
-        ? ", " + String(Randomizable.decimal(this.aMin, this.aMax))
-        : "";
-      return `rgb(${red}, ${green}, ${blue}${alpha})`;
-    }
-    return Randomizable.array(this.colorKeywords);
+    return this.external
+      ? Randomizable.array(this.colorKeywords)
+      : `rgba(${[
+          Randomizable.number(this.rMin, this.rMax),
+          Randomizable.number(this.gMin, this.gMax),
+          Randomizable.number(this.bMin, this.bMax),
+          this.alpha ? [Randomizable.decimal(this.aMin, this.aMax)] : 1,
+        ].join(",")})`;
   }
 }
