@@ -2,21 +2,65 @@
 
 Randomize your style.
 
+## Installation
+
+`npm i -D random-css`
+
+## How To Use
+
+Import the `RandomElement` corresponding to the HTML element you want to
+randomize.
+
+In this example, a `<div>` will be created. Its `borderWidth` will remain fixed
+at `1rem`, while the `borderColor`, `borderRadius`, and `borderStyle` properties will be randomized.
+
+```
+import { RandomDiv } from "random-css";
+
+function MyComponent() {
+  return (
+    <RandomDiv
+      fixedStyle={{borderWidth: "1rem"}}
+      style={["borderColor", "borderRadius", "borderStyle"]}
+    >
+      my super awesome div content!!!
+    </RandomDiv>
+  );
+}
+```
+
+Suppose you wanted to specify which border styles will be used.
+
+```
+<RandomDiv
+  fixedStyle={{borderWidth: "1rem"}}
+  style={[
+    "borderColor",
+    "borderRadius",
+    {
+      borderStyle: {
+        borderStyles: [
+          "dashed",
+          "dotted",
+          "double",
+          "groove",
+          "solid"
+        ]
+      }
+    }
+  ]}
+>
+  dude, check out these border styles!
+</RandomDiv>
+```
+
 ## What's New?
-
-### Typescript
-
-We are now using TypeScript. The upside is that we can use interfaces and
-abstract classes. The downside is that we are using TypeScript.
 
 ### Content Security Policy
 
 Random CSS is now compatible with a _strict_
 [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP),
-i.e., one that forbids the use of inline CSS. There is now an `unsafe` option
-which defaults to `true`, in which case incline CSS is used. If you set it to
-`false`, then external CSS is used and you must be sure to link to the
-[stylesheet](https://randomcss.org/random.css) in your `<head>`.
+i.e., one that forbids inline CSS. There is now an `external` prop which defaults to `false`. If you set it to `true`, then external CSS is used and you must be sure to link to the [stylesheet](https://randomcss.org/random.css) in your `<head>`.
 
 While using external CSS is considered safer, it comes with a tradeoff: It
 significantly limits the number of possible values supported for some CSS
@@ -36,7 +80,7 @@ of which there are only 142.
 
 1. npm install
 2. npm run watch
-3. Open dist/index.html in browser.
+3. Open dist/form.html in browser.
 
 ## Authors
 
