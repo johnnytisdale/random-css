@@ -5,7 +5,7 @@ import StyleConfig, {
   DEFAULT_STYLE_CONFIG,
 } from "../../interfaces/StyleConfig";
 import CssPropertyName from "../../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementGenericProps";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementProps";
 import {
   DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
   DEFAULT_RANDOM_STRING_PROPS_SIZE,

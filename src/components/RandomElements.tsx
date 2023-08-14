@@ -1,5 +1,5 @@
 import RandomElement from "./RandomElement";
-import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
+import RandomElementProps from "../interfaces/RandomElementProps";
 
 import * as React from "react";
 import {
@@ -22,7 +22,7 @@ import {
 } from "react";
 
 export function RandomA(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     AnchorHTMLAttributes<HTMLAnchorElement>,
     HTMLAnchorElement
   >
@@ -31,16 +31,13 @@ export function RandomA(
 }
 
 export function RandomBody(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLBodyElement>,
-    HTMLBodyElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLBodyElement>, HTMLBodyElement>
 ): React.ReactNode {
   return <RandomElement element="body" {...props} />;
 }
 
 export function RandomButton(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   >
@@ -49,31 +46,25 @@ export function RandomButton(
 }
 
 export function RandomDiv(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 ): React.ReactNode {
   return <RandomElement element="div" {...props} />;
 }
 
 export function RandomEm(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="em" {...props} />;
 }
 
 export function RandomFooter(
-  props: RandomElementGenericProps<
-    React.HTMLAttributes<HTMLElement>,
-    HTMLElement
-  >
+  props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="footer" {...props} />;
 }
 
 export function RandomForm(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     FormHTMLAttributes<HTMLFormElement>,
     HTMLFormElement
   >
@@ -82,7 +73,7 @@ export function RandomForm(
 }
 
 export function RandomH1(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -91,7 +82,7 @@ export function RandomH1(
 }
 
 export function RandomH2(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -100,7 +91,7 @@ export function RandomH2(
 }
 
 export function RandomH3(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -109,7 +100,7 @@ export function RandomH3(
 }
 
 export function RandomH4(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -118,7 +109,7 @@ export function RandomH4(
 }
 
 export function RandomH5(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -127,7 +118,7 @@ export function RandomH5(
 }
 
 export function RandomH6(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   >
@@ -136,22 +127,19 @@ export function RandomH6(
 }
 
 export function RandomHead(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLHeadElement>,
-    HTMLHeadElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement>
 ): React.ReactNode {
   return <RandomElement element="head" {...props} />;
 }
 
 export function RandomHeader(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="header" {...props} />;
 }
 
 export function RandomHtml(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HtmlHTMLAttributes<HTMLHtmlElement>,
     HTMLHtmlElement
   >
@@ -160,7 +148,7 @@ export function RandomHtml(
 }
 
 export function RandomImg(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   >
@@ -169,7 +157,7 @@ export function RandomImg(
 }
 
 export function RandomInput(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
@@ -178,7 +166,7 @@ export function RandomInput(
 }
 
 export function RandomLabel(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     LabelHTMLAttributes<HTMLLabelElement>,
     HTMLLabelElement
   >
@@ -187,25 +175,25 @@ export function RandomLabel(
 }
 
 export function RandomMain(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="main" {...props} />;
 }
 
 export function RandomMenu(
-  props: RandomElementGenericProps<MenuHTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<MenuHTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="menu" {...props} />;
 }
 
 export function RandomNav(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="nav" {...props} />;
 }
 
 export function RandomOl(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     OlHTMLAttributes<HTMLOListElement>,
     HTMLOListElement
   >
@@ -214,7 +202,7 @@ export function RandomOl(
 }
 
 export function RandomOption(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     OptionHTMLAttributes<HTMLOptionElement>,
     HTMLOptionElement
   >
@@ -223,7 +211,7 @@ export function RandomOption(
 }
 
 export function RandomP(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLParagraphElement>,
     HTMLParagraphElement
   >
@@ -232,13 +220,13 @@ export function RandomP(
 }
 
 export function RandomSection(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="section" {...props} />;
 }
 
 export function RandomSelect(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
   >
@@ -247,28 +235,25 @@ export function RandomSelect(
 }
 
 export function RandomSmall(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="small" {...props} />;
 }
 
 export function RandomSpan(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLSpanElement>,
-    HTMLSpanElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 ): React.ReactNode {
   return <RandomElement element="span" {...props} />;
 }
 
 export function RandomStrong(
-  props: RandomElementGenericProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ): React.ReactNode {
   return <RandomElement element="strong" {...props} />;
 }
 
 export function RandomTable(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     TableHTMLAttributes<HTMLTableElement>,
     HTMLTableElement
   >
@@ -277,7 +262,7 @@ export function RandomTable(
 }
 
 export function RandomTbody(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLTableSectionElement>,
     HTMLTableSectionElement
   >
@@ -286,7 +271,7 @@ export function RandomTbody(
 }
 
 export function RandomTd(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     TdHTMLAttributes<HTMLTableDataCellElement>,
     HTMLTableDataCellElement
   >
@@ -295,7 +280,7 @@ export function RandomTd(
 }
 
 export function RandomTextarea(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
   >
@@ -304,7 +289,7 @@ export function RandomTextarea(
 }
 
 export function RandomTfoot(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLTableSectionElement>,
     HTMLTableSectionElement
   >
@@ -313,7 +298,7 @@ export function RandomTfoot(
 }
 
 export function RandomTh(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     ThHTMLAttributes<HTMLTableHeaderCellElement>,
     HTMLTableHeaderCellElement
   >
@@ -322,7 +307,7 @@ export function RandomTh(
 }
 
 export function RandomThead(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLTableSectionElement>,
     HTMLTableSectionElement
   >
@@ -331,16 +316,13 @@ export function RandomThead(
 }
 
 export function RandomTitle(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLTitleElement>,
-    HTMLTitleElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLTitleElement>, HTMLTitleElement>
 ): React.ReactNode {
   return <RandomElement element="title" {...props} />;
 }
 
 export function RandomTr(
-  props: RandomElementGenericProps<
+  props: RandomElementProps<
     HTMLAttributes<HTMLTableRowElement>,
     HTMLTableRowElement
   >
@@ -349,10 +331,7 @@ export function RandomTr(
 }
 
 export function RandomUl(
-  props: RandomElementGenericProps<
-    HTMLAttributes<HTMLUListElement>,
-    HTMLUListElement
-  >
+  props: RandomElementProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>
 ): React.ReactNode {
   return <RandomElement element="ul" {...props} />;
 }

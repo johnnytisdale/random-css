@@ -1,25 +1,10 @@
-import StyleInput from "./StyleInput";
-
-import * as React from "react";
+import RandomElementProps from "./RandomElementProps";
 
 interface Props {
-  children?: React.ReactNode;
-  className?: string;
-
-  /**
-   * If true, use an external stylesheet instead of using JavaScript to change
-   * styles.
-   */
-  external?: boolean;
-  fixedStyle?: React.CSSProperties;
-  id?: string;
-  style?: StyleInput;
-  testID?: string;
+  element: keyof HTMLElementTagNameMap;
 }
 
 type RandomElementGenericProps<Attributes, Element> = Props &
-  Omit<React.DetailedHTMLProps<Attributes, Element>, "style">;
+  RandomElementProps<Attributes, Element>;
 
 export default RandomElementGenericProps;
-
-export const DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL = false;

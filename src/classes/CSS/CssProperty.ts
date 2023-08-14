@@ -1,5 +1,5 @@
 import CssPropertyName from "../../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementGenericProps";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementProps";
 import Randomizable from "../Randomizable";
 
 export default abstract class CssProperty extends Randomizable {

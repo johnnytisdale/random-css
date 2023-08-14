@@ -1,7 +1,7 @@
 import CssPropertyName from "../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementGenericProps";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementProps";
 import RandomCssUtils from "../classes/RandomCssUtils";
-import RandomElementProps from "../interfaces/RandomElementProps";
+import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
 import Style from "../types/Style";
@@ -23,7 +23,7 @@ export default function RandomElement<Attributes, Element>({
   style: styleInput,
   testID,
   ...nativeProps
-}: RandomElementProps<Attributes, Element>): React.ReactNode {
+}: RandomElementGenericProps<Attributes, Element>): React.ReactNode {
   const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const styleConfig = useMemo(

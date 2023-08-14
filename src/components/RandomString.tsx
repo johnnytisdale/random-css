@@ -3,10 +3,10 @@ import "../styles/RandomString.scss";
 import CssPropertyName from "../enums/CssPropertyName";
 import GlyphConfig, { DEFAULT_GLYPH_CONFIG } from "../interfaces/GlyphConfig";
 import GlyphInput from "../interfaces/GlyphInput";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementGenericProps";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementProps";
 import Randomizable from "../classes/Randomizable";
 import RandomStringProps, {
   DEFAULT_RANDOM_STRING_PROPS_CENTER,

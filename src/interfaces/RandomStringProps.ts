@@ -1,13 +1,10 @@
 import GlyphInput from "./GlyphInput";
-import RandomElementGenericProps from "./RandomElementGenericProps";
+import RandomElementProps from "./RandomElementProps";
 
 import { HTMLAttributes } from "react";
 
 export default interface RandomStringProps
-  extends RandomElementGenericProps<
-    HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > {
+  extends RandomElementProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   /**
    * If true, the text will be centered.
    */
