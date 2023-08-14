@@ -1,5 +1,8 @@
 import Color from "../../enums/ColorKeyword";
-import ColorOptions from "../../interfaces/ColorOptions";
+import ColorOptions, {
+  DEFAULT_COLOR_ALPHA_MAX,
+  DEFAULT_COLOR_ALPHA_MIN,
+} from "../../interfaces/ColorOptions";
 import CssColorProperty from "../../types/CssColorProperty";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
@@ -72,6 +75,22 @@ export default function FormSubsectionColor({
               maxValue={option?.bMax ?? 255}
               minValue={option?.bMin ?? 0}
               setValues={(bMin, bMax) => setOption({ bMax, bMin })}
+            />
+          </FormSubsection>
+          <FormSubsection label="alpha">
+            <FormOptionBoolean
+              label="enabled"
+              checked={option?.alpha}
+              setChecked={(alpha) => setOption({ alpha })}
+            />
+            <FormOptionRange
+              disabled={disabled || !option?.alpha}
+              max={1}
+              min={0}
+              maxValue={option?.aMax ?? DEFAULT_COLOR_ALPHA_MAX}
+              minValue={option?.aMin ?? DEFAULT_COLOR_ALPHA_MIN}
+              setValues={(aMin, aMax) => setOption({ aMax, aMin })}
+              step="0.01"
             />
           </FormSubsection>
         </>

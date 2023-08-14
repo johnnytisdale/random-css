@@ -16,9 +16,9 @@ export default interface ColorOptions extends Option {
 
 export const DEFAULT_COLOR_ENABLED = false;
 export const DEFAULT_COLOR_KEYWORDS = Object.values(ColorKeyword);
-export const DEFAULT_COLOR_ALPHA = true;
+export const DEFAULT_COLOR_ALPHA = false;
 export const DEFAULT_COLOR_ALPHA_MAX = 1;
-export const DEFAULT_COLOR_ALPHA_MIN = 0.5;
+export const DEFAULT_COLOR_ALPHA_MIN = 0.75;
 export const DEFAULT_COLOR_MAX = 255;
 export const DEFAULT_COLOR_MIN = 0;
 
