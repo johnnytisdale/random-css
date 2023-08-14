@@ -61,6 +61,6 @@
     "test-build": "webpack --mode development --env environment=test",
     "watch": "webpack --mode development --env environment=form --watch"
   },
-  "version": "3.0.0",
+  "version": "3.0.1",
   "dependencies": {}
 }
