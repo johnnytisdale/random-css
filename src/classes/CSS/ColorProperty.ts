@@ -1,5 +1,8 @@
 import ColorKeyword from "../../enums/ColorKeyword";
 import ColorOptions, {
+  DEFAULT_COLOR_ALPHA,
+  DEFAULT_COLOR_ALPHA_MAX,
+  DEFAULT_COLOR_ALPHA_MIN,
   DEFAULT_COLOR_KEYWORDS,
   DEFAULT_COLOR_MAX,
   DEFAULT_COLOR_MIN,
@@ -8,6 +11,9 @@ import CssProperty from "./CssProperty";
 import Randomizable from "../Randomizable";
 
 export default abstract class ColorProperty extends CssProperty {
+  private alpha: boolean;
+  private aMax: number;
+  private aMin: number;
   private bMax: number;
   private bMin: number;
   private gMax: number;
@@ -21,6 +27,9 @@ export default abstract class ColorProperty extends CssProperty {
     protected external: boolean
   ) {
     super(external);
+    this.alpha = options.alpha ?? DEFAULT_COLOR_ALPHA;
+    this.aMax = options.aMax ?? DEFAULT_COLOR_ALPHA_MAX;
+    this.aMin = options.aMin ?? DEFAULT_COLOR_ALPHA_MIN;
     this.bMax = options.bMax ?? DEFAULT_COLOR_MAX;
     this.bMin = options.bMin ?? DEFAULT_COLOR_MIN;
     this.gMax = options.gMax ?? DEFAULT_COLOR_MAX;
@@ -31,12 +40,13 @@ export default abstract class ColorProperty extends CssProperty {
   }
 
   public getRandomValue(): string {
-    if (!this.external) {
-      const red = Randomizable.number(this.rMin, this.rMax);
-      const green = Randomizable.number(this.gMin, this.gMax);
-      const blue = Randomizable.number(this.bMin, this.bMax);
-      return `rgb(${red}, ${green}, ${blue})`;
-    }
-    return Randomizable.array(this.colorKeywords);
+    return this.external
+      ? Randomizable.array(this.colorKeywords)
+      : `rgba(${[
+          Randomizable.number(this.rMin, this.rMax),
+          Randomizable.number(this.gMin, this.gMax),
+          Randomizable.number(this.bMin, this.bMax),
+          this.alpha ? [Randomizable.decimal(this.aMin, this.aMax)] : 1,
+        ].join(",")})`;
   }
 }
