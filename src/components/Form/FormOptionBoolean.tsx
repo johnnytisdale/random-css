@@ -10,17 +10,13 @@ interface Props extends OptionProps {
 
 export default function FormOptionBoolean({
   checked,
-  children,
   disabled = false,
-  id,
-  label,
   setChecked,
+  ...optionProps
 }: Props): React.ReactNode {
   return (
     <FormOption
-      children={children}
-      label={label}
-      id={id}
+      {...optionProps}
       input={{
         checked,
         disabled,
