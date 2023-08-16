@@ -17,14 +17,14 @@ interface Props extends OptionProps {
 }
 
 export default function FormOptionLength({
-  label,
   option,
   setOption,
+  ...optionProps
 }: Props): React.ReactNode {
   return (
     <FormOptionBoolean
+      {...optionProps}
       checked={option?.enabled === true}
-      label={label}
       setChecked={(enabled) => setOption({ enabled })}
     >
       <FormSubsection>

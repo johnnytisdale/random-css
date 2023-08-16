@@ -10,13 +10,13 @@ interface Props extends OptionProps {
 
 export default function FormOptionProbability({
   disabled,
-  label,
   setProbability,
   value,
+  ...optionProps
 }: Props): React.ReactNode {
   return (
     <FormOption
-      label={label}
+      {...optionProps}
       input={{
         disabled,
         max: "1",

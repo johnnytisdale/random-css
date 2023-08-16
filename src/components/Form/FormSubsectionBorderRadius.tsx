@@ -28,15 +28,33 @@ export default function FormSubsectionBorderRadius({
       <FormSubsection>
         <FormOptionBoolean
           checked={option?.slash === true}
-          {...{ disabled }}
+          disabled={disabled}
           label="slash"
           setChecked={(slash) => setOption({ slash })}
+          tooltip={
+            <>
+              If enabled, we may make a corner elliptical by providing two
+              values separated by a slash.
+              <div style={{ marginTop: "1rem" }}>Example: 25% / 75%</div>
+              <div style={{ marginTop: "1rem" }}>
+                See also: <em>slashProbability</em>
+              </div>
+            </>
+          }
         />
         <FormOptionProbability
           label="slashProbability"
           disabled={disabled || !option?.slash}
           value={option?.slashProbability}
           setProbability={(slashProbability) => setOption({ slashProbability })}
+          tooltip={
+            <>
+              The probability that a corner will be made elliptical.
+              <div style={{ marginTop: "1rem" }}>
+                See also: <em>slash</em>
+              </div>
+            </>
+          }
         />
         <FormOptionRange
           {...{ disabled }}

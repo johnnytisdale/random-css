@@ -4,5 +4,5 @@ export default interface OptionProps {
   external?: boolean;
   id?: string;
   label?: string;
-  tooltip?: string;
+  tooltip?: React.ReactNode;
 }
