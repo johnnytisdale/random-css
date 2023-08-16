@@ -58,7 +58,7 @@ Suppose you wanted to specify which border styles will be used.
 
 ### CSS Properties
 
-#### animation
+#### [animation](https://developer.mozilla.org/en-US/docs/Web/CSS/animation)
 
 ```
 <RandomDiv
@@ -132,7 +132,7 @@ The maximum value that may be generated for `transition-duration`.
 External: 1-3 (s)<br>
 Inline: 300-3000 (ms)
 
-Must be greater than the value supplied for `durationMax`.
+Must be greater than or equal to `durationMax`.
 
 ##### [durationMin](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration): integer
 
@@ -141,7 +141,7 @@ The minimum value that may be generated for `transition-duration`.
 External: 1-3 (s)<br>
 Inline: 300-3000 (ms)
 
-Must be less than the value supplied for `durationMax`.
+Must be less than or equal to `durationMax`.
 
 ##### [easingFunctions](https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function): array
 
@@ -186,7 +186,7 @@ The maximum value that may be generated for iteration count.
 External: Must be a whole number between 1 and 3, inclusive.<br>
 Inline: Must be a float or integer between 0.25 and 3, inclusive.
 
-Must be greater than `min`.
+Must be greater than or equal to `min`.
 
 ###### min: float / integer
 
@@ -195,7 +195,7 @@ The minimum value that may be generated for iteration count.
 External: Must be a whole number between 1 and 3, inclusive.<br>
 Inline: Must be a float or integer between 0.25 and 3, inclusive.
 
-Must be less than `max`.
+Must be less than or equal to `max`.
 
 ##### [stepPositions](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function): array
 
@@ -217,11 +217,11 @@ Jump terms to be used with the `steps` easing function.
 - "skewXY"
 - "skewY"
 
-#### backgroundColor, borderColor, color, textDecorationColor
-
-<em>external = false</em>
+#### [backgroundColor](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color), [borderColor](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color), [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color), [textDecorationColor](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color)
 
 ```
+// external is false by default.
+
 <RandomDiv
   style={{
     backgroundColor: {
@@ -241,9 +241,9 @@ Jump terms to be used with the `steps` easing function.
 </RandomDiv>
 ```
 
-<em>external = true</em>
-
 ```
+// When using an external stylesheet, specify color keywords instead of rgba values.
+
 <RandomDiv
   external={true}
   style={{
@@ -276,7 +276,7 @@ The maximum alpha value that may be generated.
 
 Must be between 0 and 1, inclusive.
 
-Must be greater than aMin.
+Must be greater than or equal to aMin.
 
 ##### aMin: float
 
@@ -284,7 +284,7 @@ The minimum alpha value that may be generated.
 
 Must be between 0 and 1, inclusive.
 
-Must be less than aMax.
+Must be less than or equal to aMax.
 
 ##### bMax: integer
 
@@ -292,7 +292,7 @@ The maximum blue value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be greater than bMin.
+Must be greater than or equal to bMin.
 
 ##### bMin: integer
 
@@ -300,7 +300,7 @@ The minimum blue value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be less than bMax.
+Must be less than or equal to bMax.
 
 ##### gMax: integer
 
@@ -308,7 +308,7 @@ The maximum green value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be greater than gMin.
+Must be greater than or equal to gMin.
 
 ##### gMin: integer
 
@@ -316,7 +316,7 @@ The minimum green value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be less than gMax.
+Must be less than or equal to gMax.
 
 ##### rMax: integer
 
@@ -324,7 +324,7 @@ The maximum red value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be greater than rMin.
+Must be greater than or equal to rMin.
 
 ##### rMin: integer
 
@@ -332,7 +332,7 @@ The minimum red value that may be generated.
 
 Must be a whole number between 0 and 255, inclusive.
 
-Must be less than rMax.
+Must be less than or equal to rMax.
 
 ##### colorKeywords: array
 
@@ -477,6 +477,213 @@ Must be less than rMax.
 - "WhiteSmoke"
 - "Yellow"
 - "YellowGreen"
+
+#### [borderRadius](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
+
+##### maxCorners: integer;
+
+The maximum number of corners to which a radius may be applied.
+
+Must be between 1 and 4, inclusive.
+
+Must be greater than or equal to `minCorners`.
+
+##### minCorners: integer;
+
+The minimum number of corners to which a radius may be applied.
+
+Must be between 1 and 4, inclusive.
+
+Must be less than or equal to `maxCorners`.
+
+##### maxRadius: integer;
+
+The maximum radius (as a percentage) that may be generated.
+
+Must be between 1 and 100, inclusive.
+
+Must be greater than or equal to `minRadius`.
+
+##### minRadius: integer;
+
+The minimum radius (as a percentage) that may be generated.
+
+Must be between 1 and 100, inclusive.
+
+Must be less than or equal to `maxRadius`.
+
+##### slash: boolean;
+
+Whether a corner may be made elliptical by providing two values separated by a slash.
+
+##### slashProbability: float;
+
+The probability that a corner may be made elliptical.
+
+Must be between 0 and 1, inclusive.
+
+#### [borderStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style)
+
+##### borderStyles: array
+
+- "dashed"
+- "dotted"
+- "double"
+- "groove"
+- "hidden"
+- "inset"
+- "none"
+- "outset"
+- "ridge"
+- "solid"
+
+#### [borderWidth](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width)
+
+##### max: integer
+
+The maximum value that may be generated.
+
+Must be greater than or equal to `min`.
+
+##### min: integer
+
+The maximum value that may be generated.
+
+Must be less than or equal to `max`.
+
+##### units: array
+
+- "mm"
+- "pt"
+- "px"
+
+#### [fontFamily](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
+
+##### fallbackProbability: float
+
+The probability that a fallback will be provided.
+
+> Generic font families are a fallback mechanism, a means of preserving some of the style sheet author's intent when none of the specified fonts are available. Generic family names are keywords and must not be quoted. A generic font family should be the last item in the list of font family names.
+
+Must be between 0 and 1, inclusive.
+
+##### fontFamilyNames: array
+
+- "Arial"
+- '"Arial Black"'
+- "Bookman"
+- "Candara"
+- '"Comic Sans MS"'
+- "Courier"
+- '"Courier New"'
+- "Garamond"
+- "Georgia"
+- "Impact"
+- "Palatino"
+- "Roboto"
+- '"Times New Roman"'
+- "Times"
+- "Verdana"
+
+##### fontGenericNames: array
+
+- "cursive"
+- "emoji"
+- "fangsong"
+- "fantasy"
+- "math"
+- "monospace"
+- "sans-serif"
+- "serif"
+- "system-ui"
+- "ui-monospace"
+- "ui-sans-serif"
+- "ui-serif"
+- "ui-rounded"
+
+##### includeFallbacks: boolean
+
+Whether the value generated may consist two font names: a font family name and a "fallback" generic name.
+
+##### includeFamilyNames: boolean
+
+Whether the value generated may consist solely of a font family name.
+
+##### includeGenericNames: boolean
+
+Whether the value generated may consist solely of a generic font name.
+
+#### [fontStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
+
+##### degrees: boolean
+
+Whether to include a `degrees` value when the font style is `oblique`.
+
+##### degreesProbability: float
+
+The probability that a `degrees` value will be included when the font style is `oblique`.
+
+##### fontStyles: array
+
+- "italic"
+- "normal"
+- "oblique"
+
+##### maxDegrees: integer
+
+The maximum value that may be generated for `degrees` when the font style is `oblique`.
+
+Must be between -90 and 90, inclusive.
+
+Must be greater than or equal to `minDegrees`.
+
+##### minDegrees: integer
+
+The minimum value that may be generated for `degrees` when the font style is `oblique`.
+
+Must be between -90 and 90, inclusive.
+
+Must be less than or equal to `maxDegrees`.
+
+#### [fontWeight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)
+
+##### fontWeights: array
+
+- "100"
+- "200"
+- "300"
+- "400"
+- "500"
+- "600"
+- "700"
+- "800"
+- "900"
+- "bold"
+- "bolder"
+- "lighter"
+- "normal"
+
+#### [textDecorationLine](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line)
+
+##### textDecorationLines: array
+
+- "line-through"
+- "line-through underline"
+- "line-through overline"
+- "none"
+- "overline"
+- "overline underline"
+- "underline"
+
+#### [textDecorationStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style)
+
+##### styles: array
+
+- "dashed"
+- "dotted"
+- "double"
+- "solid"
+- "wavy"
 
 ## What's New?
 
