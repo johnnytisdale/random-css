@@ -16,9 +16,11 @@ export default function FormOptionArray<T>({
   possibleValues,
   setValues,
   values,
+  ...optionProps
 }: Props<T>): React.ReactNode {
   return possibleValues.map((value) => (
     <FormOption
+      {...optionProps}
       label={displayValue === undefined ? String(value) : displayValue(value)}
       input={{
         checked: values.includes(value),

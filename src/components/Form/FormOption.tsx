@@ -1,9 +1,11 @@
+import OptionProps from "../../interfaces/OptionProps";
+import { Tooltip } from "./Tooltip";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { useMemo } from "react";
-import OptionProps from "../../interfaces/OptionProps";
 
 interface InputProps
   extends React.DetailedHTMLProps<
@@ -22,6 +24,7 @@ export default function FormOption({
   id,
   input,
   label,
+  tooltip,
 }: Props): React.ReactNode {
   const [expanded, setExpanded] = React.useState(false);
   const className = useMemo(
@@ -50,7 +53,10 @@ export default function FormOption({
               />
             </span>
           )}
-          <div className="text">{label}</div>
+          <div className="label">
+            {label}
+            {tooltip ? <Tooltip text={tooltip} /> : null}
+          </div>
         </div>
         <div className="input">
           <input {...input} />
