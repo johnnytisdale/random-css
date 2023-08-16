@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { useState } from "react";
 
-export function Tooltip({ text }: { text: string }) {
+export function Tooltip({ text }: { text: React.ReactNode }) {
   const [show, setShow] = useState(false);
   return (
     <div
