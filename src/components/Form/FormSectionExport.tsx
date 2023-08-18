@@ -1,6 +1,6 @@
 import FormSection from "./FormSection";
-import GlyphInput from "../../interfaces/GlyphInput";
-import StyleInput from "../../interfaces/StyleInput";
+import GlyphInput from "../../types/GlyphInput";
+import StyleInput from "../../types/StyleInput";
 
 import * as React from "react";
 import { useMemo, useState } from "react";

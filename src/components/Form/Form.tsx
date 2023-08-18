@@ -18,12 +18,12 @@ import FormSectionGlyph from "./FormSectionGlyph";
 import GlyphConfig, {
   DEFAULT_GLYPH_CONFIG,
 } from "../../interfaces/GlyphConfig";
-import GlyphInput from "../../interfaces/GlyphInput";
+import GlyphInput from "../../types/GlyphInput";
 import GlyphType from "../../enums/GlyphType";
 import RandomCssUtils from "../../classes/RandomCssUtils";
 import { RandomDiv } from "../RandomElements";
 import RandomString from "../RandomString";
-import StyleInput from "../../interfaces/StyleInput";
+import StyleInput from "../../types/StyleInput";
 
 import * as React from "react";
 import { useLayoutEffect, useMemo, useReducer, useState } from "react";

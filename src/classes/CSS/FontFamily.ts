@@ -1,15 +1,16 @@
 import CssProperty from "./CssProperty";
 import CssPropertyName from "../../enums/CssPropertyName";
-import FontFamilyName from "../../enums/FontFamilyName";
-import FontGenericName from "../../enums/FontGenericName";
-import FontFamilyOptions, {
+import {
   DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY,
   DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES,
   DEFAULT_FONT_FAMILY_FONT_GENERIC_NAMES,
   DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS,
   DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES,
   DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES,
-} from "../../interfaces/FontFamilyOptions";
+} from "../../values/defaults/css/FontFamilyDefaults";
+import FontFamilyName from "../../enums/FontFamilyName";
+import FontGenericName from "../../enums/FontGenericName";
+import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
 import Randomizable from "../Randomizable";
 
 export default class FontFamily extends CssProperty {

@@ -1,21 +1,23 @@
 import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
-import GlyphConfig, { DEFAULT_GLYPH_CONFIG } from "../interfaces/GlyphConfig";
-import GlyphInput from "../interfaces/GlyphInput";
-import RandomCharacter from "./RandomCharacter";
-import RandomCssUtils from "../classes/RandomCssUtils";
-import { RandomDiv } from "./RandomElements";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementProps";
-import Randomizable from "../classes/Randomizable";
-import RandomStringProps, {
+import DEFAULT_GLYPH_CONFIG from "../values/defaults/DefaultGlyphConfig";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../values/defaults/RandomElementPropsDefaults";
+import {
   DEFAULT_RANDOM_STRING_PROPS_CENTER,
   DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
   DEFAULT_RANDOM_STRING_PROPS_SIZE,
   DEFAULT_RANDOM_STRING_PROPS_TEXT,
-} from "../interfaces/RandomStringProps";
+} from "../values/defaults/RandomStringPropsDefaults";
+import GlyphConfig from "../interfaces/GlyphConfig";
+import GlyphInput from "../types/GlyphInput";
+import RandomCharacter from "./RandomCharacter";
+import RandomCssUtils from "../classes/RandomCssUtils";
+import { RandomDiv } from "./RandomElements";
+import Randomizable from "../classes/Randomizable";
+import RandomStringProps from "../interfaces/RandomStringProps";
 import StyleConfig from "../interfaces/StyleConfig";
-import StyleInput from "../interfaces/StyleInput";
+import StyleInput from "../types/StyleInput";
 
 import * as React from "react";
 import { useMemo } from "react";

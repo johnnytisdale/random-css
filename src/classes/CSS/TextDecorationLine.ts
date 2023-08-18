@@ -1,9 +1,8 @@
 import CssProperty from "../../enums/CssPropertyName";
-import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
-import TextDecorationLineOptions, {
-  DEFAULT_TEXT_DECORATION_LINE_LINES,
-} from "../../interfaces/TextDecorationLineOptions";
+import { DEFAULT_TEXT_DECORATION_LINE_LINES } from "../../values/defaults/css/TextDecorationLineDefaults";
 import KeywordProperty from "./KeywordProperty";
+import TextDecorationLineKeyword from "../../enums/TextDecorationLineKeyword";
+import TextDecorationLineOptions from "../../interfaces/TextDecorationLineOptions";
 
 export default class TextDecorationLine extends KeywordProperty {
   protected keywords: TextDecorationLineKeyword[];

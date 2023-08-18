@@ -1,12 +1,12 @@
 import CssPropertyName from "../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../interfaces/RandomElementProps";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../values/defaults/RandomElementPropsDefaults";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import RandomElementGenericProps from "../interfaces/RandomElementGenericProps";
 import Randomizable from "../classes/Randomizable";
 import Randomizables from "../interfaces/Randomizables";
 import Style from "../types/Style";
 import StyleConfig from "../interfaces/StyleConfig";
-import StyleInput from "../interfaces/StyleInput";
+import StyleInput from "../types/StyleInput";
 import Timeouts from "../interfaces/Timeouts";
 
 import { Property as CssPropertyType } from "csstype";

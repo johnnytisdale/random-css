@@ -9,7 +9,7 @@ module.exports = (env) => {
       ? "./src/components/Form/Form.tsx"
       : env.environment === "test"
       ? { test: "./src/js/test.jsx" }
-      : "./src/js/index.js";
+      : "./src/index.ts";
 
   return {
     entry,
@@ -29,6 +29,7 @@ module.exports = (env) => {
         },
         {
           test: /\.s[ac]ss$/i,
+          exclude: /node_modules/,
           use: [
             // Creates `style` nodes from JS strings
             "style-loader",
@@ -52,7 +53,10 @@ module.exports = (env) => {
         ENV: JSON.stringify(env.environment),
       }),
       new CopyWebpackPlugin({
-        patterns: [{ from: "src/styles/random.css" }],
+        patterns: [
+          { from: "src/index.d.ts" },
+          { from: "src/styles/random.css" },
+        ],
       }),
       ...(env.environment === "form"
         ? [
