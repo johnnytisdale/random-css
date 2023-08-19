@@ -1,9 +1,10 @@
 import CssProperty from "../../enums/CssPropertyName";
-import FontStyleKeyword from "../../enums/FontStyleKeyword";
-import FontStyleOptions, {
+import {
   DEFAULT_FONT_STYLE_MAX_DEGREES,
   DEFAULT_FONT_STYLE_MIN_DEGREES,
-} from "../../interfaces/FontStyleOptions";
+} from "../../values/defaults/css/FontStyleDefaults";
+import FontStyleKeyword from "../../enums/FontStyleKeyword";
+import FontStyleOptions from "../../interfaces/FontStyleOptions";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";

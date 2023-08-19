@@ -1,7 +1,5 @@
-import {
-  AnimationIterationCountOptions,
-  DEFAULT_ANIMATION_ITERATION_COUNT_MAX,
-} from "../../../interfaces/AnimationOptions";
+import AnimationIterationCountOptions from "../../../interfaces/AnimationIterationCountOptions";
+import { DEFAULT_ANIMATION_ITERATION_COUNT_MAX } from "../../../values/defaults/css/AnimationDefaults";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionProbability from "../FormOptionProbability";
 import FormOptionRange from "../FormOptionRange";

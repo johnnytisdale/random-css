@@ -1,7 +1,7 @@
 import * as leetJSON from "../src/json/leet.json";
 import * as unicodeJSON from "../src/json/unicode.json";
 
-import { DEFAULT_GLYPH_CONFIG } from "../src/interfaces/GlyphConfig";
+import DEFAULT_GLYPH_CONFIG from "../src/values/defaults/DefaultGlyphConfig";
 import Glyph from "../src/classes/Glyph";
 import Letter from "../src/enums/Letter";
 

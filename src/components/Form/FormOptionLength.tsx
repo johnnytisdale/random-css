@@ -1,11 +1,12 @@
+import {
+  DEFAULT_LENGTH_MAX,
+  DEFAULT_LENGTH_MIN,
+} from "../../values/defaults/css/LengthDefaults";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";
 import FormSubsection from "./FormSubsection";
-import LengthOptions, {
-  DEFAULT_LENGTH_MAX,
-  DEFAULT_LENGTH_MIN,
-} from "../../interfaces/LengthOptions";
+import LengthOptions from "../../interfaces/LengthOptions";
 import LengthUnit from "../../enums/LengthUnit";
 import OptionProps from "../../interfaces/OptionProps";
 
