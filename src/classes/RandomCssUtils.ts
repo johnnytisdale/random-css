@@ -19,7 +19,7 @@ import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
 import Option from "../interfaces/Option";
 import Randomizable from "./Randomizable";
-import Randomizables from "../interfaces/Randomizables";
+import Randomizables from "../types/Randomizables";
 import StyleConfig from "../interfaces/StyleConfig";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";

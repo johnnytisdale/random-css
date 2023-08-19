@@ -1,4 +1,4 @@
-import StyleInput from "../types/StyleInput";
+import StyleInput from "./StyleInput";
 
 import * as React from "react";
 

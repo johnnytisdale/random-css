@@ -1,5 +1,5 @@
 import GlyphInput from "../types/GlyphInput";
-import RandomElementProps from "./RandomElementProps";
+import RandomElementProps from "../types/RandomElementProps";
 
 import { HTMLAttributes } from "react";
 

@@ -3,10 +3,12 @@ import AnimationEasingFunction from "./enums/AnimationEasingFunction";
 import AnimationFillMode from "./enums/AnimationFillMode";
 import AnimationIterationCountOptions from "./interfaces/AnimationIterationCountOptions";
 import AnimationOptions from "./interfaces/AnimationOptions";
+import AnimationStepPosition from "./enums/AnimationStepPosition";
 import AnimationTransformation from "./enums/AnimationTransformation";
 import BorderRadiusOptions from "./interfaces/BorderRadiusOptions";
 import BorderStyleKeyword from "./enums/BorderStyleKeyword";
 import Color from "./classes/CSS/Color";
+import ColorKeyword from "./enums/ColorKeyword";
 import ColorOptions from "./interfaces/ColorOptions";
 import type CssColorProperty from "./types/CssColorProperty";
 import CssProperty from "./classes/CSS/CssProperty";
@@ -22,7 +24,6 @@ import type GlyphInput from "./types/GlyphInput";
 import GlyphType from "./enums/GlyphType";
 import LengthOptions from "./interfaces/LengthOptions";
 import LengthUnit from "./enums/LengthUnit";
-import OptionProps from "./interfaces/OptionProps";
 import RandomCharacter from "./components/RandomCharacter";
 import RandomCssUtils from "./classes/RandomCssUtils";
 import RandomElement from "./components/RandomElement";
@@ -109,20 +110,46 @@ import {
 } from "./values/defaults/css/LengthDefaults";
 import DEFAULT_STYLE_CONFIG from "./values/defaults/DefaultStyleConfig";
 
+const AnimationDirections = Object.values(AnimationDirection);
+const AnimationEasingFunctions = Object.values(AnimationEasingFunction);
+const AnimationFillModes = Object.values(AnimationFillMode);
+const AnimationStepPositions = Object.values(AnimationStepPosition);
+const AnimationTransformations = Object.values(AnimationTransformation);
+const BorderStyleKeywords = Object.values(BorderStyleKeyword);
+const ColorKeywords = Object.values(ColorKeyword);
+const CssPropertyNames = Object.values(CssPropertyName);
+const FontFamilyNames = Object.values(FontFamilyName);
+const FontGenericNames = Object.values(FontGenericName);
+const FontStyleKeywords = Object.values(FontStyleKeyword);
+const FontWeightValues = Object.values(FontWeightValue);
+const GlyphTypes = Object.values(GlyphType);
+const LengthUnits = Object.values(LengthUnit);
+const TextDecorationLineKeywords = Object.values(TextDecorationLineKeyword);
+const TextDecorationStyleKeywords = Object.values(TextDecorationStyleKeyword);
+
 export {
   AnimationDirection,
+  AnimationDirections,
   AnimationEasingFunction,
+  AnimationEasingFunctions,
   AnimationFillMode,
+  AnimationFillModes,
   AnimationIterationCountOptions,
   AnimationOptions,
+  AnimationStepPosition,
+  AnimationStepPositions,
   AnimationTransformation,
+  AnimationTransformations,
   BorderRadiusOptions,
   BorderStyleKeyword,
+  BorderStyleKeywords,
   Color,
+  ColorKeywords,
   ColorOptions,
   CssColorProperty,
   CssProperty,
   CssPropertyName,
+  CssPropertyNames,
   DEFAULT_ANIMATION_DURATION_MAX,
   DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
   DEFAULT_ANIMATION_DURATION_MIN,
@@ -147,17 +174,22 @@ export {
   DEFAULT_RANDOM_STRING_PROPS_TEXT,
   DEFAULT_STYLE_CONFIG,
   FontFamilyName,
+  FontFamilyNames,
   FontFamilyOptions,
   FontGenericName,
+  FontGenericNames,
   FontStyleKeyword,
+  FontStyleKeywords,
   FontStyleOptions,
   FontWeightValue,
+  FontWeightValues,
   GlyphConfig,
   GlyphInput,
   GlyphType,
+  GlyphTypes,
   LengthOptions,
   LengthUnit,
-  OptionProps,
+  LengthUnits,
   RandomA,
   RandomBody,
   RandomButton,
@@ -205,5 +237,7 @@ export {
   StyleConfig,
   StyleInput,
   TextDecorationLineKeyword,
+  TextDecorationLineKeywords,
   TextDecorationStyleKeyword,
+  TextDecorationStyleKeywords,
 };
