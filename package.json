@@ -58,6 +58,6 @@
     "test": "jest --verbose",
     "watch": "webpack --mode development --env environment=development --watch"
   },
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dependencies": {}
 }
