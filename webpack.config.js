@@ -51,10 +51,7 @@ module.exports = (env) => {
         ENV: JSON.stringify(env.environment),
       }),
       new CopyWebpackPlugin({
-        patterns: [
-          { from: "src/index.d.ts" },
-          { from: "src/styles/random.css" },
-        ],
+        patterns: [{ from: "src/index.d.ts" }],
       }),
       ...(env.environment === "development"
         ? [
