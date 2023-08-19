@@ -712,15 +712,6 @@ So when using external CSS, we use the
 [color keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color),
 of which there are only 142.
 
-## Start Developing
-
-1. `git clone https://github.com/johnnytisdale/random-css.git`
-2. `cd random-css`
-3. `npm install`
-4. `npm run watch`
-5. Open `dist/form.html` in browser.
-6. As you make changes in `src`, refresh the form and test.
-
 ## Authors
 
 - **Johnny Tisdale** - [github](https://github.com/johnnytisdale) | [website](https://johnnytisdale.com)
