@@ -1,5 +1,5 @@
-import GlyphInput from "./GlyphInput";
-import RandomElementProps from "./RandomElementProps";
+import GlyphInput from "../types/GlyphInput";
+import RandomElementProps from "../types/RandomElementProps";
 
 import { HTMLAttributes } from "react";
 
@@ -30,8 +30,3 @@ export default interface RandomStringProps
    */
   text?: string;
 }
-
-export const DEFAULT_RANDOM_STRING_PROPS_CENTER = false;
-export const DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES = true;
-export const DEFAULT_RANDOM_STRING_PROPS_SIZE = 3;
-export const DEFAULT_RANDOM_STRING_PROPS_TEXT = "random css";

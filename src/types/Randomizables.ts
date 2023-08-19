@@ -1,4 +1,4 @@
-import RandomizableName from "../types/RandomizableName";
+import RandomizableName from "./RandomizableName";
 import Randomizable from "../classes/Randomizable";
 
 type Randomizables = {

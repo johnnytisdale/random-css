@@ -5,26 +5,25 @@ import BorderRadius from "./CSS/BorderRadius";
 import BorderStyle from "./CSS/BorderStyle";
 import BorderWidth from "./CSS/BorderWidth";
 import Color from "./CSS/Color";
-import StyleConfig from "../interfaces/StyleConfig";
 import CssPropertyName from "../enums/CssPropertyName";
-import { DEFAULT_ANIMATION_OPTIONS } from "../interfaces/AnimationOptions";
-import { DEFAULT_BORDER_RADIUS_OPTIONS } from "../interfaces/BorderRadiusOptions";
-import { DEFAULT_BORDER_STYLE_OPTIONS } from "../interfaces/BorderStyleOptions";
-import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../interfaces/LengthOptions";
-import { DEFAULT_COLOR_OPTIONS } from "../interfaces/ColorOptions";
-import { DEFAULT_FONT_FAMILY_OPTIONS } from "../interfaces/FontFamilyOptions";
-import { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../interfaces/TextDecorationLineOptions";
+import { DEFAULT_ANIMATION_OPTIONS } from "../values/defaults/css/AnimationDefaults";
+import { DEFAULT_BORDER_RADIUS_OPTIONS } from "../values/defaults/css/BorderRadiusDefaults";
+import { DEFAULT_BORDER_STYLE_OPTIONS } from "../values/defaults/css/BorderStyleDefaults";
+import { DEFAULT_COLOR_OPTIONS } from "../values/defaults/css/ColorDefaults";
+import { DEFAULT_FONT_FAMILY_OPTIONS } from "../values/defaults/css/FontFamilyDefaults";
+import { DEFAULT_BORDER_WIDTH_OPTIONS } from "../values/defaults/css/LengthDefaults";
+import { DEFAULT_TEXT_DECORATION_LINE_OPTIONS } from "../values/defaults/css/TextDecorationLineDefaults";
+import { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../values/defaults/css/TextDecorationStyleDefaults";
 import FontFamily from "./CSS/FontFamily";
 import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
 import Option from "../interfaces/Option";
 import Randomizable from "./Randomizable";
-import Randomizables from "../interfaces/Randomizables";
+import Randomizables from "../types/Randomizables";
+import StyleConfig from "../interfaces/StyleConfig";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";
-import TextDecorationStyle, {
-  DEFAULT_TEXT_DECORATION_STYLE_OPTIONS,
-} from "./CSS/TextDecorationStyle";
+import TextDecorationStyle from "./CSS/TextDecorationStyle";
 
 export default class RandomCssUtils {
   public static reducer<T>(state: T, newState: Partial<T>): T {

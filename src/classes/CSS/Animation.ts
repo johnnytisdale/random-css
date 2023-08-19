@@ -1,23 +1,24 @@
 import AnimationDirection from "../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../enums/AnimationFillMode";
+import AnimationIterationCountOptions from "../../interfaces/AnimationIterationCountOptions";
+import AnimationOptions from "../../interfaces/AnimationOptions";
+import AnimationStepPosition from "../../enums/AnimationStepPosition";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
 import CssPropertyName from "../../enums/CssPropertyName";
-import AnimationOptions, {
-  AnimationIterationCountOptions,
+import {
   DEFAULT_ANIMATION_DIRECTIONS,
+  DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
+  DEFAULT_ANIMATION_DURATION_MAX,
+  DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
+  DEFAULT_ANIMATION_DURATION_MIN,
   DEFAULT_ANIMATION_EASING_FUNCTIONS,
   DEFAULT_ANIMATION_FILL_MODES,
   DEFAULT_ANIMATION_ITERATION_COUNT,
-  DEFAULT_ANIMATION_DURATION_MAX,
-  DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
-  DEFAULT_ANIMATION_DURATION_MIN,
-  DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
-  DEFAULT_ANIMATION_TRANSFORMATIONS,
   DEFAULT_ANIMATION_STEP_POSITIONS,
-} from "../../interfaces/AnimationOptions";
-import AnimationStepPosition from "../../enums/AnimationStepPosition";
+  DEFAULT_ANIMATION_TRANSFORMATIONS,
+} from "../../values/defaults/css/AnimationDefaults";
 import Randomizable from "../Randomizable";
 
 export default class Animation extends CssProperty {

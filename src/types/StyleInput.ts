@@ -1,5 +1,5 @@
 import CssPropertyName from "../enums/CssPropertyName";
-import StyleConfig from "./StyleConfig";
+import StyleConfig from "../interfaces/StyleConfig";
 
 type StyleInput =
   | StyleConfig

@@ -1,8 +1,7 @@
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import BorderStyleOptions, {
-  DEFAULT_BORDER_STYLE_KEYWORDS,
-} from "../../interfaces/BorderStyleOptions";
+import BorderStyleOptions from "../../interfaces/BorderStyleOptions";
 import CssProperty from "../../enums/CssPropertyName";
+import { DEFAULT_BORDER_STYLE_KEYWORDS } from "../../values/defaults/css/BorderStyleDefaults";
 import KeywordProperty from "./KeywordProperty";
 
 export default class BorderStyle extends KeywordProperty {

@@ -1,10 +1,11 @@
-import BorderRadiusOptions, {
-  DEFAULT_BORDER_RADIUS_MAX_CORNERS,
-  DEFAULT_BORDER_RADIUS_MAX_RADIUS,
-  DEFAULT_BORDER_RADIUS_MIN_CORNERS,
-  DEFAULT_BORDER_RADIUS_MIN_RADIUS,
-} from "../../interfaces/BorderRadiusOptions";
+import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import CssProperty from "../../enums/CssPropertyName";
+import {
+  DEFAULT_BORDER_RADIUS_MAX_CORNERS,
+  DEFAULT_BORDER_RADIUS_MIN_CORNERS,
+  DEFAULT_BORDER_RADIUS_MAX_RADIUS,
+  DEFAULT_BORDER_RADIUS_MIN_RADIUS,
+} from "../../values/defaults/css/BorderRadiusDefaults";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionProbability from "./FormOptionProbability";
 import FormOptionRange from "./FormOptionRange";

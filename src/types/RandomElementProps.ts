@@ -21,5 +21,3 @@ type RandomElementProps<Attributes, Element> = Props &
   Omit<React.DetailedHTMLProps<Attributes, Element>, "style">;
 
 export default RandomElementProps;
-
-export const DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL = false;

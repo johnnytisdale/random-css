@@ -1,0 +1,1 @@
+export const DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL = false;

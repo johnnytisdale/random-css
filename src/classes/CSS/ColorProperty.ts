@@ -1,13 +1,14 @@
 import ColorKeyword from "../../enums/ColorKeyword";
-import ColorOptions, {
+import ColorOptions from "../../interfaces/ColorOptions";
+import CssProperty from "./CssProperty";
+import {
   DEFAULT_COLOR_ALPHA,
   DEFAULT_COLOR_ALPHA_MAX,
   DEFAULT_COLOR_ALPHA_MIN,
-  DEFAULT_COLOR_KEYWORDS,
   DEFAULT_COLOR_MAX,
   DEFAULT_COLOR_MIN,
-} from "../../interfaces/ColorOptions";
-import CssProperty from "./CssProperty";
+  DEFAULT_COLOR_KEYWORDS,
+} from "../../values/defaults/css/ColorDefaults";
 import Randomizable from "../Randomizable";
 
 export default abstract class ColorProperty extends CssProperty {

@@ -1,9 +1,10 @@
 import Color from "../../enums/ColorKeyword";
-import ColorOptions, {
+import ColorOptions from "../../interfaces/ColorOptions";
+import CssColorProperty from "../../types/CssColorProperty";
+import {
   DEFAULT_COLOR_ALPHA_MAX,
   DEFAULT_COLOR_ALPHA_MIN,
-} from "../../interfaces/ColorOptions";
-import CssColorProperty from "../../types/CssColorProperty";
+} from "../../values/defaults/css/ColorDefaults";
 import FormOptionArray from "./FormOptionArray";
 import FormOptionBoolean from "./FormOptionBoolean";
 import FormOptionRange from "./FormOptionRange";

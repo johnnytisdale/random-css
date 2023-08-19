@@ -1,29 +1,27 @@
 import "../../styles/Form.scss";
 
 import BorderStyleKeyword from "../../enums/BorderStyleKeyword";
-import StyleConfig, {
-  DEFAULT_STYLE_CONFIG,
-} from "../../interfaces/StyleConfig";
+import StyleConfig from "../../interfaces/StyleConfig";
 import CssPropertyName from "../../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../interfaces/RandomElementProps";
+import DEFAULT_GLYPH_CONFIG from "../../values/defaults/DefaultGlyphConfig";
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../values/defaults/RandomElementPropsDefaults";
 import {
   DEFAULT_RANDOM_STRING_PROPS_IGNORE_SPACES,
   DEFAULT_RANDOM_STRING_PROPS_SIZE,
   DEFAULT_RANDOM_STRING_PROPS_TEXT,
-} from "../../interfaces/RandomStringProps";
+} from "../../values/defaults/RandomStringPropsDefaults";
+import DEFAULT_STYLE_CONFIG from "../../values/defaults/DefaultStyleConfig";
 import FormSectionCss from "./FormSectionCss";
 import FormSectionExport from "./FormSectionExport";
 import FormSectionGlobal from "./FormSectionGlobal";
 import FormSectionGlyph from "./FormSectionGlyph";
-import GlyphConfig, {
-  DEFAULT_GLYPH_CONFIG,
-} from "../../interfaces/GlyphConfig";
-import GlyphInput from "../../interfaces/GlyphInput";
+import GlyphConfig from "../../interfaces/GlyphConfig";
+import GlyphInput from "../../types/GlyphInput";
 import GlyphType from "../../enums/GlyphType";
 import RandomCssUtils from "../../classes/RandomCssUtils";
 import { RandomDiv } from "../RandomElements";
 import RandomString from "../RandomString";
-import StyleInput from "../../interfaces/StyleInput";
+import StyleInput from "../../types/StyleInput";
 
 import * as React from "react";
 import { useLayoutEffect, useMemo, useReducer, useState } from "react";

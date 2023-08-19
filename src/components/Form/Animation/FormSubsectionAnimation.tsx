@@ -1,17 +1,18 @@
 import AnimationDirection from "../../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
-import AnimationOptions, {
-  AnimationIterationCountOptions,
+import AnimationIterationCountOptions from "../../../interfaces/AnimationIterationCountOptions";
+import AnimationOptions from "../../../interfaces/AnimationOptions";
+import AnimationTransformation from "../../../enums/AnimationTransformation";
+import CssProperty from "../../../enums/CssPropertyName";
+import {
   DEFAULT_ANIMATION_DURATION_MAX,
   DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL,
   DEFAULT_ANIMATION_DURATION_MIN,
   DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN,
   DEFAULT_ANIMATION_ITERATION_COUNT_MIN_EXTERNAL,
-} from "../../../interfaces/AnimationOptions";
-import AnimationTransformation from "../../../enums/AnimationTransformation";
-import CssProperty from "../../../enums/CssPropertyName";
+} from "../../../values/defaults/css/AnimationDefaults";
 import FormOptionArray from "../FormOptionArray";
 import FormOptionBoolean from "../FormOptionBoolean";
 import FormOptionRange from "../FormOptionRange";

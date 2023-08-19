@@ -1,5 +1,5 @@
 import RandomElement from "./RandomElement";
-import RandomElementProps from "../interfaces/RandomElementProps";
+import RandomElementProps from "../types/RandomElementProps";
 
 import * as React from "react";
 import {

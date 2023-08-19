@@ -1,7 +1,6 @@
 import CssProperty from "../../enums/CssPropertyName";
-import FontWeightOptions, {
-  DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
-} from "../../interfaces/FontWeightOptions";
+import { DEFAULT_FONT_WEIGHT_FONT_WEIGHTS } from "../../values/defaults/css/FontWeightDefaults";
+import FontWeightOptions from "../../interfaces/FontWeightOptions";
 import FontWeightValue from "../../enums/FontWeightValue";
 import KeywordProperty from "./KeywordProperty";
 

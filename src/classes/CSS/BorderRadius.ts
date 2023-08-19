@@ -1,13 +1,14 @@
+import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
 import CssProperty from "./CssProperty";
 import CssPropertyName from "../../enums/CssPropertyName";
-import BorderRadiusOptions, {
+import {
   DEFAULT_BORDER_RADIUS_MAX_CORNERS,
   DEFAULT_BORDER_RADIUS_MAX_RADIUS,
   DEFAULT_BORDER_RADIUS_MIN_CORNERS,
   DEFAULT_BORDER_RADIUS_MIN_RADIUS,
   DEFAULT_BORDER_RADIUS_SLASH,
   DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY,
-} from "../../interfaces/BorderRadiusOptions";
+} from "../../values/defaults/css/BorderRadiusDefaults";
 import Randomizable from "../Randomizable";
 
 export default class BorderRadius extends CssProperty {
