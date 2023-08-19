@@ -39,6 +39,11 @@
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
   },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.LICENSE.txt"
+  ],
   "keywords": [],
   "license": "ISC",
   "main": "dist/index.js",
@@ -58,6 +63,7 @@
     "test": "jest --verbose",
     "watch": "webpack --mode development --env environment=development --watch"
   },
+  "types": "dist/index.d.ts",
   "version": "3.0.2",
   "dependencies": {}
 }
