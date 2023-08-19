@@ -5,10 +5,8 @@ const webpack = require("webpack");
 
 module.exports = (env) => {
   const entry =
-    env.environment === "form"
-      ? "./src/components/Form/Form.tsx"
-      : env.environment === "test"
-      ? { test: "./src/js/test.jsx" }
+    env.environment === "development"
+      ? { dev: "./src/js/dev.jsx" }
       : "./src/index.ts";
 
   return {
@@ -42,7 +40,7 @@ module.exports = (env) => {
       ],
     },
     output: {
-      filename: `${env.environment === "test" ? "[name]" : "index"}.js`,
+      filename: `${env.environment === "development" ? "[name]" : "index"}.js`,
       path: path.resolve(__dirname, "dist"),
       library: "random-css",
       libraryTarget: "umd",
@@ -58,20 +56,11 @@ module.exports = (env) => {
           { from: "src/styles/random.css" },
         ],
       }),
-      ...(env.environment === "form"
+      ...(env.environment === "development"
         ? [
             new HtmlWebpackPlugin({
-              filename: "form.html",
-              template: "src/html/form.html",
-              title: "Random CSS",
-            }),
-          ]
-        : env.environment === "test"
-        ? [
-            new HtmlWebpackPlugin({
-              filename: "test.html",
-              inject: false,
-              template: "src/html/test.html",
+              filename: "dev.html",
+              template: "src/html/dev.html",
               title: "Random CSS",
             }),
           ]

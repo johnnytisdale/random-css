@@ -51,15 +51,12 @@
     "access": "public"
   },
   "scripts": {
-    "css": "py src/python/cssGenerator.py",
     "dev": "webpack --mode development --env environment=development",
-    "form": "webpack --mode development --env environment=form",
     "lint": "npx eslint src --max-warnings=0",
     "prepublishOnly": "del /F /Q dist && npm run prod",
     "prod": "webpack --mode production --env environment=production",
     "test": "jest --verbose",
-    "test-build": "webpack --mode development --env environment=test",
-    "watch": "webpack --mode development --env environment=form --watch"
+    "watch": "webpack --mode development --env environment=development --watch"
   },
   "version": "3.0.1",
   "dependencies": {}
