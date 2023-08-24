@@ -6,13 +6,14 @@ Randomize your style.
 
 `npm i -D random-css`
 
-## How To Use
+## Quick Start
 
 Import the `RandomElement` corresponding to the HTML element you want to
 randomize.
 
 In this example, a `<div>` will be created. Its `borderWidth` will remain fixed
-at `1rem`, while the `borderColor`, `borderRadius`, and `borderStyle` properties will be randomized.
+at `1rem`, while the `borderColor`, `borderRadius`, and `borderStyle` properties
+will be randomized.
 
 ```
 import { RandomDiv } from "random-css";
@@ -21,7 +22,11 @@ function MyComponent() {
   return (
     <RandomDiv
       fixedStyle={{borderWidth: "1rem"}}
-      style={["borderColor", "borderRadius", "borderStyle"]}
+      style={[
+        "borderColor",
+        "borderRadius",
+        "borderStyle"
+      ]}
     >
       my super awesome div content!!!
     </RandomDiv>
@@ -52,6 +57,107 @@ Suppose you wanted to specify which border styles will be used.
 >
   dude, check out these border styles!
 </RandomDiv>
+```
+
+## Components
+
+There is a RandomElement component for most HTML tags.
+
+| HTML Tag | RandomElement  |
+| -------- | -------------- |
+| a        | RandomA        |
+| body     | RandomBody     |
+| button   | RandomButton   |
+| div      | RandomDiv      |
+| em       | RandomEm       |
+| footer   | RandomFooter   |
+| form     | RandomForm     |
+| h1       | RandomH1       |
+| h2       | RandomH2       |
+| h3       | RandomH3       |
+| h4       | RandomH4       |
+| h5       | RandomH5       |
+| h6       | RandomH6       |
+| head     | RandomHead     |
+| header   | RandomHeader   |
+| html     | RandomHtml     |
+| img      | RandomImg      |
+| input    | RandomInput    |
+| label    | RandomLabel    |
+| main     | RandomMain     |
+| menu     | RandomMenu     |
+| nav      | RandomNav      |
+| ol       | RandomOl       |
+| option   | RandomOption   |
+| p        | RandomP        |
+| section  | RandomSection  |
+| select   | RandomSelect   |
+| small    | RandomSmall    |
+| span     | RandomSpan     |
+| strong   | RandomStrong   |
+| table    | RandomTable    |
+| tbody    | RandomTbody    |
+| td       | RandomTd       |
+| textarea | RandomTextarea |
+| tfoot    | RandomTfoot    |
+| th       | RandomTh       |
+| thead    | RandomThead    |
+| title    | RandomTitle    |
+| tr       | RandomTr       |
+| ul       | RandomUl       |
+
+<em>More elements will be supported soon!</em>
+
+### RandomString
+
+`RandomString` is a special component. Given a string, it renders a container
+`div` containing one `div` for each character in the string. The config passed
+to the `style` prop is applied to each character `div`. The container `div` is
+styled such that the space between the characters remains relatively stable
+despite changes in size, border, etc.
+
+For example, this:
+
+```
+<RandomString text="random css" />
+```
+
+Is rendered like this:
+
+```
+<div class="random-css-string" style="...">
+  <div class="random-css-character" style="...">
+    r
+  </div>
+  <div class="random-css-character" style="...">
+    a
+  </div>
+  <div class="random-css-character" style="...">
+    n
+  </div>
+  <div class="random-css-character" style="...">
+    d
+  </div>
+  <div class="random-css-character" style="...">
+    o
+  </div>
+  <div class="random-css-character" style="...">
+    m
+  </div>
+  <div class="random-css-character" style="..."
+  >
+  </div>
+  <div class="random-css-character" style="...">
+    c
+  </div>
+  <div class="random-css-character" style="...">
+    s
+  </div>
+  <div class="random-css-character" style="...">
+    s
+  </div>
+</div>
+
 ```
 
 ## Configuration
@@ -237,12 +343,17 @@ Jump terms to be used with the `steps` easing function.
     },
   }}
 >
-  my rad div content with a randomized background color!
+  my rad div content
+  with a randomized background color!
 </RandomDiv>
 ```
 
 ```
-// When using an external stylesheet, specify color keywords instead of rgba values.
+/**
+ * When using an external stylesheet,
+ * specify color keywords instead of
+ * rgba values.
+ */
 
 <RandomDiv
   external={true}
@@ -262,7 +373,9 @@ Jump terms to be used with the `steps` easing function.
     },
   }}
 >
-  my rad div content with a randomized background color, using an external stylesheet!
+  my rad div content
+  with a randomized background color,
+  using an external stylesheet!
 </RandomDiv>
 ```
 
@@ -685,18 +798,174 @@ Must be less than or equal to `maxDegrees`.
 - "solid"
 - "wavy"
 
-## What's New?
+### Glyph
 
-- CI/CD: Github Actions
-- Formatting: Prettier
-- Linting: ESLint
-- Testing: Jest and React Testing Library
+The `RandomString` component has a `glyph` prop.
 
-### Content Security Policy
+> In typography, a [glyph](https://en.wikipedia.org/wiki/Glyph) is "the specific shape, design, or representation of a character".
 
-Random CSS is now compatible with a _strict_
+There are currently two ways the glyphs can be randomized: [leet](https://en.wikipedia.org/wiki/Leet) and [unicode](https://en.wikipedia.org/wiki/Unicode).
+
+When one of these options is enabled, each character in string passed to
+the `text` prop will be randomly replaced with a glyph of the respective type
+(assuming that character is supported).
+
+```
+<RandomString
+  glyph={["leet", "unicode"]}
+  text="random css"
+/>
+```
+
+For example, the character "a" may be replaced as follows:
+
+#### leet
+
+- 4
+- /-\
+- /\_\
+- @
+- /\
+
+#### unicode
+
+- Á
+- á
+- ă
+- ǎ
+- Â
+- â
+- Ä
+- ä
+- ȧ
+- ạ
+- ȁ
+- À
+- à
+- ả
+- ȃ
+- ā
+- ą
+- ẚ
+- Å
+- å
+- ḁ
+- Ⱥ
+- Ã
+- ã
+- ͣ
+- ᴀ
+- ɑ
+- ɐ
+
+<em>Soon you will be able to specify which glyphs you want to include for each
+character.</em>
+
+### Shorthand
+
+In an effort to make Random CSS less verbose, we support a shorthand for both
+the `style` and `glyph` props. (Note that the `glyph` prop only exists on
+`RandomString`.)
+
+So if you want to enable the `animation` CSS property with the default values,
+then instead of this:
+
+```
+<RandomString
+  style={{
+    animation: {
+      directions: [
+        "alternate",
+        "alternate-reverse",
+        "normal",
+        "reverse",
+      ],
+      durationMax: 3000,
+      durationMin: 300,
+      easingFunctions: [
+        "cubic-bezier",
+        "ease",
+        "ease-in",
+        "ease-out",
+        "ease-in-out",
+        "linear",
+        "step-end",
+        "step-start",
+        "steps",
+      ],
+      fillModes: [
+        "backwards",
+        "both",
+        "forwards",
+      ],
+      iterationCount: {
+        infinite: true,
+        infiniteProbability: 0.5,
+        integersOnly: false,
+        max: 3,
+        min: 0.25,
+      },
+      stepPositions: [
+        "end",
+        "jump-both",
+        "jump-end",
+        "jump-none",
+        "jump-start",
+        "start",
+      ],
+      transformations: [
+        "rotate",
+        "scaleDown",
+        "scaleUp",
+        "skewX",
+        "skewXY",
+        "skewY",
+      ],
+    }
+  }}
+  text="random css"
+/>
+```
+
+You can just do this:
+
+```
+<RandomString
+  style="animation"
+  text="random css"
+/>
+```
+
+Say you want the defaults except for `transformations`, of which you only want
+to use `rotate`. You can do this:
+
+```
+<RandomString
+  style={{ animation: { transformations: ["rotate"] } }}
+  text="random css"
+/>
+```
+
+If you also want to enable `backgroundColor` (defaults), you can do this:
+
+```
+<RandomString
+  style={[
+    { animation: { transformations: ["rotate"] } },
+    "backgroundColor"
+  ]}
+  text="random css"
+/>
+```
+
+## Content Security Policy
+
+Random CSS is compatible with a _strict_
 [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP),
-i.e., one that forbids inline CSS. There is now an `external` prop which defaults to `false`. If you set it to `true`, then external CSS is used and you must be sure to link to the [stylesheet](https://randomcss.org/random.css) in your `<head>`.
+i.e., one that forbids inline CSS. There is an `external` prop which
+defaults to `false`. If you set it to `true`, then external CSS is used and you
+must be sure to link the [stylesheet](https://randomcss.org/random.css) in
+your `<head>`.
 
 While using external CSS is considered safer, it comes with a tradeoff: It
 significantly limits the number of possible values supported for some CSS
@@ -719,7 +988,3 @@ of which there are only 142.
 ## License
 
 This project is licensed under the ISC License. See [LICENSE.md](LICENSE.md) for details.
-
-## Acknowledgements
-
-- [Billie Thompson](https://github.com/PurpleBooth) - [README template](https://github.com/PurpleBooth/a-good-readme-template)
