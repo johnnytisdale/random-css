@@ -106,7 +106,7 @@ There is a RandomElement component for most HTML tags.
 | tr       | RandomTr       |
 | ul       | RandomUl       |
 
-<em>More elements will be supported soon!</em>
+_More elements will be supported soon!_
 
 ### RandomString
 
@@ -858,8 +858,8 @@ For example, the character "a" may be replaced as follows:
 - ɑ
 - ɐ
 
-<em>Soon you will be able to specify which glyphs you want to include for each
-character.</em>
+_Soon you will be able to specify which glyphs you want to include for each
+character._
 
 ### Shorthand
 
