@@ -22,6 +22,11 @@ export default abstract class Randomizable {
 
   public abstract getRandomValue(): string;
 
+  public maxDelay = 3000;
+  public minDelay = 300;
+
+  public shouldRepeat = true;
+
   public static array<T>(array: Array<T>) {
     return array[Randomizable.number(0, array.length - 1)];
   }
