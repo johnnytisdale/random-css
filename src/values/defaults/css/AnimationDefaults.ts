@@ -4,6 +4,7 @@ import AnimationFillMode from "../../../enums/AnimationFillMode";
 import AnimationOptions from "../../../interfaces/AnimationOptions";
 import AnimationStepPosition from "../../../enums/AnimationStepPosition";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
+import DEFAULT_RANDOMIZABLE from "../RandomizableDefaults";
 
 export const DEFAULT_ANIMATION_DIRECTIONS = Object.values(AnimationDirection);
 export const DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL = 3;
@@ -13,7 +14,6 @@ export const DEFAULT_ANIMATION_DURATION_MIN = 300;
 export const DEFAULT_ANIMATION_EASING_FUNCTIONS = Object.values(
   AnimationEasingFunction
 );
-export const DEFAULT_ANIMATION_ENABLED = false;
 export const DEFAULT_ANIMATION_FILL_MODES = Object.values(AnimationFillMode);
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE = true;
 export const DEFAULT_ANIMATION_ITERATION_COUNT_INFINITE_PROBABILITY = 0.5;
@@ -35,11 +35,11 @@ export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
   AnimationTransformation
 );
 export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
+  ...DEFAULT_RANDOMIZABLE,
   directions: DEFAULT_ANIMATION_DIRECTIONS,
   durationMax: DEFAULT_ANIMATION_DURATION_MAX,
   durationMin: DEFAULT_ANIMATION_DURATION_MIN,
   easingFunctions: DEFAULT_ANIMATION_EASING_FUNCTIONS,
-  enabled: DEFAULT_ANIMATION_ENABLED,
   fillModes: DEFAULT_ANIMATION_FILL_MODES,
   iterationCount: DEFAULT_ANIMATION_ITERATION_COUNT,
   stepPositions: DEFAULT_ANIMATION_STEP_POSITIONS,
