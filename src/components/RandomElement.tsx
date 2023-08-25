@@ -78,23 +78,16 @@ export default function RandomElement<Attributes, Element>({
     Object.entries(randomizables.current).forEach(([_, randomizable]) => {
       const key = _ as CssPropertyName;
       if (randomizable == null) {
-        if (timeouts.current[key] == null) {
-          return;
+        if (timeouts.current[key] != null) {
+          update = true;
+          newStyle[key] = defaults.current[key];
+          timeouts.current[key] = null;
         }
-        update = true;
-        newStyle[key] = defaults.current[key];
-        timeouts.current[key] = null;
       } else if (timeouts.current[key]) {
-        /**
-         * We don't need to add a new timeout for this one because it already
-         * has a timeout.
-         */
+        // Already has a timeout.
         return;
       } else {
-        /**
-         * This option was just enabled. There is no need to do setTimeout
-         * here because that will happen at the end of timeoutFunction.
-         */
+        // This option was just enabled.
         timeoutFunction(key);
       }
     });
