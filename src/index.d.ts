@@ -1,3 +1,39 @@
+import {
+  AreaHTMLAttributes,
+  AudioHTMLAttributes,
+  BaseHTMLAttributes,
+  BlockquoteHTMLAttributes,
+  CanvasHTMLAttributes,
+  ColHTMLAttributes,
+  ColgroupHTMLAttributes,
+  DataHTMLAttributes,
+  DelHTMLAttributes,
+  DetailsHTMLAttributes,
+  DialogHTMLAttributes,
+  EmbedHTMLAttributes,
+  FieldsetHTMLAttributes,
+  HTMLAttributes,
+  IframeHTMLAttributes,
+  InsHTMLAttributes,
+  LiHTMLAttributes,
+  LinkHTMLAttributes,
+  MapHTMLAttributes,
+  MetaHTMLAttributes,
+  MeterHTMLAttributes,
+  ObjectHTMLAttributes,
+  OptgroupHTMLAttributes,
+  OutputHTMLAttributes,
+  ProgressHTMLAttributes,
+  QuoteHTMLAttributes,
+  ScriptHTMLAttributes,
+  SlotHTMLAttributes,
+  SourceHTMLAttributes,
+  StyleHTMLAttributes,
+  TimeHTMLAttributes,
+  TrackHTMLAttributes,
+  VideoHTMLAttributes,
+} from "react";
+
 declare module "random-css" {
   export type AnimationDirection =
     | "alternate"
@@ -365,16 +401,91 @@ declare module "random-css" {
       HTMLAnchorElement
     >
   ): React.ReactNode;
+  export function RandomAbbr(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomAddress(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomArea(
+    props: RandomElementProps<
+      AreaHTMLAttributes<HTMLAreaElement>,
+      HTMLAreaElement
+    >
+  ): React.ReactNode;
+  export function RandomArticle(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomAside(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomAudio(
+    props: RandomElementProps<
+      AudioHTMLAttributes<HTMLAudioElement>,
+      HTMLAudioElement
+    >
+  ): React.ReactNode;
+  export function RandomB(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomBase(
+    props: RandomElementProps<
+      BaseHTMLAttributes<HTMLBaseElement>,
+      HTMLBaseElement
+    >
+  ): React.ReactNode;
+  export function RandomBdi(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomBdo(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomBlockquote(
+    props: RandomElementProps<
+      BlockquoteHTMLAttributes<HTMLQuoteElement>,
+      HTMLQuoteElement
+    >
+  ): React.ReactNode;
   export function RandomBody(
     props: RandomElementProps<
       React.HTMLAttributes<HTMLBodyElement>,
       HTMLBodyElement
     >
   ): React.ReactNode;
+  export function RandomBr(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export function RandomButton(
     props: RandomElementProps<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
+    >
+  ): React.ReactNode;
+  export function RandomCanvas(
+    props: RandomElementProps<
+      CanvasHTMLAttributes<HTMLCanvasElement>,
+      HTMLCanvasElement
+    >
+  ): React.ReactNode;
+  export function RandomCaption(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomCite(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomCode(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomCol(
+    props: RandomElementProps<
+      ColHTMLAttributes<HTMLTableColElement>,
+      HTMLTableColElement
+    >
+  ): React.ReactNode;
+  export function RandomColgroup(
+    props: RandomElementProps<
+      ColgroupHTMLAttributes<HTMLTableColElement>,
+      HTMLTableColElement
     >
   ): React.ReactNode;
   export class RandomCssUtils {
@@ -393,11 +504,53 @@ declare module "random-css" {
       Config extends Partial<Record<keyof Config, Option>>,
     >(input: Input): Config;
   }
+  export function RandomData(
+    props: RandomElementProps<
+      DataHTMLAttributes<HTMLDataElement>,
+      HTMLDataElement
+    >
+  ): React.ReactNode;
+  export function RandomDatalist(
+    props: RandomElementProps<
+      HTMLAttributes<HTMLDataListElement>,
+      HTMLDataListElement
+    >
+  ): React.ReactNode;
+  export function RandomDd(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomDel(
+    props: RandomElementProps<DelHTMLAttributes<HTMLModElement>, HTMLModElement>
+  ): React.ReactNode;
+  export function RandomDetails(
+    props: RandomElementProps<
+      DetailsHTMLAttributes<HTMLDetailsElement>,
+      HTMLDetailsElement
+    >
+  ): React.ReactNode;
+  export function RandomDfn(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomDialog(
+    props: RandomElementProps<
+      DialogHTMLAttributes<HTMLDialogElement>,
+      HTMLDialogElement
+    >
+  ): React.ReactNode;
   export function RandomDiv(
     props: RandomElementProps<
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >
+  ): React.ReactNode;
+  export function RandomDl(
+    props: RandomElementProps<
+      HTMLAttributes<HTMLDListElement>,
+      HTMLDListElement
+    >
+  ): React.ReactNode;
+  export function RandomDt(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export type RandomElementProps<
     Attributes extends React.HTMLAttributes<Element>,
@@ -413,6 +566,24 @@ declare module "random-css" {
   } & Omit<React.DetailedHTMLProps<Attributes, Element>, "style">;
   export function RandomEm(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomEmbed(
+    props: RandomElementProps<
+      EmbedHTMLAttributes<HTMLEmbedElement>,
+      HTMLEmbedElement
+    >
+  ): React.ReactNode;
+  export function RandomFieldset(
+    props: RandomElementProps<
+      FieldsetHTMLAttributes<HTMLFieldSetElement>,
+      HTMLFieldSetElement
+    >
+  ): React.ReactNode;
+  export function RandomFigcaption(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomFigure(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export function RandomFooter(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
@@ -468,10 +639,25 @@ declare module "random-css" {
   export function RandomHeader(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
+  export function RandomHgroup(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomHr(
+    props: RandomElementProps<HTMLAttributes<HTMLHRElement>, HTMLHRElement>
+  ): React.ReactNode;
   export function RandomHtml(
     props: RandomElementProps<
       React.HtmlHTMLAttributes<HTMLHtmlElement>,
       HTMLHtmlElement
+    >
+  ): React.ReactNode;
+  export function RandomI(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomIframe(
+    props: RandomElementProps<
+      IframeHTMLAttributes<HTMLIFrameElement>,
+      HTMLIFrameElement
     >
   ): React.ReactNode;
   export function RandomImg(
@@ -486,6 +672,9 @@ declare module "random-css" {
       HTMLInputElement
     >
   ): React.ReactNode;
+  export function RandomIns(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export abstract class Randomizable {
     public abstract name: RandomizableName;
     public static ignoreForSpaces: Record<RandomizableName, boolean>;
@@ -498,6 +687,9 @@ declare module "random-css" {
   export type Randomizables = {
     [key in RandomizableName]: Randomizable | null;
   };
+  export function RandomKbd(
+    props: RandomElementProps<InsHTMLAttributes<HTMLModElement>, HTMLModElement>
+  ): React.ReactNode;
   export type RandomizableName =
     | CssPropertyName
     | MiscellaneousRandomizableName;
@@ -505,6 +697,21 @@ declare module "random-css" {
     props: RandomElementProps<
       React.LabelHTMLAttributes<HTMLLabelElement>,
       HTMLLabelElement
+    >
+  ): React.ReactNode;
+  export function RandomLegend(
+    props: RandomElementProps<
+      HTMLAttributes<HTMLLegendElement>,
+      HTMLLegendElement
+    >
+  ): React.ReactNode;
+  export function RandomLi(
+    props: RandomElementProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
+  ): React.ReactNode;
+  export function RandomLink(
+    props: RandomElementProps<
+      LinkHTMLAttributes<HTMLLinkElement>,
+      HTMLLinkElement
     >
   ): React.ReactNode;
   export function RandomMain(
@@ -516,13 +723,52 @@ declare module "random-css" {
       HTMLElement
     >
   ): React.ReactNode;
+  export function RandomMap(
+    props: RandomElementProps<MapHTMLAttributes<HTMLMapElement>, HTMLMapElement>
+  ): React.ReactNode;
+  export function RandomMark(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomMeta(
+    props: RandomElementProps<
+      MetaHTMLAttributes<HTMLMetaElement>,
+      HTMLMetaElement
+    >
+  ): React.ReactNode;
+  export function RandomMeter(
+    props: RandomElementProps<
+      MeterHTMLAttributes<HTMLMeterElement>,
+      HTMLMeterElement
+    >
+  ): React.ReactNode;
   export function RandomNav(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomNoscript(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomObject(
+    props: RandomElementProps<
+      ObjectHTMLAttributes<HTMLObjectElement>,
+      HTMLObjectElement
+    >
   ): React.ReactNode;
   export function RandomOl(
     props: RandomElementProps<
       React.OlHTMLAttributes<HTMLOListElement>,
       HTMLOListElement
+    >
+  ): React.ReactNode;
+  export function RandomOptgroup(
+    props: RandomElementProps<
+      OptgroupHTMLAttributes<HTMLOptGroupElement>,
+      HTMLOptGroupElement
+    >
+  ): React.ReactNode;
+  export function RandomOutput(
+    props: RandomElementProps<
+      OutputHTMLAttributes<HTMLOutputElement>,
+      HTMLOutputElement
     >
   ): React.ReactNode;
   export function RandomOption(
@@ -537,6 +783,48 @@ declare module "random-css" {
       HTMLParagraphElement
     >
   ): React.ReactNode;
+  export function RandomPicture(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomPre(
+    props: RandomElementProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
+  ): React.ReactNode;
+  export function RandomProgress(
+    props: RandomElementProps<
+      ProgressHTMLAttributes<HTMLProgressElement>,
+      HTMLProgressElement
+    >
+  ): React.ReactNode;
+  export function RandomQ(
+    props: RandomElementProps<
+      QuoteHTMLAttributes<HTMLQuoteElement>,
+      HTMLQuoteElement
+    >
+  ): React.ReactNode;
+  export function RandomRp(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomRt(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomRuby(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomS(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomSamp(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomScript(
+    props: RandomElementProps<
+      ScriptHTMLAttributes<HTMLScriptElement>,
+      HTMLScriptElement
+    >
+  ): React.ReactNode;
+  export function RandomSearch(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export function RandomSection(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
@@ -546,8 +834,20 @@ declare module "random-css" {
       HTMLSelectElement
     >
   ): React.ReactNode;
+  export function RandomSlot(
+    props: RandomElementProps<
+      SlotHTMLAttributes<HTMLSlotElement>,
+      HTMLSlotElement
+    >
+  ): React.ReactNode;
   export function RandomSmall(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomSource(
+    props: RandomElementProps<
+      SourceHTMLAttributes<HTMLSourceElement>,
+      HTMLSourceElement
+    >
   ): React.ReactNode;
   export function RandomSpan(
     props: RandomElementProps<
@@ -555,7 +855,33 @@ declare module "random-css" {
       HTMLSpanElement
     >
   ): React.ReactNode;
+  export function RandomStyle(
+    props: RandomElementProps<
+      StyleHTMLAttributes<HTMLStyleElement>,
+      HTMLStyleElement
+    >
+  ): React.ReactNode;
+  export function RandomSub(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomSummary(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomSup(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export function RandomString(props: RandomStringProps): React.ReactNode;
+  export interface RandomStringProps
+    extends RandomElementProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    > {
+    center?: boolean;
+    glyph?: GlyphInput;
+    ignoreSpaces?: boolean;
+    size?: number;
+    text?: string;
+  }
   export function RandomStrong(
     props: RandomElementProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
@@ -575,6 +901,12 @@ declare module "random-css" {
     props: RandomElementProps<
       React.TdHTMLAttributes<HTMLTableDataCellElement>,
       HTMLTableDataCellElement
+    >
+  ): React.ReactNode;
+  export function RandomTemplate(
+    props: RandomElementProps<
+      HTMLAttributes<HTMLTemplateElement>,
+      HTMLTemplateElement
     >
   ): React.ReactNode;
   export function RandomTextarea(
@@ -601,6 +933,12 @@ declare module "random-css" {
       HTMLTableSectionElement
     >
   ): React.ReactNode;
+  export function RandomTime(
+    props: RandomElementProps<
+      TimeHTMLAttributes<HTMLTimeElement>,
+      HTMLTimeElement
+    >
+  ): React.ReactNode;
   export function RandomTitle(
     props: RandomElementProps<
       React.HTMLAttributes<HTMLTitleElement>,
@@ -613,23 +951,33 @@ declare module "random-css" {
       HTMLTableRowElement
     >
   ): React.ReactNode;
+  export function RandomTrack(
+    props: RandomElementProps<
+      TrackHTMLAttributes<HTMLTrackElement>,
+      HTMLTrackElement
+    >
+  ): React.ReactNode;
+  export function RandomU(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export function RandomUl(
     props: RandomElementProps<
       React.HTMLAttributes<HTMLUListElement>,
       HTMLUListElement
     >
   ): React.ReactNode;
-  export interface RandomStringProps
-    extends RandomElementProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    > {
-    center?: boolean;
-    glyph?: GlyphInput;
-    ignoreSpaces?: boolean;
-    size?: number;
-    text?: string;
-  }
+  export function RandomVar(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
+  export function RandomVideo(
+    props: RandomElementProps<
+      VideoHTMLAttributes<HTMLVideoElement>,
+      HTMLVideoElement
+    >
+  ): React.ReactNode;
+  export function RandomWbr(
+    props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
+  ): React.ReactNode;
   export interface StyleConfig {
     animation?: AnimationOptions;
     backgroundColor?: ColorOptions;
