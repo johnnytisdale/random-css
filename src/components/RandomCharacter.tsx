@@ -22,7 +22,7 @@ export default function RandomCharacter({
     setGlyph(randomizable.current?.getRandomValue() ?? character);
     if (randomizable.current?.shouldRepeat) {
       timeout.current = setTimeout(
-        timeoutFunction,
+        () => randomizable.current?.shouldRepeat && timeoutFunction(),
         Randomizable.number(
           randomizable.current.minDelay,
           randomizable.current.maxDelay
@@ -33,7 +33,7 @@ export default function RandomCharacter({
 
   // config changed
   useEffect(() => {
-    randomizable.current = Glyph.enabled(config)
+    randomizable.current = config?.enabled
       ? new Glyph(character, config)
       : null;
     if (randomizable.current == null) {

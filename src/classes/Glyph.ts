@@ -26,12 +26,6 @@ export default class Glyph extends Randomizable {
   public getRandomValue(): string {
     return Randomizable.array(this.glyphs);
   }
-
-  public static enabled(options: GlyphConfig) {
-    return (
-      options?.leet?.enabled === true || options?.unicode?.enabled === true
-    );
-  }
 }
 
 function getLeetValues(character: string): Array<string> {
