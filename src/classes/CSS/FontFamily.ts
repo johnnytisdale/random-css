@@ -24,7 +24,7 @@ export default class FontFamily extends CssProperty {
   public name = CssPropertyName.FONT_FAMILY;
 
   constructor(options: FontFamilyOptions) {
-    super();
+    super(options);
     this.fallbackProbability =
       options.fallbackProbability ?? DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY;
     this.fontFamilyNames = options.fontFamilyNames ?? [

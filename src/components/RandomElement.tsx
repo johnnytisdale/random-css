@@ -58,10 +58,15 @@ export default function RandomElement<Attributes, Element>({
     (key: CssPropertyName) => {
       if (randomizables.current[key]) {
         setStyle({ [key]: randomizables.current[key].getRandomValue() });
-        timeouts.current[key] = setTimeout(
-          () => timeoutFunction(key),
-          Randomizable.number(300, 3000)
-        );
+        if (randomizables.current[key].shouldRepeat) {
+          timeouts.current[key] = setTimeout(
+            () => timeoutFunction(key),
+            Randomizable.number(
+              randomizables.current[key].minDelay,
+              randomizables.current[key].maxDelay
+            )
+          );
+        }
       }
     },
     [style]

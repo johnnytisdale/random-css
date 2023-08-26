@@ -9,7 +9,7 @@ export default class FontWeight extends KeywordProperty {
   public name = CssProperty.FONT_WEIGHT;
 
   constructor(options: FontWeightOptions) {
-    super();
+    super(options);
     this.keywords = options.fontWeights ?? [
       ...DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
     ];

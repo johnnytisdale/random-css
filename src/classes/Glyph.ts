@@ -13,7 +13,7 @@ export default class Glyph extends Randomizable {
     private character: string,
     options: GlyphConfig
   ) {
-    super();
+    super(options);
     const lower = this.character.toLowerCase();
     if (options?.leet?.enabled) {
       this.glyphs.push(...getLeetValues(lower));

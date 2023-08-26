@@ -22,7 +22,7 @@ export default class BorderRadius extends CssProperty {
 
   // TODO: use class properties, validate
   constructor(options: BorderRadiusOptions) {
-    super();
+    super(options);
     this.maxCorners = options.maxCorners ?? DEFAULT_BORDER_RADIUS_MAX_CORNERS;
     this.minCorners = options.minCorners ?? DEFAULT_BORDER_RADIUS_MIN_CORNERS;
     this.maxRadius = options.maxRadius ?? DEFAULT_BORDER_RADIUS_MAX_RADIUS;

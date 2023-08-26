@@ -9,7 +9,7 @@ export default class BorderStyle extends KeywordProperty {
   public name = CssProperty.BORDER_STYLE;
 
   constructor(options: BorderStyleOptions, external: boolean) {
-    super(external);
+    super(options, external);
     // TODO: Support 4 border styles when external === true
     if (!external) {
       this.keywordLimit = 4;

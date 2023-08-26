@@ -15,7 +15,7 @@ export default class BorderWidth extends LengthProperty {
   public name = CssProperty.BORDER_WIDTH;
 
   constructor(options: LengthOptions) {
-    super();
+    super(options);
     this.max = options.max ?? DEFAULT_LENGTH_MAX;
     this.min = options.min ?? DEFAULT_LENGTH_MIN;
     this.units = options.units ?? [...DEFAULT_LENGTH_UNITS];

@@ -1,6 +1,19 @@
+import {
+  DEFAULT_RANDOMIZABLE_MAX_DELAY,
+  DEFAULT_RANDOMIZABLE_MIN_DELAY,
+  DEFAULT_RANDOMIZABLE_SHOULD_REPEAT,
+} from "../values/defaults/RandomizableDefaults";
+import Option from "../interfaces/Option";
 import RandomizableName from "../types/RandomizableName";
 
 export default abstract class Randomizable {
+  constructor(options: Option) {
+    this.maxDelay = options.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
+    this.minDelay = options.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
+    this.shouldRepeat =
+      options.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
+  }
+
   public abstract name: RandomizableName;
 
   public static ignoreForSpaces: Record<RandomizableName, boolean> = {
@@ -19,6 +32,10 @@ export default abstract class Randomizable {
     textDecorationLine: true,
     textDecorationStyle: true,
   };
+
+  public maxDelay: number;
+  public minDelay: number;
+  public shouldRepeat: boolean;
 
   public abstract getRandomValue(): string;
 

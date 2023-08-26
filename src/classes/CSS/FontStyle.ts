@@ -20,7 +20,7 @@ export default class FontStyle extends CssProperty {
   public name = CssPropertyName.FONT_STYLE;
 
   constructor(options: FontStyleOptions, external: boolean) {
-    super(external);
+    super(options, external);
     this.degrees = options?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
     this.degreesProbability =
       options?.degreesProbability ?? DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;

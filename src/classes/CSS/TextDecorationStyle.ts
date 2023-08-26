@@ -9,7 +9,7 @@ export default class TextDecorationStyle extends KeywordProperty {
   public name = CssProperty.TEXT_DECORATION_STYLE;
 
   constructor(options: TextDecorationStyleOptions) {
-    super();
+    super(options);
     this.keywords = options?.styles ?? [
       ...DEFAULT_TEXT_DECORATION_STYLE_STYLES,
     ];

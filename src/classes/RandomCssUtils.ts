@@ -137,20 +137,24 @@ export default class RandomCssUtils {
         };
       } else if (typeof item === "object") {
         Object.keys(item).forEach((key) => {
-          config[key as keyof Config] = {
-            ...config[key as keyof Config],
-            ...(item as Config)[key as keyof Config],
+          if (typeof item[key] === "object") {
+            config[key as keyof Config] = {
+              ...config[key as keyof Config],
+              ...item[key as keyof Config],
 
-            /**
-             * The user should not have to type "{ enabled : true }" because it
-             * is too cumbersome. If they include a CSSPropertyName in their
-             * input, then unless they explicity set enabled to false for it,
-             * we will assume they want to enable it.
-             */
-            ...((item as Config)[key as keyof Config]?.enabled !== false && {
-              enabled: true,
-            }),
-          };
+              /**
+               * The user should not have to type "{ enabled : true }" because it
+               * is too cumbersome. If they include a CSSPropertyName in their
+               * input, then unless they explicity set enabled to false for it,
+               * we will assume they want to enable it.
+               */
+              ...(item[key as keyof Config]?.enabled !== false && {
+                enabled: true,
+              }),
+            };
+          } else {
+            config[key as keyof Config] = item[key as keyof Config];
+          }
         });
       }
     }

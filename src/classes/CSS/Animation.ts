@@ -34,7 +34,7 @@ export default class Animation extends CssProperty {
   public name = CssPropertyName.ANIMATION;
 
   constructor(options: AnimationOptions, external: boolean) {
-    super(external);
+    super(options, external);
     this.directions = options.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
     this.easingFunctions = options.easingFunctions ?? [
       ...DEFAULT_ANIMATION_EASING_FUNCTIONS,

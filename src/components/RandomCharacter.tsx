@@ -20,13 +20,18 @@ export default function RandomCharacter({
 
   const timeoutFunction = useCallback(() => {
     setGlyph(randomizable.current?.getRandomValue() ?? character);
-    timeout.current = setTimeout(
-      () => timeoutFunction(),
-      Randomizable.number(300, 3000)
-    );
+    if (randomizable.current?.shouldRepeat) {
+      timeout.current = setTimeout(
+        timeoutFunction,
+        Randomizable.number(
+          randomizable.current.minDelay,
+          randomizable.current.maxDelay
+        )
+      );
+    }
   }, []);
 
-  // character/config changed
+  // config changed
   useEffect(() => {
     randomizable.current = Glyph.enabled(config)
       ? new Glyph(character, config)
@@ -50,7 +55,7 @@ export default function RandomCharacter({
        */
       timeoutFunction();
     }
-  }, [character, config]);
+  }, [config]);
 
   return glyph;
 }

@@ -1,12 +1,12 @@
+import DEFAULT_RANDOMIZABLE from "../RandomizableDefaults";
 import TextDecorationLineKeyword from "../../../enums/TextDecorationLineKeyword";
 import TextDecorationLineOptions from "../../../interfaces/TextDecorationLineOptions";
 
-export const DEFAULT_TEXT_DECORATION_LINE_ENABLED = false;
 export const DEFAULT_TEXT_DECORATION_LINE_LINES = Object.values(
   TextDecorationLineKeyword
 );
 
 export const DEFAULT_TEXT_DECORATION_LINE_OPTIONS: TextDecorationLineOptions = {
-  enabled: DEFAULT_TEXT_DECORATION_LINE_ENABLED,
+  ...DEFAULT_RANDOMIZABLE,
   lines: DEFAULT_TEXT_DECORATION_LINE_LINES,
 };

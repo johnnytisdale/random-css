@@ -27,7 +27,7 @@ export default abstract class ColorProperty extends CssProperty {
     options: ColorOptions,
     protected external: boolean
   ) {
-    super(external);
+    super(options, external);
     this.alpha = options.alpha ?? DEFAULT_COLOR_ALPHA;
     this.aMax = options.aMax ?? DEFAULT_COLOR_ALPHA_MAX;
     this.aMin = options.aMin ?? DEFAULT_COLOR_ALPHA_MIN;
