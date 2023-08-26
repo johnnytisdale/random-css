@@ -9,7 +9,7 @@ export default class TextDecorationLine extends KeywordProperty {
   public name = CssProperty.TEXT_DECORATION_LINE;
 
   constructor(options: TextDecorationLineOptions) {
-    super();
+    super(options);
     this.keywords = options.lines ?? [...DEFAULT_TEXT_DECORATION_LINE_LINES];
   }
 }
