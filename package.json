@@ -57,6 +57,7 @@
   },
   "scripts": {
     "dev": "webpack --mode development --env environment=development",
+    "dev2": "npm run prod && copy dist\\index.js ..\\randomcss.org\\node_modules\\random-css\\dist\\index.js && cd ..\\randomcss.org && npm run dev",
     "lint": "npx eslint src --max-warnings=0",
     "prepublishOnly": "del /F /Q dist && npm run prod",
     "prod": "webpack --mode production --env environment=production",
