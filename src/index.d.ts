@@ -374,9 +374,9 @@ declare module "random-css" {
     | "lighter"
     | "normal";
   export const FontWeightValues: Array<FontWeightValue>;
-  export interface GlyphConfig {
-    leet?: Option;
-    unicode?: Option;
+  export interface GlyphConfig extends Option {
+    leet?: { enabled: boolean };
+    unicode?: { enabled: boolean };
   }
   export type GlyphInput =
     | GlyphConfig
@@ -393,6 +393,9 @@ declare module "random-css" {
   export const LengthUnits: Array<LengthUnit>;
   export interface Option {
     enabled?: boolean;
+    maxDelay?: number;
+    minDelay?: number;
+    shouldRepeat?: boolean;
   }
   export type MiscellaneousRandomizableName = "glyph";
   export function RandomA(
@@ -676,13 +679,16 @@ declare module "random-css" {
     props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export abstract class Randomizable {
-    public abstract name: RandomizableName;
-    public static ignoreForSpaces: Record<RandomizableName, boolean>;
-    public abstract getRandomValue(): string;
     public static array<T>(array: Array<T>): T;
     public static boolean(): boolean;
     public static decimal(min: number, max: number, places: number): number;
+    public abstract getRandomValue(): string;
+    public static ignoreForSpaces: Record<RandomizableName, boolean>;
+    public maxDelay: number;
+    public minDelay: number;
+    public abstract name: RandomizableName;
     public static number(min: number, max: number, integer: boolean): number;
+    public shouldRepeat: boolean;
   }
   export type Randomizables = {
     [key in RandomizableName]: Randomizable | null;

@@ -41,9 +41,7 @@ export default function RandomElement<Attributes, Element>({
     ) as Timeouts
   );
 
-  /**
-   * When the component mounts, record the default CSS values.
-   */
+  // When the component mounts, record the default CSS values.
   useEffect(() => {
     const element = document.getElementById(id);
     if (element) {
@@ -60,7 +58,8 @@ export default function RandomElement<Attributes, Element>({
         setStyle({ [key]: randomizables.current[key].getRandomValue() });
         if (randomizables.current[key].shouldRepeat) {
           timeouts.current[key] = setTimeout(
-            () => timeoutFunction(key),
+            () =>
+              randomizables.current[key]?.shouldRepeat && timeoutFunction(key),
             Randomizable.number(
               randomizables.current[key].minDelay,
               randomizables.current[key].maxDelay
@@ -74,6 +73,7 @@ export default function RandomElement<Attributes, Element>({
 
   // style/external changed
   useEffect(() => {
+    const previousRandomizables = { ...randomizables.current };
     randomizables.current = RandomCssUtils.getCssRandomizables(
       styleConfig,
       external
@@ -83,18 +83,30 @@ export default function RandomElement<Attributes, Element>({
     Object.entries(randomizables.current).forEach(([_, randomizable]) => {
       const key = _ as CssPropertyName;
       if (randomizable == null) {
-        if (timeouts.current[key] == null) {
+        if (
+          timeouts.current[key] == null &&
+          previousRandomizables[key]?.shouldRepeat !== false
+        ) {
           return;
         }
         update = true;
         newStyle[key] = defaults.current[key];
         timeouts.current[key] = null;
       } else if (timeouts.current[key]) {
-        /**
-         * We don't need to add a new timeout for this one because it already
-         * has a timeout.
-         */
-        return;
+        // Already has a timeout. But maybe they set shouldRepeat to false.
+        if (!randomizable.shouldRepeat) {
+          timeouts.current[key] = null;
+        } else if (
+          previousRandomizables[key]?.maxDelay !== randomizable.maxDelay ||
+          previousRandomizables[key]?.minDelay !== randomizable.minDelay
+        ) {
+          clearTimeout(timeouts.current[key]);
+          timeouts.current[key] = setTimeout(
+            () =>
+              randomizables.current[key]?.shouldRepeat && timeoutFunction(key),
+            Randomizable.number(randomizable.minDelay, randomizable.maxDelay)
+          );
+        }
       } else {
         /**
          * This option was just enabled. There is no need to do setTimeout
