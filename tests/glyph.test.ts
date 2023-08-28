@@ -5,7 +5,13 @@ import DEFAULT_GLYPH_CONFIG from "../src/values/defaults/DefaultGlyphConfig";
 import Glyph from "../src/classes/Glyph";
 import Letter from "../src/enums/Letter";
 
-const glyph = new Glyph("a", DEFAULT_GLYPH_CONFIG);
+let character = "a";
+const setGlyph = (newCharacter: string) => {
+  character = newCharacter;
+};
+
+const glyph = new Glyph(character, setGlyph);
+glyph.setConfig(DEFAULT_GLYPH_CONFIG);
 
 test("Glyph.name == 'glyph'", () => {
   expect(glyph.name).toBe("glyph");

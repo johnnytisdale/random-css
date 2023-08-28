@@ -1,6 +1,6 @@
 import FontWeightValue from "../enums/FontWeightValue";
-import Option from "./Option";
+import KeywordOptions from "./KeywordOptions";
 
-export default interface FontWeightOptions extends Option {
-  fontWeights?: FontWeightValue[];
+export default interface FontWeightOptions extends KeywordOptions {
+  keywords?: FontWeightValue[];
 }

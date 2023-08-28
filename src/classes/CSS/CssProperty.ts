@@ -1,18 +1,23 @@
 import CssPropertyName from "../../enums/CssPropertyName";
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../../values/defaults/RandomElementPropsDefaults";
-import Option from "../../interfaces/Option";
 import Randomizable from "../Randomizable";
+import Style from "../../types/Style";
 
 export default abstract class CssProperty extends Randomizable {
+  protected defaultValue: string;
   protected separator = " ";
   public name: CssPropertyName;
 
   constructor(
-    options: Option,
-    protected external = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL
+    style: Style,
+    protected setStyle: (style: Style) => void
   ) {
-    super(options);
+    super();
+    this.defaultValue = style[this.name] ?? "";
   }
 
   public abstract getRandomValue(): string;
+
+  protected setValue(value: string) {
+    this.setStyle({ [this.name]: value });
+  }
 }

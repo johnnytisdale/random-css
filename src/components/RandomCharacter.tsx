@@ -1,9 +1,8 @@
 import Glyph from "../classes/Glyph";
 import GlyphConfig from "../interfaces/GlyphConfig";
-import Randomizable from "../classes/Randomizable";
 
 import * as React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   character: string;
@@ -16,45 +15,15 @@ export default function RandomCharacter({
 }: Props): React.ReactNode {
   const [glyph, setGlyph] = useState(character);
   const randomizable = useRef<Glyph>(null);
-  const timeout = useRef<NodeJS.Timeout | null>(null);
 
-  const timeoutFunction = useCallback(() => {
-    setGlyph(randomizable.current?.getRandomValue() ?? character);
-    if (randomizable.current?.shouldRepeat) {
-      timeout.current = setTimeout(
-        () => randomizable.current?.shouldRepeat && timeoutFunction(),
-        Randomizable.number(
-          randomizable.current.minDelay,
-          randomizable.current.maxDelay
-        )
-      );
-    }
+  useEffect(() => {
+    randomizable.current = new Glyph(character, (value: string) =>
+      setGlyph(value ?? character)
+    );
   }, []);
 
-  // config changed
   useEffect(() => {
-    randomizable.current = config?.enabled
-      ? new Glyph(character, config)
-      : null;
-    if (randomizable.current == null) {
-      if (timeout.current == null) {
-        return;
-      }
-      setGlyph(character);
-      timeout.current = null;
-    } else if (timeout.current) {
-      /**
-       * We don't need to add a new timeout for this one because it already
-       * has a timeout.
-       */
-      return;
-    } else {
-      /**
-       * This option was just enabled. There is no need to do setTimeout
-       * here because that will happen at the end of timeoutFunction.
-       */
-      timeoutFunction();
-    }
+    randomizable.current.setConfig(config);
   }, [config]);
 
   return glyph;

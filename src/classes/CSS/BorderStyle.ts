@@ -5,15 +5,14 @@ import { DEFAULT_BORDER_STYLE_KEYWORDS } from "../../values/defaults/css/BorderS
 import KeywordProperty from "./KeywordProperty";
 
 export default class BorderStyle extends KeywordProperty {
+  protected defaultKeywords = [...DEFAULT_BORDER_STYLE_KEYWORDS];
   protected keywords: BorderStyleKeyword[];
   public name = CssProperty.BORDER_STYLE;
 
-  constructor(options: BorderStyleOptions, external: boolean) {
-    super(options, external);
-    // TODO: Support 4 border styles when external === true
-    if (!external) {
+  protected setSpecificConfig(config: BorderStyleOptions) {
+    if (!this.external) {
       this.keywordLimit = 4;
     }
-    this.keywords = options.borderStyles ?? [...DEFAULT_BORDER_STYLE_KEYWORDS];
+    super.setSpecificConfig(config);
   }
 }

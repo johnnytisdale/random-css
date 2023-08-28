@@ -107,8 +107,8 @@ declare module "random-css" {
     | "ridge"
     | "solid";
   export const BorderStyleKeywords: Array<BorderStyleKeyword>;
-  export interface BorderStyleOptions extends Option {
-    borderStyles?: BorderStyleKeyword[];
+  export interface BorderStyleOptions extends KeywordOptions {
+    keywords?: BorderStyleKeyword[];
   }
   export type ColorKeyword =
     | "AliceBlue"
@@ -356,8 +356,8 @@ declare module "random-css" {
     maxDegrees?: number;
     minDegrees?: number;
   }
-  export interface FontWeightOptions extends Option {
-    fontWeights?: FontWeightValue[];
+  export interface FontWeightOptions extends KeywordOptions {
+    keywords?: FontWeightValue[];
   }
   export type FontWeightValue =
     | "100"
@@ -384,6 +384,9 @@ declare module "random-css" {
     | Array<GlyphConfig | GlyphType>;
   export type GlyphType = "leet" | "unicode";
   export const GlyphTypes: Array<GlyphType>;
+  export interface KeywordOptions extends Option {
+    keywords?: Array<string>;
+  }
   export interface LengthOptions extends Option {
     max?: number;
     min?: number;
@@ -679,15 +682,21 @@ declare module "random-css" {
     props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export abstract class Randomizable {
+    protected abstract defaultValue: string;
+    protected abstract setSpecificConfig(config: Option): void;
+    protected abstract setValue(value: string): void;
+    protected enabled: boolean;
+    protected external: boolean;
     public static array<T>(array: Array<T>): T;
     public static boolean(): boolean;
     public static decimal(min: number, max: number, places: number): number;
-    public abstract getRandomValue(): string;
     public static ignoreForSpaces: Record<RandomizableName, boolean>;
+    public static number(min: number, max: number, integer: boolean): number;
+    public abstract getRandomValue(): string;
+    public abstract name: RandomizableName;
     public maxDelay: number;
     public minDelay: number;
-    public abstract name: RandomizableName;
-    public static number(min: number, max: number, integer: boolean): number;
+    public setConfig(config: Option, external: boolean): void;
     public shouldRepeat: boolean;
   }
   export type Randomizables = {
@@ -1012,8 +1021,8 @@ declare module "random-css" {
     | "overline underline"
     | "underline";
   export const TextDecorationLineKeywords: Array<TextDecorationLineKeyword>;
-  export interface TextDecorationLineOptions extends Option {
-    lines?: TextDecorationLineKeyword[];
+  export interface TextDecorationLineOptions extends KeywordOptions {
+    keywords?: TextDecorationLineKeyword[];
   }
   export type TextDecorationStyleKeyword =
     | "dashed"
@@ -1022,7 +1031,7 @@ declare module "random-css" {
     | "solid"
     | "wavy";
   export const TextDecorationStyleKeywords: Array<TextDecorationStyleKeyword>;
-  export interface TextDecorationStyleOptions extends Option {
+  export interface TextDecorationStyleOptions extends KeywordOptions {
     styles?: TextDecorationStyleKeyword[];
   }
 }

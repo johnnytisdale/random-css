@@ -6,5 +6,5 @@ export const DEFAULT_FONT_WEIGHT_FONT_WEIGHTS = Object.values(FontWeightValue);
 
 export const DEFAULT_FONT_WEIGHT_OPTIONS: FontWeightOptions = {
   ...DEFAULT_RANDOMIZABLE,
-  fontWeights: DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
+  keywords: DEFAULT_FONT_WEIGHT_FONT_WEIGHTS,
 };

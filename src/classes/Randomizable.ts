@@ -1,4 +1,6 @@
+import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../values/defaults/RandomElementPropsDefaults";
 import {
+  DEFAULT_RANDOMIZABLE_ENABLED,
   DEFAULT_RANDOMIZABLE_MAX_DELAY,
   DEFAULT_RANDOMIZABLE_MIN_DELAY,
   DEFAULT_RANDOMIZABLE_SHOULD_REPEAT,
@@ -7,14 +9,19 @@ import Option from "../interfaces/Option";
 import RandomizableName from "../types/RandomizableName";
 
 export default abstract class Randomizable {
-  constructor(options: Option) {
-    this.maxDelay = options.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
-    this.minDelay = options.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
-    this.shouldRepeat =
-      options.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
-  }
+  protected abstract defaultValue: string;
 
   public abstract name: RandomizableName;
+
+  private config: Option;
+  private timeout: NodeJS.Timeout;
+
+  protected enabled: boolean;
+  protected external: boolean;
+
+  public maxDelay: number;
+  public minDelay: number;
+  public shouldRepeat: boolean;
 
   public static ignoreForSpaces: Record<RandomizableName, boolean> = {
     animation: false,
@@ -33,11 +40,73 @@ export default abstract class Randomizable {
     textDecorationStyle: true,
   };
 
-  public maxDelay: number;
-  public minDelay: number;
-  public shouldRepeat: boolean;
+  private clearTimeout() {
+    clearTimeout(this.timeout);
+    this.timeout = null;
+  }
+
+  private setTimeout() {
+    this.timeout = setTimeout(
+      () => this.enabled && this.shouldRepeat && this.timeoutFunction(),
+      Randomizable.number(this.minDelay, this.maxDelay)
+    );
+  }
+
+  private timeoutFunction() {
+    this.setValue(this.getRandomValue());
+    if (this.enabled && this.shouldRepeat) {
+      this.setTimeout();
+    }
+  }
+
+  protected abstract setSpecificConfig(config: Option): void;
+  protected abstract setValue(value: string): void;
+
+  public setConfig(
+    config: Option,
+    external: boolean = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL
+  ) {
+    const previousConfig = !this.config ? null : { ...this.config };
+    this.config = config;
+    this.enabled = config?.enabled ?? DEFAULT_RANDOMIZABLE_ENABLED;
+    this.maxDelay = config?.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
+    this.minDelay = config?.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
+    this.shouldRepeat =
+      config?.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
+    this.external = external;
+    this.setSpecificConfig(config);
+
+    // Just enabled.
+    if (!previousConfig?.enabled && this.enabled) {
+      console.log("JUST enabled");
+      return this.timeoutFunction();
+    }
+
+    if (!this.enabled) {
+      if (!previousConfig || previousConfig?.enabled) {
+        if (this.timeout == null && previousConfig?.shouldRepeat) {
+          return;
+        }
+        this.setValue(this.defaultValue);
+        this.clearTimeout();
+      }
+    } else if (this.timeout) {
+      // Already has a timeout.
+      if (!this.shouldRepeat) {
+        this.clearTimeout();
+      } else if (
+        previousConfig?.maxDelay !== this.maxDelay ||
+        previousConfig?.minDelay !== this.minDelay
+      ) {
+        this.clearTimeout();
+        this.setTimeout();
+      }
+    }
+  }
 
   public abstract getRandomValue(): string;
+
+  // STATIC METHODS
 
   public static array<T>(array: Array<T>) {
     return array[Randomizable.number(0, array.length - 1)];

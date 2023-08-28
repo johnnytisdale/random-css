@@ -19,14 +19,13 @@ export default class FontStyle extends CssProperty {
   private minDegrees: number;
   public name = CssPropertyName.FONT_STYLE;
 
-  constructor(options: FontStyleOptions, external: boolean) {
-    super(options, external);
-    this.degrees = options?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
+  protected setSpecificConfig(config: FontStyleOptions) {
+    this.degrees = config?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
     this.degreesProbability =
-      options?.degreesProbability ?? DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;
-    this.fontStyles = options?.fontStyles ?? DEFAULT_FONT_STYLE_FONT_STYLES;
-    this.maxDegrees = options?.maxDegrees ?? DEFAULT_FONT_STYLE_MAX_DEGREES;
-    this.minDegrees = options?.minDegrees ?? DEFAULT_FONT_STYLE_MIN_DEGREES;
+      config?.degreesProbability ?? DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;
+    this.fontStyles = config?.fontStyles ?? DEFAULT_FONT_STYLE_FONT_STYLES;
+    this.maxDegrees = config?.maxDegrees ?? DEFAULT_FONT_STYLE_MAX_DEGREES;
+    this.minDegrees = config?.minDegrees ?? DEFAULT_FONT_STYLE_MIN_DEGREES;
   }
 
   public getRandomValue(): string {

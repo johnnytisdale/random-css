@@ -6,20 +6,30 @@ import MiscellaneousRandomizableName from "../enums/MiscellaneousRandomizableNam
 import Randomizable from "./Randomizable";
 
 export default class Glyph extends Randomizable {
-  private glyphs: Array<string> = [this.character];
+  protected defaultValue: string;
+  private glyphs: Array<string>;
+  private lower: string;
   public name = MiscellaneousRandomizableName.GLYPH;
 
   constructor(
     private character: string,
-    options: GlyphConfig
+    protected setValue: (value: string) => void
   ) {
-    super(options);
-    const lower = this.character.toLowerCase();
-    if (options?.leet?.enabled) {
-      this.glyphs.push(...getLeetValues(lower));
+    super();
+    this.lower = this.character.toLowerCase();
+  }
+
+  protected setSpecificConfig(config: GlyphConfig): void {
+    this.glyphs = [this.character];
+    if (!config?.leet?.enabled && !config?.unicode?.enabled) {
+      this.enabled = false;
+      return;
     }
-    if (options?.unicode?.enabled) {
-      this.glyphs.push(...getUnicodeValues(lower));
+    if (config?.leet?.enabled) {
+      this.glyphs.push(...getLeetValues(this.lower));
+    }
+    if (config?.unicode?.enabled) {
+      this.glyphs.push(...getUnicodeValues(this.lower));
     }
   }
 
