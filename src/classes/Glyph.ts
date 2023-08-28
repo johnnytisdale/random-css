@@ -11,19 +11,19 @@ export default class Glyph extends Randomizable {
   public name = MiscellaneousRandomizableName.GLYPH;
 
   constructor(
-    protected defaultValue: string,
+    protected character: string,
     protected setValue: (value: string) => void
   ) {
     super();
-    this.lower = this.defaultValue.toLowerCase();
+    this.lower = this.character.toLowerCase();
   }
 
   protected resetValue() {
-    this.setValue(this.defaultValue);
+    this.setValue(this.character);
   }
 
   protected setSpecificConfig(config: GlyphConfig): void {
-    this.glyphs = [this.defaultValue];
+    this.glyphs = [this.character];
     if (!config?.leet?.enabled && !config?.unicode?.enabled) {
       return;
     }

@@ -682,7 +682,6 @@ declare module "random-css" {
     props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export abstract class Randomizable {
-    protected abstract defaultValue: string;
     protected abstract setSpecificConfig(config: Option): void;
     protected abstract setValue(value: string): void;
     protected enabled: boolean;

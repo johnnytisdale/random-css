@@ -9,8 +9,6 @@ import Option from "../interfaces/Option";
 import RandomizableName from "../types/RandomizableName";
 
 export default abstract class Randomizable {
-  protected abstract defaultValue: string;
-
   public abstract name: RandomizableName;
 
   private config: Option;

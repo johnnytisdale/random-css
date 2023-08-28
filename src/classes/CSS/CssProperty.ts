@@ -3,7 +3,6 @@ import Randomizable from "../Randomizable";
 import Style from "../../types/Style";
 
 export default abstract class CssProperty extends Randomizable {
-  protected defaultValue: string;
   protected separator = " ";
   public name: CssPropertyName;
 
