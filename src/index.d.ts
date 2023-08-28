@@ -689,7 +689,6 @@ declare module "random-css" {
     public static array<T>(array: Array<T>): T;
     public static boolean(): boolean;
     public static decimal(min: number, max: number, places: number): number;
-    public static ignoreForSpaces: Record<RandomizableName, boolean>;
     public static number(min: number, max: number, integer: boolean): number;
     public abstract getRandomValue(): string;
     public abstract name: RandomizableName;

@@ -1,80 +1,71 @@
-import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../values/defaults/RandomElementPropsDefaults";
+import Config from "../interfaces/Config";
 import {
   DEFAULT_RANDOMIZABLE_ENABLED,
   DEFAULT_RANDOMIZABLE_MAX_DELAY,
   DEFAULT_RANDOMIZABLE_MIN_DELAY,
   DEFAULT_RANDOMIZABLE_SHOULD_REPEAT,
 } from "../values/defaults/RandomizableDefaults";
-import Config from "../interfaces/Config";
 import RandomizableName from "../types/RandomizableName";
 
 export default abstract class Randomizable {
+  /**
+   * The name of this `Randomizable`. It should clearly describe what is being
+   * randomized. For example: `"backgroundColor"` or `"glyph"`.
+   */
   public abstract name: RandomizableName;
 
+  /**
+   * The `Config` object passed to this `Randomizable` the last time
+   * `setConfig()` was called. This is used to compare new config to previous
+   * config.
+   */
   private config: Config;
+
+  /**
+   * The timeout used to repeatedly generate a random value, assuming
+   * `shouldRepeat` is true.
+   */
   private timeout: NodeJS.Timeout;
 
+  /**
+   * If this `Randomizable` is enabled, then it will generate a random value
+   * (repeatedly if `shouldRepeat` is true). If it is not enabled, it will do
+   * nothing.
+   */
   protected enabled: boolean;
-  protected external: boolean;
 
+  /**
+   * The maximum number of milliseconds that should elapse before another random
+   * value is generated (assuming `shouldRepeat` is true).
+   */
   public maxDelay: number;
+
+  /**
+   * The minimum number of milliseconds that should elapse before another random
+   * value is generated (assuming `shouldRepeat` is true).
+   */
   public minDelay: number;
+
+  /**
+   * If true, a random value will be generated repeatedly. Each new random value
+   * will be generated after a delay of random length whose range is defined by
+   * `minDelay` and `maxDelay`.
+   */
   public shouldRepeat: boolean;
 
-  public static ignoreForSpaces: Record<RandomizableName, boolean> = {
-    animation: false,
-    backgroundColor: false,
-    borderColor: false,
-    borderRadius: false,
-    borderStyle: false,
-    borderWidth: false,
-    color: true,
-    fontFamily: true,
-    fontStyle: true,
-    fontWeight: true,
-    glyph: true,
-    textDecorationColor: true,
-    textDecorationLine: true,
-    textDecorationStyle: true,
-  };
-
+  /**
+   * Cancels `this.timeout` and sets it to `null`.
+   */
   private clearTimeout() {
     clearTimeout(this.timeout);
     this.timeout = null;
   }
 
-  private setTimeout() {
-    this.timeout = setTimeout(
-      () => this.enabled && this.shouldRepeat && this.timeoutFunction(),
-      Randomizable.number(this.minDelay, this.maxDelay)
-    );
-  }
-
-  private timeoutFunction() {
-    this.setValue(this.getRandomValue());
-    if (this.enabled && this.shouldRepeat) {
-      this.setTimeout();
-    }
-  }
-
-  protected abstract resetValue(): void;
-  protected abstract setSpecificConfig(config: Config): void;
-  protected abstract setValue(value: string): void;
-
-  public setConfig(
-    config: Config,
-    external: boolean = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL
-  ) {
-    const previousConfig = !this.config ? null : { ...this.config };
-    this.config = config;
-    this.enabled = config?.enabled ?? DEFAULT_RANDOMIZABLE_ENABLED;
-    this.maxDelay = config?.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
-    this.minDelay = config?.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
-    this.shouldRepeat =
-      config?.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
-    this.external = external;
-    this.setSpecificConfig(config);
-
+  /**
+   * Logic for clearing/setting `this.timeout` based on the config.
+   * @param {Config} previousConfig The config before `setConfig()` was called.
+   */
+  private configDidChange(previousConfig: Config) {
     if (this.enabled) {
       if (!previousConfig?.enabled) {
         this.timeoutFunction();
@@ -98,21 +89,112 @@ export default abstract class Randomizable {
     }
   }
 
+  /**
+   * Schedules the execution of `this.timeoutFunction()`.
+   */
+  private setTimeout() {
+    this.timeout = setTimeout(
+      () => this.enabled && this.shouldRepeat && this.timeoutFunction(),
+      Randomizable.number(this.minDelay, this.maxDelay)
+    );
+  }
+
+  /**
+   * Sets the value to a new randomly generated value. Schedules another
+   * execution of itself if `this.enabled` and `this.shouldRepeat` are `true`.
+   */
+  private timeoutFunction() {
+    this.setValue(this.getRandomValue());
+    if (this.enabled && this.shouldRepeat) {
+      this.setTimeout();
+    }
+  }
+
+  /**
+   * Resets the value to its default (i.e., whatever the value was at the time
+   * of instantiation).
+   */
+  protected abstract resetValue(): void;
+
+  /**
+   * Sets config specific to this `Randomizable`. This method will be called by
+   * `setConfig()`.
+   * @param {Config} config The Config object.
+   */
+  protected abstract setSpecificConfig(config: Config): void;
+
+  /**
+   * Updates the value.
+   * @param {string} value The new value.
+   */
+  protected abstract setValue(value: string): void;
+
+  /**
+   * Public setter for `this.config`.
+   * @param {Config} config The Config object.
+   */
+  public setConfig(config: Config) {
+    const previousConfig = !this.config ? null : { ...this.config };
+    this.config = config;
+    this.setGeneralConfig(config);
+    this.setSpecificConfig(config);
+    this.configDidChange(previousConfig);
+  }
+
+  /**
+   * Sets general config, i.e. that which is common to all `Randomizable`
+   * instances.
+   * @param {Config} config The Config object.
+   */
+  private setGeneralConfig(config: Config) {
+    this.enabled = config?.enabled ?? DEFAULT_RANDOMIZABLE_ENABLED;
+    this.maxDelay = config?.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
+    this.minDelay = config?.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
+    this.shouldRepeat =
+      config?.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
+  }
+
+  /**
+   * Get a random value!
+   */
   public abstract getRandomValue(): string;
 
-  public static array<T>(array: Array<T>) {
+  /**
+   * Returns a random element of an array.
+   * @param {Array<T>} array The array from which to return a random element.
+   * @returns {T} An element of the given array.
+   */
+  public static array<T>(array: Array<T>): T {
     return array[Randomizable.number(0, array.length - 1)];
   }
 
+  /**
+   * Returns a random boolean.
+   * @returns {boolean} A random boolean.
+   */
   public static boolean(): boolean {
     return Randomizable.number(0, 1) === 1;
   }
 
+  /**
+   * Returns a float between 0 and 1, inclusive.
+   * @param min The minimum value to be returned.
+   * @param max The maximum value to be returned.
+   * @param places The number of decimal places.
+   * @returns {float} A float between 0 and 1, inclusive.
+   */
   public static decimal(min = 0, max = 1, places = 2): number {
     return parseFloat((Math.random() * (min - max) + max).toFixed(places));
   }
 
-  public static number(min: number, max: number, integer = true) {
+  /**
+   * Returns a random number between `min` and `max`, inclusive.
+   * @param min The minimum value to be returned.
+   * @param max The maximum value to be returned.
+   * @param {boolean} integer Whether the value should be a whole number.
+   * @returns {number} A random number between `min` and `max`.
+   */
+  public static number(min: number, max: number, integer = true): number {
     const random = Math.random() * (max - min + 1) + min;
     return integer === true
       ? Math.floor(random)

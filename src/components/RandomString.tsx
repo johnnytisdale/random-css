@@ -14,13 +14,30 @@ import GlyphInput from "../types/GlyphInput";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
-import Randomizable from "../classes/Randomizable";
+import RandomizableName from "../types/RandomizableName";
 import RandomStringProps from "../interfaces/RandomStringProps";
 import StyleConfig from "../interfaces/StyleConfig";
 import StyleInput from "../types/StyleInput";
 
 import * as React from "react";
 import { useMemo } from "react";
+
+const ignoreForSpaces: Record<RandomizableName, boolean> = {
+  animation: false,
+  backgroundColor: false,
+  borderColor: false,
+  borderRadius: false,
+  borderStyle: false,
+  borderWidth: false,
+  color: true,
+  fontFamily: true,
+  fontStyle: true,
+  fontWeight: true,
+  glyph: true,
+  textDecorationColor: true,
+  textDecorationLine: true,
+  textDecorationStyle: true,
+};
 
 export default function RandomString({
   center = DEFAULT_RANDOM_STRING_PROPS_CENTER,
@@ -107,8 +124,7 @@ export default function RandomString({
                     {},
                     ...Object.keys(styleConfig).map(
                       (cssProperty: CssPropertyName) =>
-                        ignoreSpaces ||
-                        Randomizable.ignoreForSpaces[cssProperty]
+                        ignoreSpaces || ignoreForSpaces[cssProperty]
                           ? {}
                           : { [cssProperty]: styleConfig[cssProperty] }
                     )
