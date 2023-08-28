@@ -1,8 +1,8 @@
 import FontFamilyName from "../enums/FontFamilyName";
 import FontGenericName from "../enums/FontGenericName";
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface FontFamilyOptions extends Option {
+export default interface FontFamilyConfig extends Config {
   fallbackProbability?: number;
   fontFamilyNames?: FontFamilyName[];
   fontGenericNames?: FontGenericName[];

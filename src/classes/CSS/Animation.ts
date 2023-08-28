@@ -1,8 +1,8 @@
 import AnimationDirection from "../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../enums/AnimationFillMode";
-import AnimationIterationCountOptions from "../../interfaces/AnimationIterationCountOptions";
-import AnimationOptions from "../../interfaces/AnimationOptions";
+import AnimationIterationCountConfig from "../../interfaces/AnimationIterationCountConfig";
+import AnimationConfig from "../../interfaces/AnimationConfig";
 import AnimationStepPosition from "../../enums/AnimationStepPosition";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
@@ -28,49 +28,43 @@ export default class Animation extends CssProperty {
   private durationUnit: "ms" | "s";
   private easingFunctions: AnimationEasingFunction[];
   private fillModes: AnimationFillMode[];
-  private iterationCount: AnimationIterationCountOptions;
+  private iterationCount: AnimationIterationCountConfig;
   private stepPositions: AnimationStepPosition[];
   private transformations: AnimationTransformation[];
   public name = CssPropertyName.ANIMATION;
 
-  constructor(options: AnimationOptions, external: boolean) {
-    super(options, external);
-    this.directions = options.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
-    this.easingFunctions = options.easingFunctions ?? [
+  protected setSpecificConfig(config: AnimationConfig) {
+    this.directions = config.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
+    this.easingFunctions = config.easingFunctions ?? [
       ...DEFAULT_ANIMATION_EASING_FUNCTIONS,
     ];
-    if (external) {
+    if (this.external) {
       this.easingFunctions = this.easingFunctions.filter(
         (easingFunction) =>
           easingFunction !== AnimationEasingFunction.CUBIC_BEZIER &&
           easingFunction !== AnimationEasingFunction.STEPS
       );
     }
-    this.fillModes = options.fillModes ?? [...DEFAULT_ANIMATION_FILL_MODES];
+    this.fillModes = config.fillModes ?? [...DEFAULT_ANIMATION_FILL_MODES];
     this.iterationCount = {
       ...DEFAULT_ANIMATION_ITERATION_COUNT,
-      ...options.iterationCount,
+      ...config.iterationCount,
     };
     this.stepPositions =
-      options.stepPositions ?? DEFAULT_ANIMATION_STEP_POSITIONS;
-    this.transformations = options.transformations ?? [
+      config.stepPositions ?? DEFAULT_ANIMATION_STEP_POSITIONS;
+    this.transformations = config.transformations ?? [
       ...DEFAULT_ANIMATION_TRANSFORMATIONS,
     ];
 
     // duration
-    /**
-     * TODO: Probably better to do all validation once in the RandomCss
-     * component so it doesn't have to be done every time a Randomizable is
-     * instantiated.
-     */
-    const maxLimit = external
+    const maxLimit = this.external
       ? DEFAULT_ANIMATION_DURATION_MAX_EXTERNAL
       : DEFAULT_ANIMATION_DURATION_MAX;
-    const minLimit = external
+    const minLimit = this.external
       ? DEFAULT_ANIMATION_DURATION_MIN_EXTERNAL
       : DEFAULT_ANIMATION_DURATION_MIN;
-    this.durationMax = options?.durationMax ?? maxLimit;
-    this.durationMin = options?.durationMin ?? minLimit;
+    this.durationMax = config?.durationMax ?? maxLimit;
+    this.durationMin = config?.durationMin ?? minLimit;
     if (this.durationMax > maxLimit) {
       this.durationMax = maxLimit;
     }
@@ -83,7 +77,7 @@ export default class Animation extends CssProperty {
     if (this.durationMin > this.durationMax) {
       this.durationMin = minLimit;
     }
-    this.durationUnit = external ? "s" : "ms";
+    this.durationUnit = this.external ? "s" : "ms";
   }
 
   private getCubicBezierEasingFunction() {

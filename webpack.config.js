@@ -6,7 +6,7 @@ const webpack = require("webpack");
 module.exports = (env) => {
   const entry =
     env.environment === "development"
-      ? { dev: "./src/js/dev.jsx" }
+      ? { dev: "./src/components/Dev.tsx" }
       : "./src/index.ts";
 
   return {

@@ -10,7 +10,7 @@ import {
 } from "../../values/defaults/css/FontFamilyDefaults";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
-import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
+import FontFamilyConfig from "../../interfaces/FontFamilyConfig";
 import Randomizable from "../Randomizable";
 
 export default class FontFamily extends CssProperty {
@@ -23,22 +23,21 @@ export default class FontFamily extends CssProperty {
   protected separator = ", ";
   public name = CssPropertyName.FONT_FAMILY;
 
-  constructor(options: FontFamilyOptions) {
-    super(options);
+  protected setSpecificConfig(config: FontFamilyConfig) {
     this.fallbackProbability =
-      options.fallbackProbability ?? DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY;
-    this.fontFamilyNames = options.fontFamilyNames ?? [
+      config.fallbackProbability ?? DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY;
+    this.fontFamilyNames = config.fontFamilyNames ?? [
       ...DEFAULT_FONT_FAMILY_FONT_FAMILY_NAMES,
     ];
-    this.fontGenericNames = options.fontGenericNames ?? [
+    this.fontGenericNames = config.fontGenericNames ?? [
       ...DEFAULT_FONT_FAMILY_FONT_GENERIC_NAMES,
     ];
     this.includeFallbacks =
-      options.includeFallbacks ?? DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS;
+      config.includeFallbacks ?? DEFAULT_FONT_FAMILY_INCLUDE_FALLBACKS;
     this.includeFamilyNames =
-      options.includeFamilyNames ?? DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES;
+      config.includeFamilyNames ?? DEFAULT_FONT_FAMILY_INCLUDE_FAMILY_NAMES;
     this.includeGenericNames =
-      options.includeGenericNames ?? DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES;
+      config.includeGenericNames ?? DEFAULT_FONT_FAMILY_INCLUDE_GENERIC_NAMES;
     if (
       !this.includeFallbacks &&
       !this.includeFamilyNames &&

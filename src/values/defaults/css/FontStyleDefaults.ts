@@ -1,6 +1,6 @@
 import DEFAULT_RANDOMIZABLE from "../RandomizableDefaults";
 import FontStyleKeyword from "../../../enums/FontStyleKeyword";
-import FontStyleOptions from "../../../interfaces/FontStyleOptions";
+import FontStyleConfig from "../../../interfaces/FontStyleConfig";
 
 export const DEFAULT_FONT_STYLE_DEGREES = true;
 export const DEFAULT_FONT_STYLE_DEGREES_PROBABILITY = 0.5;
@@ -8,7 +8,7 @@ export const DEFAULT_FONT_STYLE_FONT_STYLES = Object.values(FontStyleKeyword);
 export const DEFAULT_FONT_STYLE_MAX_DEGREES = 90;
 export const DEFAULT_FONT_STYLE_MIN_DEGREES = -90;
 
-export const DEFAULT_FONT_STYLE_OPTIONS: FontStyleOptions = {
+export const DEFAULT_FONT_STYLE_OPTIONS: FontStyleConfig = {
   ...DEFAULT_RANDOMIZABLE,
   degrees: DEFAULT_FONT_STYLE_DEGREES,
   degreesProbability: DEFAULT_FONT_STYLE_DEGREES_PROBABILITY,

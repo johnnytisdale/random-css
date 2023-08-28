@@ -56,9 +56,13 @@
     "access": "public"
   },
   "scripts": {
+    "copyDist": "copy dist ..\\randomcss.org\\node_modules\\random-css\\dist",
+    "deleteDist": "del /F /Q dist",
+    "deleteDist2": "del /F /Q ..\\randomcss.org\\node_modules\\random-css\\dist",
     "dev": "webpack --mode development --env environment=development",
+    "dev2": "npm run prepublishOnly && npm run deleteDist2 && npm run copyDist && cd ..\\randomcss.org && npm run dev",
     "lint": "npx eslint src --max-warnings=0",
-    "prepublishOnly": "del /F /Q dist && npm run prod",
+    "prepublishOnly": "npm run deleteDist && npm run prod",
     "prod": "webpack --mode production --env environment=production",
     "test": "jest --verbose",
     "watch": "webpack --mode development --env environment=development --watch"

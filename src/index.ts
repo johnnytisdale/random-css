@@ -1,28 +1,28 @@
 import AnimationDirection from "./enums/AnimationDirection";
 import AnimationEasingFunction from "./enums/AnimationEasingFunction";
 import AnimationFillMode from "./enums/AnimationFillMode";
-import AnimationIterationCountOptions from "./interfaces/AnimationIterationCountOptions";
-import AnimationOptions from "./interfaces/AnimationOptions";
+import AnimationIterationCountConfig from "./interfaces/AnimationIterationCountConfig";
+import AnimationConfig from "./interfaces/AnimationConfig";
 import AnimationStepPosition from "./enums/AnimationStepPosition";
 import AnimationTransformation from "./enums/AnimationTransformation";
-import BorderRadiusOptions from "./interfaces/BorderRadiusOptions";
+import BorderRadiusConfig from "./interfaces/BorderRadiusConfig";
 import BorderStyleKeyword from "./enums/BorderStyleKeyword";
 import Color from "./classes/CSS/Color";
 import ColorKeyword from "./enums/ColorKeyword";
-import ColorOptions from "./interfaces/ColorOptions";
+import ColorConfig from "./interfaces/ColorConfig";
 import type CssColorProperty from "./types/CssColorProperty";
 import CssProperty from "./classes/CSS/CssProperty";
 import CssPropertyName from "./enums/CssPropertyName";
 import FontFamilyName from "./enums/FontFamilyName";
-import FontFamilyOptions from "./interfaces/FontFamilyOptions";
+import FontFamilyConfig from "./interfaces/FontFamilyConfig";
 import FontGenericName from "./enums/FontGenericName";
 import FontStyleKeyword from "./enums/FontStyleKeyword";
-import FontStyleOptions from "./interfaces/FontStyleOptions";
+import FontStyleConfig from "./interfaces/FontStyleConfig";
 import FontWeightValue from "./enums/FontWeightValue";
 import GlyphConfig from "./interfaces/GlyphConfig";
 import type GlyphInput from "./types/GlyphInput";
 import GlyphType from "./enums/GlyphType";
-import LengthOptions from "./interfaces/LengthOptions";
+import LengthConfig from "./interfaces/LengthConfig";
 import LengthUnit from "./enums/LengthUnit";
 import RandomCharacter from "./components/RandomCharacter";
 import RandomCssUtils from "./classes/RandomCssUtils";
@@ -134,18 +134,18 @@ export {
   AnimationEasingFunctions,
   AnimationFillMode,
   AnimationFillModes,
-  AnimationIterationCountOptions,
-  AnimationOptions,
+  AnimationIterationCountConfig,
+  AnimationConfig,
   AnimationStepPosition,
   AnimationStepPositions,
   AnimationTransformation,
   AnimationTransformations,
-  BorderRadiusOptions,
+  BorderRadiusConfig,
   BorderStyleKeyword,
   BorderStyleKeywords,
   Color,
   ColorKeywords,
-  ColorOptions,
+  ColorConfig,
   CssColorProperty,
   CssProperty,
   CssPropertyName,
@@ -175,19 +175,19 @@ export {
   DEFAULT_STYLE_CONFIG,
   FontFamilyName,
   FontFamilyNames,
-  FontFamilyOptions,
+  FontFamilyConfig,
   FontGenericName,
   FontGenericNames,
   FontStyleKeyword,
   FontStyleKeywords,
-  FontStyleOptions,
+  FontStyleConfig,
   FontWeightValue,
   FontWeightValues,
   GlyphConfig,
   GlyphInput,
   GlyphType,
   GlyphTypes,
-  LengthOptions,
+  LengthConfig,
   LengthUnit,
   LengthUnits,
   RandomA,

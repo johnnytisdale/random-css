@@ -14,13 +14,30 @@ import GlyphInput from "../types/GlyphInput";
 import RandomCharacter from "./RandomCharacter";
 import RandomCssUtils from "../classes/RandomCssUtils";
 import { RandomDiv } from "./RandomElements";
-import Randomizable from "../classes/Randomizable";
+import RandomizableName from "../types/RandomizableName";
 import RandomStringProps from "../interfaces/RandomStringProps";
 import StyleConfig from "../interfaces/StyleConfig";
 import StyleInput from "../types/StyleInput";
 
 import * as React from "react";
 import { useMemo } from "react";
+
+const ignoreForSpaces: Record<RandomizableName, boolean> = {
+  animation: false,
+  backgroundColor: false,
+  borderColor: false,
+  borderRadius: false,
+  borderStyle: false,
+  borderWidth: false,
+  color: true,
+  fontFamily: true,
+  fontStyle: true,
+  fontWeight: true,
+  glyph: true,
+  textDecorationColor: true,
+  textDecorationLine: true,
+  textDecorationStyle: true,
+};
 
 export default function RandomString({
   center = DEFAULT_RANDOM_STRING_PROPS_CENTER,
@@ -38,7 +55,7 @@ export default function RandomString({
       RandomCssUtils.getConfigFromInput<GlyphInput, GlyphConfig>(glyphInput),
     [glyphInput]
   );
-  const memoizedClassName = useMemo(() => {
+  const containerClassName = useMemo(() => {
     const classNames = ["random-css-string"];
     if (external) {
       classNames.push(`random-css-string-${String(size).replaceAll(".", "-")}`);
@@ -51,6 +68,16 @@ export default function RandomString({
     }
     return classNames.filter(Boolean).join(" ");
   }, [center, external, size]);
+
+  const characterClassName = useMemo(() => {
+    const classNames = [`random-css-character`];
+    if (external) {
+      classNames.push(
+        `random-css-character-${String(size).replaceAll(".", "-")}`
+      );
+    }
+    return classNames.join(" ");
+  }, [external, size]);
 
   const styleConfig = useMemo(
     () =>
@@ -67,28 +94,28 @@ export default function RandomString({
 
   const containerStyle = useMemo(
     () => ({
-      ...(!external && {
-        style: {
-          ...(center && { margin: "auto", width: "min-content" }),
-          fontSize: sizeString,
-        },
-      }),
+      style: {
+        ...(center && { margin: "auto", width: "min-content" }),
+        fontSize: sizeString,
+      },
     }),
-    [center, external, sizeString]
+    [center, sizeString]
   );
 
   return (
-    <div className={memoizedClassName} {...containerStyle}>
+    <div className={containerClassName} {...(!external && containerStyle)}>
       {text.split("").map((character, i) => {
         return (
           <RandomDiv
-            className="random-css-character"
+            className={characterClassName}
             id={`character-${i}`}
             external={external}
-            fixedStyle={{
-              height: `${size * 1.1875}rem`,
-              width: `${size}rem`,
-            }}
+            {...(!external && {
+              fixedStyle: {
+                height: `${size * 1.1875}rem`,
+                width: sizeString,
+              },
+            })}
             key={`${i}-${character}`}
             style={
               character != " "
@@ -97,8 +124,7 @@ export default function RandomString({
                     {},
                     ...Object.keys(styleConfig).map(
                       (cssProperty: CssPropertyName) =>
-                        ignoreSpaces ||
-                        Randomizable.ignoreForSpaces[cssProperty]
+                        ignoreSpaces || ignoreForSpaces[cssProperty]
                           ? {}
                           : { [cssProperty]: styleConfig[cssProperty] }
                     )

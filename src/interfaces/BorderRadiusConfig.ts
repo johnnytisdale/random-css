@@ -1,6 +1,6 @@
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface BorderRadiusOptions extends Option {
+export default interface BorderRadiusConfig extends Config {
   maxCorners?: number;
   minCorners?: number;
   maxRadius?: number;

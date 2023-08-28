@@ -1,18 +1,18 @@
 import AnimationDirection from "../enums/AnimationDirection";
 import AnimationEasingFunction from "../enums/AnimationEasingFunction";
 import AnimationFillMode from "../enums/AnimationFillMode";
-import AnimationIterationCountOptions from "./AnimationIterationCountOptions";
+import AnimationIterationCountConfig from "./AnimationIterationCountConfig";
 import AnimationStepPosition from "../enums/AnimationStepPosition";
 import AnimationTransformation from "../enums/AnimationTransformation";
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface AnimationOptions extends Option {
+export default interface AnimationConfig extends Config {
   directions?: AnimationDirection[];
   durationMax?: number;
   durationMin?: number;
   easingFunctions?: AnimationEasingFunction[];
   fillModes?: AnimationFillMode[];
-  iterationCount?: AnimationIterationCountOptions;
+  iterationCount?: AnimationIterationCountConfig;
   stepPositions?: AnimationStepPosition[];
   transformations?: AnimationTransformation[];
 }

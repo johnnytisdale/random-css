@@ -1,7 +1,7 @@
 import AnimationDirection from "../../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../../enums/AnimationFillMode";
-import AnimationOptions from "../../../interfaces/AnimationOptions";
+import AnimationConfig from "../../../interfaces/AnimationConfig";
 import AnimationStepPosition from "../../../enums/AnimationStepPosition";
 import AnimationTransformation from "../../../enums/AnimationTransformation";
 import DEFAULT_RANDOMIZABLE from "../RandomizableDefaults";
@@ -34,7 +34,7 @@ export const DEFAULT_ANIMATION_STEP_POSITIONS = Object.values(
 export const DEFAULT_ANIMATION_TRANSFORMATIONS = Object.values(
   AnimationTransformation
 );
-export const DEFAULT_ANIMATION_OPTIONS: AnimationOptions = {
+export const DEFAULT_ANIMATION_OPTIONS: AnimationConfig = {
   ...DEFAULT_RANDOMIZABLE,
   directions: DEFAULT_ANIMATION_DIRECTIONS,
   durationMax: DEFAULT_ANIMATION_DURATION_MAX,

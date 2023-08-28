@@ -1,4 +1,4 @@
-import BorderRadiusOptions from "../../interfaces/BorderRadiusOptions";
+import BorderRadiusConfig from "../../interfaces/BorderRadiusConfig";
 import CssProperty from "./CssProperty";
 import CssPropertyName from "../../enums/CssPropertyName";
 import {
@@ -20,16 +20,14 @@ export default class BorderRadius extends CssProperty {
   private slashProbability: number;
   public name = CssPropertyName.BORDER_RADIUS;
 
-  // TODO: use class properties, validate
-  constructor(options: BorderRadiusOptions) {
-    super(options);
-    this.maxCorners = options.maxCorners ?? DEFAULT_BORDER_RADIUS_MAX_CORNERS;
-    this.minCorners = options.minCorners ?? DEFAULT_BORDER_RADIUS_MIN_CORNERS;
-    this.maxRadius = options.maxRadius ?? DEFAULT_BORDER_RADIUS_MAX_RADIUS;
-    this.minRadius = options.minRadius ?? DEFAULT_BORDER_RADIUS_MIN_RADIUS;
-    this.slash = options.slash ?? DEFAULT_BORDER_RADIUS_SLASH;
+  protected setSpecificConfig(config: BorderRadiusConfig) {
+    this.maxCorners = config.maxCorners ?? DEFAULT_BORDER_RADIUS_MAX_CORNERS;
+    this.minCorners = config.minCorners ?? DEFAULT_BORDER_RADIUS_MIN_CORNERS;
+    this.maxRadius = config.maxRadius ?? DEFAULT_BORDER_RADIUS_MAX_RADIUS;
+    this.minRadius = config.minRadius ?? DEFAULT_BORDER_RADIUS_MIN_RADIUS;
+    this.slash = config.slash ?? DEFAULT_BORDER_RADIUS_SLASH;
     this.slashProbability =
-      options.slashProbability ?? DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY;
+      config.slashProbability ?? DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY;
   }
 
   private getRandomRadius(min = 0, max = 100): string {

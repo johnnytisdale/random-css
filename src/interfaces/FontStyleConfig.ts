@@ -1,7 +1,7 @@
 import FontStyleKeyword from "../enums/FontStyleKeyword";
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface FontStyleOptions extends Option {
+export default interface FontStyleConfig extends Config {
   degrees?: boolean;
   degreesProbability?: number;
   fontStyles?: FontStyleKeyword[];
