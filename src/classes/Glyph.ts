@@ -18,6 +18,10 @@ export default class Glyph extends Randomizable {
     this.lower = this.defaultValue.toLowerCase();
   }
 
+  protected resetValue() {
+    this.setValue(this.defaultValue);
+  }
+
   protected setSpecificConfig(config: GlyphConfig): void {
     this.glyphs = [this.defaultValue];
     if (!config?.leet?.enabled && !config?.unicode?.enabled) {

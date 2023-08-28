@@ -7,15 +7,13 @@ export default abstract class CssProperty extends Randomizable {
   protected separator = " ";
   public name: CssPropertyName;
 
-  constructor(
-    style: Style,
-    protected setStyle: (style: Style) => void
-  ) {
+  constructor(protected setStyle: (style: Style) => void) {
     super();
-    this.defaultValue = style[this.name] ?? "";
   }
 
-  public abstract getRandomValue(): string;
+  protected resetValue() {
+    this.setStyle({ [this.name]: false });
+  }
 
   protected setValue(value: string) {
     this.setStyle({ [this.name]: value });

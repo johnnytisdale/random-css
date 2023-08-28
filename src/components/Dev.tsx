@@ -31,6 +31,7 @@ function Dev(): React.ReactNode {
   return (
     <RandomString
       center={true}
+      external={true}
       glyph={glyph}
       ignoreSpaces={true}
       size={8}

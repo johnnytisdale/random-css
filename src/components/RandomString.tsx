@@ -38,7 +38,7 @@ export default function RandomString({
       RandomCssUtils.getConfigFromInput<GlyphInput, GlyphConfig>(glyphInput),
     [glyphInput]
   );
-  const memoizedClassName = useMemo(() => {
+  const containerClassName = useMemo(() => {
     const classNames = ["random-css-string"];
     if (external) {
       classNames.push(`random-css-string-${String(size).replaceAll(".", "-")}`);
@@ -51,6 +51,16 @@ export default function RandomString({
     }
     return classNames.filter(Boolean).join(" ");
   }, [center, external, size]);
+
+  const characterClassName = useMemo(() => {
+    const classNames = [`random-css-character`];
+    if (external) {
+      classNames.push(
+        `random-css-character-${String(size).replaceAll(".", "-")}`
+      );
+    }
+    return classNames.join(" ");
+  }, [external, size]);
 
   const styleConfig = useMemo(
     () =>
@@ -67,28 +77,28 @@ export default function RandomString({
 
   const containerStyle = useMemo(
     () => ({
-      ...(!external && {
-        style: {
-          ...(center && { margin: "auto", width: "min-content" }),
-          fontSize: sizeString,
-        },
-      }),
+      style: {
+        ...(center && { margin: "auto", width: "min-content" }),
+        fontSize: sizeString,
+      },
     }),
-    [center, external, sizeString]
+    [center, sizeString]
   );
 
   return (
-    <div className={memoizedClassName} {...containerStyle}>
+    <div className={containerClassName} {...(!external && containerStyle)}>
       {text.split("").map((character, i) => {
         return (
           <RandomDiv
-            className="random-css-character"
+            className={characterClassName}
             id={`character-${i}`}
             external={external}
-            fixedStyle={{
-              height: `${size * 1.1875}rem`,
-              width: `${size}rem`,
-            }}
+            {...(!external && {
+              fixedStyle: {
+                height: `${size * 1.1875}rem`,
+                width: sizeString,
+              },
+            })}
             key={`${i}-${character}`}
             style={
               character != " "

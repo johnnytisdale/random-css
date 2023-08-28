@@ -32,17 +32,12 @@ export default class RandomCssUtils {
   }
 
   public static getCssRandomizables(
-    style: Style,
     setStyle: (style: Style) => void
   ): Randomizables {
     return Object.values(CssPropertyName).reduce(
       (accumulated: Partial<Randomizables>, key: CssPropertyName) => ({
         ...accumulated,
-        [key]: RandomCssUtils.getRandomizableForCssProperty(
-          key,
-          style,
-          setStyle
-        ),
+        [key]: RandomCssUtils.getRandomizableForCssProperty(key, setStyle),
       }),
       {}
     ) as Randomizables;
@@ -50,36 +45,35 @@ export default class RandomCssUtils {
 
   public static getRandomizableForCssProperty(
     cssProperty: CssPropertyName,
-    style: Style,
     setStyle: (style: Style) => void
   ): Randomizable {
     switch (cssProperty) {
       case CssPropertyName.ANIMATION:
-        return new Animation(style, setStyle);
+        return new Animation(setStyle);
       case CssPropertyName.BACKGROUND_COLOR:
-        return new BackgroundColor(style, setStyle);
+        return new BackgroundColor(setStyle);
       case CssPropertyName.BORDER_COLOR:
-        return new BorderColor(style, setStyle);
+        return new BorderColor(setStyle);
       case CssPropertyName.BORDER_RADIUS:
-        return new BorderRadius(style, setStyle);
+        return new BorderRadius(setStyle);
       case CssPropertyName.BORDER_STYLE:
-        return new BorderStyle(style, setStyle);
+        return new BorderStyle(setStyle);
       case CssPropertyName.BORDER_WIDTH:
-        return new BorderWidth(style, setStyle);
+        return new BorderWidth(setStyle);
       case CssPropertyName.COLOR:
-        return new Color(style, setStyle);
+        return new Color(setStyle);
       case CssPropertyName.FONT_FAMILY:
-        return new FontFamily(style, setStyle);
+        return new FontFamily(setStyle);
       case CssPropertyName.FONT_STYLE:
-        return new FontStyle(style, setStyle);
+        return new FontStyle(setStyle);
       case CssPropertyName.FONT_WEIGHT:
-        return new FontWeight(style, setStyle);
+        return new FontWeight(setStyle);
       case CssPropertyName.TEXT_DECORATION_COLOR:
-        return new TextDecorationColor(style, setStyle);
+        return new TextDecorationColor(setStyle);
       case CssPropertyName.TEXT_DECORATION_LINE:
-        return new TextDecorationLine(style, setStyle);
+        return new TextDecorationLine(setStyle);
       case CssPropertyName.TEXT_DECORATION_STYLE:
-        return new TextDecorationStyle(style, setStyle);
+        return new TextDecorationStyle(setStyle);
     }
   }
 

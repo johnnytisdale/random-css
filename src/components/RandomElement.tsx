@@ -22,29 +22,15 @@ export default function RandomElement<Attributes, Element>({
   testID,
   ...nativeProps
 }: RandomElementGenericProps<Attributes, Element>): React.ReactNode {
-  const defaults = useRef<Style>({});
   const [style, setStyle] = useReducer(RandomCssUtils.reducer<Style>, {});
   const styleConfig = useMemo(() => {
     return RandomCssUtils.getConfigFromInput<StyleInput, StyleConfig>(
       styleInput
     );
   }, [styleInput]);
-  const randomizables = useRef<Randomizables>();
-
-  useEffect(() => {
-    // TODO: Is this relying on user-supplied ID? What if they don't supply it?
-    const element = document.getElementById(id);
-    if (element) {
-      const computedStyle = getComputedStyle(element);
-      Object.values(CssPropertyName).forEach((cssProperty) => {
-        defaults.current[cssProperty] = computedStyle[cssProperty];
-      });
-      randomizables.current = RandomCssUtils.getCssRandomizables(
-        computedStyle,
-        setStyle
-      );
-    }
-  }, []);
+  const randomizables = useRef<Randomizables>(
+    RandomCssUtils.getCssRandomizables(setStyle)
+  );
 
   useEffect(() => {
     Object.entries(randomizables.current).forEach(([_, randomizable]) => {
@@ -59,20 +45,18 @@ export default function RandomElement<Attributes, Element>({
   }, [external, styleConfig]);
 
   const className = useMemo(() => {
-    const classes = [];
-    if (classNameInput) {
-      classes.push(classNameInput);
-    }
+    const classes = classNameInput ? [classNameInput] : [];
     if (external) {
-      classes.push(
-        ...Object.keys(style).map(
-          (cssProperty: CssPropertyName) =>
-            `random-css-${cssProperty}-${style[cssProperty]
+      Object.keys(style).forEach((cssPropertyName: CssPropertyName) => {
+        if (style[cssPropertyName]) {
+          classes.push(
+            `random-css-${cssPropertyName}-${style[cssPropertyName]
               .replaceAll('"', "")
               .replaceAll(" ", "-")
               .replaceAll("%", "")}`
-        )
-      );
+          );
+        }
+      });
     }
     return classes.length ? classes.filter(Boolean).join(" ") : null;
   }, [external, style]);
@@ -96,8 +80,6 @@ export default function RandomElement<Attributes, Element>({
     [external, fixedStyle, style]
   );
 
-  // TODO: Figure out why unchecking border color sets classname to
-  // random-css-borderColor-rgb(0,-0,-0)
   return React.createElement(
     element,
     {

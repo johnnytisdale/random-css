@@ -59,6 +59,7 @@ export default abstract class Randomizable {
     }
   }
 
+  protected abstract resetValue(): void;
   protected abstract setSpecificConfig(config: Option): void;
   protected abstract setValue(value: string): void;
 
@@ -87,7 +88,7 @@ export default abstract class Randomizable {
         if (this.timeout == null && previousConfig?.shouldRepeat) {
           return;
         }
-        this.setValue(this.defaultValue);
+        this.resetValue();
         this.clearTimeout();
       }
     } else if (this.timeout) {
@@ -105,8 +106,6 @@ export default abstract class Randomizable {
   }
 
   public abstract getRandomValue(): string;
-
-  // STATIC METHODS
 
   public static array<T>(array: Array<T>) {
     return array[Randomizable.number(0, array.length - 1)];
