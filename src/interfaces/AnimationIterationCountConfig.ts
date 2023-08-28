@@ -1,4 +1,4 @@
-export default interface AnimationIterationCountOptions {
+export default interface AnimationIterationCountConfig {
   infinite?: boolean;
   infiniteProbability?: number;
   integersOnly?: boolean;

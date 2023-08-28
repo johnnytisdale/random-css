@@ -1,6 +1,6 @@
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface GlyphConfig extends Option {
+export default interface GlyphConfig extends Config {
   leet?: { enabled?: boolean };
   unicode?: { enabled?: boolean };
 }

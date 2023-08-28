@@ -10,7 +10,7 @@ import {
 } from "../../values/defaults/css/FontFamilyDefaults";
 import FontFamilyName from "../../enums/FontFamilyName";
 import FontGenericName from "../../enums/FontGenericName";
-import FontFamilyOptions from "../../interfaces/FontFamilyOptions";
+import FontFamilyConfig from "../../interfaces/FontFamilyConfig";
 import Randomizable from "../Randomizable";
 
 export default class FontFamily extends CssProperty {
@@ -23,7 +23,7 @@ export default class FontFamily extends CssProperty {
   protected separator = ", ";
   public name = CssPropertyName.FONT_FAMILY;
 
-  protected setSpecificConfig(config: FontFamilyOptions) {
+  protected setSpecificConfig(config: FontFamilyConfig) {
     this.fallbackProbability =
       config.fallbackProbability ?? DEFAULT_FONT_FAMILY_FALLBACK_PROBABILITY;
     this.fontFamilyNames = config.fontFamilyNames ?? [

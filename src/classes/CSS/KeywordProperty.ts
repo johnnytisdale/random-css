@@ -1,13 +1,13 @@
 import CssProperty from "./CssProperty";
 import Randomizable from "../Randomizable";
-import KeywordOptions from "../../interfaces/KeywordOptions";
+import KeywordConfig from "../../interfaces/KeywordConfig";
 
 export default abstract class KeywordProperty extends CssProperty {
   protected abstract keywords: Array<string>;
   protected abstract defaultKeywords: Array<string>;
   protected keywordLimit = 1;
 
-  protected setSpecificConfig(config: KeywordOptions) {
+  protected setSpecificConfig(config: KeywordConfig) {
     this.keywords = config.keywords ?? this.defaultKeywords;
   }
 

@@ -1,7 +1,7 @@
 import LengthUnit from "../enums/LengthUnit";
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface LengthOptions extends Option {
+export default interface LengthConfig extends Config {
   max?: number;
   min?: number;
   units?: LengthUnit[];

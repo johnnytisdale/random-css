@@ -54,20 +54,20 @@ declare module "random-css" {
   export const AnimationEasingFunctions: Array<AnimationEasingFunction>;
   export type AnimationFillMode = "backwards" | "both" | "forwards";
   export const AnimationFillModes: Array<AnimationFillMode>;
-  export interface AnimationIterationCountOptions {
+  export interface AnimationIterationCountConfig {
     infinite?: boolean;
     infiniteProbability?: number;
     integersOnly?: boolean;
     max?: number;
     min?: number;
   }
-  export interface AnimationOptions extends Option {
+  export interface AnimationConfig extends Config {
     directions?: AnimationDirection[];
     durationMax?: number;
     durationMin?: number;
     easingFunctions?: AnimationEasingFunction[];
     fillModes?: AnimationFillMode[];
-    iterationCount?: AnimationIterationCountOptions;
+    iterationCount?: AnimationIterationCountConfig;
     stepPositions?: AnimationStepPosition[];
     transformations?: AnimationTransformation[];
   }
@@ -87,7 +87,7 @@ declare module "random-css" {
     | "skewXY"
     | "skewY";
   export const AnimationTransformations: Array<AnimationTransformation>;
-  export interface BorderRadiusOptions extends Option {
+  export interface BorderRadiusConfig extends Config {
     maxCorners?: number;
     minCorners?: number;
     maxRadius?: number;
@@ -107,7 +107,7 @@ declare module "random-css" {
     | "ridge"
     | "solid";
   export const BorderStyleKeywords: Array<BorderStyleKeyword>;
-  export interface BorderStyleOptions extends KeywordOptions {
+  export interface BorderStyleConfig extends KeywordConfig {
     keywords?: BorderStyleKeyword[];
   }
   export type ColorKeyword =
@@ -253,7 +253,7 @@ declare module "random-css" {
     | "Yellow"
     | "YellowGreen";
   export const ColorKeywords: Array<ColorKeyword>;
-  export interface ColorOptions extends Option {
+  export interface ColorConfig extends Config {
     alpha?: boolean;
     aMax?: number;
     aMin?: number;
@@ -324,7 +324,7 @@ declare module "random-css" {
     | "Times"
     | "Verdana";
   export const FontFamilyNames: Array<FontFamilyName>;
-  export interface FontFamilyOptions extends Option {
+  export interface FontFamilyConfig extends Config {
     fallbackProbability?: number;
     fontFamilyNames?: FontFamilyName[];
     fontGenericNames?: FontGenericName[];
@@ -349,14 +349,14 @@ declare module "random-css" {
   export const FontGenericNames: Array<FontGenericName>;
   export type FontStyleKeyword = "italic" | "normal" | "oblique";
   export const FontStyleKeywords: Array<FontStyleKeyword>;
-  export interface FontStyleOptions extends Option {
+  export interface FontStyleConfig extends Config {
     degrees?: boolean;
     degreesProbability?: number;
     fontStyles?: FontStyleKeyword[];
     maxDegrees?: number;
     minDegrees?: number;
   }
-  export interface FontWeightOptions extends KeywordOptions {
+  export interface FontWeightConfig extends KeywordConfig {
     keywords?: FontWeightValue[];
   }
   export type FontWeightValue =
@@ -374,7 +374,7 @@ declare module "random-css" {
     | "lighter"
     | "normal";
   export const FontWeightValues: Array<FontWeightValue>;
-  export interface GlyphConfig extends Option {
+  export interface GlyphConfig extends Config {
     leet?: { enabled: boolean };
     unicode?: { enabled: boolean };
   }
@@ -384,17 +384,17 @@ declare module "random-css" {
     | Array<GlyphConfig | GlyphType>;
   export type GlyphType = "leet" | "unicode";
   export const GlyphTypes: Array<GlyphType>;
-  export interface KeywordOptions extends Option {
+  export interface KeywordConfig extends Config {
     keywords?: Array<string>;
   }
-  export interface LengthOptions extends Option {
+  export interface LengthConfig extends Config {
     max?: number;
     min?: number;
     units?: LengthUnit[];
   }
   export type LengthUnit = "mm" | "pt" | "px";
   export const LengthUnits: Array<LengthUnit>;
-  export interface Option {
+  export interface Config {
     enabled?: boolean;
     maxDelay?: number;
     minDelay?: number;
@@ -506,9 +506,9 @@ declare module "random-css" {
       external: boolean
     ): Randomizable;
     public static getConfigFromInput<
-      Input,
-      Config extends Partial<Record<keyof Config, Option>>,
-    >(input: Input): Config;
+      I,
+      C extends Partial<Record<keyof C, Config>>,
+    >(input: I): C;
   }
   export function RandomData(
     props: RandomElementProps<
@@ -682,7 +682,7 @@ declare module "random-css" {
     props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export abstract class Randomizable {
-    protected abstract setSpecificConfig(config: Option): void;
+    protected abstract setSpecificConfig(config: Config): void;
     protected abstract setValue(value: string): void;
     protected enabled: boolean;
     protected external: boolean;
@@ -695,7 +695,7 @@ declare module "random-css" {
     public abstract name: RandomizableName;
     public maxDelay: number;
     public minDelay: number;
-    public setConfig(config: Option, external: boolean): void;
+    public setConfig(config: Config, external: boolean): void;
     public shouldRepeat: boolean;
   }
   export type Randomizables = {
@@ -993,19 +993,19 @@ declare module "random-css" {
     props: RandomElementProps<HTMLAttributes<HTMLElement>, HTMLElement>
   ): React.ReactNode;
   export interface StyleConfig {
-    animation?: AnimationOptions;
-    backgroundColor?: ColorOptions;
-    borderColor?: ColorOptions;
-    borderRadius?: BorderRadiusOptions;
-    borderStyle?: BorderStyleOptions;
-    borderWidth?: LengthOptions;
-    color?: ColorOptions;
-    fontFamily?: FontFamilyOptions;
-    fontStyle?: FontStyleOptions;
-    fontWeight?: FontWeightOptions;
-    textDecorationColor?: ColorOptions;
-    textDecorationLine?: TextDecorationLineOptions;
-    textDecorationStyle?: TextDecorationStyleOptions;
+    animation?: AnimationConfig;
+    backgroundColor?: ColorConfig;
+    borderColor?: ColorConfig;
+    borderRadius?: BorderRadiusConfig;
+    borderStyle?: BorderStyleConfig;
+    borderWidth?: LengthConfig;
+    color?: ColorConfig;
+    fontFamily?: FontFamilyConfig;
+    fontStyle?: FontStyleConfig;
+    fontWeight?: FontWeightConfig;
+    textDecorationColor?: ColorConfig;
+    textDecorationLine?: TextDecorationLineConfig;
+    textDecorationStyle?: TextDecorationStyleConfig;
   }
   export type StyleInput =
     | StyleConfig
@@ -1020,7 +1020,7 @@ declare module "random-css" {
     | "overline underline"
     | "underline";
   export const TextDecorationLineKeywords: Array<TextDecorationLineKeyword>;
-  export interface TextDecorationLineOptions extends KeywordOptions {
+  export interface TextDecorationLineConfig extends KeywordConfig {
     keywords?: TextDecorationLineKeyword[];
   }
   export type TextDecorationStyleKeyword =
@@ -1030,7 +1030,7 @@ declare module "random-css" {
     | "solid"
     | "wavy";
   export const TextDecorationStyleKeywords: Array<TextDecorationStyleKeyword>;
-  export interface TextDecorationStyleOptions extends KeywordOptions {
+  export interface TextDecorationStyleConfig extends KeywordConfig {
     styles?: TextDecorationStyleKeyword[];
   }
 }

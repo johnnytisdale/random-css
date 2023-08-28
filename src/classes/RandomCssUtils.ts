@@ -17,7 +17,7 @@ import { DEFAULT_TEXT_DECORATION_STYLE_OPTIONS } from "../values/defaults/css/Te
 import FontFamily from "./CSS/FontFamily";
 import FontStyle from "./CSS/FontStyle";
 import FontWeight from "./CSS/FontWeight";
-import Option from "../interfaces/Option";
+import Config from "../interfaces/Config";
 import Randomizable from "./Randomizable";
 import Randomizables from "../types/Randomizables";
 import Style from "../types/Style";
@@ -80,7 +80,7 @@ export default class RandomCssUtils {
   public static getConfigForCssProperty(
     cssProperty: CssPropertyName,
     styleConfig: StyleConfig
-  ): Option {
+  ): Config {
     switch (cssProperty) {
       case CssPropertyName.ANIMATION:
         return styleConfig?.animation ?? { ...DEFAULT_ANIMATION_OPTIONS };
@@ -123,20 +123,20 @@ export default class RandomCssUtils {
     }
   }
 
-  public static getConfigFromInput<Input, Config>(input: Input): Config {
-    const config = {} as Config;
+  public static getConfigFromInput<I, C>(input: I): C {
+    const config = {} as C;
     for (const item of Array.isArray(input) ? input : [input]) {
       if (typeof item === "string") {
-        config[item as keyof Config] = {
-          ...config[item as keyof Config],
+        config[item as keyof C] = {
+          ...config[item as keyof C],
           ...{ enabled: true },
         };
       } else if (typeof item === "object") {
         Object.keys(item).forEach((key) => {
           if (typeof item[key] === "object") {
-            config[key as keyof Config] = {
-              ...config[key as keyof Config],
-              ...item[key as keyof Config],
+            config[key as keyof C] = {
+              ...config[key as keyof C],
+              ...item[key as keyof C],
 
               /**
                * The user should not have to type "{ enabled : true }" because it
@@ -144,12 +144,12 @@ export default class RandomCssUtils {
                * input, then unless they explicity set enabled to false for it,
                * we will assume they want to enable it.
                */
-              ...(item[key as keyof Config]?.enabled !== false && {
+              ...(item[key as keyof C]?.enabled !== false && {
                 enabled: true,
               }),
             };
           } else {
-            config[key as keyof Config] = item[key as keyof Config];
+            config[key as keyof C] = item[key as keyof C];
           }
         });
       }

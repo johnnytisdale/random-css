@@ -1,5 +1,5 @@
 import ColorKeyword from "../../enums/ColorKeyword";
-import ColorOptions from "../../interfaces/ColorOptions";
+import ColorConfig from "../../interfaces/ColorConfig";
 import CssProperty from "./CssProperty";
 import {
   DEFAULT_COLOR_ALPHA,
@@ -23,7 +23,7 @@ export default abstract class ColorProperty extends CssProperty {
   private rMin: number;
   private colorKeywords: ColorKeyword[];
 
-  protected setSpecificConfig(config: ColorOptions) {
+  protected setSpecificConfig(config: ColorConfig) {
     this.alpha = config.alpha ?? DEFAULT_COLOR_ALPHA;
     this.aMax = config.aMax ?? DEFAULT_COLOR_ALPHA_MAX;
     this.aMin = config.aMin ?? DEFAULT_COLOR_ALPHA_MIN;

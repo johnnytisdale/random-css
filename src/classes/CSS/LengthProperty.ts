@@ -4,7 +4,7 @@ import {
   DEFAULT_LENGTH_MIN,
   DEFAULT_LENGTH_UNITS,
 } from "../../values/defaults/css/LengthDefaults";
-import LengthOptions from "../../interfaces/LengthOptions";
+import LengthConfig from "../../interfaces/LengthConfig";
 import LengthUnit from "../../enums/LengthUnit";
 import Randomizable from "../Randomizable";
 
@@ -13,7 +13,7 @@ export default abstract class LengthProperty extends CssProperty {
   protected min: number;
   protected max: number;
 
-  protected setSpecificConfig(config: LengthOptions) {
+  protected setSpecificConfig(config: LengthConfig) {
     this.max = config.max ?? DEFAULT_LENGTH_MAX;
     this.min = config.min ?? DEFAULT_LENGTH_MIN;
     this.units = config.units ?? [...DEFAULT_LENGTH_UNITS];

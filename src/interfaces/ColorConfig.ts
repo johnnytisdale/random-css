@@ -1,7 +1,7 @@
 import ColorKeyword from "../enums/ColorKeyword";
-import Option from "./Option";
+import Config from "./Config";
 
-export default interface ColorOptions extends Option {
+export default interface ColorConfig extends Config {
   alpha?: boolean;
   aMax?: number;
   aMin?: number;

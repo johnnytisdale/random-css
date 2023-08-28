@@ -8,7 +8,7 @@ import {
   DEFAULT_FONT_STYLE_MIN_DEGREES,
 } from "../../values/defaults/css/FontStyleDefaults";
 import FontStyleKeyword from "../../enums/FontStyleKeyword";
-import FontStyleOptions from "../../interfaces/FontStyleOptions";
+import FontStyleConfig from "../../interfaces/FontStyleConfig";
 import Randomizable from "../Randomizable";
 
 export default class FontStyle extends CssProperty {
@@ -19,7 +19,7 @@ export default class FontStyle extends CssProperty {
   private minDegrees: number;
   public name = CssPropertyName.FONT_STYLE;
 
-  protected setSpecificConfig(config: FontStyleOptions) {
+  protected setSpecificConfig(config: FontStyleConfig) {
     this.degrees = config?.degrees ?? DEFAULT_FONT_STYLE_DEGREES;
     this.degreesProbability =
       config?.degreesProbability ?? DEFAULT_FONT_STYLE_DEGREES_PROBABILITY;

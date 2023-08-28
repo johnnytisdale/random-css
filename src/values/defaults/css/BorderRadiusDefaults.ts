@@ -1,4 +1,4 @@
-import BorderRadiusOptions from "../../../interfaces/BorderRadiusOptions";
+import BorderRadiusConfig from "../../../interfaces/BorderRadiusConfig";
 import DEFAULT_RANDOMIZABLE from "../RandomizableDefaults";
 
 export const DEFAULT_BORDER_RADIUS_MAX_CORNERS = 4;
@@ -8,7 +8,7 @@ export const DEFAULT_BORDER_RADIUS_MIN_RADIUS = 1;
 export const DEFAULT_BORDER_RADIUS_SLASH = true;
 export const DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY = 0.5;
 
-export const DEFAULT_BORDER_RADIUS_OPTIONS: BorderRadiusOptions = {
+export const DEFAULT_BORDER_RADIUS_OPTIONS: BorderRadiusConfig = {
   ...DEFAULT_RANDOMIZABLE,
   maxCorners: DEFAULT_BORDER_RADIUS_MAX_CORNERS,
   minCorners: DEFAULT_BORDER_RADIUS_MIN_CORNERS,

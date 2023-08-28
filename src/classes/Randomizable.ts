@@ -5,13 +5,13 @@ import {
   DEFAULT_RANDOMIZABLE_MIN_DELAY,
   DEFAULT_RANDOMIZABLE_SHOULD_REPEAT,
 } from "../values/defaults/RandomizableDefaults";
-import Option from "../interfaces/Option";
+import Config from "../interfaces/Config";
 import RandomizableName from "../types/RandomizableName";
 
 export default abstract class Randomizable {
   public abstract name: RandomizableName;
 
-  private config: Option;
+  private config: Config;
   private timeout: NodeJS.Timeout;
 
   protected enabled: boolean;
@@ -58,11 +58,11 @@ export default abstract class Randomizable {
   }
 
   protected abstract resetValue(): void;
-  protected abstract setSpecificConfig(config: Option): void;
+  protected abstract setSpecificConfig(config: Config): void;
   protected abstract setValue(value: string): void;
 
   public setConfig(
-    config: Option,
+    config: Config,
     external: boolean = DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL
   ) {
     const previousConfig = !this.config ? null : { ...this.config };

@@ -1,8 +1,8 @@
 import AnimationDirection from "../../enums/AnimationDirection";
 import AnimationEasingFunction from "../../enums/AnimationEasingFunction";
 import AnimationFillMode from "../../enums/AnimationFillMode";
-import AnimationIterationCountOptions from "../../interfaces/AnimationIterationCountOptions";
-import AnimationOptions from "../../interfaces/AnimationOptions";
+import AnimationIterationCountConfig from "../../interfaces/AnimationIterationCountConfig";
+import AnimationConfig from "../../interfaces/AnimationConfig";
 import AnimationStepPosition from "../../enums/AnimationStepPosition";
 import AnimationTransformation from "../../enums/AnimationTransformation";
 import CssProperty from "./CssProperty";
@@ -28,12 +28,12 @@ export default class Animation extends CssProperty {
   private durationUnit: "ms" | "s";
   private easingFunctions: AnimationEasingFunction[];
   private fillModes: AnimationFillMode[];
-  private iterationCount: AnimationIterationCountOptions;
+  private iterationCount: AnimationIterationCountConfig;
   private stepPositions: AnimationStepPosition[];
   private transformations: AnimationTransformation[];
   public name = CssPropertyName.ANIMATION;
 
-  protected setSpecificConfig(config: AnimationOptions) {
+  protected setSpecificConfig(config: AnimationConfig) {
     this.directions = config.directions ?? [...DEFAULT_ANIMATION_DIRECTIONS];
     this.easingFunctions = config.easingFunctions ?? [
       ...DEFAULT_ANIMATION_EASING_FUNCTIONS,
