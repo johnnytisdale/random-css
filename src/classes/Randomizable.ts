@@ -77,31 +77,26 @@ export default abstract class Randomizable {
     this.external = external;
     this.setSpecificConfig(config);
 
-    // Just enabled.
-    if (!previousConfig?.enabled && this.enabled) {
-      console.log("JUST enabled");
-      return this.timeoutFunction();
-    }
-
-    if (!this.enabled) {
-      if (!previousConfig || previousConfig?.enabled) {
-        if (this.timeout == null && previousConfig?.shouldRepeat) {
-          return;
+    if (this.enabled) {
+      if (!previousConfig?.enabled) {
+        this.timeoutFunction();
+      } else {
+        if (this.shouldRepeat) {
+          if (
+            !previousConfig?.shouldRepeat ||
+            previousConfig?.maxDelay !== this.maxDelay ||
+            previousConfig?.minDelay !== this.minDelay
+          ) {
+            this.clearTimeout();
+            this.setTimeout();
+          }
+        } else if (previousConfig?.shouldRepeat) {
+          this.clearTimeout();
         }
-        this.resetValue();
-        this.clearTimeout();
       }
-    } else if (this.timeout) {
-      // Already has a timeout.
-      if (!this.shouldRepeat) {
-        this.clearTimeout();
-      } else if (
-        previousConfig?.maxDelay !== this.maxDelay ||
-        previousConfig?.minDelay !== this.minDelay
-      ) {
-        this.clearTimeout();
-        this.setTimeout();
-      }
+    } else if (previousConfig?.enabled) {
+      this.resetValue();
+      this.clearTimeout();
     }
   }
 
