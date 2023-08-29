@@ -2,32 +2,33 @@ import BorderRadiusConfig from "../../interfaces/BorderRadiusConfig";
 import CssProperty from "./CssProperty";
 import CssPropertyName from "../../enums/CssPropertyName";
 import {
+  DEFAULT_BORDER_RADIUS_ELLIPTICAL,
+  DEFAULT_BORDER_RADIUS_ELLIPTICAL_PROBABILITY,
   DEFAULT_BORDER_RADIUS_MAX_CORNERS,
   DEFAULT_BORDER_RADIUS_MAX_RADIUS,
   DEFAULT_BORDER_RADIUS_MIN_CORNERS,
   DEFAULT_BORDER_RADIUS_MIN_RADIUS,
-  DEFAULT_BORDER_RADIUS_SLASH,
-  DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY,
 } from "../../values/defaults/css/BorderRadiusDefaults";
 import Randomizable from "../Randomizable";
 
 export default class BorderRadius extends CssProperty {
+  private elliptical: boolean;
+  private ellipticalProbability: number;
   private maxCorners: number;
   private minCorners: number;
   private maxRadius: number;
   private minRadius: number;
-  private slash: boolean;
-  private slashProbability: number;
   public name = CssPropertyName.BORDER_RADIUS;
 
   protected setSpecificConfig(config: BorderRadiusConfig) {
+    this.elliptical = config.elliptical ?? DEFAULT_BORDER_RADIUS_ELLIPTICAL;
+    this.ellipticalProbability =
+      config.ellipticalProbability ??
+      DEFAULT_BORDER_RADIUS_ELLIPTICAL_PROBABILITY;
     this.maxCorners = config.maxCorners ?? DEFAULT_BORDER_RADIUS_MAX_CORNERS;
     this.minCorners = config.minCorners ?? DEFAULT_BORDER_RADIUS_MIN_CORNERS;
     this.maxRadius = config.maxRadius ?? DEFAULT_BORDER_RADIUS_MAX_RADIUS;
     this.minRadius = config.minRadius ?? DEFAULT_BORDER_RADIUS_MIN_RADIUS;
-    this.slash = config.slash ?? DEFAULT_BORDER_RADIUS_SLASH;
-    this.slashProbability =
-      config.slashProbability ?? DEFAULT_BORDER_RADIUS_SLASH_PROBABILITY;
   }
 
   private getRandomRadius(min = 0, max = 100): string {
@@ -36,7 +37,7 @@ export default class BorderRadius extends CssProperty {
 
   public getRandomValue(): string {
     const useSlash =
-      (this.slash && Math.random() <= this.slashProbability) ?? 0;
+      this.elliptical && Math.random() <= this.ellipticalProbability;
     const valueSets: string[] = [];
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
       const valueCount = Randomizable.number(this.minCorners, this.maxCorners);

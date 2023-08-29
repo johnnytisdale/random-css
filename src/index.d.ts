@@ -88,12 +88,12 @@ declare module "random-css" {
     | "skewY";
   export const AnimationTransformations: Array<AnimationTransformation>;
   export interface BorderRadiusConfig extends Config {
+    elliptical?: boolean;
+    ellipticalProbability?: number;
     maxCorners?: number;
     minCorners?: number;
     maxRadius?: number;
     minRadius?: number;
-    slash?: boolean;
-    slashProbability?: number;
   }
   export type BorderStyleKeyword =
     | "dashed"
