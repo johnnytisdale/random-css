@@ -3,7 +3,7 @@ import {
   DEFAULT_RANDOMIZABLE_ENABLED,
   DEFAULT_RANDOMIZABLE_MAX_DELAY,
   DEFAULT_RANDOMIZABLE_MIN_DELAY,
-  DEFAULT_RANDOMIZABLE_SHOULD_REPEAT,
+  DEFAULT_RANDOMIZABLE_REPEAT,
 } from "../values/defaults/RandomizableDefaults";
 import RandomizableName from "../types/RandomizableName";
 
@@ -149,7 +149,7 @@ export default abstract class Randomizable {
     this.enabled = config?.enabled ?? DEFAULT_RANDOMIZABLE_ENABLED;
     this.maxDelay = config?.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
     this.minDelay = config?.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
-    this.repeat = config?.repeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
+    this.repeat = config?.repeat ?? DEFAULT_RANDOMIZABLE_REPEAT;
   }
 
   /**
