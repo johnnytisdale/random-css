@@ -305,7 +305,7 @@ Is rendered like this:
 
 The maximum value that may be generated for `transition-duration`.
 
-External: 1-3 (s)<br>
+External: 1-3 (s)  
 Inline: 300-3000 (ms)
 
 Must be greater than or equal to `durationMax`.
@@ -314,7 +314,7 @@ Must be greater than or equal to `durationMax`.
 
 The minimum value that may be generated for `transition-duration`.
 
-External: 1-3 (s)<br>
+External: 1-3 (s)  
 Inline: 300-3000 (ms)
 
 Must be less than or equal to `durationMax`.
@@ -359,7 +359,7 @@ are supported.
 
 The maximum value that may be generated for iteration count.
 
-External: Must be a whole number between 1 and 3, inclusive.<br>
+External: Must be a whole number between 1 and 3, inclusive.  
 Inline: Must be a float or integer between 0.25 and 3, inclusive.
 
 Must be greater than or equal to `min`.
@@ -368,7 +368,7 @@ Must be greater than or equal to `min`.
 
 The minimum value that may be generated for iteration count.
 
-External: Must be a whole number between 1 and 3, inclusive.<br>
+External: Must be a whole number between 1 and 3, inclusive.  
 Inline: Must be a float or integer between 0.25 and 3, inclusive.
 
 Must be less than or equal to `max`.
@@ -1043,9 +1043,9 @@ properties, particularly color properties.
 
 To use an external stylesheet, we have to create a rule for every value that we
 want to support for a given property. This means that using `rgb()` is pretty
-much out of the question. `rgb()` accepts three integers, each ranging from 0 to 255. So to support every possible combination, we would have to create
-256<sup>3</sup> = 16,777,216 rules for each color property. Creating that many
-rules for just _one_ property results in a stylesheet that is over 1GB in size.
+much out of the question. `rgb()` accepts three integers, each ranging from 0 to 255. So to support every possible combination, we would have to create 256³ =
+16,777,216 rules for each color property. Creating that many rules for just
+_one_ property results in a stylesheet that is over 1GB in size.
 
 So when using external CSS, we use the
 [color keywords](https://developer.mozilla.org/en-US/docs/Web/CSS/named-color),
