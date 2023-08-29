@@ -22,27 +22,26 @@ export default abstract class Randomizable {
   private config: Config;
 
   /**
-   * The timeout used to repeatedly generate a random value, assuming
-   * `shouldRepeat` is true.
+   * The timeout used to repeatedly generate a random value, assuming `repeat`
+   * is true.
    */
   private timeout: NodeJS.Timeout;
 
   /**
    * If this `Randomizable` is enabled, then it will generate a random value
-   * (repeatedly if `shouldRepeat` is true). If it is not enabled, it will do
-   * nothing.
+   * (repeatedly if `repeat` is true). If it is not enabled, it will do nothing.
    */
   protected enabled: boolean;
 
   /**
    * The maximum number of milliseconds that should elapse before another random
-   * value is generated (assuming `shouldRepeat` is true).
+   * value is generated (assuming `repeat` is true).
    */
   public maxDelay: number;
 
   /**
    * The minimum number of milliseconds that should elapse before another random
-   * value is generated (assuming `shouldRepeat` is true).
+   * value is generated (assuming `repeat` is true).
    */
   public minDelay: number;
 
@@ -51,7 +50,7 @@ export default abstract class Randomizable {
    * will be generated after a delay of random length whose range is defined by
    * `minDelay` and `maxDelay`.
    */
-  public shouldRepeat: boolean;
+  public repeat: boolean;
 
   /**
    * Cancels `this.timeout` and sets it to `null`.
@@ -70,16 +69,16 @@ export default abstract class Randomizable {
       if (!previousConfig?.enabled) {
         this.timeoutFunction();
       } else {
-        if (this.shouldRepeat) {
+        if (this.repeat) {
           if (
-            !previousConfig?.shouldRepeat ||
+            !previousConfig?.repeat ||
             previousConfig?.maxDelay !== this.maxDelay ||
             previousConfig?.minDelay !== this.minDelay
           ) {
             this.clearTimeout();
             this.setTimeout();
           }
-        } else if (previousConfig?.shouldRepeat) {
+        } else if (previousConfig?.repeat) {
           this.clearTimeout();
         }
       }
@@ -94,18 +93,18 @@ export default abstract class Randomizable {
    */
   private setTimeout() {
     this.timeout = setTimeout(
-      () => this.enabled && this.shouldRepeat && this.timeoutFunction(),
+      () => this.enabled && this.repeat && this.timeoutFunction(),
       Randomizable.number(this.minDelay, this.maxDelay)
     );
   }
 
   /**
    * Sets the value to a new randomly generated value. Schedules another
-   * execution of itself if `this.enabled` and `this.shouldRepeat` are `true`.
+   * execution of itself if `this.enabled` and `this.repeat` are `true`.
    */
   private timeoutFunction() {
     this.setValue(this.getRandomValue());
-    if (this.enabled && this.shouldRepeat) {
+    if (this.enabled && this.repeat) {
       this.setTimeout();
     }
   }
@@ -150,8 +149,7 @@ export default abstract class Randomizable {
     this.enabled = config?.enabled ?? DEFAULT_RANDOMIZABLE_ENABLED;
     this.maxDelay = config?.maxDelay ?? DEFAULT_RANDOMIZABLE_MAX_DELAY;
     this.minDelay = config?.minDelay ?? DEFAULT_RANDOMIZABLE_MIN_DELAY;
-    this.shouldRepeat =
-      config?.shouldRepeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
+    this.repeat = config?.repeat ?? DEFAULT_RANDOMIZABLE_SHOULD_REPEAT;
   }
 
   /**

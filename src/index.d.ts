@@ -398,7 +398,7 @@ declare module "random-css" {
     enabled?: boolean;
     maxDelay?: number;
     minDelay?: number;
-    shouldRepeat?: boolean;
+    repeat?: boolean;
   }
   export type MiscellaneousRandomizableName = "glyph";
   export function RandomA(
@@ -695,7 +695,7 @@ declare module "random-css" {
     public maxDelay: number;
     public minDelay: number;
     public setConfig(config: Config, external: boolean): void;
-    public shouldRepeat: boolean;
+    public repeat: boolean;
   }
   export type Randomizables = {
     [key in RandomizableName]: Randomizable | null;
