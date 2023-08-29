@@ -1,6 +1,7 @@
 {
   "author": "Johnny Tisdale",
   "description": "Fully customizable hyperdynamic styling.",
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.22.6",
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",
@@ -68,6 +69,5 @@
     "watch": "webpack --mode development --env environment=development --watch"
   },
   "types": "dist/index.d.ts",
-  "version": "3.1.0",
-  "dependencies": {}
+  "version": "4.0.0"
 }
