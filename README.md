@@ -663,6 +663,16 @@ Must be less than or equal to rMax.
 
 #### [borderRadius](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
 
+##### elliptical: boolean;
+
+Whether a corner may be made elliptical by providing two values separated by a slash.
+
+##### ellipticalProbability: float;
+
+The probability that a corner will be made elliptical.
+
+Must be between 0 and 1, inclusive.
+
 ##### maxCorners: integer;
 
 The maximum number of corners to which a radius may be applied.
@@ -694,16 +704,6 @@ The minimum radius (as a percentage) that may be generated.
 Must be between 1 and 100, inclusive.
 
 Must be less than or equal to `maxRadius`.
-
-##### slash: boolean;
-
-Whether a corner may be made elliptical by providing two values separated by a slash.
-
-##### slashProbability: float;
-
-The probability that a corner may be made elliptical.
-
-Must be between 0 and 1, inclusive.
 
 #### [borderStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style)
 
