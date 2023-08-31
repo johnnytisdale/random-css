@@ -1,6 +1,7 @@
 import Config from "./Config";
+import GlyphTypeConfig from "./GlyphTypeConfig";
 
 export default interface GlyphConfig extends Config {
-  leet?: { enabled?: boolean };
-  unicode?: { enabled?: boolean };
+  leet?: GlyphTypeConfig;
+  unicode?: GlyphTypeConfig;
 }

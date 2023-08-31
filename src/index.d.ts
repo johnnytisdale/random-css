@@ -375,18 +375,112 @@ declare module "random-css" {
     | "normal";
   export const FontWeightValues: Array<FontWeightValue>;
   export interface GlyphConfig extends Config {
-    leet?: { enabled: boolean };
-    unicode?: { enabled: boolean };
+    leet?: GlyphTypeConfig;
+    unicode?: GlyphTypeConfig;
   }
   export type GlyphInput =
     | GlyphConfig
     | GlyphType
     | Array<GlyphConfig | GlyphType>;
+  export type GlyphSpecification = Partial<Record<Letter, Array<string>>>;
   export type GlyphType = "leet" | "unicode";
   export const GlyphTypes: Array<GlyphType>;
+  export interface GlyphTypeConfig {
+    enabled?: boolean;
+    glyphs?: GlyphSpecification;
+  }
   export interface KeywordConfig extends Config {
     keywords?: Array<string>;
   }
+  export type LeetGlyphA = "@" | "4" | "/\\" | "/-\\" | "/_\\";
+  export type LeetGlyphB =
+    | "8"
+    | "j3"
+    | "lo"
+    | "18"
+    | "13"
+    | "|:"
+    | "|}"
+    | "|8"
+    | "|o"
+    | "|3"
+    | "6";
+  export type LeetGlyphC = "¢," | "©" | "{" | "\u003c" | "(" | "[";
+  export type LeetGlyphD = ":|)" | "|\u003e" | "|}" | "|]";
+  export type LeetGlyphE = "£" | "3";
+  export type LeetGlyphF = "ph" | "|=" | "|#" | '|"';
+  export type LeetGlyphG = "C-" | "-" | "6" | "[" | "[+";
+  export type LeetGlyphH =
+    | ":-:"
+    | "{=}"
+    | "{-}"
+    | "}-{"
+    | "}{"
+    | "4"
+    | "I+I"
+    | "(-)"
+    | ")-("
+    | "|-|"
+    | "|=|"
+    | "/-/"
+    | "[-]"
+    | "[=]";
+  export type LeetGlyphI = "!" | "9" | "1" | "|";
+  export type LeetGlyphJ = "_}" | "_)" | "_|" | "_7" | "_/" | "_]";
+  export type LeetGlyphK = "l{" | "l\u003c" | "1\u003c" | "|{" | "|\u003c";
+  export type LeetGlyphL = "|_" | "|" | "1" | "][";
+  export type LeetGlyphM = "^^" | "N\\" | "(V)" | "|\\/|" | "/\\/\\" | "/X\\";
+  export type LeetGlyphN = "|\\|" | "/V" | "/\\/";
+  export type LeetGlyphO = "{}" | "\u003c\u003e" | "()" | "[]" | "0";
+  export type LeetGlyphP =
+    | "|\u003e"
+    | "|Â°"
+    | "|*"
+    | "|D"
+    | "|o"
+    | "|7"
+    | "|O"
+    | "/o"
+    | "[]D";
+  export type LeetGlyphQ = "kw" | "9" | "O_" | "(,)" | "0,";
+  export type LeetGlyphR = "12" | "|2" | "|^" | "®";
+  export type LeetGlyphS = "$" | "5" | "§";
+  export type LeetGlyphT =
+    | "\u0027|\u0027"
+    | "\u0027][\u0027"
+    | "-|-"
+    | "+"
+    | "7"
+    | "7`"
+    | "`|`"
+    | "~|~";
+  export type LeetGlyphU =
+    | "\\_\\"
+    | "{_}"
+    | "/_/"
+    | "(_)"
+    | "|_|"
+    | "\\_/"
+    | "[_]";
+  export type LeetGlyphV = "\\/";
+  export type LeetGlyphW =
+    | "\u0027//"
+    | "Ð¨"
+    | "\\\\//\\\\//"
+    | "(/\\)"
+    | "|/\\|"
+    | "\\/\\/"
+    | "\\\\\u0027"
+    | "\\^/"
+    | "\\_|_/"
+    | "\\V/"
+    | "\\X/"
+    | "2u"
+    | "VV";
+  export type LeetGlyphX = "*" | "}{" | "\u003e\u003c" | ")(" | "%";
+  export type LeetGlyphY = "\\|/" | "`/" | "¥";
+  export type LeetGlyphZ = "5" | "\u003e_," | "(/)" | "7_" | "2";
+  export const LeetGlyphs: Record<Letter, Array<string>>;
   export interface LengthConfig extends Config {
     max?: number;
     min?: number;
@@ -394,6 +488,34 @@ declare module "random-css" {
   }
   export type LengthUnit = "mm" | "pt" | "px";
   export const LengthUnits: Array<LengthUnit>;
+  export type Letter =
+    | "a"
+    | "b"
+    | "c"
+    | "d"
+    | "e"
+    | "f"
+    | "g"
+    | "h"
+    | "i"
+    | "j"
+    | "k"
+    | "l"
+    | "m"
+    | "n"
+    | "o"
+    | "p"
+    | "q"
+    | "r"
+    | "s"
+    | "t"
+    | "u"
+    | "v"
+    | "w"
+    | "x"
+    | "y"
+    | "z";
+  export const Letters: Array<Letter>;
   export interface Config {
     enabled?: boolean;
     maxDelay?: number;
@@ -1032,4 +1154,5 @@ declare module "random-css" {
   export interface TextDecorationStyleConfig extends KeywordConfig {
     styles?: TextDecorationStyleKeyword[];
   }
+  export const UnicodeGlyphs: Record<Letter, Array<string>>;
 }
