@@ -1,7 +1,7 @@
 import "../styles/RandomString.scss";
 
 import CssPropertyName from "../enums/CssPropertyName";
-import DEFAULT_GLYPH_CONFIG from "../values/defaults/DefaultGlyphConfig";
+import DEFAULT_GLYPH_CONFIG from "../values/defaults/glyph/DefaultGlyphConfig";
 import { DEFAULT_RANDOM_ELEMENT_PROPS_EXTERNAL } from "../values/defaults/RandomElementPropsDefaults";
 import {
   DEFAULT_RANDOM_STRING_PROPS_CENTER,

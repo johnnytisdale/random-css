@@ -1,13 +1,15 @@
-import leetJSON from "../json/leet.json";
-import unicodeJSON from "../json/unicode.json";
-
 import GlyphConfig from "../interfaces/GlyphConfig";
+import GlyphType from "../enums/GlyphType";
+import LeetGlyphs from "../values/enums/LeetGlyphs";
+import Letter from "../enums/Letter";
 import MiscellaneousRandomizableName from "../enums/MiscellaneousRandomizableName";
 import Randomizable from "./Randomizable";
+import UnicodeGlyphs from "../values/enums/UnicodeGlyphs";
 
 export default class Glyph extends Randomizable {
   private glyphs: Array<string>;
-  private lower: string;
+  private lower: Letter;
+  private specifications: Partial<Record<GlyphType, Array<string>>> = {};
   public name = MiscellaneousRandomizableName.GLYPH;
 
   constructor(
@@ -15,7 +17,21 @@ export default class Glyph extends Randomizable {
     protected setValue: (value: string) => void
   ) {
     super();
-    this.lower = this.character.toLowerCase();
+    const lowercase = character.toLowerCase();
+    if (lowercase.match(/[a-z]/g)) {
+      this.lower = lowercase as Letter;
+    }
+  }
+
+  private getLeetValues(): Array<string> {
+    return this.specifications?.leet ?? LeetGlyphs[this.lower];
+  }
+
+  // TODO: support "Force case" (only lowercase or only uppercase)
+  private getUnicodeValues(): Array<string> {
+    return (this.specifications?.unicode ?? UnicodeGlyphs[this.lower]).map(
+      (unicode: string) => String.fromCodePoint(parseInt(unicode, 16))
+    );
   }
 
   protected resetValue() {
@@ -23,141 +39,25 @@ export default class Glyph extends Randomizable {
   }
 
   protected setSpecificConfig(config: GlyphConfig): void {
+    if (!this.lower) {
+      this.enabled = false;
+      return;
+    }
     this.glyphs = [this.character];
     if (!config?.leet?.enabled && !config?.unicode?.enabled) {
       return;
     }
     if (config?.leet?.enabled) {
-      this.glyphs.push(...getLeetValues(this.lower));
+      this.specifications.leet = config?.leet?.glyphs?.[this.lower];
+      this.glyphs.push(...this.getLeetValues());
     }
     if (config?.unicode?.enabled) {
-      this.glyphs.push(...getUnicodeValues(this.lower));
+      this.specifications.unicode = config?.unicode?.glyphs?.[this.lower];
+      this.glyphs.push(...this.getUnicodeValues());
     }
   }
 
   public getRandomValue(): string {
     return Randomizable.array(this.glyphs);
-  }
-}
-
-function getLeetValues(character: string): Array<string> {
-  switch (character) {
-    case "a":
-      return leetJSON.a;
-    case "b":
-      return leetJSON.b;
-    case "c":
-      return leetJSON.c;
-    case "d":
-      return leetJSON.d;
-    case "e":
-      return leetJSON.e;
-    case "f":
-      return leetJSON.f;
-    case "g":
-      return leetJSON.g;
-    case "h":
-      return leetJSON.h;
-    case "i":
-      return leetJSON.i;
-    case "j":
-      return leetJSON.j;
-    case "k":
-      return leetJSON.k;
-    case "l":
-      return leetJSON.l;
-    case "m":
-      return leetJSON.m;
-    case "n":
-      return leetJSON.n;
-    case "o":
-      return leetJSON.o;
-    case "p":
-      return leetJSON.p;
-    case "q":
-      return leetJSON.q;
-    case "r":
-      return leetJSON.r;
-    case "s":
-      return leetJSON.s;
-    case "t":
-      return leetJSON.t;
-    case "u":
-      return leetJSON.u;
-    case "v":
-      return leetJSON.v;
-    case "w":
-      return leetJSON.w;
-    case "x":
-      return leetJSON.x;
-    case "y":
-      return leetJSON.y;
-    case "z":
-      return leetJSON.z;
-    default:
-      return [];
-  }
-}
-
-// TODO: support "Force case" (only lowercase or only uppercase)
-function getUnicodeValues(character: string): Array<string> {
-  const mapFunction = ({ unicode }: { unicode: string }) => {
-    return String.fromCodePoint(parseInt(unicode, 16));
-  };
-  switch (character) {
-    case "a":
-      return unicodeJSON.a.map(mapFunction);
-    case "b":
-      return unicodeJSON.b.map(mapFunction);
-    case "c":
-      return unicodeJSON.c.map(mapFunction);
-    case "d":
-      return unicodeJSON.d.map(mapFunction);
-    case "e":
-      return unicodeJSON.e.map(mapFunction);
-    case "f":
-      return unicodeJSON.f.map(mapFunction);
-    case "g":
-      return unicodeJSON.g.map(mapFunction);
-    case "h":
-      return unicodeJSON.h.map(mapFunction);
-    case "i":
-      return unicodeJSON.i.map(mapFunction);
-    case "j":
-      return unicodeJSON.j.map(mapFunction);
-    case "k":
-      return unicodeJSON.k.map(mapFunction);
-    case "l":
-      return unicodeJSON.l.map(mapFunction);
-    case "m":
-      return unicodeJSON.m.map(mapFunction);
-    case "n":
-      return unicodeJSON.n.map(mapFunction);
-    case "o":
-      return unicodeJSON.o.map(mapFunction);
-    case "p":
-      return unicodeJSON.p.map(mapFunction);
-    case "q":
-      return unicodeJSON.q.map(mapFunction);
-    case "r":
-      return unicodeJSON.r.map(mapFunction);
-    case "s":
-      return unicodeJSON.s.map(mapFunction);
-    case "t":
-      return unicodeJSON.t.map(mapFunction);
-    case "u":
-      return unicodeJSON.u.map(mapFunction);
-    case "v":
-      return unicodeJSON.v.map(mapFunction);
-    case "w":
-      return unicodeJSON.w.map(mapFunction);
-    case "x":
-      return unicodeJSON.x.map(mapFunction);
-    case "y":
-      return unicodeJSON.y.map(mapFunction);
-    case "z":
-      return unicodeJSON.z.map(mapFunction);
-    default:
-      return [];
   }
 }
