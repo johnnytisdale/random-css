@@ -10,6 +10,7 @@ import StyleInput from "../types/StyleInput";
 import { Property as CssPropertyType } from "csstype";
 import * as React from "react";
 import { useEffect, useMemo, useReducer, useRef } from "react";
+import CssProperty from "../classes/CSS/CssProperty";
 
 export default function RandomElement<Attributes, Element>({
   children,
@@ -33,15 +34,14 @@ export default function RandomElement<Attributes, Element>({
   );
 
   useEffect(() => {
-    Object.entries(randomizables.current).forEach(([_, randomizable]) => {
-      randomizable.setConfig(
-        RandomCssUtils.getConfigForCssProperty(
-          _ as CssPropertyName,
-          styleConfig
-        ),
-        external
-      );
-    });
+    Object.entries(randomizables.current).forEach(
+      ([cssPropertyName, randomizable]: [CssPropertyName, CssProperty]) => {
+        randomizable.setConfig(
+          RandomCssUtils.getConfigForCssProperty(cssPropertyName, styleConfig),
+          external
+        );
+      }
+    );
   }, [external, styleConfig]);
 
   const className = useMemo(() => {
