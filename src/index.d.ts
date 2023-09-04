@@ -41,6 +41,8 @@ declare module "random-css" {
     | "normal"
     | "reverse";
   export const AnimationDirections: Array<AnimationDirection>;
+  export type AnimationDuration = "1s" | "2s" | "3s";
+  export const AnimationDurations: Array<AnimationDuration>;
   export type AnimationEasingFunction =
     | "cubic-bezier"
     | "ease"
@@ -265,10 +267,18 @@ declare module "random-css" {
     rMax?: number;
     rMin?: number;
   }
-  export type CssColorProperty = Extract<
-    CssPropertyName,
-    "backgroundColor" | "borderColor" | "color" | "textDecorationColor"
-  >;
+  export type CssColorProperty =
+    | "backgroundColor"
+    | "borderColor"
+    | "color"
+    | "textDecorationColor";
+  export const CssColorProperties: Array<CssColorProperty>;
+  export type CssKeywordProperty =
+    | "borderStyle"
+    | "fontWeight"
+    | "textDecorationLine"
+    | "textDecorationStyle";
+  export const CssKeywordProperties: Array<CssKeywordProperty>;
   export type CssPropertyName =
     | "animation"
     | "backgroundColor"
@@ -389,6 +399,7 @@ declare module "random-css" {
     enabled?: boolean;
     glyphs?: GlyphSpecification;
   }
+  export const HEIGHT_MULTIPLIER: number;
   export interface KeywordConfig extends Config {
     keywords?: Array<string>;
   }
