@@ -1,0 +1,3 @@
+const HEIGHT_MULTIPLIER = 1.1875;
+
+export default HEIGHT_MULTIPLIER;

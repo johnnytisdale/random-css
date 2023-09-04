@@ -30,7 +30,7 @@ export default class Glyph extends Randomizable {
   // TODO: support "Force case" (only lowercase or only uppercase)
   private getUnicodeValues(): Array<string> {
     return (this.specifications?.unicode ?? UnicodeGlyphs[this.lower]).map(
-      (unicode: string) => String.fromCodePoint(parseInt(unicode, 16))
+      (unicode) => Glyph.fromUnicode(unicode)
     );
   }
 
@@ -59,5 +59,9 @@ export default class Glyph extends Randomizable {
 
   public getRandomValue(): string {
     return Randomizable.array(this.glyphs);
+  }
+
+  public static fromUnicode(unicode: string) {
+    return String.fromCodePoint(parseInt(unicode, 16));
   }
 }

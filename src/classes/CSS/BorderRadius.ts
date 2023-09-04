@@ -37,10 +37,14 @@ export default class BorderRadius extends CssProperty {
 
   public getRandomValue(): string {
     const useSlash =
-      this.elliptical && Math.random() <= this.ellipticalProbability;
+      !this.external &&
+      this.elliptical &&
+      Math.random() <= this.ellipticalProbability;
     const valueSets: string[] = [];
     for (let i = 0; i < (useSlash ? 2 : 1); i++) {
-      const valueCount = Randomizable.number(this.minCorners, this.maxCorners);
+      const valueCount = this.external
+        ? 1
+        : Randomizable.number(this.minCorners, this.maxCorners);
       const values: string[] = [];
       for (let x = 0; x < valueCount; x++) {
         values.push(this.getRandomRadius(this.minRadius, this.maxRadius));

@@ -1,5 +1,7 @@
 import AnimationDirection from "./enums/AnimationDirection";
 import AnimationDirections from "./values/enums/AnimationDirections";
+import AnimationDuration from "./enums/AnimationDuration";
+import AnimationDurations from "./values/enums/AnimationDurations";
 import AnimationEasingFunction from "./enums/AnimationEasingFunction";
 import AnimationEasingFunctions from "./values/enums/AnimationEasingFunctions";
 import AnimationFillMode from "./enums/AnimationFillMode";
@@ -16,7 +18,10 @@ import BorderStyleKeywords from "./values/enums/BorderStyleKeywords";
 import Color from "./classes/CSS/Color";
 import ColorConfig from "./interfaces/ColorConfig";
 import ColorKeywords from "./values/enums/ColorKeywords";
-import type CssColorProperty from "./types/CssColorProperty";
+import CssColorProperties from "./values/enums/CssColorProperties";
+import CssColorProperty from "./enums/CssColorProperty";
+import CssKeywordProperties from "./values/enums/CssKeywordProperties";
+import CssKeywordProperty from "./enums/CssKeywordProperty";
 import CssProperty from "./classes/CSS/CssProperty";
 import CssPropertyName from "./enums/CssPropertyName";
 import CssPropertyNames from "./values/enums/CssPropertyNames";
@@ -130,10 +135,13 @@ import TextDecorationLineKeywords from "./values/enums/TextDecorationLineKeyword
 import TextDecorationStyleKeyword from "./enums/TextDecorationStyleKeyword";
 import TextDecorationStyleKeywords from "./values/enums/TextDecorationStyleKeywords";
 import UnicodeGlyphs from "./values/enums/UnicodeGlyphs";
+import HEIGHT_MULTIPLIER from "./values/HeightMultiplier";
 
 export {
   AnimationDirection,
   AnimationDirections,
+  AnimationDuration,
+  AnimationDurations,
   AnimationEasingFunction,
   AnimationEasingFunctions,
   AnimationFillMode,
@@ -150,7 +158,10 @@ export {
   Color,
   ColorKeywords,
   ColorConfig,
+  CssColorProperties,
   CssColorProperty,
+  CssKeywordProperties,
+  CssKeywordProperty,
   CssProperty,
   CssPropertyName,
   CssPropertyNames,
@@ -193,6 +204,7 @@ export {
   GlyphType,
   GlyphTypes,
   GlyphTypeConfig,
+  HEIGHT_MULTIPLIER,
   LeetGlyphs,
   LengthConfig,
   LengthUnit,
