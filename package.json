@@ -69,5 +69,5 @@
     "watch": "webpack --mode development --env environment=development --watch"
   },
   "types": "dist/index.d.ts",
-  "version": "4.0.0"
+  "version": "4.0.1"
 }
