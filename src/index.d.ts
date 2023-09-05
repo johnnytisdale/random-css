@@ -1163,7 +1163,7 @@ declare module "random-css" {
     | "wavy";
   export const TextDecorationStyleKeywords: Array<TextDecorationStyleKeyword>;
   export interface TextDecorationStyleConfig extends KeywordConfig {
-    styles?: TextDecorationStyleKeyword[];
+    keywords?: TextDecorationStyleKeyword[];
   }
   export const UnicodeGlyphs: Record<Letter, Array<string>>;
 }

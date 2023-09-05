@@ -44,7 +44,7 @@ Suppose you wanted to specify which border styles will be used.
     "borderRadius",
     {
       borderStyle: {
-        borderStyles: [
+        keywords: [
           "dashed",
           "dotted",
           "double",
@@ -707,7 +707,7 @@ Must be less than or equal to `maxRadius`.
 
 #### [borderStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style)
 
-##### borderStyles: array
+##### keywords: array
 
 - "dashed"
 - "dotted"
@@ -830,7 +830,7 @@ Must be less than or equal to `maxDegrees`.
 
 #### [fontWeight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)
 
-##### fontWeights: array
+##### keywords: array
 
 - "100"
 - "200"
@@ -848,7 +848,7 @@ Must be less than or equal to `maxDegrees`.
 
 #### [textDecorationLine](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line)
 
-##### textDecorationLines: array
+##### keywords: array
 
 - "line-through"
 - "line-through underline"
@@ -860,7 +860,7 @@ Must be less than or equal to `maxDegrees`.
 
 #### [textDecorationStyle](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style)
 
-##### styles: array
+##### keywords: array
 
 - "dashed"
 - "dotted"
