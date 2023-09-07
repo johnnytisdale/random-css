@@ -91,7 +91,7 @@ export default abstract class Randomizable {
   /**
    * Schedules the execution of `this.timeoutFunction()`.
    */
-  private setTimeout() {
+  protected setTimeout() {
     this.timeout = setTimeout(
       () => this.enabled && this.repeat && this.timeoutFunction(),
       Randomizable.number(this.minDelay, this.maxDelay)
@@ -102,11 +102,15 @@ export default abstract class Randomizable {
    * Sets the value to a new randomly generated value. Schedules another
    * execution of itself if `this.enabled` and `this.repeat` are `true`.
    */
-  private timeoutFunction() {
-    this.setValue(this.getRandomValue());
+  protected timeoutFunction() {
+    this.update();
     if (this.enabled && this.repeat) {
       this.setTimeout();
     }
+  }
+
+  protected update() {
+    this.setValue(this.getRandomValue());
   }
 
   /**
@@ -120,7 +124,7 @@ export default abstract class Randomizable {
    * `setConfig()`.
    * @param {Config} config The Config object.
    */
-  protected abstract setSpecificConfig(config: Config): void;
+  protected abstract setSpecificConfig(config: Config): boolean | void;
 
   /**
    * Updates the value.
@@ -136,7 +140,10 @@ export default abstract class Randomizable {
     const previousConfig = !this.config ? null : { ...this.config };
     this.config = config;
     this.setGeneralConfig(config);
-    this.setSpecificConfig(config);
+    const shouldStop = this.setSpecificConfig(config);
+    if (shouldStop) {
+      return;
+    }
     this.configDidChange(previousConfig);
   }
 

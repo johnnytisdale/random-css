@@ -9,7 +9,10 @@ import {
   DEFAULT_COLOR_MIN,
   DEFAULT_COLOR_KEYWORDS,
 } from "../../values/defaults/css/ColorDefaults";
+import Plugins from "../../interfaces/Plugins";
 import Randomizable from "../Randomizable";
+import RGBA from "../../types/RGBA";
+import Style from "../../types/Style";
 
 export default abstract class ColorProperty extends CssProperty {
   private alpha: boolean;
@@ -22,6 +25,7 @@ export default abstract class ColorProperty extends CssProperty {
   private rMax: number;
   private rMin: number;
   private colorKeywords: ColorKeyword[];
+  public plugins: Plugins = {};
 
   protected setSpecificConfig(config: ColorConfig) {
     this.alpha = config.alpha ?? DEFAULT_COLOR_ALPHA;
@@ -34,16 +38,71 @@ export default abstract class ColorProperty extends CssProperty {
     this.rMax = config.rMax ?? DEFAULT_COLOR_MAX;
     this.rMin = config.rMin ?? DEFAULT_COLOR_MIN;
     this.colorKeywords = config.colorKeywords ?? [...DEFAULT_COLOR_KEYWORDS];
+    if (config.plugins?.colorContrast) {
+      this.plugins.colorContrast = config.plugins.colorContrast;
+      if (
+        this.name === config.plugins.colorContrast.secondary?.cssPropertyName
+      ) {
+        this.enabled = false;
+        return true;
+      }
+      this.update = this.update_colorContrast;
+    } else {
+      if (this.plugins.colorContrast) {
+        delete this.plugins.colorContrast;
+      }
+      this.update = super.update;
+    }
+  }
+
+  protected update_colorContrast() {
+    const primaryColor = this.getRandomRGBA();
+    const secondaryStyle: Style = {};
+    const secondaryColors = Array.isArray(
+      this.plugins.colorContrast.primary.secondary
+    )
+      ? this.plugins.colorContrast.primary.secondary
+      : [this.plugins.colorContrast.primary.secondary];
+    secondaryColors.forEach((cssPropertyName) => {
+      secondaryStyle[cssPropertyName] = this.rgbaToString(
+        this.contrasting(primaryColor)
+      );
+    });
+    console.log({ primaryColor, secondaryStyle });
+    this.setValue(this.rgbaToString(primaryColor));
+    this.plugins.colorContrast.primary.setSecondaryStyle(secondaryStyle);
+  }
+
+  private contrasting(rgba: RGBA): RGBA {
+    return rgba.map((base, i) =>
+      i === 3
+        ? base
+        : base < 100
+        ? Randomizable.number(base + 100, 255)
+        : base > 155
+        ? Randomizable.number(0, base - 100)
+        : Randomizable.boolean()
+        ? Randomizable.number(base + 100, 255)
+        : Randomizable.number(0, base - 100)
+    ) as RGBA;
+  }
+
+  private getRandomRGBA(): RGBA {
+    return [
+      Randomizable.number(this.rMin, this.rMax),
+      Randomizable.number(this.gMin, this.gMax),
+      Randomizable.number(this.bMin, this.bMax),
+      this.alpha ? Randomizable.decimal(this.aMin, this.aMax) : 1,
+    ];
+  }
+
+  private rgbaToString(rgba: RGBA): string {
+    return `rgba(${rgba.join(",")})`;
   }
 
   public getRandomValue(): string {
     return this.external
       ? Randomizable.array(this.colorKeywords)
-      : `rgba(${[
-          Randomizable.number(this.rMin, this.rMax),
-          Randomizable.number(this.gMin, this.gMax),
-          Randomizable.number(this.bMin, this.bMax),
-          this.alpha ? [Randomizable.decimal(this.aMin, this.aMax)] : 1,
-        ].join(",")})`;
+      : this.rgbaToString(this.getRandomRGBA());
   }
 }

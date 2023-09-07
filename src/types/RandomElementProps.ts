@@ -1,3 +1,4 @@
+import Plugins from "../interfaces/Plugins";
 import StyleInput from "./StyleInput";
 
 import * as React from "react";
@@ -13,6 +14,7 @@ interface Props {
   external?: boolean;
   fixedStyle?: React.CSSProperties;
   id?: string;
+  plugins?: Plugins;
   style?: StyleInput;
   testID?: string;
 }

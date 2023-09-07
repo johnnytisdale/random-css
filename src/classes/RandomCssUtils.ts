@@ -25,10 +25,44 @@ import StyleConfig from "../interfaces/StyleConfig";
 import TextDecorationColor from "./CSS/TextDecorationColor";
 import TextDecorationLine from "./CSS/TextDecorationLine";
 import TextDecorationStyle from "./CSS/TextDecorationStyle";
+import Plugins from "../interfaces/Plugins";
+import CssColorProperties from "../values/enums/CssColorProperties";
+import CssColorPropertyName from "../types/CssColorPropertyName";
 
 export default class RandomCssUtils {
   public static reducer<T>(state: T, newState: Partial<T>): T {
     return { ...state, ...newState };
+  }
+
+  public static addPluginsToStyleConfig(config: StyleConfig, plugins: Plugins) {
+    Object.values(CssColorProperties).forEach(
+      (cssColorPropertyName: CssColorPropertyName) => {
+        if (
+          config[cssColorPropertyName] &&
+          !config[cssColorPropertyName].plugins
+        ) {
+          config[cssColorPropertyName].plugins = {};
+        }
+      }
+    );
+    if (plugins?.colorContrast) {
+      if (plugins.colorContrast.primary) {
+        const cssPropertyName =
+          plugins?.colorContrast?.primary?.cssPropertyName;
+        if (config[cssPropertyName]) {
+          config[cssPropertyName].plugins.colorContrast = plugins.colorContrast;
+        }
+      }
+      if (plugins?.colorContrast?.secondary) {
+        const secondaryProperty =
+          plugins?.colorContrast?.secondary.cssPropertyName;
+        if (config[secondaryProperty]) {
+          config[secondaryProperty].plugins.colorContrast =
+            plugins.colorContrast;
+        }
+      }
+    }
+    return config;
   }
 
   public static getCssRandomizables(
